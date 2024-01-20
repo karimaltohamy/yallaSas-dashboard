@@ -1,0 +1,26 @@
+@import "../../../sass/variables.scss";
+
+// start price_table_section
+.pricing_table {
+  padding: 10px;
+  padding-bottom: 30px;
+
+  .line {
+    display: flex;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 900px) {
+  .pricing_table {
+    .line {
+      flex-direction: column;
+      gap: 20px;
+
+      > div {
+        width: 100% !important;
+      }
+    }
+  }
+}
+// end price_table_section

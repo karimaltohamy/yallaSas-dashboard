@@ -1,0 +1,68 @@
+// start user_invoice_designer_section
+.user_invoice_designer_section {
+  margin: 10px;
+
+  .monaco-editor {
+    width: 100% !important;
+  }
+
+  .form_invoice_designer {
+    .input_item {
+      &:not(:last-child) {
+        margin-bottom: 15px;
+      }
+
+      label {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 4px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 2px;
+
+        .star {
+          font-size: 12px;
+          color: red;
+        }
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid rgb(222, 222, 222);
+        border-radius: 3px;
+      }
+    }
+
+    button {
+      padding: 5px 20px;
+      width: 100%;
+      border-radius: 4px;
+
+      &:not(:last-child) {
+        margin-bottom: 15px;
+      }
+
+      &.btn_save {
+        background-color: #1b8eb7;
+        color: white;
+      }
+
+      &.btn_factory {
+        background-color: #f86c6b;
+        color: white;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .user_invoice_designer_section {
+    .form_invoice_designer {
+      margin-top: 20px;
+    }
+  }
+}
+// end user_invoice_designer_section

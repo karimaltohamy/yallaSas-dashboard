@@ -1,0 +1,217 @@
+@import "../../sass/variables.scss";
+
+.section_form {
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgb(229, 229, 229);
+  margin-bottom: 20px;
+
+  .head {
+    padding: 8px;
+    border-bottom: 1px solid rgb(218, 218, 218);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    h4 {
+      font-size: 20px;
+      margin-bottom: 0;
+      font-weight: 600;
+    }
+
+    i {
+      font-size: 19px;
+    }
+  }
+
+  .boxs_information {
+    .boxs {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+
+      .box {
+        padding: 15px;
+        border: 1px solid rgb(204, 204, 204);
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+
+        .icon {
+          background-color: #fbe8e4;
+          width: 30px;
+          min-width: 30px;
+          height: 30px;
+          border-radius: 7px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          i {
+            color: #fa4a27;
+          }
+        }
+
+        .text {
+          h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 0;
+          }
+
+          span {
+            color: gray;
+            font-size: 15px;
+          }
+        }
+      }
+    }
+  }
+
+  form {
+    padding: 10px;
+
+    .input_item,
+    .input_switch {
+      margin-bottom: 15px;
+    }
+
+    .input_item {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+
+      &.remove {
+        display: none;
+      }
+
+      label {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 4px;
+        font-size: 17px;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 2px;
+
+        .star {
+          font-size: 12px;
+          color: red;
+        }
+      }
+
+      input,
+      select {
+        flex: 2;
+        width: 100%;
+        padding: 5px;
+        border: 1px solid rgb(222, 222, 222);
+        border-radius: 3px;
+        outline: none;
+
+        &:focus {
+          border: 1px solid $primary-color;
+        }
+      }
+
+      select {
+        padding: 2px;
+      }
+    }
+
+    .input_switch {
+      position: relative;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+
+      span {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 4px;
+        flex: 1;
+      }
+
+      input[type="checkbox"] {
+        height: 0;
+        width: 0;
+        visibility: hidden;
+        display: none;
+      }
+
+      label {
+        cursor: pointer;
+        text-indent: -9999px;
+        width: 40px;
+        height: 20px;
+        background: grey;
+        display: block;
+        border-radius: 100px;
+        position: relative;
+      }
+
+      label:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 3px;
+        transform: translateY(-50%);
+        width: 15px;
+        height: 15px;
+        background: #fff;
+        border-radius: 90px;
+        transition: 0.3s;
+      }
+
+      input:checked + label {
+        background: $primary-color;
+      }
+
+      input:checked + label:after {
+        left: calc(100% - 3px);
+        transform: translateX(-100%) translateY(-50%);
+      }
+
+      label:active:after {
+        width: 130px;
+      }
+    }
+
+    .input_file {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 15px;
+
+      span {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 4px;
+        flex: 1;
+      }
+
+      label {
+        flex: 2;
+        width: 30px;
+        height: 30px;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8bfa8;
+        cursor: pointer;
+
+        input {
+          display: none;
+        }
+
+        i {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+// start issuing_invoice_section
+.issuing_invoice_section {
+  margin: 0 10px;
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 5px;
+
+  .head {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1px solid rgb(228, 228, 228);
+    padding: 8px 12px;
+
+    h4 {
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    span {
+      font-size: 20px;
+      font-weight: 60;
+    }
+  }
+
+  .issuing_invoice_content {
+    padding: 15px;
+
+    form {
+      .input {
+        input {
+          width: 100%;
+          padding: 5px;
+          border: 1px solid rgb(222, 222, 222);
+          border-radius: 3px;
+          max-width: 200px;
+        }
+      }
+    }
+  }
+}
+// end issuing_invoice_section

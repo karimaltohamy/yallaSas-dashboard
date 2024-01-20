@@ -1,0 +1,194 @@
+@import "./variables.scss";
+
+.general_information {
+  margin-top: 30px;
+
+  .line {
+    display: flex;
+    gap: 30px;
+
+    .main_details {
+      width: 35%;
+
+      .box_main_details {
+        background-color: white;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        margin-bottom: 20px;
+
+        .image {
+          img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: auto;
+          }
+        }
+
+        .name {
+          margin-top: 10px;
+          font-size: 22px;
+          font-weight: 600;
+        }
+
+        .position {
+          font-size: 15px;
+          color: gray;
+        }
+      }
+
+      .box_details {
+        background-color: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+
+        .head {
+          margin-bottom: 10px;
+
+          h4 {
+            font-weight: 700;
+          }
+        }
+
+        .item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          &:not(:last-child) {
+            margin-bottom: 15px;
+          }
+
+          i {
+            color: $primary-color;
+          }
+        }
+      }
+
+      .box_btns_utils {
+        background-color: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+
+        .box {
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 10px;
+          row-gap: 5px;
+
+          .item {
+            padding: 6px 10px;
+            background-color: $main-color;
+            color: white !important;
+            border-radius: 5px;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            cursor: pointer;
+            flex: 1;
+            min-width: 130px;
+          }
+        }
+      }
+
+      .card_map {
+        background-color: white;
+        padding: 15px;
+        border-radius: 10px;
+
+        .map {
+          iframe {
+            height: 250px;
+            width: 100%;
+          }
+        }
+
+        form {
+          .line {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+
+            > div {
+              width: 50%;
+            }
+
+            .input_item {
+              label {
+                font-weight: 600;
+                display: block;
+                margin-bottom: 5px;
+              }
+
+              input {
+                outline: none;
+                border: 1px solid rgb(199, 199, 199);
+                border-radius: 4px;
+                width: 100%;
+              }
+            }
+          }
+
+          .btn_submit {
+            padding: 5px 20px;
+            background-color: $main-color;
+            color: white;
+            border-radius: 5px;
+            margin-top: 15px;
+            border: none;
+          }
+        }
+      }
+    }
+
+    .info_details {
+      width: 65%;
+      background-color: white;
+      padding: 15px;
+      border-radius: 10px;
+      height: fit-content;
+      border: 1px solid #dadada;
+
+      .item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &:not(:last-child) {
+          margin-bottom: 7px;
+          padding-bottom: 5px;
+          border-bottom: 1px solid rgb(207, 207, 207);
+        }
+
+        h6 {
+          font-weight: 600;
+          font-size: 18px;
+        }
+
+        span {
+          color: gray;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .general_information {
+    .line {
+      flex-direction: column;
+      gap: 15px;
+
+      > div {
+        width: 100% !important;
+      }
+    }
+  }
+}

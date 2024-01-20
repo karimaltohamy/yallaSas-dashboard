@@ -1,0 +1,101 @@
+@import "../../../sass/variables.scss";
+
+// start activation_states_section
+.activation_states_section {
+  margin: 20px 10px;
+
+  .form_states {
+    .btns_filter {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+
+      button {
+        padding: 5px 20px;
+        background-color: $main-color;
+        color: white;
+        border-radius: 5px;
+        font-weight: 600;
+
+        &.active {
+          background-color: $primary-color;
+        }
+      }
+    }
+
+    form {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+
+      .input {
+        select,
+        input {
+          width: 100%;
+          border: 1px solid rgb(200, 200, 200);
+          padding: 6px;
+          border-radius: 3px;
+          outline: none;
+          font-weight: 600;
+
+          &.remove {
+            display: none;
+          }
+
+          &:focus {
+            border: 1px solid $primary-color;
+          }
+        }
+      }
+
+      .btn_detailed {
+        padding: 5px 20px;
+        background-color: black;
+        color: white;
+        border-radius: 5px;
+      }
+    }
+  }
+
+  .chart_activation {
+    margin-top: 20px;
+    .chart {
+      svg {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .activation_states_section {
+    .form_states {
+      .btns_filter {
+        gap: 10px;
+        justify-content: center;
+        margin-bottom: 10px;
+
+        button {
+          padding: 3px 20px;
+          font-size: 15px;
+        }
+      }
+
+      form {
+        justify-content: center;
+        gap: 8px;
+
+        .input {
+          input,
+          select {
+            padding: 3px;
+            font-size: 13px;
+          }
+        }
+      }
+    }
+  }
+}
+// end activation_states_section

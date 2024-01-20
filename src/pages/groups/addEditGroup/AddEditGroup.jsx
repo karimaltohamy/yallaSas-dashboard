@@ -1,0 +1,48 @@
+import React, { useState } from "react";
+import SectionForm from "../../../components/sectionform/SectionForm";
+import InputSectionForm from "../../../components/sectionform/InputSectionForm";
+
+const AddEditGroup = () => {
+  const [generalinformation, setGeneralinformation] = useState({
+    groupName: "",
+    details: "",
+  });
+
+  const handleChangeGeneralInformation = (e) => {
+    setGeneralinformation((prev) => {
+      return {
+        ...prev,
+        [e.target.id]: e.target.checked ? e.target.checked : e.target.value,
+      };
+    });
+  };
+
+  return (
+    <div className="content_page">
+      <SectionForm title={"General information"}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <InputSectionForm
+            label={"Group name"}
+            type={"text"}
+            value={generalinformation.groupName}
+            onChange={handleChangeGeneralInformation}
+            id="groupName"
+          />
+          <InputSectionForm
+            label={"Details"}
+            type={"text"}
+            value={generalinformation.details}
+            onChange={handleChangeGeneralInformation}
+            id="details"
+          />
+        </div>
+      </SectionForm>
+      <div className="btns_add">
+        <button className="btn_add">OK</button>
+        <button className="btn_close">Cancel</button>
+      </div>
+    </div>
+  );
+};
+
+export default AddEditGroup;

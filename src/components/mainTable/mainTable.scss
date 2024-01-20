@@ -1,0 +1,44 @@
+@import "../../sass/variables.scss";
+
+.container_table {
+  margin-top: 30px;
+  background-color: var(--bg-section);
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: var(--box-shadow);
+
+  .MuiDataGrid-root {
+    border: 0;
+  }
+
+  .MuiDataGrid-columnHeaders,
+  .MuiDataGrid-footerContainer {
+    background-color: $primary-color;
+    color: white;
+  }
+
+  .MuiDataGrid-footerContainer {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  .MuiToolbar-root {
+    color: white !important;
+  }
+
+  .MuiButtonBase-root {
+    color: var(--text-color) !important;
+  }
+
+  .MuiDataGrid-cell--textRight {
+    justify-content: flex-start !important;
+  }
+
+  .status {
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    display: block;
+    margin: auto;
+  }
+}

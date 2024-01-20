@@ -1,0 +1,54 @@
+@import "../../sass/variables.scss";
+
+.managers_tree_box {
+  width: 35%;
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  height: fit-content;
+
+  .head {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgb(217, 217, 217);
+
+    h4 {
+      font-size: 19px;
+      margin-bottom: 0;
+    }
+
+    i {
+      color: $primary-color;
+    }
+  }
+
+  .content_box {
+    padding: 20px;
+
+    .search_input {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      border: 1px solid rgb(219, 219, 219);
+      border-radius: 3px;
+      padding: 5px;
+
+      input {
+        width: 100%;
+        border: none;
+        outline: none;
+      }
+
+      svg {
+        width: 18px;
+        color: gray;
+      }
+    }
+
+    .result {
+      height: 70vh;
+    }
+  }
+}

@@ -1,0 +1,92 @@
+@import "../../../sass/generalProfile.scss";
+
+.radius_table {
+  margin-top: 20px;
+  .head {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background-color: $main-color;
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+  }
+
+  .table {
+    overflow-x: auto;
+    width: 100%;
+
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background-color: #f5f5f5;
+    }
+
+    &::-webkit-scrollbar {
+      height: 7px;
+      background-color: #f5f5f5;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      background-color: transparent;
+    }
+
+    &:hover {
+      &:-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: rgb(225, 225, 225);
+      }
+    }
+  }
+
+  table {
+    background-color: white;
+    width: 100%;
+    border-radius: 5px;
+    overflow-x: auto;
+
+    thead {
+      tr {
+        > *:nth-child(even) {
+          background-color: #eef1f4;
+        }
+      }
+
+      th {
+        padding: 10px;
+        border-bottom: 1px solid #e2e2e2;
+        min-width: 170px;
+      }
+    }
+
+    tbody {
+      tr {
+        &:not(:last-child) {
+          td {
+            border-bottom: 1px solid #e2e2e2;
+          }
+        }
+      }
+      td {
+        padding: 8px;
+
+        input {
+          border: 1px solid rgb(200, 200, 200);
+          border-radius: 5px;
+          padding: 0 8px;
+          outline: none;
+        }
+
+        .remove {
+          color: rgb(243, 40, 5);
+        }
+
+        .save {
+          color: #5588da;
+        }
+      }
+    }
+  }
+}

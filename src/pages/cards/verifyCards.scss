@@ -1,0 +1,44 @@
+.form_verfiy {
+  padding: 15px;
+  border-bottom: 1px solid rgb(212, 218, 223);
+
+  form {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+
+    .input_item {
+      select {
+        width: 100%;
+        border: 1px solid rgb(212, 218, 223);
+        padding: 2px;
+        border-radius: 3px;
+        min-width: 250px;
+      }
+    }
+
+    .input_search {
+      border: 1px solid rgb(212, 218, 223);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 3px;
+      overflow: hidden;
+      background-color: white;
+
+      input {
+        border: none;
+        outline: none;
+        width: 100%;
+        background-color: transparent;
+      }
+
+      i {
+        padding: 10px;
+        background-color: rgb(243, 243, 243);
+      }
+    }
+  }
+}

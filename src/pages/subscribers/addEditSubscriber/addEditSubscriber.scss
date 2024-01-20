@@ -1,0 +1,24 @@
+@import "../../../sass/variables.scss";
+
+.btns_add {
+  margin-top: 30px;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  button {
+    padding: 5px 30px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+
+    &.btn_add {
+      background-color: $primary-color;
+    }
+
+    &.btn_close {
+      background-color: $main-color;
+    }
+  }
+}
