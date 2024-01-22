@@ -24,7 +24,8 @@
       }
     }
 
-    form {
+    form,
+    div {
       display: flex;
       align-items: center;
       gap: 15px;
@@ -35,18 +36,23 @@
         input {
           width: 100%;
           border: 1px solid rgb(200, 200, 200);
-          padding: 6px;
+          padding: 4px;
           border-radius: 3px;
           outline: none;
           font-weight: 600;
+          font-size: 15px;
 
           &.remove {
             display: none;
           }
 
           &:focus {
-            border: 1px solid $primary-color;
+            border: 2px solid $primary-color;
           }
+        }
+
+        select {
+          padding: 3px;
         }
       }
 
@@ -75,11 +81,12 @@
       .btns_filter {
         gap: 10px;
         justify-content: center;
+        align-items: center;
         margin-bottom: 10px;
 
         button {
-          padding: 3px 20px;
-          font-size: 15px;
+          padding: 3px 15px;
+          font-size: 14px;
         }
       }
 
@@ -90,7 +97,6 @@
         .input {
           input,
           select {
-            padding: 3px;
             font-size: 13px;
           }
         }

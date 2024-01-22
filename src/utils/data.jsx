@@ -160,6 +160,10 @@ export const sidebarLinks = [
         pathLink: "/report-debts-journal",
       },
       {
+        titleLink: "Data Export",
+        pathLink: "/report-data-export-jobs",
+      },
+      {
         titleLink: "Managers' invoices",
         pathLink: "/report-invoice-managers",
       },

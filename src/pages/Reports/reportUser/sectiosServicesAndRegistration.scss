@@ -1,0 +1,130 @@
+.according_service,
+.date_registration_section {
+  background-color: var(--bg-section);
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 10px var(--border-color);
+  margin-top: 20px;
+  padding: 20px;
+
+  .head_section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .select_manager {
+      select {
+        padding: 5px;
+        flex: 5;
+        width: 100%;
+        border: 1px solid rgb(199, 199, 199);
+        border-radius: 5px;
+      }
+    }
+  }
+
+  .content {
+    .chart_pie,
+    .chart {
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .according_service_infomation {
+      .according_service_table {
+        overflow-x: auto;
+
+        &::-webkit-scrollbar-track {
+          border-radius: 10px;
+          background-color: #f5f5f5;
+        }
+
+        &::-webkit-scrollbar {
+          height: 7px;
+          background-color: #f5f5f5;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          border-radius: 10px;
+          -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+          background-color: transparent;
+        }
+
+        &:hover {
+          &:-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            background-color: rgb(225, 225, 225);
+          }
+        }
+
+        table {
+          margin-top: 15px;
+          background-color: var(--bg-section);
+          width: 100%;
+          border-radius: 5px;
+          overflow-x: auto;
+
+          thead {
+            tr {
+              > *:nth-child(even) {
+                background-color: var(--bg-main);
+              }
+            }
+
+            th {
+              padding: 10px;
+              border-bottom: 1px solid var(--border-color);
+              background-color: var(--bg-section);
+              min-width: 170px;
+            }
+          }
+
+          tbody {
+            tr {
+              &:not(:last-child) {
+                td {
+                  border-bottom: 1px solid var(--border-color);
+                }
+              }
+            }
+            td {
+              padding: 8px;
+
+              input {
+                border: 1px solid rgb(200, 200, 200);
+                border-radius: 5px;
+                padding: 0 8px;
+                outline: none;
+              }
+
+              .remove {
+                color: rgb(243, 40, 5);
+              }
+
+              .save {
+                color: #5588da;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .according_service,
+  .date_registration_section {
+    .head_section {
+      .select_manager {
+        select {
+          padding: 2px;
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}

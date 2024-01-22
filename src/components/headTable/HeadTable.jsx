@@ -9,6 +9,7 @@ const HeadTable = ({
   iconHead,
   setOpenChangeName,
   setOpenDataBalance,
+  actions = true,
 }) => {
   const [openProcesses, setOpenProcesses] = useState(false);
   return (
@@ -53,19 +54,21 @@ const HeadTable = ({
         </div>
 
         <div className="utils">
-          <div className="actions_box">
-            <button
-              className="btn_actions"
-              onClick={() => setOpenProcesses(!openProcesses)}
-            >
-              <i className="fa-solid fa-wrench"></i>
-              Processes
-            </button>
+          {actions && (
+            <div className="actions_box">
+              <button
+                className="btn_actions"
+                onClick={() => setOpenProcesses(!openProcesses)}
+              >
+                <i className="fa-solid fa-wrench"></i>
+                Processes
+              </button>
 
-            <div className={`box box_utils ${openProcesses ? "active" : ""}`}>
-              {children}
+              <div className={`box box_utils ${openProcesses ? "active" : ""}`}>
+                {children}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </Fragment>

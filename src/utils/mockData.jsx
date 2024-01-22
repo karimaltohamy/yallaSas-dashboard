@@ -357,3 +357,45 @@ export const mockDataReportsActivations = [
     status: "ok",
   },
 ];
+
+export const mockDataReportsInvoiceManagers = [
+  {
+    id: 1,
+    invoiceNumber: "2023-1-33049",
+    history: "2021-09-08 13:0",
+    type: "activation",
+    manager: "admin",
+    amount: "70",
+    details: "activated user demo1",
+    publishedBy: "admin",
+    paymentMethod: "balance",
+    notes: "",
+    paid: "yes",
+  },
+];
+
+export const mockDataReportsJournalManagers = [
+  {
+    id: 1,
+    history: "2021-09-08 13:0",
+    debit: "activation",
+    credit: "admin",
+    amount: "70",
+    balance: "activated user demo1",
+    process: "admin",
+    details: "balance",
+    notes: "",
+  },
+];
+
+export const mockDataReportsMoneyTransfer = [
+  {
+    id: 1,
+    history: "2021-09-08 13:0",
+    process: "deposit",
+    credit: "manager_2",
+    debit: "admin",
+    amount: "70",
+    notes: "",
+  },
+];

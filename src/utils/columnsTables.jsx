@@ -493,3 +493,330 @@ export const columnsReportsActivations = [
     headerName: "Status",
   },
 ];
+
+export const columnsReportCardsTransfer = [
+  {
+    field: "date",
+    headerName: "Date",
+  },
+  {
+    field: "oldOwner",
+    headerName: "Old Owner",
+  },
+  {
+    field: "number",
+    headerName: "Number",
+  },
+  {
+    field: "unitValue",
+    headerName: "Unit Value",
+  },
+  {
+    field: "total",
+    headerName: "Total",
+  },
+  {
+    field: "type",
+    headerName: "Type",
+  },
+  {
+    field: "rangeStart",
+    headerName: "Range Start",
+  },
+  {
+    field: "rangeEnd",
+    headerName: "Range End",
+  },
+  {
+    field: "manager",
+    headerName: "Manager",
+  },
+];
+
+export const columnsReportDebtsJournal = [
+  {
+    field: "date",
+    headerName: "Date",
+  },
+  {
+    field: "debtor",
+    headerName: "Debtor",
+  },
+  {
+    field: "creditor",
+    headerName: "Creditor",
+  },
+  {
+    field: "amount",
+    headerName: "Amount",
+  },
+  {
+    field: "balance",
+    headerName: "Balance",
+  },
+  {
+    field: "notices",
+    headerName: "Notices",
+  },
+];
+
+export const columnsReportDaraExportJobs = [
+  {
+    field: "date",
+    headerName: "Date",
+  },
+  {
+    field: "filename",
+    headerName: "Filename",
+  },
+  {
+    field: "manager",
+    headerName: "Manager",
+  },
+  {
+    field: "module",
+    headerName: "Module",
+  },
+  {
+    field: "status",
+    headerName: "Status",
+  },
+  {
+    field: "completedAt",
+    headerName: "Completed At",
+  },
+  {
+    field: "size",
+    headerName: "Size",
+  },
+];
+
+export const columnsReportInvoiceManagers = [
+  {
+    field: "invoiceNumber",
+    headerName: "Invoice number",
+  },
+  {
+    field: "history",
+    headerName: "History",
+  },
+  {
+    field: "type",
+    headerName: "Type",
+  },
+  {
+    field: "manager",
+    headerName: "Manager",
+  },
+  {
+    field: "amount",
+    headerName: "Amount",
+  },
+  {
+    field: "details",
+    headerName: "Details",
+  },
+  {
+    field: "publishedBy",
+    headerName: "Published by",
+  },
+  {
+    field: "paymentMethod",
+    headerName: "Payment method",
+  },
+  {
+    field: "notes",
+    headerName: "Notes",
+  },
+  {
+    field: "paid",
+    headerName: "Paid",
+  },
+];
+
+export const columnsReportJournalManagers = [
+  {
+    field: "history",
+    headerName: "History",
+  },
+  {
+    field: "debit",
+    headerName: "Debit",
+  },
+  {
+    field: "credit",
+    headerName: "Credit",
+  },
+  {
+    field: "amount",
+    headerName: "Amount",
+  },
+  {
+    field: "balance",
+    headerName: "Balance",
+  },
+  {
+    field: "process",
+    headerName: "Process",
+  },
+  {
+    field: "details",
+    headerName: "Details",
+  },
+  {
+    field: "notes",
+    headerName: "Notes",
+  },
+];
+
+export const columnsReportMonetTransfer = [
+  {
+    field: "history",
+    headerName: "History",
+  },
+  {
+    field: "process",
+    headerName: "Process",
+  },
+  {
+    field: "credit",
+    headerName: "Credit",
+  },
+  {
+    field: "debit",
+    headerName: "Debit",
+  },
+  {
+    field: "amount",
+    headerName: "Amount",
+  },
+  {
+    field: "notes",
+    headerName: "Notes",
+  },
+];
+
+export const columnsPaymentGatewayTransactions = [
+  {
+    field: "date",
+    headerName: "Date",
+  },
+  {
+    field: "gateway",
+    headerName: "Gateway",
+  },
+  {
+    field: "manager",
+    headerName: "Manager",
+  },
+  {
+    field: "user",
+    headerName: "User",
+  },
+  {
+    field: "amount",
+    headerName: "Amount",
+  },
+  {
+    field: "currency",
+    headerName: "Currency",
+  },
+  {
+    field: "status",
+    headerName: "Status",
+  },
+];
+
+export const columnsReportReceiptManagers = [
+  {
+    field: "dateReceipt",
+    headerName: "Date of receipt",
+  },
+  {
+    field: "history",
+    headerName: "History",
+  },
+  {
+    field: "loginName",
+    headerName: "Login name",
+  },
+  {
+    field: "type",
+    headerName: "Type",
+  },
+  {
+    field: "amount",
+    headerName: "Amount",
+  },
+  {
+    field: "details",
+    headerName: "Details",
+  },
+  {
+    field: "publishedBy",
+    headerName: "Published by",
+  },
+];
+
+export const columnsReportSessions = [
+  {
+    field: "loginName",
+    headerName: "Login name",
+  },
+  {
+    field: "startTime",
+    headerName: "Start Time",
+  },
+  {
+    field: "endTime",
+    headerName: "End time",
+  },
+  {
+    field: "ip",
+    headerName: "IP",
+  },
+  {
+    field: "mac",
+    headerName: "Mac",
+  },
+  {
+    field: "lift",
+    headerName: "Lift",
+  },
+  {
+    field: "download",
+    headerName: "Download",
+  },
+  {
+    field: "contactPoint",
+    headerName: "Contact Point",
+  },
+  {
+    field: "reasonTermination",
+    headerName: "Reason for termination",
+    width: 170,
+  },
+];
+
+export const columnsReportSuspicious = [
+  {
+    field: "username",
+    headerName: "Username",
+  },
+  {
+    field: "expiration",
+    headerName: "Expiration",
+  },
+  {
+    field: "name",
+    headerName: "Name",
+  },
+  {
+    field: "currentSessions",
+    headerName: "Current Sessions",
+  },
+  {
+    field: "flag",
+    headerName: "Flag",
+  },
+];

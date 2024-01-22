@@ -1,0 +1,106 @@
+@import "../../../sass/variables.scss";
+
+// start report_cards_usage_section
+.report_cards_usage_section {
+  margin: 20px 10px;
+
+  .form_report_cards {
+    form {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .input {
+        select,
+        input {
+          width: 100%;
+          border: 1px solid var(--border-color);
+          padding: 6px;
+          border-radius: 3px;
+          outline: none;
+          font-weight: 600;
+          background-color: var(--bg-section);
+          color: var(--text-color);
+
+          &.remove {
+            display: none;
+          }
+
+          &:focus {
+            border: 1px solid $primary-color;
+          }
+        }
+
+        select {
+          padding: 3px;
+        }
+      }
+
+      .reload {
+        padding: 5px 10px;
+        background-color: $primary-color;
+        color: white;
+        border-radius: 5px;
+      }
+    }
+  }
+
+  .content_report_cards {
+    background-color: var(--bg-section);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-top: 30px;
+
+    .chart {
+      svg {
+        width: 100%;
+      }
+    }
+
+    .details {
+      padding: 30px 20px;
+      border-right: 1px solid var(--border-color);
+      height: 100%;
+
+      .detail {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &:not(:last-child) {
+          padding-bottom: 10px;
+          margin-bottom: 10px;
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        h4 {
+          margin-bottom: 0;
+          font-size: 18px;
+        }
+
+        span {
+          color: gray;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .report_cards_usage_section {
+    .form_report_cards {
+      form {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+    .content_report_cards {
+      .details {
+        border-top: 1px solid rgb(235, 235, 235);
+        border-right: none;
+      }
+    }
+  }
+}
+// end report_cards_usage_section

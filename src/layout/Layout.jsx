@@ -51,6 +51,24 @@ import IssuingInvoiceForm from "../pages/accounts/IssuingInvoiceForm";
 import UserInvoiceDesigner from "../pages/accounts/UserInvoiceDesigner";
 import ReportsActivations from "../pages/Reports/ReportsActivations";
 import ReportsActivationsStatistics from "../pages/Reports/reportsActivationsStatistics/ReportsActivationsStatistics";
+import ReportsCardsUsage from "../pages/Reports/reportsCardsUsage/ReportsCardsUsage";
+import ReportCardsTransfer from "../pages/Reports/reportCardsTransfer/ReportCardsTransfer";
+import ReportDebtsJournal from "../pages/Reports/reportDebtsJournal/ReportDebtsJournal";
+import ReportDataExportJobs from "../pages/Reports/reportDataExportJobs/ReportDataExportJobs";
+import ReportInvoiceManagers from "../pages/Reports/reportInvoiceManagers/ReportInvoiceManagers";
+import ReportJournalManagers from "../pages/Reports/reportJournalManagers/ReportJournalManagers";
+import ReportMoneyTransfer from "../pages/Reports/reportMoneyTransfer/reportMoneyTransfer";
+import ReportOnline from "../pages/Reports/reportOnline/ReportOnline";
+import ReportProfits from "../pages/Reports/reportProfits/ReportProfits";
+import PaymentGatewayTransactions from "../pages/Reports/paymentGatewayTransactions/PaymentGatewayTransactions";
+import ReportReceiptsManagers from "../pages/Reports/reportReceiptsManagers/ReportReceiptsManagers";
+import ReportSessions from "../pages/Reports/reportSessions/ReportSessions";
+import ReportSuspicious from "../pages/Reports/reportSuspicious/ReportSuspicious";
+import ReportTraffic from "../pages/Reports/ReportTraffic";
+import ReportUsers from "../pages/Reports/reportUser/ReportUsers";
+import AccordingManagers from "../pages/Reports/reportUser/AccordingManagers";
+import AccordingService from "../pages/Reports/reportUser/AccordingService";
+import RegistrationDate from "../pages/Reports/reportUser/RegistrationDate";
 
 const Layout = () => {
   return (
@@ -158,6 +176,49 @@ const Layout = () => {
             path="/activation-stats"
             element={<ReportsActivationsStatistics />}
           />
+          <Route path="/reportcards-usage" element={<ReportsCardsUsage />} />
+          <Route
+            path="/report-cards-transfer"
+            element={<ReportCardsTransfer />}
+          />
+          <Route
+            path="/report-debts-journal"
+            element={<ReportDebtsJournal />}
+          />
+          <Route
+            path="/report-data-export-jobs"
+            element={<ReportDataExportJobs />}
+          />
+          <Route
+            path="/report-invoice-managers"
+            element={<ReportInvoiceManagers />}
+          />
+          <Route
+            path="/report-journal-managers"
+            element={<ReportJournalManagers />}
+          />
+          <Route
+            path="/report-money-transfer"
+            element={<ReportMoneyTransfer />}
+          />
+          <Route path="/report-online" element={<ReportOnline />} />
+          <Route path="/report-profits" element={<ReportProfits />} />
+          <Route
+            path="/payment-gateway-transaction"
+            element={<PaymentGatewayTransactions />}
+          />
+          <Route
+            path="/report-receipts-managers"
+            element={<ReportReceiptsManagers />}
+          />
+          <Route path="/report-sessions" element={<ReportSessions />} />
+          <Route path="/report-suspicious" element={<ReportSuspicious />} />
+          <Route path="/report-traffic" element={<ReportTraffic />} />
+          <Route path="/report-users" element={<ReportUsers />}>
+            <Route path="accordingManagers" element={<AccordingManagers />} />
+            <Route path="accordingService" element={<AccordingService />} />
+            <Route path="registrationDate" element={<RegistrationDate />} />
+          </Route>
         </Routes>
       </div>
     </main>
