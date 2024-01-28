@@ -1,0 +1,21 @@
+.main_section {
+  margin-top: 20px;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: var(--bg-section);
+  color: var(--text-color);
+
+  .head {
+    padding: 10px;
+    background-color: rgb(11, 11, 11);
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    h5 {
+      font-size: 18px;
+      margin-bottom: 0;
+    }
+  }
+}

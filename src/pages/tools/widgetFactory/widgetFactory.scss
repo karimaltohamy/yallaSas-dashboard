@@ -1,0 +1,152 @@
+@import "../../../sass/variables.scss";
+
+// start widget_factory_section
+.widget_factory_section {
+  margin: 10px;
+
+  .path {
+    color: gray;
+    font-size: 17px;
+    margin-bottom: 12px;
+  }
+
+  .line {
+    margin-top: 20px;
+  }
+
+  .selected_widget {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+
+    select {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      min-width: 200px;
+      max-width: 100%;
+      background-color: transparent;
+      color: var(--text-color);
+    }
+
+    .utils_form {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      button {
+        i {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+
+  .form_options {
+    padding: 10px;
+    display: none;
+
+    &.active {
+      display: block;
+    }
+
+    .input_item {
+      &:not(:last-child) {
+        margin-bottom: 12px;
+      }
+
+      label {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 4px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 2px;
+
+        .star {
+          font-size: 12px;
+          color: red;
+        }
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid rgb(222, 222, 222);
+        border-radius: 3px;
+        outline: none;
+
+        &:focus {
+          border: 1px solid $primary-color;
+        }
+      }
+    }
+
+    .btn_save {
+      padding: 5px 20px;
+      background-color: $primary-color;
+      color: white;
+      border-radius: 4px;
+    }
+  }
+
+  .container_box {
+    padding: 10px;
+    display: none;
+
+    &.active {
+      display: block;
+    }
+
+    .box {
+      border-radius: 5px;
+      background-color: #3da8d8;
+      color: white;
+      overflow: hidden;
+      position: relative;
+
+      .head_box {
+        padding: 30px;
+        .icon {
+          margin-bottom: 10px;
+          position: absolute;
+          right: 15px;
+          opacity: 0.5;
+          top: 50%;
+          transform: translateY(-50%);
+
+          i {
+            font-size: 60px;
+          }
+        }
+
+        .title {
+          font-weight: 700;
+          margin-bottom: 3px;
+        }
+
+        p {
+          margin-bottom: 0;
+        }
+      }
+
+      .number {
+        padding: 20px;
+        background-color: #328bb4;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .widget_factory_section {
+    .line {
+      gap: 20px;
+    }
+  }
+}
+// end

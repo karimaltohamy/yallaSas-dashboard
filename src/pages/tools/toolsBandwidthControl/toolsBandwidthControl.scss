@@ -1,0 +1,72 @@
+@import "../../../sass/variables.scss";
+
+// start tools_bandwidth_control_content
+.tools_bandwidth_control_content {
+  padding: 10px;
+
+  .btns_controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    .btn_control {
+      padding: 5px 18px;
+      background-color: black;
+      color: white;
+      border-radius: 5px;
+    }
+  }
+
+  .main_range {
+    display: flex;
+    margin-top: 25px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+
+    > div {
+      padding: 15px;
+
+      &:not(:last-child) {
+        border-left: 1px solid var(--border-color);
+      }
+    }
+
+    .info,
+    .text {
+      width: 30%;
+
+      h5 {
+        font-size: 17px;
+        margin-bottom: 0;
+      }
+    }
+
+    .text {
+      display: flex;
+      align-items: center;
+    }
+
+    .range {
+      width: 40%;
+      position: relative;
+      padding: 25px 15px;
+
+      input {
+        width: 100%;
+      }
+
+      .value_main {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 7px;
+      }
+    }
+
+    .info {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+    }
+  }
+}

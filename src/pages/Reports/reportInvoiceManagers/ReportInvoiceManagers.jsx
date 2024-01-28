@@ -11,7 +11,7 @@ const ReportInvoiceManagers = () => {
         <HeadTable
           path="report / managers invoices"
           title="Managers invoices"
-          iconHead={<i class="fa-solid fa-file-invoice-dollar"></i>}
+          iconHead={<i className="fa-solid fa-file-invoice-dollar"></i>}
           actions={false}
         />
         <MainTable

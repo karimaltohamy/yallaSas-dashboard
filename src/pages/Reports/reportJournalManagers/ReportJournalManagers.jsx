@@ -11,7 +11,7 @@ const ReportJournalManagers = () => {
         <HeadTable
           path="report / manager journal"
           title="Report manager journa"
-          iconHead={<i class="fa-solid fa-book"></i>}
+          iconHead={<i className="fa-solid fa-book"></i>}
           actions={false}
         />
         <MainTable

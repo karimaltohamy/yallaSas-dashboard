@@ -10,7 +10,7 @@ const ReportSessions = () => {
         <HeadTable
           path="report / users sessions"
           title="Users Sessions"
-          iconHead={<i class="fa-solid fa-book"></i>}
+          iconHead={<i className="fa-solid fa-book"></i>}
           actions={false}
         />
         <MainTable rows={[]} columns={columnsReportSessions} />

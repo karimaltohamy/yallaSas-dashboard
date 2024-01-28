@@ -4,10 +4,10 @@ import ChartPie from "../../../components/charts/ChartPie";
 
 const AccordingService = () => {
   return (
-    <div class="according_service">
-      <div class="head_section">
-        <form action="" class="select_manager">
-          <div class="input">
+    <div className="according_service">
+      <div className="head_section">
+        <form action="" className="select_manager">
+          <div className="input">
             <select name="" id="">
               <option value="">All Managers</option>
               <option value="">Admin</option>
@@ -17,26 +17,26 @@ const AccordingService = () => {
             </select>
           </div>
         </form>
-        <div class="btn_actions">
-          <button class="btn_action">
-            <i class="fa-solid fa-download"></i>
+        <div className="btn_actions">
+          <button className="btn_action">
+            <i className="fa-solid fa-download"></i>
             <span>تحميل</span>
           </button>
-          <button class="btn_action">
-            <i class="fa-solid fa-rotate"></i>
+          <button className="btn_action">
+            <i className="fa-solid fa-rotate"></i>
             <span>تحديث</span>
           </button>
         </div>
       </div>
 
-      <div class="content">
+      <div className="content">
         <div className="mx-auto mt-5 flex items-center justify-center">
-          <div class="container_chart h-[250px] md:h-[400px] w-[250px] md:w-[400px]">
+          <div className="container_chart h-[250px] md:h-[400px] w-[250px] md:w-[400px]">
             <ChartPie />
           </div>
         </div>
-        <div class="according_service_infomation">
-          <div class="according_service_table">
+        <div className="according_service_infomation">
+          <div className="according_service_table">
             <table>
               <thead>
                 <tr>

@@ -13,11 +13,11 @@ const ReportProfits = () => {
   };
 
   return (
-    <div class="activation_states_section">
-      <div class="form_states">
+    <div className="activation_states_section">
+      <div className="form_states">
         <div>
-          <div class="input">
-            <select name="" id="" class="select_month">
+          <div className="input">
+            <select name="" id="" className="select_month">
               <option value="">جميع المدراء</option>
               <option value="">admin</option>
               <option value="">manager_1</option>
@@ -26,7 +26,7 @@ const ReportProfits = () => {
               <option value="">manager_4</option>
             </select>
           </div>
-          <div class="input">
+          <div className="input">
             <select name="" id="">
               <option value="">2023</option>
               <option value="">2022</option>
@@ -38,7 +38,7 @@ const ReportProfits = () => {
             </select>
           </div>
           <button
-            class="btn_detailed"
+            className="btn_detailed"
             onClick={() => setOpenDownloadDetaildReport(true)}
           >
             Download Detailed Report
@@ -46,7 +46,7 @@ const ReportProfits = () => {
         </div>
       </div>
 
-      <div class="bg-white h-[300px] md:h-[500px] mt-3 md:mt-6">
+      <div className="bg-white h-[300px] md:h-[500px] mt-3 md:mt-6">
         <ChartLine title={"Earnings report"} />
       </div>
 
@@ -64,7 +64,7 @@ const ReportProfits = () => {
           onChange={setDateSelected}
           placeholder={""}
         />
-        <p class="desc">
+        <p className="desc">
           This will generate a detailed profits report made by each manager and
           profile.
         </p>

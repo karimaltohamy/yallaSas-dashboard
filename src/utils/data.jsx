@@ -205,7 +205,7 @@ export const sidebarLinks = [
       },
       {
         titleLink: "Customers",
-        pathLink: "/report-users",
+        pathLink: "/report-users/accordingManagers",
       },
     ],
   },
@@ -288,7 +288,7 @@ export const sidebarLinks = [
       },
       {
         titleLink: "Backup",
-        pathLink: "/add-settings-backup.",
+        pathLink: "/add-settings-backup",
       },
       {
         titleLink: "Email",

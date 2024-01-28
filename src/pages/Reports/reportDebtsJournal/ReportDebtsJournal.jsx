@@ -10,7 +10,7 @@ const ReportDebtsJournal = () => {
         <HeadTable
           path="report / debts journal"
           title="report debts journal"
-          iconHead={<i class="fa-solid fa-book"></i>}
+          iconHead={<i className="fa-solid fa-book"></i>}
           actions={false}
         />
         <MainTable rows={[]} columns={columnsReportDebtsJournal} />

@@ -11,7 +11,7 @@ const ReportMoneyTransfer = () => {
         <HeadTable
           path=" report / money transfer"
           title="Money transfer"
-          iconHead={<i class="fa-solid fa-book"></i>}
+          iconHead={<i className="fa-solid fa-book"></i>}
           actions={false}
         />
         <MainTable

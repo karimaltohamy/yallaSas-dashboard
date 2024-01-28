@@ -1,0 +1,93 @@
+// start tools_import_section
+
+.tools_import_section {
+  margin: 10px;
+  .form_import {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+
+    .input_item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      label {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 4px;
+        font-size: 17px;
+        display: flex;
+        align-items: center;
+        gap: 2px;
+
+        .star {
+          font-size: 12px;
+          color: red;
+        }
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid var(--border-color);
+        border-radius: 3px;
+        background-color: transparent;
+        color: var(--text-color);
+
+        option {
+          color: black;
+        }
+      }
+    }
+
+    .input_check {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      label {
+        font-weight: 600;
+        font-size: 15px;
+      }
+
+      input {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    .input_file {
+      input {
+        display: none;
+      }
+
+      label {
+        padding: 5px 20px;
+        color: white;
+        background-color: black;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .content_card {
+    margin-top: 20px;
+    padding: 30px;
+    background-color: var(--bg-section);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tools_import_section {
+    .form_import {
+      justify-content: center;
+    }
+  }
+}
+// end tools_import_section

@@ -69,6 +69,25 @@ import ReportUsers from "../pages/Reports/reportUser/ReportUsers";
 import AccordingManagers from "../pages/Reports/reportUser/AccordingManagers";
 import AccordingService from "../pages/Reports/reportUser/AccordingService";
 import RegistrationDate from "../pages/Reports/reportUser/RegistrationDate";
+import RadiusLog from "../pages/log/radiusLog/RadiusLog";
+import SysLog from "../pages/log/sysLog/SysLog";
+import LoginAttempts from "../pages/log/loginAttempts/LoginAttempts";
+import DashboardManager from "../pages/tools/dashboardManager/DashboardManager";
+import WidgetFactory from "../pages/tools/widgetFactory/WidgetFactory";
+import SystemServices from "../pages/tools/systemServices/SystemServices";
+import SystemUpdate from "../pages/tools/systemUpdate/SystemUpdate";
+import SystemMaintenance from "../pages/tools/systemMaintenance/SystemMaintenance";
+import ToolsAnnouncements from "../pages/tools/toolsAnnouncements/ToolsAnnouncements";
+import ToolsImport from "../pages/tools/toolsImport/ToolsImport";
+import ToolsBandwidthControl from "../pages/tools/toolsBandwidthControl/ToolsBandwidthControl";
+import BackupIndex from "../pages/tools/backupIndex/BackupIndex";
+import SettingsBackup from "../pages/tools/backupIndex/SettingsBackup";
+import BulkChanges from "../pages/tools/BulkChanges/BulkChanges";
+import IpPools from "../pages/ipPools/IpPools";
+import SettingsAdvanced from "../pages/options/settingsAdvanced/SettingsAdvanced";
+import AddIpPools from "../pages/ipPools/AddIpPools";
+import EmailSettings from "../pages/options/emailSettings/EmailSettings";
+import SettingsEmailTemplates from "../pages/options/settingsEmailTemplates/SettingsEmailTemplates";
 
 const Layout = () => {
   return (
@@ -219,6 +238,39 @@ const Layout = () => {
             <Route path="accordingService" element={<AccordingService />} />
             <Route path="registrationDate" element={<RegistrationDate />} />
           </Route>
+          {/* log */}
+          <Route path="/log-radius" element={<RadiusLog />} />
+          <Route path="/system-log" element={<SysLog />} />
+          <Route path="/login-attempts" element={<LoginAttempts />} />
+          {/* tools */}
+          <Route
+            path="/tools-dashboard-manager"
+            element={<DashboardManager />}
+          />
+          <Route path="/widget-factory" element={<WidgetFactory />} />
+          <Route path="/system-services" element={<SystemServices />} />
+          <Route path="/system-update" element={<SystemUpdate />} />
+          <Route path="/system-maintenance" element={<SystemMaintenance />} />
+          <Route path="/tools-announcements" element={<ToolsAnnouncements />} />
+          <Route path="/tools-import" element={<ToolsImport />} />
+          <Route
+            path="/tools-bandwidth-control"
+            element={<ToolsBandwidthControl />}
+          />
+          <Route path="/backup-index" element={<BackupIndex />} />
+          <Route path="/backup-index/settings" element={<SettingsBackup />} />
+          <Route path="/bulk-changes" element={<BulkChanges />} />
+          {/* ip pools */}
+          <Route path="/ip-pools" element={<IpPools />} />
+          <Route path="/add-ip-pools" element={<AddIpPools />} />
+          {/* options */}
+          <Route path="/settings-advanced" element={<SettingsAdvanced />} />
+          <Route path="/add-settings-backup" element={<BulkChanges />} />
+          <Route path="/settings-email" element={<EmailSettings />} />
+          <Route
+            path="/settings-email-templates"
+            element={<SettingsEmailTemplates />}
+          />
         </Routes>
       </div>
     </main>

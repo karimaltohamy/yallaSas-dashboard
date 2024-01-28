@@ -11,7 +11,7 @@ const ReportUsers = () => {
     },
     {
       title: "According to the service",
-      icon: <i class="fa-solid fa-bell-concierge"></i>,
+      icon: <i className="fa-solid fa-bell-concierge"></i>,
       path: "accordingService",
     },
     {

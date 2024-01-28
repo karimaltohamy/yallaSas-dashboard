@@ -1,0 +1,58 @@
+.bulk_changes_content {
+  padding: 15px;
+
+  form {
+    display: flex;
+    align-items: end;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .input_item {
+      label {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 4px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 2px;
+
+        .star {
+          font-size: 12px;
+          color: red;
+        }
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid var(--border-color);
+        border-radius: 3px;
+        min-width: 330px;
+        max-width: 100%;
+        background-color: transparent;
+        color: var(--text-color);
+
+        option {
+          color: black;
+        }
+      }
+    }
+
+    .btns_actions {
+      display: flex;
+      align-items: center;
+
+      gap: 15px;
+
+      .btn_action {
+        padding: 5px 15px;
+        background-color: black;
+        color: white;
+        border-radius: 4px;
+      }
+    }
+  }
+}

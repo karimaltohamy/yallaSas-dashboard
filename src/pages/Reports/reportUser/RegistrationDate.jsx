@@ -3,10 +3,10 @@ import ChartLine from "../../../components/charts/ChartLine";
 
 const RegistrationDate = () => {
   return (
-    <div class="date_registration_section">
-      <div class="head_section">
-        <form action="" class="select_manager">
-          <div class="input">
+    <div className="date_registration_section">
+      <div className="head_section">
+        <form action="" className="select_manager">
+          <div className="input">
             <select name="" id="">
               <option value="">2023</option>
               <option value="">2022</option>
@@ -18,20 +18,20 @@ const RegistrationDate = () => {
             </select>
           </div>
         </form>
-        <div class="btn_actions">
-          <button class="btn_action">
-            <i class="fa-solid fa-download"></i>
+        <div className="btn_actions">
+          <button className="btn_action">
+            <i className="fa-solid fa-download"></i>
             <span>تحميل</span>
           </button>
-          <button class="btn_action">
-            <i class="fa-solid fa-rotate"></i>
+          <button className="btn_action">
+            <i className="fa-solid fa-rotate"></i>
             <span>تحديث</span>
           </button>
         </div>
       </div>
 
-      <div class="content">
-        <div class="container_chart h-[250px] md:h-[400px]">
+      <div className="content">
+        <div className="container_chart h-[250px] md:h-[400px]">
           <ChartLine />
         </div>
       </div>

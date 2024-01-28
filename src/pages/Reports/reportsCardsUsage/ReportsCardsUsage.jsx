@@ -4,10 +4,10 @@ import ChartLine from "../../../components/charts/ChartLine";
 
 const ReportsCardsUsage = () => {
   return (
-    <div class="report_cards_usage_section">
-      <div class="form_report_cards">
+    <div className="report_cards_usage_section">
+      <div className="form_report_cards">
         <form action="">
-          <div class="input">
+          <div className="input">
             <select name="" id="">
               <option value="">لوحه المشتركين</option>
               <option value="">admin</option>
@@ -16,29 +16,29 @@ const ReportsCardsUsage = () => {
               <option value="">manager_3</option>
             </select>
           </div>
-          <div class="input">
+          <div className="input">
             <input type="date" />
           </div>
-          <div class="input">
+          <div className="input">
             <input type="date" />
           </div>
-          <button class="reload">
-            <i class="fa-solid fa-rotate"></i>
+          <button className="reload">
+            <i className="fa-solid fa-rotate"></i>
           </button>
         </form>
       </div>
-      <div class="content_report_cards">
-        <div class="grid grid-cols-1 md:grid-cols-2">
-          <div class="bg-white w-full h-[280px] md:h-[400px]">
+      <div className="content_report_cards">
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          <div className="bg-white w-full h-[280px] md:h-[400px]">
             <ChartLine />
           </div>
-          <div class="">
-            <div class="details">
-              <div class="detail">
+          <div className="">
+            <div className="details">
+              <div className="detail">
                 <h4>Cards Used</h4>
                 <span>0</span>
               </div>
-              <div class="detail">
+              <div className="detail">
                 <h4>Total Value</h4>
                 <span>$0.00</span>
               </div>

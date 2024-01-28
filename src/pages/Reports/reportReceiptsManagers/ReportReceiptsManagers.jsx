@@ -10,7 +10,7 @@ const ReportReceiptsManagers = () => {
         <HeadTable
           path="report / receipts"
           title="Manager Receipts"
-          iconHead={<i class="fa-solid fa-book"></i>}
+          iconHead={<i className="fa-solid fa-book"></i>}
           actions={false}
         />
         <MainTable rows={[]} columns={columnsReportReceiptManagers} />

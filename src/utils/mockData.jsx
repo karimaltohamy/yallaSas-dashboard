@@ -399,3 +399,14 @@ export const mockDataReportsMoneyTransfer = [
     notes: "",
   },
 ];
+
+export const mockDataSysLog = [
+  {
+    id: 1,
+    date: "2021-09-08 13:0",
+    event: "manager/login	",
+    manager: "admin",
+    details: "manager login admin",
+    internetAddress: "91.106.63.11",
+  },
+];

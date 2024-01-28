@@ -820,3 +820,89 @@ export const columnsReportSuspicious = [
     headerName: "Flag",
   },
 ];
+
+export const columnsSysLog = [
+  {
+    field: "date",
+    headerName: "Date",
+  },
+  {
+    field: "event",
+    headerName: "Event",
+  },
+  {
+    field: "manager",
+    headerName: "Manager",
+  },
+  {
+    field: "details",
+    headerName: "Details",
+  },
+  {
+    field: "internetAddress",
+    headerName: "Internet Address",
+    width: 150,
+  },
+];
+
+export const columnsLoginAttempts = [
+  {
+    field: "date",
+    headerName: "Date",
+  },
+  {
+    field: "loginName",
+    headerName: "Login name",
+  },
+  {
+    field: "serverReply",
+    headerName: "Server Reply",
+  },
+  {
+    field: "nas",
+    headerName: "NAS",
+  },
+  {
+    field: "mac",
+    headerName: "MAC",
+  },
+];
+
+export const columnsBackupIndex = [
+  {
+    field: "fileName",
+    headerName: "FileName",
+  },
+  {
+    field: "date",
+    headerName: "Date",
+  },
+  {
+    field: "size",
+    headerName: "Size",
+  },
+  {
+    field: "version",
+    headerName: "Version",
+  },
+];
+
+export const columnsIpPools = [
+  {
+    field: "poolName",
+    headerName: "Pool Name",
+  },
+  {
+    field: "fromIp",
+    headerName: "From IP",
+  },
+  {
+    field: "toIp",
+    headerName: "To IP",
+  },
+  {
+    field: "LeaseTime",
+    headerName: "Lease Time(hours)",
+    width: 140,
+  },
+];

@@ -10,7 +10,7 @@ const ReportSuspicious = () => {
         <HeadTable
           path="report / suspicious users"
           title="Suspicious Users"
-          iconHead={<i class="fa-solid fa-book"></i>}
+          iconHead={<i className="fa-solid fa-book"></i>}
           actions={false}
         />
         <MainTable rows={[]} columns={columnsReportSuspicious} />

@@ -1,0 +1,76 @@
+@import "../../../sass/variables.scss";
+
+.tools_announcements_form {
+  padding: 15px;
+
+  form {
+    .input_item {
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+
+      label {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 4px;
+        font-size: 17px;
+        display: flex;
+        align-items: center;
+        gap: 2px;
+
+        .star {
+          font-size: 12px;
+          color: red;
+        }
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid var(--border-color);
+        border-radius: 3px;
+        background-color: transparent;
+        color: var(--text-color);
+      }
+    }
+
+    .input_check {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+
+      label {
+        font-weight: 600;
+        font-size: 15px;
+      }
+
+      input {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    .bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+
+      p {
+        margin-bottom: 0;
+      }
+
+      .btn_send {
+        padding: 5px 20px;
+        background-color: $primary-color;
+        color: white;
+        border-radius: 4px;
+      }
+    }
+  }
+}

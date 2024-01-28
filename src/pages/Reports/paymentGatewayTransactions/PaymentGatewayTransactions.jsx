@@ -10,7 +10,7 @@ const PaymentGatewayTransactions = () => {
         <HeadTable
           path="report / payment gateway transactions"
           title="Payment Gateway Transactions"
-          iconHead={<i class="fa-solid fa-book"></i>}
+          iconHead={<i className="fa-solid fa-book"></i>}
           actions={false}
         />
         <MainTable rows={[]} columns={columnsPaymentGatewayTransactions} />

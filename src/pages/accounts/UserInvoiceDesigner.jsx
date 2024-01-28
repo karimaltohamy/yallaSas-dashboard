@@ -16,7 +16,7 @@ const UserInvoiceDesigner = () => {
         <div className="col-12 col-md-2">
           <form action="" className="form_invoice_designer">
             <div className="input_item">
-              <label for="">PDF Paper Size</label>
+              <label htmlFor="">PDF Paper Size</label>
               <select name="" id="">
                 <option value="">A4</option>
                 <option value="">A5</option>
@@ -24,7 +24,7 @@ const UserInvoiceDesigner = () => {
               </select>
             </div>
             <div className="input_item">
-              <label for="">Page Orientation</label>
+              <label htmlFor="">Page Orientation</label>
               <select name="" id="">
                 <option value="">Portrait</option>
                 <option value="">A5</option>

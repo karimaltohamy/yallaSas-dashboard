@@ -1,0 +1,80 @@
+@import "../../../sass/variables.scss";
+
+// start system_maintenance_section
+.system_maintenance_section {
+  margin: 10px;
+
+  .head {
+    text-align: center;
+    margin: 10px 0 20px;
+
+    .image {
+      img {
+        width: 120px;
+      }
+    }
+
+    h4 {
+      margin-bottom: 0;
+    }
+  }
+
+  .faq {
+    .accordion {
+      .accordion-item {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        border: none;
+        background-color: var(--bg-section);
+        color: var(--text-color);
+
+        &:not(:last-child) {
+          margin-bottom: 20px;
+        }
+
+        .accordion-button {
+          border: none;
+          border-radius: 7px;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          background-color: var(--bg-section);
+          color: var(--text-color);
+
+          &::after {
+            margin-left: unset;
+            margin-right: auto;
+            color: var(--text-color);
+          }
+
+          &:not(.collapsed) {
+            background-color: $primary-color !important;
+            color: white !important;
+          }
+        }
+
+        .accordion-body {
+          .btns {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+
+            .btn_system {
+              padding: 5px 20px;
+              background-color: black;
+              color: white !important;
+              border-radius: 4px;
+            }
+          }
+        }
+
+        .collapse {
+          visibility: inherit !important;
+        }
+      }
+    }
+  }
+}
+// end system_maintenance_section
