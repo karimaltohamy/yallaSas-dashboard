@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useRef } from "react";
+import MainSection from "../../../components/mainSection/MainSection";
+import InputEditor from "../../../components/inputEditor/InputEditor";
 
 const SettingsEmailTemplates = () => {
+  const editorRef = useRef(null);
+
   return (
-    <div className="m-[10px]">
+    <div className="settings_email_templates m-[10px]">
       <div class="dashboard_manager_content">
         <div class="selected_dashboard">
           <form action="">
@@ -24,19 +28,19 @@ const SettingsEmailTemplates = () => {
           </div>
         </div>
 
-        <div class="dashboard_designer template_designer active">
-          <div class="head">
-            <i class="fa-regular fa-eye"></i>
-            <h5> Template Editor</h5>
-          </div>
-
-          <form action="" class="form_tamplate">
-            <div class="input_item">
-              <input type="text" placeholder="email subject" />
+        <MainSection
+          title={"Template Editor"}
+          icon={<i className="fa-regular fa-eye"></i>}
+        >
+          <div className="form_tamplate">
+            <div className="input_item">
+              <input type="text" placeholder="Email subject" />
             </div>
-            <div class="input_item"></div>
-          </form>
-        </div>
+            <div className="input_item">
+              <InputEditor editorRef={editorRef} />
+            </div>
+          </div>
+        </MainSection>
       </div>
     </div>
   );

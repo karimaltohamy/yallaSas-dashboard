@@ -906,3 +906,22 @@ export const columnsIpPools = [
     width: 140,
   },
 ];
+
+export const columnsFormSettings = [
+  {
+    field: "key",
+    headerName: "Key",
+  },
+  {
+    field: "label",
+    headerName: "Label",
+  },
+  {
+    field: "type",
+    headerName: "Type",
+  },
+  {
+    field: "requird",
+    headerName: "Required",
+  },
+];

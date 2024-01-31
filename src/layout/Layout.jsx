@@ -88,6 +88,9 @@ import SettingsAdvanced from "../pages/options/settingsAdvanced/SettingsAdvanced
 import AddIpPools from "../pages/ipPools/AddIpPools";
 import EmailSettings from "../pages/options/emailSettings/EmailSettings";
 import SettingsEmailTemplates from "../pages/options/settingsEmailTemplates/SettingsEmailTemplates";
+import SettingsFreezone from "../pages/options/settingsFreezone/SettingsFreezone";
+import SettingsForms from "../pages/options/settingsForms/SettingsForms";
+import SettingsGeneral from "../pages/options/settingsGeneral/SettingsGeneral";
 
 const Layout = () => {
   return (
@@ -271,6 +274,9 @@ const Layout = () => {
             path="/settings-email-templates"
             element={<SettingsEmailTemplates />}
           />
+          <Route path="/settings-freezone" element={<SettingsFreezone />} />
+          <Route path="/settings-forms" element={<SettingsForms />} />
+          <Route path="/settings-general" element={<SettingsGeneral />} />
         </Routes>
       </div>
     </main>

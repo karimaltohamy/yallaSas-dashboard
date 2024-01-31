@@ -90,7 +90,6 @@
       label {
         font-weight: 600;
         display: block;
-        margin-bottom: 4px;
         font-size: 17px;
         flex: 1;
         display: flex;
@@ -184,17 +183,18 @@
       display: flex;
       gap: 20px;
       align-items: center;
+      justify-content: space-between;
       margin-bottom: 15px;
 
-      span {
+      span,
+      h6 {
         font-weight: 600;
         display: block;
-        margin-bottom: 4px;
+        font-size: 17px;
         flex: 1;
       }
 
       label {
-        flex: 2;
         width: 30px;
         height: 30px;
         border-radius: 3px;
