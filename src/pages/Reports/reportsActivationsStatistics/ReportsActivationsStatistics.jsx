@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./reportsActivationsStatistics.scss";
 import ChartLine from "../../../components/charts/ChartLine";
+import { t } from "i18next";
 
 const ReportsActivationsStatistics = () => {
   const [typeStatistics, setTypeStatistics] = useState("daily");
@@ -13,13 +14,13 @@ const ReportsActivationsStatistics = () => {
             className={`btn_daily ${typeStatistics == "daily" && "active"}`}
             onClick={() => setTypeStatistics("daily")}
           >
-            Daily
+            {t("Daily")}
           </button>
           <button
             className={`btn_daily ${typeStatistics == "monthly" && "active"}`}
             onClick={() => setTypeStatistics("monthly")}
           >
-            Monthly
+            {t("Monthly")}
           </button>
         </div>
         <form action="">

@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import MainSection from "../../../components/mainSection/MainSection";
 import "./toolsAnnouncements.scss";
-import { Editor } from "@tinymce/tinymce-react";
 import InputEditor from "../../../components/inputEditor/InputEditor";
+import { t } from "i18next";
 
 const ToolsAnnouncements = () => {
   const editorRef = useRef(null);
@@ -16,7 +16,7 @@ const ToolsAnnouncements = () => {
   return (
     <div className="m-[10px]">
       <MainSection
-        title={"Announcements"}
+        title={t("Announcements")}
         icon={<i className="fa-solid fa-bullhorn"></i>}
       >
         <div className="tools_announcements_form">
@@ -57,11 +57,11 @@ const ToolsAnnouncements = () => {
                 </div>
                 <div className="input_check">
                   <input type="checkbox" id="active_user" />
-                  <label htmlFor="active_user">Active Users</label>
+                  <label htmlFor="active_user">{"Active Users"}</label>
                 </div>
                 <div className="input_check">
                   <input type="checkbox" id="expired_users" />
-                  <label htmlFor="expired_users">Expired Users</label>
+                  <label htmlFor="expired_users">{t("Expired Users")}</label>
                 </div>
               </div>
             </div>

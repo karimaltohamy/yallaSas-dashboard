@@ -3,6 +3,7 @@ import SectionForm from "../../components/sectionform/SectionForm";
 import SelectSectionForm from "../../components/sectionform/SelectSectionForm";
 import InputSectionForm from "../../components/sectionform/InputSectionForm";
 import SwitchSectionForm from "../../components/sectionform/switchSectionForm";
+import { t } from "i18next";
 
 const AddEditCards = () => {
   const [cardsGenerator, setCardsGenerator] = useState({
@@ -27,10 +28,10 @@ const AddEditCards = () => {
 
   return (
     <div className="content_page">
-      <SectionForm title={"Cards Generator"}>
+      <SectionForm title={t("Cards Generator")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <SelectSectionForm
-            label={"Type"}
+            label={t("Type")}
             value={cardsGenerator.type}
             onChange={handleChangeCardsGenerator}
             id="type"
@@ -40,48 +41,48 @@ const AddEditCards = () => {
             ]}
           />
           <InputSectionForm
-            label={"Quantity"}
+            label={t("Quantity")}
             type={"text"}
             value={cardsGenerator.quantity}
             onChange={handleChangeCardsGenerator}
             id="quantity"
           />
           <InputSectionForm
-            label={"Value"}
+            label={t("Value")}
             type={"text"}
             value={cardsGenerator.value}
             onChange={handleChangeCardsGenerator}
             id="value"
           />
           <InputSectionForm
-            label={"Expiration"}
+            label={t("Expiration")}
             type={"text"}
             value={cardsGenerator.expiration}
             onChange={handleChangeCardsGenerator}
             id="expiration"
           />
           <InputSectionForm
-            label={"Prefix"}
+            label={t("Prefix")}
             type={"text"}
             value={cardsGenerator.prefix}
             onChange={handleChangeCardsGenerator}
             id="prefix"
           />
           <InputSectionForm
-            label={"Pin Size"}
+            label={t("Pin Size")}
             type={"text"}
             value={cardsGenerator.pinSize}
             onChange={handleChangeCardsGenerator}
             id="pinSize"
           />
           <SwitchSectionForm
-            label={"Auto Activate"}
+            label={t("Auto Activate")}
             value={cardsGenerator.autoActivate}
             onChange={handleChangeCardsGenerator}
             id="autoActivate"
           />
           <SelectSectionForm
-            label={"Owner"}
+            label={t("Owner")}
             value={cardsGenerator.owner}
             onChange={handleChangeCardsGenerator}
             id="owner"
@@ -94,8 +95,8 @@ const AddEditCards = () => {
         </div>
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">OK</button>
-        <button className="btn_close">Cancel</button>
+        <button className="btn_add">{"OK"}</button>
+        <button className="btn_close">{"Cancel"}</button>
       </div>
     </div>
   );

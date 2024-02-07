@@ -1,5 +1,6 @@
 import React from "react";
 import "./pricingTableBox.scss";
+import { t } from "i18next";
 
 const PricingTableBox = () => {
   return (
@@ -12,10 +13,10 @@ const PricingTableBox = () => {
         <div className="table">
           <table>
             <thead>
-              <th>Profile</th>
-              <th>Cost</th>
-              <th>Price</th>
-              <th>End User Price</th>
+              <th>{t("Profile")}</th>
+              <th>{t("Cost")}</th>
+              <th>{t("Price")}</th>
+              <th>{t("End User Price")}</th>
             </thead>
             <tbody>
               <tr>

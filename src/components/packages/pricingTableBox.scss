@@ -2,7 +2,7 @@
 
 .pricing_table_box {
   width: 65%;
-  background-color: white;
+  background-color: var(--bg-section);
   height: fit-content;
 
   .pricing_table {
@@ -52,20 +52,21 @@
     }
 
     table {
-      background-color: white;
+      background-color: var(--bg-section);
+      color: var(--text-color);
       width: 100%;
       border-radius: 5px;
 
       thead {
         tr {
           > *:nth-child(even) {
-            background-color: #eef1f4;
+            background-color: var(--bg-main);
           }
         }
 
         th {
           padding: 10px;
-          border-bottom: 1px solid #e2e2e2;
+          border-bottom: 1px solid var(--border-color);
           min-width: 170px;
           text-align: start;
         }
@@ -102,7 +103,7 @@
 
     .btns {
       padding: 10px;
-      border-top: 1px solid rgb(223, 223, 223);
+      border-top: 1px solid var(--border-color);
       display: flex;
       align-items: center;
       gap: 20px;

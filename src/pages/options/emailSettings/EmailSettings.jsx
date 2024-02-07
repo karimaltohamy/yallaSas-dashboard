@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SectionForm from "../../../components/sectionform/SectionForm";
 import SwitchSectionForm from "../../../components/sectionform/switchSectionForm";
 import InputSectionForm from "../../../components/sectionform/InputSectionForm";
+import { t } from "i18next";
 
 const EmailSettings = () => {
   const [settings, setSettings] = useState({
@@ -59,8 +60,8 @@ const EmailSettings = () => {
         />
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">OK</button>
-        <button className="btn_close">Cancel</button>
+        <button className="btn_add">{t("OK")}</button>
+        <button className="btn_close">{t("Cancel")}</button>
       </div>
     </div>
   );

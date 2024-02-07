@@ -1,6 +1,7 @@
 // start dashboard_manager_section
 .dashboard_manager,
-.settings_email_templates {
+.settings_email_templates,
+.sites_section {
   margin: 10px;
 
   .path {
@@ -22,7 +23,7 @@
         border-radius: 4px;
         min-width: 400px;
         max-width: 100%;
-        background-color: white;
+        background-color: transparent;
         color: var(--text-color);
 
         option {

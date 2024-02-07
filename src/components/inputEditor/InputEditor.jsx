@@ -1,5 +1,6 @@
 import { Editor } from "@tinymce/tinymce-react";
-import React from "react";
+import React, { useEffect } from "react";
+import "./inputEditor.scss";
 
 const InputEditor = ({ editorRef }) => {
   return (

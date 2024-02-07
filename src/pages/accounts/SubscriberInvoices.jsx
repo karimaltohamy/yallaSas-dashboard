@@ -4,28 +4,29 @@ import MainTable from "../../components/mainTable/MainTable";
 import { columnsSubscribersInvoices } from "../../utils/columnsTables";
 import { mockDataSubscriberInvoices } from "../../utils/mockData";
 import { Link } from "react-router-dom";
+import { t } from "i18next";
 
 const SubscriberInvoices = () => {
   return (
     <div className="main_content_tables">
       <div className="conetnt_table">
         <HeadTable
-          path="users invoices"
-          title="List of Users Invoices"
+          path={t("users invoices")}
+          title={t("List of Users Invoices")}
           iconHead={<i className="fa-solid fa-people-group"></i>}
         >
           <div className="content">
             <div className="item">
-              <span>Payment</span>
+              <span>{t("Payment")}</span>
             </div>
             <div className="item">
-              <span>Cancel payment</span>
+              <span>{t("Cancel payment")}</span>
             </div>
             <div className="item">
-              <span>Download</span>
+              <span>{t("Download")}</span>
             </div>
             <Link to={"/user-invoice-designer"} className="item">
-              <span>Invoice design</span>
+              <span>{t("Invoice design")}</span>
             </Link>
           </div>
         </HeadTable>

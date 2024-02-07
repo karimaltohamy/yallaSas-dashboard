@@ -3,28 +3,29 @@ import HeadTable from "../../../components/headTable/HeadTable";
 import { columnsFormSettings } from "../../../utils/columnsTables";
 import MainTable from "../../../components/mainTable/MainTable";
 import { Link } from "react-router-dom";
+import { t } from "i18next";
 
 const SettingsForms = () => {
   return (
     <div className="main_content_tables">
       <div className="conetnt_table">
         <HeadTable
-          path="form settings"
-          title="Form Settings"
+          path={t("form settings")}
+          title={t("Form Settings")}
           iconHead={<i className="fa-solid fa-people-group"></i>}
         >
           <div className="content">
             <Link className="item">
               <i className="fa-solid fa-plus"></i>
-              <span>Add</span>
+              <span>{t("Add")}</span>
             </Link>
             <Link className="item">
               <i className="fa-regular fa-pen-to-square"></i>
-              <span>Edit</span>
+              <span>{t("Edit")}</span>
             </Link>
             <div className="item">
               <i className="fa-solid fa-trash"></i>
-              <span>Delete</span>
+              <span>{t("Delete")}</span>
             </div>
           </div>
         </HeadTable>

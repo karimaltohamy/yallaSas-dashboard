@@ -1,18 +1,19 @@
 import React from "react";
 import "./bulkChanges.scss";
 import MainSection from "../../../components/mainSection/MainSection";
+import { t } from "i18next";
 
 const BulkChanges = () => {
   return (
     <div className="m-[10px]">
       <MainSection
-        title={"Bulk Changes"}
+        title={t("Bulk Changes")}
         icon={<i className="fa-solid fa-people-group"></i>}
       >
         <div className="bulk_changes_content">
           <form action="">
             <div className="input_item">
-              <label htmlFor="">Attribute</label>
+              <label htmlFor="">{t("Attribute")}</label>
               <select name="" id="">
                 <option value="">Username</option>
                 <option value="">Fisrt Name</option>
@@ -29,7 +30,7 @@ const BulkChanges = () => {
               </select>
             </div>
             <div className="input_item">
-              <label htmlFor="">Value</label>
+              <label htmlFor="">{t("Value")}</label>
               <input type="text" />
             </div>
             <div className="btns_actions">

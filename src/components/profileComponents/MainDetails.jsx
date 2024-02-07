@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import Popup from "../popup/Popup";
 import InputItem from "../popup/inputItem/InputItem";
+import { t } from "i18next";
 
 const MainDetails = () => {
   // opens and setOpnes popups
@@ -61,11 +62,11 @@ const MainDetails = () => {
           <div className="box">
             <Link to={"/subscribers/activate/:id"} className="item">
               <i className="fa-regular fa-pen-to-square"></i>
-              <span>Activate</span>
+              <span>{t("Activate")}</span>
             </Link>
             <Link to={""} href="userInvoiceForm.html" className="item">
               <i className="fa-solid fa-file-import"></i>
-              <span>Issuing an invoice</span>
+              <span>{t("Issuing an invoice")}</span>
             </Link>
             <Link
               to={"/subscribers/change-package/:id"}
@@ -73,41 +74,41 @@ const MainDetails = () => {
               className="item"
             >
               <i className="fa-solid fa-play"></i>
-              <span>Change the package</span>
+              <span>{t("Change the package")}</span>
             </Link>
 
             <div className="item btn_reset_traffic">
               <i className="fa-solid fa-star-of-life"></i>
-              <span> Reset Traffic </span>
+              <span> {t("Reset Traffic")} </span>
             </div>
             <div
               className="item btn_open_model"
               onClick={() => setOpenDeposit(true)}
             >
               <i className="fa-solid fa-money-bill-transfer"></i>
-              <span>Deposit</span>
+              <span>{t("Deposit")}</span>
             </div>
             <div
               className="item btn_open_model"
               onClick={() => setOpenDiscountAmount(true)}
             >
               <i className="fa-solid fa-money-bill-transfer"></i>
-              <span>Drag</span>
+              <span>{t("Drag")}</span>
             </div>
             <div
               className="item btn_open_model"
               onClick={() => setOpenChangeName(true)}
             >
               <i className="fa-solid fa-pen-fancy"></i>
-              <span>Name changed</span>
+              <span>{t("Name changed")}</span>
             </div>
             <div className="item btn_disconnect">
               <i className="fa-solid fa-link-slash"></i>
-              <span>Disconnect</span>
+              <span>{t("Disconnect")}</span>
             </div>
             <div className="item btn_remove_user">
               <i className="fa-solid fa-trash"></i>
-              <span> Delete</span>
+              <span> {t("Delete")}</span>
             </div>
           </div>
         </div>
@@ -131,7 +132,7 @@ const MainDetails = () => {
                 <input type="text" />
               </div>
             </div>
-            <button className="btn_submit">OK</button>
+            <button className="btn_submit">{t("OK")}</button>
           </form>
         </div>
       </div>

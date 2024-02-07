@@ -1,6 +1,7 @@
 import React from "react";
 import ChartLine from "../../../components/charts/ChartLine";
 import "./consumptionSubscriber.scss";
+import { t } from "i18next";
 
 const ConsumptionSubscriber = () => {
   return (
@@ -13,11 +14,11 @@ const ConsumptionSubscriber = () => {
         <table>
           <thead>
             <tr>
-              <th>Day</th>
-              <th>Download</th>
-              <th>Upload</th>
-              <th>Total</th>
-              <th>Real Traffic</th>
+              <th>{t("Day")}</th>
+              <th>{t("Download")}</th>
+              <th>{t("Upload")}</th>
+              <th>{t("Total")}</th>
+              <th>{t("Real Traffic")}</th>
             </tr>
           </thead>
           <tbody>

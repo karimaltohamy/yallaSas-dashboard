@@ -12,7 +12,8 @@
     .input_item {
       select {
         width: 100%;
-        border: 1px solid rgb(212, 218, 223);
+        border: 1px solid var(--border-color);
+        background-color: transparent;
         padding: 2px;
         border-radius: 3px;
         min-width: 250px;
@@ -20,13 +21,12 @@
     }
 
     .input_search {
-      border: 1px solid rgb(212, 218, 223);
+      border: 1px solid var(--border-color);
       display: flex;
       align-items: center;
       gap: 10px;
       border-radius: 3px;
       overflow: hidden;
-      background-color: white;
 
       input {
         border: none;
@@ -37,7 +37,7 @@
 
       i {
         padding: 10px;
-        background-color: rgb(243, 243, 243);
+        background-color: var(--bg-section);
       }
     }
   }

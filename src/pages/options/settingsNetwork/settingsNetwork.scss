@@ -1,0 +1,180 @@
+@import "../../../sass/variables.scss";
+
+.settings_network_content {
+  padding: 20px;
+
+  .global_settings {
+    margin-bottom: 30px;
+
+    .title {
+      font-size: 22px;
+      padding-bottom: 10px;
+      margin-bottom: 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .global_form {
+      margin-top: 20px;
+      .input_item {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+
+        &:not(:last-child) {
+          margin-bottom: 20px;
+        }
+
+        label {
+          font-weight: 600;
+          display: block;
+          margin-bottom: 4px;
+          font-size: 17px;
+          flex: 1;
+          display: flex;
+          align-items: center;
+          gap: 2px;
+
+          .star {
+            font-size: 12px;
+            color: red;
+          }
+        }
+
+        input,
+        select {
+          flex: 2;
+          width: 100%;
+          padding: 5px;
+          border: 1px solid var(--border-color);
+          border-radius: 3px;
+          background-color: transparent;
+          color: var(--text-color);
+
+          option {
+            color: black;
+          }
+        }
+      }
+    }
+  }
+
+  .network_interfaces,
+  .static_interfaces {
+    margin-bottom: 30px;
+
+    .btn_add_col {
+      padding: 5px 20px;
+      background-color: black;
+      color: white;
+      border-radius: 4px;
+      font-size: 15px;
+      margin-top: 20px;
+    }
+
+    .title {
+      font-size: 22px;
+      padding-bottom: 10px;
+      margin-bottom: 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .network_table {
+      margin-top: 20px;
+      overflow-x: auto;
+
+      &::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: #f5f5f5;
+      }
+
+      &::-webkit-scrollbar {
+        height: 7px;
+        background-color: #f5f5f5;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: transparent;
+      }
+
+      &:hover {
+        &:-webkit-scrollbar-thumb {
+          border-radius: 10px;
+          -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+          background-color: rgb(225, 225, 225);
+        }
+      }
+
+      table {
+        background-color: var(--bg-section);
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+
+        thead {
+          th {
+            padding: 10px;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            min-width: 170px;
+          }
+        }
+
+        tbody {
+          tr {
+            &:not(:last-child) {
+              td {
+                border-bottom: 1px solid var(--border-color);
+              }
+            }
+          }
+          td {
+            padding: 10px;
+
+            input,
+            select {
+              border: 1px solid var(--border-color);
+              border-radius: 5px;
+              padding: 0 8px;
+              outline: none;
+              width: 100%;
+              background-color: transparent;
+              color: var(--text-color);
+
+              option {
+                color: black;
+              }
+
+              &.range {
+                padding: 0;
+              }
+            }
+
+            .btns {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .btn_saveChanges {
+    padding: 5px 20px;
+    background-color: $primary-color;
+    color: white;
+    border-radius: 4px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    i {
+      font-size: 19px;
+    }
+  }
+}

@@ -3,6 +3,7 @@ import SectionForm from "../../../components/sectionform/SectionForm";
 import SelectSectionForm from "../../../components/sectionform/SelectSectionForm";
 import SwitchSectionForm from "../../../components/sectionform/switchSectionForm";
 import InputSectionForm from "../../../components/sectionform/InputSectionForm";
+import { t } from "i18next";
 
 const SettingsAdvanced = () => {
   const [settings, setSettings] = useState({
@@ -34,7 +35,7 @@ const SettingsAdvanced = () => {
 
   return (
     <div className="m-[10px]">
-      <SectionForm title={"Advanced Settings"}>
+      <SectionForm title={t("Advanced Settings")}>
         <SelectSectionForm
           label={"User Idle Timeout"}
           value={settings.userIdleTimeout}
@@ -43,14 +44,14 @@ const SettingsAdvanced = () => {
           options={[{ name: "2 Minutes", value: "" }]}
         />
         <SelectSectionForm
-          label={"Mikrotik interim update"}
+          label={t("Mikrotik interim update")}
           value={settings.mikrotikInterimUpdate}
           onChange={handleChangeSettings}
           id="mikrotikInterimUpdate"
           options={[{ name: "2 Minutes", value: "" }]}
         />
         <SelectSectionForm
-          label={"Remote Control Method"}
+          label={t("Remote Control Method")}
           value={settings.remoteControlMethod}
           onChange={handleChangeSettings}
           id="remoteControlMethod"
@@ -60,37 +61,37 @@ const SettingsAdvanced = () => {
           ]}
         />
         <SwitchSectionForm
-          label={"Lock Prepaid Cards To Owner"}
+          label={t("Lock Prepaid Cards To Owner")}
           value={settings.lockPrepaidCardsOwner}
           onChange={handleChangeSettings}
           id="lockPrepaidCardsOwner"
         />
         <SwitchSectionForm
-          label={"Disconnect On Activation"}
+          label={t("Disconnect On Activation")}
           value={settings.disconnectActivation}
           onChange={handleChangeSettings}
           id="disconnectActivation"
         />
         <SwitchSectionForm
-          label={"Disconnect On Update"}
+          label={t("Disconnect On Update")}
           value={settings.disconnectUpdate}
           onChange={handleChangeSettings}
           id="disconnectUpdate"
         />
         <SwitchSectionForm
-          label={"Lock user MAC on login"}
+          label={t("Lock user MAC on login")}
           value={settings.lockUserMACLogin}
           onChange={handleChangeSettings}
           id="lockUserMACLogin"
         />
         <SwitchSectionForm
-          label={"Reset User Traffic On Profile Change"}
+          label={t("Reset User Traffic On Profile Change")}
           value={settings.resetUserTrafficProfileChange}
           onChange={handleChangeSettings}
           id="lockUserMACLogin"
         />
         <SelectSectionForm
-          label={"Radius Username Case Sensitivity"}
+          label={t("Radius Username Case Sensitivity")}
           value={settings.radiusUsernameCaseSensitivity}
           onChange={handleChangeSettings}
           id="radiusUsernameCaseSensitivity"
@@ -100,26 +101,26 @@ const SettingsAdvanced = () => {
           ]}
         />
         <SwitchSectionForm
-          label={"Accept Invalid Users"}
+          label={t("Accept Invalid Users")}
           value={settings.acceptInvalidUsers}
           onChange={handleChangeSettings}
           id="acceptInvalidUsers"
         />
         <InputSectionForm
-          label={"Limit User Activation via Reward Points/Month (times)"}
+          label={t("Limit User Activation via Reward Points/Month (times)")}
           type={"number"}
           value={settings.limitUserActivationViaReward}
           onChange={handleChangeSettings}
           id="limitUserActivationViaReward"
         />
         <SwitchSectionForm
-          label={"Add Random Delay to User Authentication"}
+          label={t("Add Random Delay to User Authentication")}
           value={settings.addRandomDelayUserAuthentication}
           onChange={handleChangeSettings}
           id="addRandomDelayUserAuthentication"
         />
         <SelectSectionForm
-          label={"Manager Session Time"}
+          label={t("Manager Session Time")}
           value={settings.managerSessionTime}
           onChange={handleChangeSettings}
           id="managerSessionTime"
@@ -131,21 +132,21 @@ const SettingsAdvanced = () => {
           ]}
         />
         <SwitchSectionForm
-          label={"Route Guard"}
+          label={t("Route Guard")}
           value={settings.routeGuard}
           onChange={handleChangeSettings}
           id="routeGuard"
         />
         <SwitchSectionForm
-          label={"Webhook Notifications"}
+          label={t("Webhook Notifications")}
           value={settings.webhookNotifications}
           onChange={handleChangeSettings}
           id="webhookNotifications"
         />
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">OK</button>
-        <button className="btn_close">Cancel</button>
+        <button className="btn_add">{t("OK")}</button>
+        <button className="btn_close">{t("Cancel")}</button>
       </div>
     </div>
   );

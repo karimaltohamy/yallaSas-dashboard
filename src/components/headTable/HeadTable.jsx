@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import "./headTable.scss";
+import { useTranslation } from "react-i18next";
 
 const HeadTable = ({
   children,
@@ -12,10 +13,13 @@ const HeadTable = ({
   actions = true,
 }) => {
   const [openProcesses, setOpenProcesses] = useState(false);
+  const lang = localStorage.getItem("lang");
+  const { t } = useTranslation();
+
   return (
     <Fragment>
       <div className="path">
-        <span>Home</span> /<span>{path}</span>
+        <span>{t("Home")}</span> /<span>{path}</span>
       </div>
       {statusFilter && (
         <div className="status_filter">
@@ -61,10 +65,14 @@ const HeadTable = ({
                 onClick={() => setOpenProcesses(!openProcesses)}
               >
                 <i className="fa-solid fa-wrench"></i>
-                Processes
+                {t("Processes")}
               </button>
 
-              <div className={`box box_utils ${openProcesses ? "active" : ""}`}>
+              <div
+                className={`box box_utils ${openProcesses ? "active" : ""} ${
+                  lang == "ar" ? "ar" : ""
+                }`}
+              >
                 {children}
               </div>
             </div>

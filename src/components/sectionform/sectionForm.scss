@@ -1,15 +1,15 @@
 @import "../../sass/variables.scss";
 
 .section_form {
-  background-color: white;
+  background-color: var(--bg-section);
   border-radius: 5px;
   overflow: hidden;
-  box-shadow: 0 0 10px rgb(229, 229, 229);
+  box-shadow: 0 0 10px var(--box-shasow);
   margin-bottom: 20px;
 
   .head {
     padding: 8px;
-    border-bottom: 1px solid rgb(218, 218, 218);
+    border-bottom: 1px solid var(--border-color);
     display: flex;
     align-items: center;
     gap: 6px;
@@ -33,7 +33,8 @@
 
       .box {
         padding: 15px;
-        border: 1px solid rgb(204, 204, 204);
+        border: 1px solid var(--border-color);
+
         border-radius: 5px;
         display: flex;
         align-items: center;
@@ -107,9 +108,10 @@
         flex: 2;
         width: 100%;
         padding: 5px;
-        border: 1px solid rgb(222, 222, 222);
+        border: 1px solid var(--border-color);
         border-radius: 3px;
         outline: none;
+        background-color: transparent;
 
         &:focus {
           border: 1px solid $primary-color;

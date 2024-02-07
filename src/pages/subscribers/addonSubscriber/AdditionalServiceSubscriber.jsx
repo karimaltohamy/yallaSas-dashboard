@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SectionForm from "../../../components/sectionform/SectionForm";
 import SelectSectionForm from "../../../components/sectionform/SelectSectionForm";
+import { t } from "i18next";
 
 const AdditionalServiceSubscriber = () => {
   const [additionalService, setAdditionalService] = useState({
@@ -18,7 +19,7 @@ const AdditionalServiceSubscriber = () => {
 
   return (
     <div className="content_page">
-      <SectionForm title={"Extend Subscriber"}>
+      <SectionForm title={t("Extend Subscriber")}>
         <div className="boxs_information mb-5">
           <div className="boxs">
             <div className="box">
@@ -52,7 +53,7 @@ const AdditionalServiceSubscriber = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 border-t border-gray-300 pt-4">
           <SelectSectionForm
-            label={"Type service"}
+            label={t("Type service")}
             value={additionalService.typeService}
             onChange={handleAdditionalService}
             id="typeService"
@@ -60,8 +61,8 @@ const AdditionalServiceSubscriber = () => {
         </div>
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">OK</button>
-        <button className="btn_close">Cancel</button>
+        <button className="btn_add">{"OK"}</button>
+        <button className="btn_close">{t("Cancel")}</button>
       </div>
     </div>
   );

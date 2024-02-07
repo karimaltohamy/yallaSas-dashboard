@@ -1,0 +1,73 @@
+@import "../../../sass/variables.scss";
+
+// start boxs_trees
+.boxs_trees {
+  margin-top: 30px;
+  .box_tree {
+    margin: 10px;
+    background-color: var(--bg-section);
+    border-radius: 5px;
+    overflow: hidden;
+
+    .head {
+      background-color: black;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+
+      h4 {
+        margin-bottom: 0;
+        font-size: 17px;
+      }
+    }
+
+    .box_content {
+      padding: 15px;
+    }
+  }
+
+  .btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    gap: 25px;
+
+    .btn_exchange {
+      padding: 5px 20px;
+      background-color: black;
+      color: white;
+      border-radius: 3px;
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .boxs_trees {
+    margin-top: 20px;
+
+    .btns {
+      padding: 10px;
+      gap: 12px;
+      flex-direction: row;
+
+      .btn_exchange {
+        width: fit-content;
+        padding: 5px 10px;
+
+        &:nth-child(1) {
+          transform: rotate(90deg);
+        }
+
+        &:nth-child(2) {
+          transform: rotate(-90deg);
+        }
+      }
+    }
+  }
+}
+// end boxs_trees

@@ -1,15 +1,16 @@
 import React from "react";
 import "./managersTreeBox.scss";
+import { t } from "i18next";
 const ManagersTreeBox = () => {
   return (
     <div className="managers_tree_box">
       <div className="head">
         <i className="fa-solid fa-cubes"></i>
-        <h4>Managers Tree</h4>
+        <h4>{t("Managers Tree")}</h4>
       </div>
       <div className="content_box">
         <div className="search_input">
-          <input type="text" placeholder="search managers..." />
+          <input type="text" placeholder={t("search managers...")} />
           <div className="icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"

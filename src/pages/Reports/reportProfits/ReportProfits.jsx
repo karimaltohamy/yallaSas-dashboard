@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ChartLine from "../../../components/charts/ChartLine";
 import Popup from "../../../components/popup/Popup";
 import InputItem from "../../../components/popup/inputItem/InputItem";
+import { t } from "i18next";
 
 const ReportProfits = () => {
   const [openDownloadDetaildReport, setOpenDownloadDetaildReport] =
@@ -41,12 +42,12 @@ const ReportProfits = () => {
             className="btn_detailed"
             onClick={() => setOpenDownloadDetaildReport(true)}
           >
-            Download Detailed Report
+            {t("Download Detailed Report")}
           </button>
         </div>
       </div>
 
-      <div className="bg-white h-[300px] md:h-[500px] mt-3 md:mt-6">
+      <div className="bg_section h-[300px] md:h-[500px] mt-3 md:mt-6">
         <ChartLine title={"Earnings report"} />
       </div>
 
@@ -65,8 +66,9 @@ const ReportProfits = () => {
           placeholder={""}
         />
         <p className="desc">
-          This will generate a detailed profits report made by each manager and
-          profile.
+          {
+            "This will generate a detailed profits report made by each manager and profile."
+          }
         </p>
       </Popup>
     </div>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import MainSection from "../../../components/mainSection/MainSection";
 import "./widgetFactory.scss";
+import { t } from "i18next";
 
 const WidgetFactory = () => {
   const [openOptions, setOpenOptions] = useState(false);
@@ -9,7 +10,7 @@ const WidgetFactory = () => {
       <div className="line flex gap-10">
         <div className="w-full md:w-[50%]">
           <MainSection
-            title={"Widget Factory"}
+            title={t("Widget Factory")}
             icon={<i className="fa-solid fa-puzzle-piece"></i>}
           >
             <form action="" className="selected_widget" id="select-dashboard">
@@ -43,18 +44,18 @@ const WidgetFactory = () => {
               <form action="" className="form_options active">
                 <div className="input_item">
                   <label htmlFor="">
-                    Title
+                    {t("Title")}
                     <div className="star">*</div>
                   </label>
                   <input type="text" />
                 </div>
                 <div className="input_item">
-                  <label htmlFor=""> Description </label>
+                  <label htmlFor=""> {t("Description")} </label>
                   <input type="text" />
                 </div>
                 <div className="input_item">
                   <label htmlFor="">
-                    Type
+                    {t("Type")}
                     <div className="star">*</div>
                   </label>
                   <select name="" id="">
@@ -63,7 +64,7 @@ const WidgetFactory = () => {
                 </div>
                 <div className="input_item">
                   <label htmlFor="">
-                    Color
+                    {t("Color")}
                     <div className="star">*</div>
                   </label>
                   <select name="" id="">
@@ -80,7 +81,7 @@ const WidgetFactory = () => {
                 </div>
                 <div className="input_item">
                   <label htmlFor="">
-                    Width
+                    {t("Width")}
                     <div className="star">*</div>
                   </label>
                   <select name="" id="">
@@ -93,7 +94,7 @@ const WidgetFactory = () => {
                 </div>
                 <div className="input_item">
                   <label htmlFor="">
-                    Icon
+                    {t("Icon")}
                     <div className="star">*</div>
                   </label>
                   <select name="" id="">
@@ -105,14 +106,14 @@ const WidgetFactory = () => {
                   </select>
                 </div>
                 <div className="input_item">
-                  <label htmlFor=""> Data Source </label>
+                  <label htmlFor=""> {t("Data Source")} </label>
                   <select name="" id="">
                     <option value="">Internal</option>
                     <option value="">External</option>
                   </select>
                 </div>
                 <div className="input_item">
-                  <label htmlFor="">Internal Data Source</label>
+                  <label htmlFor="">{t("Internal Data Source")}</label>
                   <select name="" id="">
                     <option value="">wd_users_count</option>
                     <option value="">wd_users_active_count</option>
@@ -120,20 +121,20 @@ const WidgetFactory = () => {
                 </div>
                 <div className="input_item">
                   <label htmlFor="">
-                    Refresh Interval (sec)
+                    {t("Refresh Interval (sec)")}
                     <div className="star">*</div>
                   </label>
                   <input type="number" />
                 </div>
 
-                <button className="btn_save">Save</button>
+                <button className="btn_save">{t("Save")}</button>
               </form>
             )}
           </MainSection>
         </div>
         <div className="w-full md:w-[50%]">
           <MainSection
-            title={"preview"}
+            title={t("preview")}
             icon={<i className="fa-regular fa-eye"></i>}
           >
             {openOptions && (

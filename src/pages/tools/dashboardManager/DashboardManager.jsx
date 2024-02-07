@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./dashboardManager.scss";
 import MainSection from "../../../components/mainSection/MainSection";
+import { t } from "i18next";
 
 const DashboardManager = () => {
   const [rows, setRows] = useState([]);
@@ -34,7 +35,7 @@ const DashboardManager = () => {
         </div>
       </div>
       <MainSection
-        title={"Dashboard Designer"}
+        title={t("Dashboard Designer")}
         icon={<i className="fa-regular fa-eye"></i>}
       >
         <div className="line flex gap-10">
@@ -49,7 +50,7 @@ const DashboardManager = () => {
                         setRows(rows.filter((row, index) => index !== i))
                       }
                     >
-                      <span>Delete Row</span>
+                      <span>{t("Delete Row")}</span>
                       <i className="fa-solid fa-trash"></i>
                     </button>
                   </div>
@@ -59,7 +60,7 @@ const DashboardManager = () => {
                   className="btn_add_row"
                   onClick={() => handleAddRow({ row: rows.length + 1 })}
                 >
-                  <span>Add Row</span>
+                  <span>{t("Add Row")}</span>
                   <i className="fa-solid fa-circle-plus"></i>
                 </button>
               </div>

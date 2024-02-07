@@ -1,18 +1,19 @@
 import React from "react";
 import MainSection from "../../../components/mainSection/MainSection";
 import "./toolsBandwidthControl.scss";
+import { t } from "i18next";
 
 const ToolsBandwidthControl = () => {
   return (
     <div className="m-[10px]">
       <MainSection
-        title={"Bandwidth Controller"}
+        title={t("Bandwidth Controller")}
         icon={<i className="fa-solid fa-gears"></i>}
       >
         <div className="tools_bandwidth_control_content">
           <div className="btns_controls">
-            <button className="btn_control save">Save</button>
-            <button className="btn_control reset">Reset</button>
+            <button className="btn_control save">{"Save"}</button>
+            <button className="btn_control reset">{"Reset"}</button>
             <button className="btn_control reload">
               <i className="fa-solid fa-rotate"></i>
             </button>
@@ -20,7 +21,7 @@ const ToolsBandwidthControl = () => {
 
           <div className="main_range">
             <div className="text">
-              <h5>All Profiles</h5>
+              <h5>{"All Profiles"}</h5>
             </div>
 
             <div className="range">

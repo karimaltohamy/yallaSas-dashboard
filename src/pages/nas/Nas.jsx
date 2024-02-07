@@ -4,24 +4,25 @@ import { Link } from "react-router-dom";
 import { columnsNas } from "../../utils/columnsTables";
 import { mockDataNas } from "../../utils/mockData";
 import MainTable from "../../components/mainTable/MainTable";
+import { t } from "i18next";
 
 const Nas = () => {
   return (
     <div className="main_content_tables">
       <div className="conetnt_table">
         <HeadTable
-          path="nas"
-          title="List of nas"
+          path={t("NAS")}
+          title={t("List of nas")}
           iconHead={<i className="fa-solid fa-people-group"></i>}
         >
           <div className="content">
             <Link to={"/NAS/add/1"} className="item">
               <i className="fa-solid fa-plus"></i>
-              <span>Add</span>
+              <span>{"Add"}</span>
             </Link>
             <div className="item">
               <i className="fa-solid fa-trash"></i>
-              <span>Delete</span>
+              <span>{t("Delete")}</span>
             </div>
           </div>
         </HeadTable>

@@ -1,6 +1,7 @@
 import React from "react";
 import "./reportsCardUsage.scss";
 import ChartLine from "../../../components/charts/ChartLine";
+import { t } from "i18next";
 
 const ReportsCardsUsage = () => {
   return (
@@ -29,17 +30,17 @@ const ReportsCardsUsage = () => {
       </div>
       <div className="content_report_cards">
         <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="bg-white w-full h-[280px] md:h-[400px]">
+          <div className="w-full h-[280px] md:h-[400px]">
             <ChartLine />
           </div>
           <div className="">
             <div className="details">
               <div className="detail">
-                <h4>Cards Used</h4>
+                <h4>{t("Cards Used")}</h4>
                 <span>0</span>
               </div>
               <div className="detail">
-                <h4>Total Value</h4>
+                <h4>{t("Total Value")}</h4>
                 <span>$0.00</span>
               </div>
             </div>

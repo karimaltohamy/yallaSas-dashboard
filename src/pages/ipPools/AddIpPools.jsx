@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SectionForm from "../../components/sectionform/SectionForm";
 import InputSectionForm from "../../components/sectionform/InputSectionForm";
+import { t } from "i18next";
 
 const AddIpPools = () => {
   const [ipPool, setIpPool] = useState({
@@ -21,31 +22,31 @@ const AddIpPools = () => {
 
   return (
     <div className="content_page">
-      <SectionForm title={"IP Pool Form"}>
+      <SectionForm title={t("IP Pool Form")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <InputSectionForm
-            label={"Pool Name"}
+            label={t("Pool Name")}
             type={"text"}
             value={ipPool.poolName}
             onChange={handleChangeIpPool}
             id="poolName"
           />
           <InputSectionForm
-            label={"Lease Time (hours)"}
+            label={t("Lease Time (hours)")}
             type={"text"}
             value={ipPool.leaseTime}
             onChange={handleChangeIpPool}
             id="leaseTime"
           />
           <InputSectionForm
-            label={"Start IP"}
+            label={t("Start IP")}
             type={"text"}
             value={ipPool.startIp}
             onChange={handleChangeIpPool}
             id="startIp"
           />
           <InputSectionForm
-            label={"End IP"}
+            label={t("End IP")}
             type={"text"}
             value={ipPool.endIp}
             onChange={handleChangeIpPool}
@@ -54,8 +55,8 @@ const AddIpPools = () => {
         </div>
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">OK</button>
-        <button className="btn_close">Cancel</button>
+        <button className="btn_add">{t("OK")}</button>
+        <button className="btn_close">{t("Cancel")}</button>
       </div>
     </div>
   );

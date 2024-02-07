@@ -1,12 +1,12 @@
 @import "../../sass/variables.scss";
 
 .nav_profile {
-  background-color: white;
+  background-color: var(--bg-section);
   border-radius: 5px;
   display: flex;
   align-items: center;
   gap: 15px;
-  box-shadow: 2px 3px 12px rgb(212, 212, 212);
+  box-shadow: var(--box-shadow);
   padding: 0 12px;
   overflow-x: auto;
 

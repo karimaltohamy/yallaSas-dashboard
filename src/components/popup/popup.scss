@@ -43,7 +43,7 @@
     max-width: 500px;
     width: 500px;
     overflow: auto;
-    background-color: white;
+    background-color: var(--bg-section);
     border-radius: 5px;
 
     &.max_height {
@@ -79,7 +79,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid rgb(220 220 220);
+      border-bottom: 1px solid var(--border-color);
 
       h5 {
         margin-bottom: 0;
@@ -108,7 +108,8 @@
         input,
         select {
           padding: 4px;
-          border: 1px solid rgb(220 220 220);
+          border: 1px solid var(--border-color);
+          background-color: transparent;
           border-radius: 4px;
           width: 100%;
           outline: none;
@@ -118,7 +119,7 @@
           input {
             border: none;
             outline: none;
-            background-color: rgb(238, 238, 238);
+            background-color: var(--bg-main);
           }
         }
       }

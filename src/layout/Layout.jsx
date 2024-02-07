@@ -1,96 +1,301 @@
-import React, { Fragment } from "react";
+import React, { Fragment, Suspense } from "react";
 import Sidebar from "../components/sidebar/Sidebar";
 import Header from "../components/header/Header";
 import { Route, Routes } from "react-router-dom";
-import Home from "../pages/home/Home";
-import Subscribers from "../pages/subscribers/Subscribers";
-import AddEditSubscriber from "../pages/subscribers/addEditSubscriber/AddEditSubscriber";
-import ActivateSubscriber from "../pages/subscribers/activateSubscriber/ActivateSubscriber";
-import ExtendSubscriber from "../pages/subscribers/extendSubscriber/ExtendSubscriber";
-import AdditionalServiceSubscriber from "../pages/subscribers/addonSubscriber/AdditionalServiceSubscriber";
-import ChangePackageSubscriber from "../pages/subscribers/changePackageSubscriber/ChangePackageSubscriber";
-import ProfileSubscriber from "../pages/subscribers/profileSubscriber/ProfileSubscriber";
-import GeneralSubscriber from "../pages/subscribers/profileSubscriber/GeneralSubscriber";
-import ConsumptionSubscriber from "../pages/subscribers/profileSubscriber/ConsumptionSubscriber";
-import SessionsSubscriber from "../pages/subscribers/profileSubscriber/SessionsSubscriber";
-import InvoicesSubscriber from "../pages/subscribers/profileSubscriber/InvoicesSubscriber";
-import PaymentsSubscriber from "../pages/subscribers/profileSubscriber/PaymentsSubscriber";
-import RecordSubscriber from "../pages/subscribers/profileSubscriber/RecordSubscriber";
-import DocumentsSubscriber from "../pages/subscribers/profileSubscriber/DocumentsSubscriber";
-import RadiusSubscriber from "../pages/subscribers/profileSubscriber/RadiusSubscriber";
-import FinancialRecordSubscriber from "../pages/subscribers/profileSubscriber/financialRecordSubscriber";
-import FreeZoneSubscriber from "../pages/subscribers/profileSubscriber/FreeZoneSubscriber";
-import QuotasSubscriber from "../pages/subscribers/profileSubscriber/quotasSubscriber";
-import OnlineSubscribers from "../pages/subscribers/onlineSubscribers/OnlineSubscribers";
-import CompensationsSubscribers from "../pages/subscribers/compensationsSubscribers/CompensationsSubscribers";
-import SubscriberTickets from "../pages/subscribers/subscriberTickets/SubscriberTickets";
-import Managers from "../pages/managers/Managers";
-import AddEditManager from "../pages/managers/addEditManager/AddEditManager";
-import ProfileManager from "../pages/managers/profileManager/ProfileManager";
-import GeneralManager from "../pages/managers/profileManager/GeneralManager";
-import InvoicesManager from "../pages/managers/profileManager/InvoicesManager";
-import ReceiptManager from "../pages/managers/profileManager/ReceiptManager";
-import RegisterAccountsManager from "../pages/managers/profileManager/RegisterAccountsManager";
-import Groups from "../pages/groups/Groups";
-import AddEditGroup from "../pages/groups/addEditGroup/AddEditGroup";
-import Nas from "../pages/nas/Nas";
-import AddEditNas from "../pages/nas/addEditNas/AddEditNas";
-import PackagesList from "../pages/packages/packagesList/packagesList";
-import AddEditPackage from "../pages/packages/packagesList/AddEditPackage";
-import PricingTable from "../pages/packages/pricingTable/PricingTable";
-import ConsumptionNotices from "../pages/packages/consumptionNotices/ConsumptionNotices";
-import AddEditConsumptionNotices from "../pages/packages/consumptionNotices/AddEditConsumptionNotices";
-import AddonsServices from "../pages/packages/addonsServices/AddonsServices";
-import AddEditAddonsServices from "../pages/packages/addonsServices/AddEditAddonsServices";
-import Cards from "../pages/cards/Cards";
-import AddEditCards from "../pages/cards/AddEditCards";
-import VerifyCards from "../pages/cards/VerifyCards";
-import CardJobsQueue from "../pages/packages/addonsServices/CardJobsQueue";
-import SubscriberInvoices from "../pages/accounts/SubscriberInvoices";
-import IssuingInvoiceForm from "../pages/accounts/IssuingInvoiceForm";
-import UserInvoiceDesigner from "../pages/accounts/UserInvoiceDesigner";
-import ReportsActivations from "../pages/Reports/ReportsActivations";
-import ReportsActivationsStatistics from "../pages/Reports/reportsActivationsStatistics/ReportsActivationsStatistics";
-import ReportsCardsUsage from "../pages/Reports/reportsCardsUsage/ReportsCardsUsage";
-import ReportCardsTransfer from "../pages/Reports/reportCardsTransfer/ReportCardsTransfer";
-import ReportDebtsJournal from "../pages/Reports/reportDebtsJournal/ReportDebtsJournal";
-import ReportDataExportJobs from "../pages/Reports/reportDataExportJobs/ReportDataExportJobs";
-import ReportInvoiceManagers from "../pages/Reports/reportInvoiceManagers/ReportInvoiceManagers";
-import ReportJournalManagers from "../pages/Reports/reportJournalManagers/ReportJournalManagers";
-import ReportMoneyTransfer from "../pages/Reports/reportMoneyTransfer/reportMoneyTransfer";
-import ReportOnline from "../pages/Reports/reportOnline/ReportOnline";
-import ReportProfits from "../pages/Reports/reportProfits/ReportProfits";
-import PaymentGatewayTransactions from "../pages/Reports/paymentGatewayTransactions/PaymentGatewayTransactions";
-import ReportReceiptsManagers from "../pages/Reports/reportReceiptsManagers/ReportReceiptsManagers";
-import ReportSessions from "../pages/Reports/reportSessions/ReportSessions";
-import ReportSuspicious from "../pages/Reports/reportSuspicious/ReportSuspicious";
-import ReportTraffic from "../pages/Reports/ReportTraffic";
-import ReportUsers from "../pages/Reports/reportUser/ReportUsers";
-import AccordingManagers from "../pages/Reports/reportUser/AccordingManagers";
-import AccordingService from "../pages/Reports/reportUser/AccordingService";
-import RegistrationDate from "../pages/Reports/reportUser/RegistrationDate";
-import RadiusLog from "../pages/log/radiusLog/RadiusLog";
-import SysLog from "../pages/log/sysLog/SysLog";
-import LoginAttempts from "../pages/log/loginAttempts/LoginAttempts";
-import DashboardManager from "../pages/tools/dashboardManager/DashboardManager";
-import WidgetFactory from "../pages/tools/widgetFactory/WidgetFactory";
-import SystemServices from "../pages/tools/systemServices/SystemServices";
-import SystemUpdate from "../pages/tools/systemUpdate/SystemUpdate";
-import SystemMaintenance from "../pages/tools/systemMaintenance/SystemMaintenance";
-import ToolsAnnouncements from "../pages/tools/toolsAnnouncements/ToolsAnnouncements";
-import ToolsImport from "../pages/tools/toolsImport/ToolsImport";
-import ToolsBandwidthControl from "../pages/tools/toolsBandwidthControl/ToolsBandwidthControl";
-import BackupIndex from "../pages/tools/backupIndex/BackupIndex";
-import SettingsBackup from "../pages/tools/backupIndex/SettingsBackup";
-import BulkChanges from "../pages/tools/BulkChanges/BulkChanges";
-import IpPools from "../pages/ipPools/IpPools";
-import SettingsAdvanced from "../pages/options/settingsAdvanced/SettingsAdvanced";
-import AddIpPools from "../pages/ipPools/AddIpPools";
-import EmailSettings from "../pages/options/emailSettings/EmailSettings";
-import SettingsEmailTemplates from "../pages/options/settingsEmailTemplates/SettingsEmailTemplates";
-import SettingsFreezone from "../pages/options/settingsFreezone/SettingsFreezone";
-import SettingsForms from "../pages/options/settingsForms/SettingsForms";
-import SettingsGeneral from "../pages/options/settingsGeneral/SettingsGeneral";
+const Home = React.lazy(() => import("../pages/home/Home"));
+const Subscribers = React.lazy(() =>
+  import("../pages/subscribers/Subscribers")
+);
+const AddEditSubscriber = React.lazy(() =>
+  import("../pages/subscribers/addEditSubscriber/AddEditSubscriber")
+);
+const ActivateSubscriber = React.lazy(() =>
+  import("../pages/subscribers/activateSubscriber/ActivateSubscriber")
+);
+const ExtendSubscriber = React.lazy(() =>
+  import("../pages/subscribers/extendSubscriber/ExtendSubscriber")
+);
+const AdditionalServiceSubscriber = React.lazy(() =>
+  import("../pages/subscribers/addonSubscriber/AdditionalServiceSubscriber")
+);
+const ChangePackageSubscriber = React.lazy(() =>
+  import("../pages/subscribers/changePackageSubscriber/ChangePackageSubscriber")
+);
+const ProfileSubscriber = React.lazy(() =>
+  import("../pages/subscribers/profileSubscriber/ProfileSubscriber")
+);
+const GeneralSubscriber = React.lazy(() =>
+  import("../pages/subscribers/profileSubscriber/GeneralSubscriber")
+);
+const ConsumptionSubscriber = React.lazy(() =>
+  import("../pages/subscribers/profileSubscriber/ConsumptionSubscriber")
+);
+const SessionsSubscriber = React.lazy(() =>
+  import("../pages/subscribers/profileSubscriber/SessionsSubscriber")
+);
+const InvoicesSubscriber = React.lazy(() =>
+  import("../pages/subscribers/profileSubscriber/InvoicesSubscriber")
+);
+const PaymentsSubscriber = React.lazy(() =>
+  import("../pages/subscribers/profileSubscriber/PaymentsSubscriber")
+);
+const RecordSubscriber = React.lazy(() =>
+  import("../pages/subscribers/profileSubscriber/RecordSubscriber")
+);
+const DocumentsSubscriber = React.lazy(() =>
+  import("../pages/subscribers/profileSubscriber/DocumentsSubscriber")
+);
+const RadiusSubscriber = React.lazy(() =>
+  import("../pages/subscribers/profileSubscriber/RadiusSubscriber")
+);
+const FinancialRecordSubscriber = React.lazy(() =>
+  import("../pages/subscribers/profileSubscriber/financialRecordSubscriber")
+);
+const FreeZoneSubscriber = React.lazy(() =>
+  import("../pages/subscribers/profileSubscriber/FreeZoneSubscriber")
+);
+const QuotasSubscriber = React.lazy(() =>
+  import("../pages/subscribers/profileSubscriber/quotasSubscriber")
+);
+const OnlineSubscribers = React.lazy(() =>
+  import("../pages/subscribers/onlineSubscribers/OnlineSubscribers")
+);
+const CompensationsSubscribers = React.lazy(() =>
+  import(
+    "../pages/subscribers/compensationsSubscribers/CompensationsSubscribers"
+  )
+);
+const SubscriberTickets = React.lazy(() =>
+  import("../pages/subscribers/subscriberTickets/SubscriberTickets")
+);
+
+const Managers = React.lazy(() => import("../pages/managers/Managers"));
+const AddEditManager = React.lazy(() =>
+  import("../pages/managers/addEditManager/AddEditManager")
+);
+const ProfileManager = React.lazy(() =>
+  import("../pages/managers/profileManager/ProfileManager")
+);
+const GeneralManager = React.lazy(() =>
+  import("../pages/managers/profileManager/GeneralManager")
+);
+const InvoicesManager = React.lazy(() =>
+  import("../pages/managers/profileManager/InvoicesManager")
+);
+const ReceiptManager = React.lazy(() =>
+  import("../pages/managers/profileManager/ReceiptManager")
+);
+const RegisterAccountsManager = React.lazy(() =>
+  import("../pages/managers/profileManager/RegisterAccountsManager")
+);
+const Groups = React.lazy(() => import("../pages/groups/Groups"));
+const AddEditGroup = React.lazy(() =>
+  import("../pages/groups/addEditGroup/AddEditGroup")
+);
+const Nas = React.lazy(() => import("../pages/nas/Nas"));
+const AddEditNas = React.lazy(() =>
+  import("../pages/nas/addEditNas/AddEditNas")
+);
+const PackagesList = React.lazy(() =>
+  import("../pages/packages/packagesList/packagesList")
+);
+const AddEditPackage = React.lazy(() =>
+  import("../pages/packages/packagesList/AddEditPackage")
+);
+const PricingTable = React.lazy(() =>
+  import("../pages/packages/pricingTable/PricingTable")
+);
+const ConsumptionNotices = React.lazy(() =>
+  import("../pages/packages/consumptionNotices/ConsumptionNotices")
+);
+const AddEditConsumptionNotices = React.lazy(() =>
+  import("../pages/packages/consumptionNotices/AddEditConsumptionNotices")
+);
+const AddonsServices = React.lazy(() =>
+  import("../pages/packages/addonsServices/AddonsServices")
+);
+const AddEditAddonsServices = React.lazy(() =>
+  import("../pages/packages/addonsServices/AddEditAddonsServices")
+);
+const Cards = React.lazy(() => import("../pages/cards/Cards"));
+const AddEditCards = React.lazy(() => import("../pages/cards/AddEditCards"));
+const VerifyCards = React.lazy(() => import("../pages/cards/VerifyCards"));
+const CardJobsQueue = React.lazy(() =>
+  import("../pages/packages/addonsServices/CardJobsQueue")
+);
+const SubscriberInvoices = React.lazy(() =>
+  import("../pages/accounts/SubscriberInvoices")
+);
+const IssuingInvoiceForm = React.lazy(() =>
+  import("../pages/accounts/IssuingInvoiceForm")
+);
+const ReportsActivations = React.lazy(() =>
+  import("../pages/Reports/ReportsActivations")
+);
+const UserInvoiceDesigner = React.lazy(() =>
+  import("../pages/accounts/UserInvoiceDesigner")
+);
+const ReportsActivationsStatistics = React.lazy(() =>
+  import(
+    "../pages/Reports/reportsActivationsStatistics/ReportsActivationsStatistics"
+  )
+);
+const ReportsCardsUsage = React.lazy(() =>
+  import("../pages/Reports/reportsCardsUsage/ReportsCardsUsage")
+);
+const ReportCardsTransfer = React.lazy(() =>
+  import("../pages/Reports/reportCardsTransfer/ReportCardsTransfer")
+);
+const ReportDebtsJournal = React.lazy(() =>
+  import("../pages/Reports/reportDebtsJournal/ReportDebtsJournal")
+);
+const ReportDataExportJobs = React.lazy(() =>
+  import("../pages/Reports/reportDataExportJobs/ReportDataExportJobs")
+);
+const ReportInvoiceManagers = React.lazy(() =>
+  import("../pages/Reports/reportInvoiceManagers/ReportInvoiceManagers")
+);
+const ReportJournalManagers = React.lazy(() =>
+  import("../pages/Reports/reportJournalManagers/ReportJournalManagers")
+);
+const ReportMoneyTransfer = React.lazy(() =>
+  import("../pages/Reports/reportMoneyTransfer/reportMoneyTransfer")
+);
+const ReportOnline = React.lazy(() =>
+  import("../pages/Reports/reportOnline/ReportOnline")
+);
+const ReportProfits = React.lazy(() =>
+  import("../pages/Reports/reportProfits/ReportProfits")
+);
+const PaymentGatewayTransactions = React.lazy(() =>
+  import(
+    "../pages/Reports/paymentGatewayTransactions/PaymentGatewayTransactions"
+  )
+);
+const ReportReceiptsManagers = React.lazy(() =>
+  import("../pages/Reports/reportReceiptsManagers/ReportReceiptsManagers")
+);
+const ReportSessions = React.lazy(() =>
+  import("../pages/Reports/reportSessions/ReportSessions")
+);
+const ReportSuspicious = React.lazy(() =>
+  import("../pages/Reports/reportSuspicious/ReportSuspicious")
+);
+const ReportTraffic = React.lazy(() =>
+  import("../pages/Reports/ReportTraffic")
+);
+const ReportUsers = React.lazy(() =>
+  import("../pages/Reports/reportUser/ReportUsers")
+);
+const AccordingManagers = React.lazy(() =>
+  import("../pages/Reports/reportUser/AccordingManagers")
+);
+const AccordingService = React.lazy(() =>
+  import("../pages/Reports/reportUser/AccordingService")
+);
+const RegistrationDate = React.lazy(() =>
+  import("../pages/Reports/reportUser/RegistrationDate")
+);
+const RadiusLog = React.lazy(() => import("../pages/log/radiusLog/RadiusLog"));
+const SysLog = React.lazy(() => import("../pages/log/sysLog/SysLog"));
+const LoginAttempts = React.lazy(() =>
+  import("../pages/log/loginAttempts/LoginAttempts")
+);
+const DashboardManager = React.lazy(() =>
+  import("../pages/tools/dashboardManager/DashboardManager")
+);
+const WidgetFactory = React.lazy(() =>
+  import("../pages/tools/widgetFactory/WidgetFactory")
+);
+const SystemServices = React.lazy(() =>
+  import("../pages/tools/systemServices/SystemServices")
+);
+const SystemUpdate = React.lazy(() =>
+  import("../pages/tools/systemUpdate/SystemUpdate")
+);
+const SystemMaintenance = React.lazy(() =>
+  import("../pages/tools/systemMaintenance/SystemMaintenance")
+);
+const ToolsAnnouncements = React.lazy(() =>
+  import("../pages/tools/toolsAnnouncements/ToolsAnnouncements")
+);
+const ToolsImport = React.lazy(() =>
+  import("../pages/tools/toolsImport/ToolsImport")
+);
+const ToolsBandwidthControl = React.lazy(() =>
+  import("../pages/tools/toolsBandwidthControl/ToolsBandwidthControl")
+);
+const BackupIndex = React.lazy(() =>
+  import("../pages/tools/backupIndex/BackupIndex")
+);
+const SettingsBackup = React.lazy(() =>
+  import("../pages/tools/backupIndex/SettingsBackup")
+);
+const BulkChanges = React.lazy(() =>
+  import("../pages/tools/BulkChanges/BulkChanges")
+);
+const IpPools = React.lazy(() => import("../pages/ipPools/IpPools"));
+const SettingsAdvanced = React.lazy(() =>
+  import("../pages/options/settingsAdvanced/SettingsAdvanced")
+);
+const AddIpPools = React.lazy(() => import("../pages/ipPools/AddIpPools"));
+const EmailSettings = React.lazy(() =>
+  import("../pages/options/emailSettings/EmailSettings")
+);
+const SettingsEmailTemplates = React.lazy(() =>
+  import("../pages/options/settingsEmailTemplates/SettingsEmailTemplates")
+);
+const SettingsFreezone = React.lazy(() =>
+  import("../pages/options/settingsFreezone/SettingsFreezone")
+);
+const SettingsForms = React.lazy(() =>
+  import("../pages/options/settingsForms/SettingsForms")
+);
+const SettingsGeneral = React.lazy(() =>
+  import("../pages/options/settingsGeneral/SettingsGeneral")
+);
+const LicenseSettings = React.lazy(() =>
+  import("../pages/options/licenseSettings/LicenseSettings")
+);
+const SettingsNetwork = React.lazy(() =>
+  import("../pages/options/settingsNetwork/SettingsNetwork")
+);
+const SettingsNotifications = React.lazy(() =>
+  import("../pages/options/settingsNotifications/SettingsNotifications")
+);
+const SettingsAcl = React.lazy(() =>
+  import("../pages/options/settingsAcl/SettingsAcl")
+);
+const { SettingsPaymentGateways } = React.lazy(() =>
+  import("../pages/options/settingsPaymentGateways/SettingsPaymentGateways")
+);
+const SettingsBilling = React.lazy(() =>
+  import("../pages/options/settingsBilling/SettingsBilling")
+);
+const SettingsSites = React.lazy(() =>
+  import("../pages/options/settingsSites/SettingsSites")
+);
+const SettingsSms = React.lazy(() =>
+  import("../pages/options/settingsSms/settingsSms")
+);
+const SettingsSastrack = React.lazy(() =>
+  import("../pages/options/settingsSastrack/SettingsSastrack")
+);
+const SettingsTelegraml = React.lazy(() =>
+  import("../pages/options/settingsTelegraml/SettingsTelegraml")
+);
+const SettingsUcp = React.lazy(() =>
+  import("../pages/options/settingsUcp/SettingsUcp")
+);
+const SettingsWeb = React.lazy(() =>
+  import("../pages/options/settingsWeb/SettingsWeb")
+);
+const AboutCompany = React.lazy(() =>
+  import("../pages/aboutCompany/AboutCompany")
+);
+const About = React.lazy(() => import("../pages/aboutCompany/About"));
+const Hardware = React.lazy(() => import("../pages/aboutCompany/Hardware"));
+const Loader = React.lazy(() => import("../components/loader/Loader"));
 
 const Layout = () => {
   return (
@@ -99,184 +304,893 @@ const Layout = () => {
       <div className="main_content_page">
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/home"
+            element={
+              <Suspense fallback={<Loader />}>
+                <Home />
+              </Suspense>
+            }
+          />
           {/* subscribers */}
-          <Route path="/subscribers" element={<Subscribers />} />
-          <Route path="/subscribers/:id" element={<ProfileSubscriber />}>
+          <Route
+            path="/subscribers"
+            element={
+              <Suspense fallback={<Loader />}>
+                <Subscribers />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/subscribers/:id"
+            element={
+              <Suspense fallback={<Loader />}>
+                <ProfileSubscriber />
+              </Suspense>
+            }
+          >
             <Route path="general" element={<GeneralSubscriber />} />
             <Route
               path="edit"
-              element={<AddEditSubscriber typePage={"editPage"} />}
+              element={
+                <Suspense fallback={<Loader />}>
+                  <AddEditSubscriber typePage={"editPage"} />
+                </Suspense>
+              }
             />
-            <Route path="consumption" element={<ConsumptionSubscriber />} />
-            <Route path="sessions" element={<SessionsSubscriber />} />
-            <Route path="invoices" element={<InvoicesSubscriber />} />
-            <Route path="payments" element={<PaymentsSubscriber />} />
-            <Route path="record" element={<RecordSubscriber />} />
-            <Route path="documents" element={<DocumentsSubscriber />} />
-            <Route path="radius" element={<RadiusSubscriber />} />
-            <Route path="free-zone" element={<FreeZoneSubscriber />} />
-            <Route path="quotas" element={<FinancialRecordSubscriber />} />
-            <Route path="financial-record" element={<QuotasSubscriber />} />
+            <Route
+              path="consumption"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <ConsumptionSubscriber />
+                </Suspense>
+              }
+            />
+            <Route
+              path="sessions"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <SessionsSubscriber />
+                </Suspense>
+              }
+            />
+            <Route
+              path="invoices"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <InvoicesSubscriber />
+                </Suspense>
+              }
+            />
+            <Route
+              path="payments"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <PaymentsSubscriber />
+                </Suspense>
+              }
+            />
+            <Route
+              path="record"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <RecordSubscriber />
+                </Suspense>
+              }
+            />
+            <Route
+              path="documents"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <DocumentsSubscriber />
+                </Suspense>
+              }
+            />
+            <Route
+              path="radius"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <RadiusSubscriber />
+                </Suspense>
+              }
+            />
+            <Route
+              path="free-zone"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <FreeZoneSubscriber />
+                </Suspense>
+              }
+            />
+            <Route
+              path="quotas"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <FinancialRecordSubscriber />
+                </Suspense>
+              }
+            />
+            <Route
+              path="financial-record"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <QuotasSubscriber />
+                </Suspense>
+              }
+            />
           </Route>
-          <Route path="/subscribers/add/:id" element={<AddEditSubscriber />} />
+          <Route
+            path="/subscribers/add/:id"
+            element={
+              <Suspense fallback={<Loader />}>
+                <AddEditSubscriber />
+              </Suspense>
+            }
+          />
           <Route
             path="/subscribers/activate/:id"
-            element={<ActivateSubscriber />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <ActivateSubscriber />
+              </Suspense>
+            }
           />
           <Route
             path="/subscribers/extend/:id"
-            element={<ExtendSubscriber />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <ExtendSubscriber />
+              </Suspense>
+            }
           />
           <Route
             path="/subscribers/addon/:id"
-            element={<AdditionalServiceSubscriber />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <AdditionalServiceSubscriber />
+              </Suspense>
+            }
           />
           <Route
             path="/subscribers/change-package/:id"
-            element={<ChangePackageSubscriber />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <ChangePackageSubscriber />
+              </Suspense>
+            }
           />
-          <Route path="/subscribers-online" element={<OnlineSubscribers />} />
+          <Route
+            path="/subscribers-online"
+            element={
+              <Suspense fallback={<Loader />}>
+                <OnlineSubscribers />
+              </Suspense>
+            }
+          />
           <Route
             path="/compensations-subscibers"
-            element={<CompensationsSubscribers />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <CompensationsSubscribers />
+              </Suspense>
+            }
           />
-          <Route path="/subscriber-tickets" element={<SubscriberTickets />} />
+          <Route
+            path="/subscriber-tickets"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SubscriberTickets />
+              </Suspense>
+            }
+          />
           {/* managers */}
-          <Route path="/managers" element={<Managers />} />
-          <Route path="/managers/add/:id" element={<AddEditManager />} />
-          <Route path="/managers/profile/:id" element={<ProfileManager />}>
-            <Route path="general" element={<GeneralManager />} />
-            <Route path="edit" element={<AddEditManager />} />
-            <Route path="invoices" element={<InvoicesManager />} />
-            <Route path="receipt" element={<ReceiptManager />} />
+          <Route
+            path="/managers"
+            element={
+              <Suspense fallback={<Loader />}>
+                <Managers />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/managers/add/:id"
+            element={
+              <Suspense fallback={<Loader />}>
+                <AddEditManager />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/managers/profile/:id"
+            element={
+              <Suspense fallback={<Loader />}>
+                <ProfileManager />
+              </Suspense>
+            }
+          >
+            <Route
+              path="general"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <GeneralManager />
+                </Suspense>
+              }
+            />
+            <Route
+              path="edit"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <AddEditManager />
+                </Suspense>
+              }
+            />
+            <Route
+              path="invoices"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <InvoicesManager />
+                </Suspense>
+              }
+            />
+            <Route
+              path="receipt"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <ReceiptManager />
+                </Suspense>
+              }
+            />
             <Route
               path="registerAccounts"
-              element={<RegisterAccountsManager />}
+              element={
+                <Suspense fallback={<Loader />}>
+                  <RegisterAccountsManager />
+                </Suspense>
+              }
             />
           </Route>
           {/* group */}
-          <Route path="/groups" element={<Groups />} />
-          <Route path="/groups/add/:id" element={<AddEditGroup />} />
+          <Route
+            path="/groups"
+            element={
+              <Suspense fallback={<Loader />}>
+                <Groups />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/groups/add/:id"
+            element={
+              <Suspense fallback={<Loader />}>
+                <AddEditGroup />
+              </Suspense>
+            }
+          />
           {/* nas */}
-          <Route path="/NAS" element={<Nas />} />
-          <Route path="/NAS/add/:id" element={<AddEditNas />} />
-          <Route path="/NAS/profile/:id/edit" element={<AddEditNas />} />
+          <Route
+            path="/NAS"
+            element={
+              <Suspense fallback={<Loader />}>
+                <Nas />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/NAS/add/:id"
+            element={
+              <Suspense fallback={<Loader />}>
+                <AddEditNas />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/NAS/profile/:id/edit"
+            element={
+              <Suspense fallback={<Loader />}>
+                <AddEditNas />
+              </Suspense>
+            }
+          />
           {/* packages */}
-          <Route path="/packages" element={<PackagesList />} />
+          <Route
+            path="/packages"
+            element={
+              <Suspense fallback={<Loader />}>
+                <PackagesList />
+              </Suspense>
+            }
+          />
           <Route path="/packages/add/:id" element={<AddEditPackage />} />
           <Route
             path="/packages/profile/:id/edit"
             element={<AddEditPackage />}
           />
-          <Route path="/pricing-table" element={<PricingTable />} />
-          <Route path="/consumption-notices" element={<ConsumptionNotices />} />
+          <Route
+            path="/pricing-table"
+            element={
+              <Suspense fallback={<Loader />}>
+                <PricingTable />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/consumption-notices"
+            element={
+              <Suspense fallback={<Loader />}>
+                <ConsumptionNotices />
+              </Suspense>
+            }
+          />
           <Route
             path="/consumption-notices/add/:id"
-            element={<AddEditConsumptionNotices />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <AddEditConsumptionNotices />
+              </Suspense>
+            }
           />
-          <Route path="/additional-services" element={<AddonsServices />} />
+          <Route
+            path="/consumption-notices/profile/:id/edit"
+            element={
+              <Suspense fallback={<Loader />}>
+                <AddEditConsumptionNotices />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/additional-services"
+            element={
+              <Suspense fallback={<Loader />}>
+                <AddonsServices />
+              </Suspense>
+            }
+          />
           <Route
             path="/additional-services/add/:id"
-            element={<AddEditAddonsServices />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <AddEditAddonsServices />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/additional-services/profile/:id/edit"
+            element={
+              <Suspense fallback={<Loader />}>
+                <AddEditAddonsServices />
+              </Suspense>
+            }
           />
           {/* cards */}
-          <Route path="/cards" element={<Cards />} />
-          <Route path="/cards/add/:id" element={<AddEditCards />} />
-          <Route path="/cards/verify" element={<VerifyCards />} />
-          <Route path="/cards/jobs-queue" element={<CardJobsQueue />} />
+          <Route
+            path="/cards"
+            element={
+              <Suspense fallback={<Loader />}>
+                <Cards />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/cards/add/:id"
+            element={
+              <Suspense fallback={<Loader />}>
+                <AddEditCards />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/cards/verify"
+            element={
+              <Suspense fallback={<Loader />}>
+                <VerifyCards />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/cards/jobs-queue"
+            element={
+              <Suspense fallback={<Loader />}>
+                <CardJobsQueue />
+              </Suspense>
+            }
+          />
           {/* account */}
-          <Route path="/subscriber-invoices" element={<SubscriberInvoices />} />
-          <Route path="/issuing-invoice" element={<IssuingInvoiceForm />} />
+          <Route
+            path="/subscriber-invoices"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SubscriberInvoices />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/issuing-invoice"
+            element={
+              <Suspense fallback={<Loader />}>
+                <IssuingInvoiceForm />
+              </Suspense>
+            }
+          />
           <Route
             path="/user-invoice-designer"
-            element={<UserInvoiceDesigner />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <UserInvoiceDesigner />
+              </Suspense>
+            }
           />
           {/* reports */}
-          <Route path="/report-activations" element={<ReportsActivations />} />
+          <Route
+            path="/report-activations"
+            element={
+              <Suspense fallback={<Loader />}>
+                <ReportsActivations />
+              </Suspense>
+            }
+          />
           <Route
             path="/activation-stats"
-            element={<ReportsActivationsStatistics />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <ReportsActivationsStatistics />
+              </Suspense>
+            }
           />
-          <Route path="/reportcards-usage" element={<ReportsCardsUsage />} />
+          <Route
+            path="/reportcards-usage"
+            element={
+              <Suspense fallback={<Loader />}>
+                <ReportsCardsUsage />
+              </Suspense>
+            }
+          />
           <Route
             path="/report-cards-transfer"
-            element={<ReportCardsTransfer />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <ReportCardsTransfer />
+              </Suspense>
+            }
           />
           <Route
             path="/report-debts-journal"
-            element={<ReportDebtsJournal />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <ReportDebtsJournal />
+              </Suspense>
+            }
           />
           <Route
             path="/report-data-export-jobs"
-            element={<ReportDataExportJobs />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <ReportDataExportJobs />
+              </Suspense>
+            }
           />
           <Route
             path="/report-invoice-managers"
-            element={<ReportInvoiceManagers />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <ReportInvoiceManagers />
+              </Suspense>
+            }
           />
           <Route
             path="/report-journal-managers"
-            element={<ReportJournalManagers />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <ReportJournalManagers />
+              </Suspense>
+            }
           />
           <Route
             path="/report-money-transfer"
-            element={<ReportMoneyTransfer />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <ReportMoneyTransfer />
+              </Suspense>
+            }
           />
-          <Route path="/report-online" element={<ReportOnline />} />
-          <Route path="/report-profits" element={<ReportProfits />} />
+          <Route
+            path="/report-online"
+            element={
+              <Suspense fallback={<Loader />}>
+                <ReportOnline />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/report-profits"
+            element={
+              <Suspense fallback={<Loader />}>
+                <ReportProfits />
+              </Suspense>
+            }
+          />
           <Route
             path="/payment-gateway-transaction"
-            element={<PaymentGatewayTransactions />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <PaymentGatewayTransactions />
+              </Suspense>
+            }
           />
           <Route
             path="/report-receipts-managers"
-            element={<ReportReceiptsManagers />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <ReportReceiptsManagers />
+              </Suspense>
+            }
           />
-          <Route path="/report-sessions" element={<ReportSessions />} />
-          <Route path="/report-suspicious" element={<ReportSuspicious />} />
-          <Route path="/report-traffic" element={<ReportTraffic />} />
-          <Route path="/report-users" element={<ReportUsers />}>
-            <Route path="accordingManagers" element={<AccordingManagers />} />
-            <Route path="accordingService" element={<AccordingService />} />
-            <Route path="registrationDate" element={<RegistrationDate />} />
+          <Route
+            path="/report-sessions"
+            element={
+              <Suspense fallback={<Loader />}>
+                <ReportSessions />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/report-suspicious"
+            element={
+              <Suspense fallback={<Loader />}>
+                <ReportSuspicious />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/report-traffic"
+            element={
+              <Suspense fallback={<Loader />}>
+                <ReportTraffic />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/report-users"
+            element={
+              <Suspense fallback={<Loader />}>
+                <ReportUsers />
+              </Suspense>
+            }
+          >
+            <Route
+              path="accordingManagers"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <AccordingManagers />
+                </Suspense>
+              }
+            />
+            <Route
+              path="accordingService"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <AccordingService />
+                </Suspense>
+              }
+            />
+            <Route
+              path="registrationDate"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <RegistrationDate />
+                </Suspense>
+              }
+            />
           </Route>
           {/* log */}
-          <Route path="/log-radius" element={<RadiusLog />} />
-          <Route path="/system-log" element={<SysLog />} />
-          <Route path="/login-attempts" element={<LoginAttempts />} />
+          <Route
+            path="/log-radius"
+            element={
+              <Suspense fallback={<Loader />}>
+                <RadiusLog />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/system-log"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SysLog />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/login-attempts"
+            element={
+              <Suspense fallback={<Loader />}>
+                <LoginAttempts />
+              </Suspense>
+            }
+          />
           {/* tools */}
           <Route
             path="/tools-dashboard-manager"
-            element={<DashboardManager />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <DashboardManager />
+              </Suspense>
+            }
           />
-          <Route path="/widget-factory" element={<WidgetFactory />} />
-          <Route path="/system-services" element={<SystemServices />} />
-          <Route path="/system-update" element={<SystemUpdate />} />
-          <Route path="/system-maintenance" element={<SystemMaintenance />} />
-          <Route path="/tools-announcements" element={<ToolsAnnouncements />} />
-          <Route path="/tools-import" element={<ToolsImport />} />
+          <Route
+            path="/widget-factory"
+            element={
+              <Suspense fallback={<Loader />}>
+                <WidgetFactory />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/system-services"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SystemServices />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/system-update"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SystemUpdate />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/system-maintenance"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SystemMaintenance />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/tools-announcements"
+            element={
+              <Suspense fallback={<Loader />}>
+                <ToolsAnnouncements />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/tools-import"
+            element={
+              <Suspense fallback={<Loader />}>
+                <ToolsImport />
+              </Suspense>
+            }
+          />
           <Route
             path="/tools-bandwidth-control"
-            element={<ToolsBandwidthControl />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <ToolsBandwidthControl />
+              </Suspense>
+            }
           />
-          <Route path="/backup-index" element={<BackupIndex />} />
-          <Route path="/backup-index/settings" element={<SettingsBackup />} />
-          <Route path="/bulk-changes" element={<BulkChanges />} />
+          <Route
+            path="/backup-index"
+            element={
+              <Suspense fallback={<Loader />}>
+                <BackupIndex />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/backup-index/settings"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SettingsBackup />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/bulk-changes"
+            element={
+              <Suspense fallback={<Loader />}>
+                <BulkChanges />
+              </Suspense>
+            }
+          />
           {/* ip pools */}
-          <Route path="/ip-pools" element={<IpPools />} />
-          <Route path="/add-ip-pools" element={<AddIpPools />} />
+          <Route
+            path="/ip-pools"
+            element={
+              <Suspense fallback={<Loader />}>
+                <IpPools />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/add-ip-pools"
+            element={
+              <Suspense fallback={<Loader />}>
+                <AddIpPools />
+              </Suspense>
+            }
+          />
           {/* options */}
-          <Route path="/settings-advanced" element={<SettingsAdvanced />} />
-          <Route path="/add-settings-backup" element={<BulkChanges />} />
-          <Route path="/settings-email" element={<EmailSettings />} />
+          <Route
+            path="/settings-advanced"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SettingsAdvanced />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/add-settings-backup"
+            element={
+              <Suspense fallback={<Loader />}>
+                <BulkChanges />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/settings-email"
+            element={
+              <Suspense fallback={<Loader />}>
+                <EmailSettings />
+              </Suspense>
+            }
+          />
           <Route
             path="/settings-email-templates"
-            element={<SettingsEmailTemplates />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <SettingsEmailTemplates />
+              </Suspense>
+            }
           />
-          <Route path="/settings-freezone" element={<SettingsFreezone />} />
-          <Route path="/settings-forms" element={<SettingsForms />} />
-          <Route path="/settings-general" element={<SettingsGeneral />} />
+          <Route
+            path="/settings-freezone"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SettingsFreezone />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/settings-forms"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SettingsForms />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/settings-general"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SettingsGeneral />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/settings-license"
+            element={
+              <Suspense fallback={<Loader />}>
+                <LicenseSettings />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/settings-network"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SettingsNetwork />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/settings-notifications"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SettingsNotifications />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/settings-acl"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SettingsAcl />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/settings-paymentgateways"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SettingsPaymentGateways />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/settings-billing"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SettingsBilling />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/settings-sites"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SettingsSites />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/settings-sms"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SettingsSms />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/settings-sastrack"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SettingsSastrack />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/settings-telegraml"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SettingsTelegraml />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/settings-ucp"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SettingsUcp />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/settings-web"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SettingsWeb />
+              </Suspense>
+            }
+          />
+          {/* about-company */}
+          <Route
+            path="/about-company"
+            element={
+              <Suspense fallback={<Loader />}>
+                <AboutCompany />
+              </Suspense>
+            }
+          >
+            <Route
+              path="about"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <About />
+                </Suspense>
+              }
+            />
+            <Route
+              path="hardware"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <Hardware />
+                </Suspense>
+              }
+            />
+          </Route>
         </Routes>
       </div>
     </main>

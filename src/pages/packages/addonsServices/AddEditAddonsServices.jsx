@@ -3,6 +3,7 @@ import SectionForm from "../../../components/sectionform/SectionForm";
 import InputSectionForm from "../../../components/sectionform/InputSectionForm";
 import SelectSectionForm from "../../../components/sectionform/SelectSectionForm";
 import SwitchSectionForm from "../../../components/sectionform/switchSectionForm";
+import { t } from "i18next";
 
 const AddEditAddonsServices = () => {
   const [addonForm, setAddonForm] = useState({
@@ -28,17 +29,17 @@ const AddEditAddonsServices = () => {
 
   return (
     <div className="content_page">
-      <SectionForm title={"Addon Form"}>
+      <SectionForm title={t("Addon Form")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <InputSectionForm
-            label={"Name"}
+            label={t("Name")}
             type={"text"}
             value={addonForm.name}
             onChange={handleChangeAddonForm}
             id="name"
           />
           <SelectSectionForm
-            label={"Expiration"}
+            label={t("Expiration")}
             value={addonForm.expirationType}
             onChange={handleChangeAddonForm}
             id="expirationType"
@@ -54,7 +55,7 @@ const AddEditAddonsServices = () => {
             type={"number"}
           />
           <SelectSectionForm
-            label={"Pricing Mode"}
+            label={t("Pricing Mode")}
             value={addonForm.pricingMode}
             onChange={handleChangeAddonForm}
             id="pricingMode"
@@ -64,33 +65,33 @@ const AddEditAddonsServices = () => {
             ]}
           />
           <InputSectionForm
-            label={"Price"}
+            label={t("Price")}
             type={"text"}
             value={addonForm.price}
             onChange={handleChangeAddonForm}
             id="price"
           />
           <InputSectionForm
-            label={"Description"}
+            label={t("Description")}
             type={"text"}
             value={addonForm.description}
             onChange={handleChangeAddonForm}
             id="description"
           />
           <SwitchSectionForm
-            label={"Set Mikrotik Address List"}
+            label={t("Set Mikrotik Address List")}
             value={addonForm.mikrotikAddressList}
             onChange={handleChangeAddonForm}
             id="mikrotikAddressList"
           />
           <SwitchSectionForm
-            label={"Set Pool Name"}
+            label={t("Set Pool Name")}
             value={addonForm.poolName}
             onChange={handleChangeAddonForm}
             id="poolName"
           />
           <SwitchSectionForm
-            label={"Call Url On Connect"}
+            label={t("Call Url On Connect")}
             value={addonForm.callUrlConnect}
             onChange={handleChangeAddonForm}
             id="callUrlConnect"
@@ -98,8 +99,8 @@ const AddEditAddonsServices = () => {
         </div>
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">OK</button>
-        <button className="btn_close">Cancel</button>
+        <button className="btn_add">{t("OK")}</button>
+        <button className="btn_close">{t("Cancel")}</button>
       </div>
     </div>
   );

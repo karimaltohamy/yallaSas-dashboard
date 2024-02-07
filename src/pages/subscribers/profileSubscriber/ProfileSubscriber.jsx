@@ -1,66 +1,67 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import NavProfile from "../../../components/navProfile/NavProfile";
+import { t } from "i18next";
 
 const ProfileSubscriber = () => {
   const itemsNev = [
     {
-      title: "General",
+      title: t("General"),
       icon: <i className="fa-regular fa-user"></i>,
       path: "general",
     },
     {
-      title: "Edit",
+      title: t("Edit"),
       icon: <i className="fa-regular fa-pen-to-square"></i>,
       path: "edit",
     },
     {
-      title: "Consumption",
+      title: t("Consumption"),
       icon: <i className="fa-solid fa-sliders"></i>,
       path: "consumption",
     },
     {
-      title: "Sessions",
+      title: t("Sessions"),
       icon: <i className="fa-solid fa-inbox"></i>,
       path: "sessions",
     },
     {
-      title: "Invoices",
+      title: t("Invoices"),
       icon: <i className="fa-solid fa-ticket"></i>,
       path: "invoices",
     },
     {
-      title: "Payments",
+      title: t("Payments"),
       icon: <i className="fa-solid fa-money-bill"></i>,
       path: "payments",
     },
     {
-      title: "Record",
+      title: t("Record"),
       icon: <i className="fa-regular fa-folder"></i>,
       path: "record",
     },
     {
-      title: "Documents",
+      title: t("Documents"),
       icon: <i className="fa-regular fa-folder-open"></i>,
       path: "documents",
     },
     {
-      title: "RADIUS",
+      title: t("RADIUS"),
       icon: <i className="fa-solid fa-hashtag"></i>,
       path: "radius",
     },
     {
-      title: "Financial record",
+      title: t("Financial record"),
       icon: <i className="fa-regular fa-address-book"></i>,
       path: "financial-record",
     },
     {
-      title: "Free Zone",
+      title: t("Free Zone"),
       icon: <i className="fa-solid fa-globe"></i>,
       path: "free-zone",
     },
     {
-      title: "quotas",
+      title: t("quotas"),
       icon: <i className="fa-solid fa-person-chalkboard"></i>,
       path: "quotas",
     },

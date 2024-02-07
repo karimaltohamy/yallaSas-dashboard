@@ -4,6 +4,7 @@ import SectionForm from "../../../components/sectionform/SectionForm";
 import SelectSectionForm from "../../../components/sectionform/SelectSectionForm";
 import SwitchSectionForm from "../../../components/sectionform/switchSectionForm";
 import InputFile from "../../../components/popup/inputFile/InputFile";
+import { t } from "i18next";
 
 const AddEditManager = () => {
   const [generalinformation, setGeneralinformation] = useState({
@@ -94,31 +95,31 @@ const AddEditManager = () => {
 
   return (
     <div className="content_page">
-      <SectionForm title={"General information"}>
+      <SectionForm title={t("General information")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <InputSectionForm
-            label={"Username"}
+            label={t("Username")}
             type={"text"}
             value={generalinformation.username}
             onChange={handleChangeGeneralUnformation}
             id="username"
           />
           <InputSectionForm
-            label={"Password"}
+            label={t("Password")}
             type={"password"}
             value={generalinformation.password}
             onChange={handleChangeGeneralUnformation}
             id="password"
           />
           <InputSectionForm
-            label={"Confirm password"}
+            label={t("Confirm password")}
             type={"password"}
             value={generalinformation.confirmPassword}
             onChange={handleChangeGeneralUnformation}
             id="confirmPassword"
           />
           <SelectSectionForm
-            label={"Follow me"}
+            label={t("Follow me")}
             type={"text"}
             value={generalinformation.followMe}
             onChange={handleChangeGeneralUnformation}
@@ -130,7 +131,7 @@ const AddEditManager = () => {
             ]}
           />
           <SelectSectionForm
-            label={"Group"}
+            label={t("Group")}
             value={generalinformation.group}
             onChange={handleChangeGeneralUnformation}
             id="group"
@@ -141,66 +142,66 @@ const AddEditManager = () => {
             ]}
           />
           <SwitchSectionForm
-            label={"Effective"}
+            label={t("Effective")}
             value={generalinformation.effective}
             onChange={handleChangeGeneralUnformation}
             id="effective"
           />
         </div>
       </SectionForm>
-      <SectionForm title={"Personal information"}>
+      <SectionForm title={t("Personal information")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <InputSectionForm
-            label={"First name"}
+            label={t("First name")}
             type={"text"}
             value={personalformation.firstName}
             onChange={handleChangePersonalformation}
             id="firstName"
           />
           <InputSectionForm
-            label={"Last name"}
+            label={t("Last name")}
             type={"text"}
             value={personalformation.lastName}
             onChange={handleChangePersonalformation}
             id="lastName"
           />
           <InputSectionForm
-            label={"Company"}
+            label={t("Company")}
             type={"text"}
             value={personalformation.company}
             onChange={handleChangePersonalformation}
             id="company"
           />
           <InputSectionForm
-            label={"Email"}
+            label={t("Email")}
             type={"text"}
             value={personalformation.email}
             onChange={handleChangePersonalformation}
             id="email"
           />
           <InputSectionForm
-            label={"Email"}
+            label={t("Email")}
             type={"text"}
             value={personalformation.email}
             onChange={handleChangePersonalformation}
             id="email"
           />
           <InputSectionForm
-            label={"Phone"}
+            label={t("Phone")}
             type={"text"}
             value={personalformation.phone}
             onChange={handleChangePersonalformation}
             id="phone"
           />
           <InputSectionForm
-            label={"City"}
+            label={t("City")}
             type={"text"}
             value={personalformation.city}
             onChange={handleChangePersonalformation}
             id="city"
           />
           <InputSectionForm
-            label={"Address"}
+            label={t("Address")}
             type={"text"}
             value={personalformation.address}
             onChange={handleChangePersonalformation}
@@ -208,46 +209,46 @@ const AddEditManager = () => {
           />
 
           <InputSectionForm
-            label={"Notice"}
-            type={"text"}
+            label={t("Notice")}
+            type={t("text")}
             value={personalformation.notice}
             onChange={handleChangePersonalformation}
             id="notice"
           />
         </div>
       </SectionForm>
-      <SectionForm title={"Special details"}>
+      <SectionForm title={t("Special details")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <InputSectionForm
-            label={"select deletion"}
+            label={t("select deletion")}
             type={"date"}
             value={specialDetails.selectDeletion}
             onChange={handleChangeSpecialDetails}
             id="selectDeletion"
           />
           <InputSectionForm
-            label={"Subscribers Suffix"}
+            label={t("Subscribers Suffix")}
             type={"text"}
             value={specialDetails.subscribersSuffix}
             onChange={handleChangeSpecialDetails}
             id="subscribersSuffix"
           />
           <InputSectionForm
-            label={"Maximum subscribers"}
+            label={t("Maximum subscribers")}
             type={"text"}
             value={specialDetails.maximumSubscribers}
             onChange={handleChangeSpecialDetails}
             id="maximumSubscribers"
           />
           <InputSectionForm
-            label={"Group"}
+            label={t("Group")}
             type={"text"}
             value={specialDetails.group}
             onChange={handleChangeSpecialDetails}
             id="group"
           />
           <SelectSectionForm
-            label={"Site"}
+            label={t("Site")}
             type={"text"}
             value={specialDetails.site}
             onChange={handleChangeSpecialDetails}
@@ -255,21 +256,21 @@ const AddEditManager = () => {
             options={[{ name: "any", value: "" }]}
           />
           <InputSectionForm
-            label={"maximumDebtLimit"}
+            label={t("maximumDebtLimit")}
             type={"text"}
             value={specialDetails.maximumDebtLimit}
             onChange={handleChangeSpecialDetails}
             id="maximumDebtLimit"
           />
           <InputSectionForm
-            label={"Address List"}
+            label={t("Address List")}
             type={"text"}
             value={specialDetails.addressList}
             onChange={handleChangeSpecialDetails}
             id="addressList"
           />
           <InputFile
-            label={"Towers from which entry is permitted"}
+            label={t("Towers from which entry is permitted")}
             value={specialDetails.towers}
             onChange={handleChangeSpecialDetails}
             id="towers"
@@ -282,81 +283,81 @@ const AddEditManager = () => {
             options={[{ name: "any", value: "" }]}
           />
           <InputSectionForm
-            label={"Requires two-factor authentication to login"}
+            label={t("Requires two-factor authentication to login")}
             type={"text"}
             value={specialDetails.requiresTwoFactorLogin}
             onChange={handleChangeSpecialDetails}
             id="requiresTwoFactorLogin"
           />
           <SwitchSectionForm
-            label={"Requires Two Factor Login Switch"}
+            label={t("Requires Two Factor Login Switch")}
             value={specialDetails.requiresTwoFactorLoginSwitch}
             onChange={handleChangeSpecialDetails}
             id="requiresTwoFactorLoginSwitch"
           />
           <SwitchSectionForm
-            label={"Not Require Cptcha"}
+            label={t("Not Require Cptcha")}
             value={specialDetails.notRequireCptcha}
             onChange={handleChangeSpecialDetails}
             id="notRequireCptcha"
           />
           <SwitchSectionForm
-            label={"Not Require Cptcha"}
+            label={t("Not Require Cptcha")}
             value={specialDetails.forceChangePassword}
             onChange={handleChangeSpecialDetails}
             id="forceChangePassword"
           />
         </div>
       </SectionForm>
-      <SectionForm title={"Determinants"}>
+      <SectionForm title={t("Determinants")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <SwitchSectionForm
-            label={"Select Deletion"}
+            label={t("Select Deletion")}
             value={determinants.selectDeletion}
             onChange={handleChangeDeterminants}
             id="selectDeletion"
           />
           <InputSectionForm
-            label={"Deletion times per month"}
+            label={t("Deletion times per month")}
             type={"text"}
             value={specialDetails.deletionTimesMonth}
             onChange={handleChangeDeterminants}
             id="deletionTimesMonth"
           />
           <SwitchSectionForm
-            label={"Determine the frequency of changing the name"}
+            label={t("Determine the frequency of changing the name")}
             value={determinants.selectChangName}
             onChange={handleChangeDeterminants}
             id="selectChangName"
           />
           <InputSectionForm
-            label={"Name change times per month"}
+            label={t("Name change times per month")}
             type={"text"}
             value={specialDetails.nameChangeTimesMonth}
             onChange={handleChangeDeterminants}
             id="nameChangeTimesMonth"
           />
           <SwitchSectionForm
-            label={"Profile change times"}
+            label={t("Profile change times")}
             value={determinants.profileChangeTimes}
             onChange={handleChangeDeterminants}
             id="profileChangeTimes"
           />
           <InputSectionForm
-            label={"Times to change the profile per month"}
+            label={t("Times to change the profile per month")}
             type={"text"}
             value={specialDetails.timesChangeProfileMonth}
             onChange={handleChangeDeterminants}
             id="timesChangeProfileMonth"
           />
           <SwitchSectionForm
-            label={"Determine the times to change the Mac"}
+            label={t("Determine the times to change the Mac")}
             value={determinants.determineTimesChangeMac}
             onChange={handleChangeDeterminants}
             id="determineTimesChangeMac"
           />
           <InputSectionForm
-            label={"Mac change times per month"}
+            label={t("Mac change times per month")}
             type={"text"}
             value={specialDetails.macChangeTimesMonth}
             onChange={handleChangeDeterminants}
@@ -365,8 +366,8 @@ const AddEditManager = () => {
         </div>
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">OK</button>
-        <button className="btn_close">Cancel</button>
+        <button className="btn_add">{t("OK")}</button>
+        <button className="btn_close">{t("Cancel")}</button>
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import InputItem from "../../components/popup/inputItem/InputItem";
 import SelectItem from "../../components/popup/selectItem/SelectItem";
 import { mockDataManagers } from "../../utils/mockData";
 import { columnsManagers } from "../../utils/columnsTables";
+import { t } from "i18next";
 
 const Managers = () => {
   // opens and setOpnes popups
@@ -76,59 +77,59 @@ const Managers = () => {
     <div className="main_content_tables">
       <div className="conetnt_table">
         <HeadTable
-          path="managers"
-          title="List of managers"
+          path={t("Managers")}
+          title={t("List of managers")}
           iconHead={<i className="fa-solid fa-people-group"></i>}
         >
           <div className="content">
             <Link to={"/managers/add/1"} className="item">
               <i className="fa-solid fa-plus"></i>
-              <span>Add</span>
+              <span>{t("Add")}</span>
             </Link>
             <Link to={"/managers/profile/1/general"} className="item">
               <i className="fa-regular fa-pen-to-square"></i>
-              <span>Edit</span>
+              <span>{"Edit"}</span>
             </Link>
             <div className="item" onClick={() => setOpenEditName(true)}>
               <i className="fa-regular fa-pen-to-square"></i>
-              <span>Edit name</span>
+              <span>{t("Edit name")}</span>
             </div>
             <div className="item" onClick={() => setOpenEditSite(true)}>
               <i className="fa-regular fa-pen-to-square"></i>
-              <span>Edit site</span>
+              <span>{t("Edit site")}</span>
             </div>
             <div className="item" onClick={() => setOpenEditGroup(true)}>
               <i className="fa-regular fa-pen-to-square"></i>
-              <span>Edit group</span>
+              <span>{t("Edit group")}</span>
             </div>
             <div className="item" onClick={() => setOpenDeposit(true)}>
               <i className="fa-solid fa-money-bill-transfer"></i>
-              <span>Deposit</span>
+              <span>{t("Deposit")}</span>
             </div>
             <div className="item" onClick={() => setOpenDiscountAmount(true)}>
               <i className="fa-solid fa-money-bill-transfer"></i>
-              <span>Discount amount</span>
+              <span>{t("Discount amount")}</span>
             </div>
             <div
               className="item btn_open_model"
               onClick={() => setOpenPayOffDebts(true)}
             >
               <i className="fa-solid fa-money-bill-transfer"></i>
-              <span>Pay off debts</span>
+              <span>{t("Pay off debts")}</span>
             </div>
             <div
               className="item btn_open_model"
               onClick={() => setOpenAddPoints(true)}
             >
               <i className="fa-regular fa-file-powerpoint"></i>
-              <span>Add points</span>
+              <span>{t("Add points")}</span>
             </div>
             <div
               className="item btn_open_model"
               onClick={() => setOpenRecoverPoints(true)}
             >
               <i className="fa-regular fa-file-powerpoint"></i>
-              <span>Recover points</span>
+              <span>{t("Recover points")}</span>
             </div>
           </div>
         </HeadTable>
@@ -305,7 +306,7 @@ const Managers = () => {
           value={"2,011,721.00"}
         />
         <InputItem
-          label={"Amount"}
+          label={t("Amount")}
           type={"number"}
           value={amountPayDebts}
           onChange={setAmountPayDebts}

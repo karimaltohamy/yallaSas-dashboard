@@ -1,21 +1,22 @@
 import React from "react";
 import NavProfile from "../../../components/navProfile/NavProfile";
 import { Outlet } from "react-router-dom";
+import { t } from "i18next";
 
 const ReportUsers = () => {
   const itemsNev = [
     {
-      title: "According to managers",
+      title: t("According to managers"),
       icon: <i className="fa-regular fa-user"></i>,
       path: "accordingManagers",
     },
     {
-      title: "According to the service",
+      title: t("According to the service"),
       icon: <i className="fa-solid fa-bell-concierge"></i>,
       path: "accordingService",
     },
     {
-      title: "By registration date",
+      title: t("By registration date"),
       icon: <i className="fa-solid fa-sliders"></i>,
       path: "registrationDate",
     },

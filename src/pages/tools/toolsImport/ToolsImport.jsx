@@ -1,12 +1,13 @@
 import React from "react";
 import "./toolsImport.scss";
+import { t } from "i18next";
 
 const ToolsImport = () => {
   return (
     <div className="tools_import_section">
       <form className="form_import">
         <div className="input_item">
-          <label htmlFor="">Import</label>
+          <label htmlFor="">{t("Import")}</label>
           <select name="" id="">
             <option value="">Users</option>
             <option value="">Managers</option>
@@ -16,12 +17,12 @@ const ToolsImport = () => {
         </div>
         <div className="input_check">
           <input type="checkbox" id="ignore" />
-          <label htmlFor="ignore"> Ignore Header (first row) </label>
+          <label htmlFor="ignore"> {t("Ignore Header (first row) ")}</label>
         </div>
         <div className="input_file">
           <label htmlFor="import_file">
             <i className="fa-solid fa-upload"></i>
-            <span>Upload File</span>
+            <span>{t("Upload File")}</span>
           </label>
           <input type="file" id="import_file" />
         </div>

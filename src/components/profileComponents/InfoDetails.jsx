@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import React from "react";
 
 const InfoDetails = () => {
@@ -6,63 +7,63 @@ const InfoDetails = () => {
       <div className="row">
         <div className="col-12">
           <div className="item">
-            <h6>Log in name</h6>
+            <h6>{t("Log in name")}</h6>
             <span>demo1</span>
           </div>
           <div className="item">
-            <h6>Password</h6>
+            <h6>{t("Password")}</h6>
             <span>12345</span>
           </div>
           <div className="item">
-            <h6>Balance</h6>
+            <h6>{t("Balance")}</h6>
             <span>$25.00</span>
           </div>
           <div className="item">
-            <h6>Continue to</h6>
+            <h6>{t("Continue to")}</h6>
             <span>Manager_2</span>
           </div>
           <div className="item">
-            <h6>Package</h6>
+            <h6>{t("Package")}</h6>
             <span>slow</span>
           </div>
           <div className="item">
-            <h6>Expiry date</h6>
+            <h6>{t("Expiry date")}</h6>
             <span>demo1</span>
           </div>
           <div className="item">
-            <h6>Number of incorrect refill attempts</h6>
+            <h6>{t("Number of incorrect refill attempts")}</h6>
             <span>0</span>
           </div>
           <div className="item">
-            <h6>Status</h6>
+            <h6>{t("Status")}</h6>
             <span>Inactive </span>
           </div>
           <div className="item">
-            <h6>Last contact</h6>
+            <h6>{t("Last contact")}</h6>
             <span>0</span>
           </div>
           <div className="item">
-            <h6>Remaining download</h6>
+            <h6>{t("Remaining download")}</h6>
             <span>0</span>
           </div>
           <div className="item">
-            <h6>Remaining aploid</h6>
+            <h6>{t("Remaining aploid")}</h6>
             <span>0</span>
           </div>
           <div className="item">
-            <h6>Amount of remaining data</h6>
+            <h6>{t("Amount of remaining data")}</h6>
             <span>0</span>
           </div>
           <div className="item">
-            <h6>Remaining time</h6>
+            <h6>{t("Remaining time")}</h6>
             <span>0 </span>
           </div>
           <div className="item">
-            <h6>Total Purchases</h6>
+            <h6>{t("Total Purchases")}</h6>
             <span>0 </span>
           </div>
           <div className="item">
-            <h6>Added on date</h6>
+            <h6>{t("Added on date")}</h6>
             <span>08 Sep 2021 - 13:05:51 </span>
           </div>
         </div>

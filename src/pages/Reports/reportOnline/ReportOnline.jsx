@@ -19,7 +19,7 @@ const ReportOnline = () => {
         </form>
       </div>
 
-      <div className="bg-white h-[300px] md:h-[500px] mt-3 md:mt-6">
+      <div className="bg_section h-[300px] md:h-[500px] mt-3 md:mt-6">
         <ChartLine title={"Online Users Report"} />
       </div>
     </div>

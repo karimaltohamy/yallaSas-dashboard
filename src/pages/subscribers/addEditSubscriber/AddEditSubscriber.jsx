@@ -4,6 +4,7 @@ import InputSectionForm from "../../../components/sectionform/InputSectionForm";
 import SelectSectionForm from "../../../components/sectionform/SelectSectionForm";
 import SwitchSectionForm from "../../../components/sectionform/switchSectionForm";
 import "./addEditSubscriber.scss";
+import { t } from "i18next";
 
 const AddEditSubscriber = () => {
   const [generalinformation, setGeneralinformation] = useState({
@@ -71,31 +72,31 @@ const AddEditSubscriber = () => {
 
   return (
     <div className="content_page">
-      <SectionForm title={"General information"}>
+      <SectionForm title={t("General information")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <InputSectionForm
-            label={"Username"}
+            label={t("Username")}
             type={"text"}
             value={generalinformation.username}
             onChange={handleChangeGeneralUnformation}
             id="username"
           />
           <InputSectionForm
-            label={"Password"}
+            label={t("Password")}
             type={"password"}
             value={generalinformation.password}
             onChange={handleChangeGeneralUnformation}
             id="password"
           />
           <InputSectionForm
-            label={"Confirm password"}
+            label={t("Confirm password")}
             type={"password"}
             value={generalinformation.confirmPassword}
             onChange={handleChangeGeneralUnformation}
             id="confirmPassword"
           />
           <SelectSectionForm
-            label={"Follow me"}
+            label={t("Follow me")}
             type={"text"}
             value={generalinformation.followMe}
             onChange={handleChangeGeneralUnformation}
@@ -107,7 +108,7 @@ const AddEditSubscriber = () => {
             ]}
           />
           <SelectSectionForm
-            label={"The Package"}
+            label={t("The Package")}
             value={generalinformation.package}
             onChange={handleChangeGeneralUnformation}
             id="package"
@@ -118,14 +119,14 @@ const AddEditSubscriber = () => {
             ]}
           />
           <InputSectionForm
-            label={"Group"}
+            label={t("Group")}
             type={"text"}
             value={generalinformation.group}
             onChange={handleChangeGeneralUnformation}
             id="group"
           />
           <SelectSectionForm
-            label={"The Site"}
+            label={t("The Site")}
             value={generalinformation.package}
             onChange={handleChangeGeneralUnformation}
             id="package"
@@ -136,120 +137,120 @@ const AddEditSubscriber = () => {
             ]}
           />
           <SwitchSectionForm
-            label={"Effective"}
+            label={t("Effective")}
             value={generalinformation.effective}
             onChange={handleChangeGeneralUnformation}
             id="effective"
           />
           <InputSectionForm
-            label={"Password for subscriber page"}
+            label={t("Password for subscriber page")}
             type={"text"}
             value={generalinformation.passwordForSubscriberPage}
             onChange={handleChangeGeneralUnformation}
             id="passwordForSubscriberPage"
           />
           <SwitchSectionForm
-            label={"MAC Lock"}
+            label={t("MAC Lock")}
             value={generalinformation.MACLock}
             onChange={handleChangeGeneralUnformation}
             id="MACLock"
           />
           <SwitchSectionForm
-            label={"Use a different password for the subscriber page"}
+            label={t("Use a different password for the subscriber page")}
             value={generalinformation.differentPasswordForSubscriberPage}
             onChange={handleChangeGeneralUnformation}
             id="differentPasswordForSubscriberPage"
           />
         </div>
       </SectionForm>
-      <SectionForm title={"Personal information"}>
+      <SectionForm title={t("Personal information")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <InputSectionForm
-            label={"First name"}
+            label={t("First name")}
             type={"text"}
             value={personalformation.firstName}
             onChange={handleChangePersonalformation}
             id="firstName"
           />
           <InputSectionForm
-            label={"Last name"}
+            label={t("Last name")}
             type={"text"}
             value={personalformation.lastName}
             onChange={handleChangePersonalformation}
             id="lastName"
           />
           <InputSectionForm
-            label={"Company"}
+            label={t("Company")}
             type={"text"}
             value={personalformation.company}
             onChange={handleChangePersonalformation}
             id="company"
           />
           <InputSectionForm
-            label={"Email"}
+            label={t("Email")}
             type={"text"}
             value={personalformation.email}
             onChange={handleChangePersonalformation}
             id="email"
           />
           <InputSectionForm
-            label={"Email"}
+            label={t("Email")}
             type={"text"}
             value={personalformation.email}
             onChange={handleChangePersonalformation}
             id="email"
           />
           <InputSectionForm
-            label={"Phone"}
+            label={t("Phone")}
             type={"text"}
             value={personalformation.phone}
             onChange={handleChangePersonalformation}
             id="phone"
           />
           <InputSectionForm
-            label={"City"}
+            label={t("City")}
             type={"text"}
             value={personalformation.city}
             onChange={handleChangePersonalformation}
             id="city"
           />
           <InputSectionForm
-            label={"Address"}
+            label={t("Address")}
             type={"text"}
             value={personalformation.address}
             onChange={handleChangePersonalformation}
             id="address"
           />
           <InputSectionForm
-            label={"Apartment number"}
+            label={t("Apartment number")}
             type={"text"}
             value={personalformation.apartmentNumber}
             onChange={handleChangePersonalformation}
             id="apartmentNumber"
           />
           <InputSectionForm
-            label={"The street"}
+            label={t("The street")}
             type={"text"}
             value={personalformation.street}
             onChange={handleChangePersonalformation}
             id="street"
           />
           <InputSectionForm
-            label={"Contract number"}
+            label={t("Contract number")}
             type={"text"}
             value={personalformation.contractNumber}
             onChange={handleChangePersonalformation}
             id="contractNumber"
           />
           <InputSectionForm
-            label={"Id number"}
+            label={t("Id number")}
             type={"text"}
             value={personalformation.idNumber}
             onChange={handleChangePersonalformation}
             id="idNumber"
           />
           <InputSectionForm
-            label={"Notice"}
+            label={t("Notice")}
             type={"text"}
             value={personalformation.notice}
             onChange={handleChangePersonalformation}
@@ -257,59 +258,59 @@ const AddEditSubscriber = () => {
           />
         </div>
       </SectionForm>
-      <SectionForm title={"Special details"}>
+      <SectionForm title={t("Special details")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <InputSectionForm
-            label={"End"}
+            label={t("End")}
             type={"date"}
             value={specialDetails.end}
             onChange={handleChangeSpecialDetails}
             id="end"
           />
           <InputSectionForm
-            label={"Entry times"}
+            label={t("Entry times")}
             type={"text"}
             value={specialDetails.entryTimes}
             onChange={handleChangeSpecialDetails}
             id="entryTimes"
           />
           <InputSectionForm
-            label={"Static iP address"}
+            label={t("Static iP address")}
             type={"text"}
             value={specialDetails.staticIPAddress}
             onChange={handleChangeSpecialDetails}
             id="staticIPAddress"
           />
           <InputSectionForm
-            label={"Mikrotik Winbox Group"}
+            label={t("Mikrotik Winbox Group")}
             type={"text"}
             value={specialDetails.mikrotikWinboxGroup}
             onChange={handleChangeSpecialDetails}
             id="mikrotikWinboxGroup"
           />
           <InputSectionForm
-            label={"Mikrotik Framed Route"}
+            label={t("Mikrotik Framed Route")}
             type={"text"}
             value={specialDetails.mikrotikFramedRoute}
             onChange={handleChangeSpecialDetails}
             id="mikrotikFramedRoute"
           />
           <InputSectionForm
-            label={"Mikrotik Address List"}
+            label={t("Mikrotik Address List")}
             type={"text"}
             value={specialDetails.mikrotikAddressList}
             onChange={handleChangeSpecialDetails}
             id="mikrotikAddressList"
           />
           <InputSectionForm
-            label={"IPv6 Prefix"}
+            label={t("IPv6 Prefix")}
             type={"text"}
             value={specialDetails.iPv6Prefix}
             onChange={handleChangeSpecialDetails}
             id="iPv6Prefix"
           />
           <SelectSectionForm
-            label={"Subscriber type"}
+            label={t("Subscriber type")}
             type={"text"}
             value={specialDetails.subscriberType}
             onChange={handleChangeSpecialDetails}
@@ -322,8 +323,8 @@ const AddEditSubscriber = () => {
         </div>
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">OK</button>
-        <button className="btn_close">Cancel</button>
+        <button className="btn_add">{t("OK")}</button>
+        <button className="btn_close">{t("Cancel")}</button>
       </div>
     </div>
   );

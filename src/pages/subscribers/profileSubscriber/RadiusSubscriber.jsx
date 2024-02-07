@@ -1,5 +1,6 @@
 import React from "react";
 import "./radiusSubscriber.scss";
+import { t } from "i18next";
 
 const RadiusSubscriber = () => {
   return (
@@ -12,11 +13,11 @@ const RadiusSubscriber = () => {
         <table>
           <thead>
             <tr>
-              <th>Attribute</th>
-              <th>Value</th>
-              <th>Is Cisco-Av-Pair</th>
-              <th>Enabled</th>
-              <th>Action</th>
+              <th>{t("Attribute")}</th>
+              <th>{t("Value")}</th>
+              <th>{t("Is Cisco-Av-Pair")}</th>
+              <th>{t("Enabled")}</th>
+              <th>{t("Action")}</th>
             </tr>
           </thead>
           <tbody>

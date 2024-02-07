@@ -3,6 +3,7 @@ import SectionForm from "../../../components/sectionform/SectionForm";
 import InputSectionForm from "../../../components/sectionform/InputSectionForm";
 import SwitchSectionForm from "../../../components/sectionform/switchSectionForm";
 import SelectSectionForm from "../../../components/sectionform/SelectSectionForm";
+import { t } from "i18next";
 
 const AddEditPackage = () => {
   const [generalinformation, setGeneralinformation] = useState({
@@ -180,50 +181,50 @@ const AddEditPackage = () => {
 
   return (
     <div className="content_page">
-      <SectionForm title={"General information"}>
+      <SectionForm title={t("General information")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <InputSectionForm
-            label={"Service Name"}
+            label={t("Service Name")}
             type={"text"}
             value={generalinformation.serviceName}
             onChange={handleChangeGeneralInformation}
             id="serviceName"
           />
           <SwitchSectionForm
-            label={"Effective"}
+            label={t("Effective")}
             value={generalinformation.effective}
             onChange={handleChangeGeneralInformation}
             id="effective"
           />
           <InputSectionForm
-            label={"Service Price"}
+            label={t("Service Price")}
             type={"text"}
             value={generalinformation.servicePrice}
             onChange={handleChangeGeneralInformation}
             id="servicePrice"
           />
           <SwitchSectionForm
-            label={"Available subscribers panel"}
+            label={t("Available subscribers panel")}
             value={generalinformation.availableSubscribersPanel}
             onChange={handleChangeGeneralInformation}
             id="availableSubscribersPanel"
           />
           <InputSectionForm
-            label={"Download speed"}
+            label={t("Download speed")}
             type={"text"}
             value={generalinformation.downloadSpeed}
             onChange={handleChangeGeneralInformation}
             id="downloadSpeed"
           />
           <InputSectionForm
-            label={"Upload speed"}
+            label={t("Upload speed")}
             type={"text"}
             value={generalinformation.uploadSpeed}
             onChange={handleChangeGeneralInformation}
             id="uploadSpeed"
           />
           <SelectSectionForm
-            label={"Type"}
+            label={t("Type")}
             value={generalinformation.type}
             onChange={handleChangeGeneralInformation}
             id="type"
@@ -235,35 +236,35 @@ const AddEditPackage = () => {
             ]}
           />
           <InputSectionForm
-            label={"Short explanation"}
+            label={t("Short explanation")}
             type={"text"}
             value={generalinformation.shortExplanation}
             onChange={handleChangeGeneralInformation}
             id="shortExplanation"
           />
           <InputSectionForm
-            label={"Value added taxes"}
+            label={t("Value added taxes")}
             type={"text"}
             value={generalinformation.valueAddedTaxes}
             onChange={handleChangeGeneralInformation}
             id="valueAddedTaxes"
           />
           <InputSectionForm
-            label={"HTTP Port"}
+            label={t("HTTP Port")}
             type={"text"}
             value={generalinformation.httpPort}
             onChange={handleChangeGeneralInformation}
             id="httpPort"
           />
           <InputSectionForm
-            label={"Monitor"}
+            label={t("Monitor")}
             type={"text"}
             value={generalinformation.monitor}
             onChange={handleChangeGeneralInformation}
             id="monitor"
           />
           <InputSectionForm
-            label={"Details"}
+            label={t("Details")}
             type={"text"}
             value={generalinformation.details}
             onChange={handleChangeGeneralInformation}
@@ -271,16 +272,16 @@ const AddEditPackage = () => {
           />
         </div>
       </SectionForm>
-      <SectionForm title={"Service parameters"}>
+      <SectionForm title={t("Service parameters")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <SwitchSectionForm
-            label={"determined Duration"}
+            label={t("determined Duration")}
             value={serviceParameters.determinedDuration}
             onChange={handleChangeServiceParameters}
             id="determinedDuration"
           />
           <SelectSectionForm
-            label={"Selection Duration"}
+            label={t("Selection Duration")}
             value={serviceParameters.selectionDurationType}
             onChange={handleChangeServiceParameters}
             id="selectionDurationType"
@@ -296,13 +297,13 @@ const AddEditPackage = () => {
             type={"number"}
           />
           <SwitchSectionForm
-            label={"Time Bound"}
+            label={t("Time Bound")}
             value={serviceParameters.timeBound}
             onChange={handleChangeServiceParameters}
             id="timeBound"
           />
           <SelectSectionForm
-            label={"Selection Duration"}
+            label={t("Selection Duration")}
             value={serviceParameters.selectionDurationTimeType}
             onChange={handleChangeServiceParameters}
             id="selectionDurationTimeType"
@@ -317,39 +318,39 @@ const AddEditPackage = () => {
             type={"number"}
           />
           <SwitchSectionForm
-            label={"Limited Download Quantity"}
+            label={t("Limited Download Quantity")}
             value={serviceParameters.limitedDownloadQuantity}
             onChange={handleChangeServiceParameters}
             id="limitedDownloadQuantity"
           />
           <InputSectionForm
-            label={"Download Quantity"}
+            label={t("Download Quantity")}
             type={"text"}
             value={generalinformation.downloadQuantity}
             onChange={handleChangeServiceParameters}
             id="downloadQuantity"
           />
           <SwitchSectionForm
-            label={"Lift Amount Limiter"}
+            label={t("Lift Amount Limiter")}
             value={serviceParameters.liftAmountLimiter}
             onChange={handleChangeServiceParameters}
             id="liftAmountLimiter"
           />
           <InputSectionForm
-            label={"Lifting Quantity"}
+            label={t("Lifting Quantity")}
             type={"text"}
             value={generalinformation.liftingQuantity}
             onChange={handleChangeServiceParameters}
             id="liftingQuantity"
           />
           <SwitchSectionForm
-            label={"Determined Total Affluence"}
+            label={t("Determined Total Affluence")}
             value={serviceParameters.determinedTotalAffluence}
             onChange={handleChangeServiceParameters}
             id="determinedTotalAffluence"
           />
           <InputSectionForm
-            label={"Total Luxury"}
+            label={t("Total Luxury")}
             type={"text"}
             value={generalinformation.totalLuxury}
             onChange={handleChangeServiceParameters}
@@ -357,31 +358,31 @@ const AddEditPackage = () => {
           />
         </div>
       </SectionForm>
-      <SectionForm title={"Daily SOA determinants"}>
+      <SectionForm title={t("Daily SOA determinants")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <InputSectionForm
-            label={"Daily Download Limit (MB)"}
+            label={t("Daily Download Limit (MB)")}
             type={"text"}
             value={dailySOADeterminants.dailyDownloadLimit}
             onChange={handleChangeDailySOADeterminants}
             id="dailyDownloadLimit"
           />
           <InputSectionForm
-            label={"Daily Upload Limit (MB)"}
+            label={t("Daily Upload Limit (MB)")}
             type={"text"}
             value={dailySOADeterminants.dailyUploadLimit}
             onChange={handleChangeDailySOADeterminants}
             id="dailyUploadLimit"
           />
           <InputSectionForm
-            label={"Daily Luxury Limit (MB)"}
+            label={t("Daily Luxury Limit (MB)")}
             type={"text"}
             value={dailySOADeterminants.dailyLuxuryLimit}
             onChange={handleChangeDailySOADeterminants}
             id="dailyLuxuryLimit"
           />
           <SelectSectionForm
-            label={"Daily Time Allowed"}
+            label={t("Daily Time Allowed")}
             value={dailySOADeterminants.dailyTimeAllowedType}
             onChange={handleChangeDailySOADeterminants}
             id="selectionDurationType"
@@ -391,16 +392,16 @@ const AddEditPackage = () => {
             ]}
             valueInput={serviceParameters.dailyTimeAllowedType}
             onChangeInput={handleChangeDailySOADeterminants}
-            idInput={"dailyTimeAllowedType"}
+            idInput={t("dailyTimeAllowedType")}
             input={true}
             type={"number"}
           />
         </div>
       </SectionForm>
-      <SectionForm title={"Advanced features"}>
+      <SectionForm title={t("Advanced features")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <SelectSectionForm
-            label={"The Pool Equipped"}
+            label={t("The Pool Equipped")}
             value={advancedFeatures.thePoolEquipped}
             onChange={handleChangeServiceParameters}
             id="thePoolEquipped"
@@ -410,124 +411,124 @@ const AddEditPackage = () => {
             ]}
           />
           <InputSectionForm
-            label={"Daily Luxury Limit (MB)"}
+            label={t("Daily Luxury Limit (MB)")}
             type={"text"}
             value={advancedFeatures.poolName}
             onChange={handleChangeAdvancedFeatures}
             id="poolName"
           />
           <SwitchSectionForm
-            label={"Activate Burst"}
+            label={t("Activate Burst")}
             value={advancedFeatures.activateBurst}
             onChange={handleChangeAdvancedFeatures}
             id="activateBurst"
           />
           <SelectSectionForm
-            label={"Subscription Expiration Service"}
+            label={t("Subscription Expiration Service")}
             value={advancedFeatures.subscriptionExpirationService}
             onChange={handleChangeServiceParameters}
             id="subscriptionExpirationService"
             options={[{ name: "None", value: "" }]}
           />
           <SelectSectionForm
-            label={"Daily Quota Expiration Service"}
+            label={t("Daily Quota Expiration Service")}
             value={advancedFeatures.dailyQuotaExpirationService}
             onChange={handleChangeServiceParameters}
             id="dailyQuotaExpirationService"
             options={[{ name: "None", value: "" }]}
           />
           <SwitchSectionForm
-            label={"Ignoring Static Ip"}
+            label={t("Ignoring Static Ip")}
             value={advancedFeatures.ignoringStaticIp}
             onChange={handleChangeAdvancedFeatures}
             id="ignoringStaticIp"
           />
           <SelectSectionForm
-            label={"Site"}
+            label={t("Site")}
             value={advancedFeatures.site}
             onChange={handleChangeServiceParameters}
             id="site"
             options={[{ name: "None", value: "" }]}
           />
           <SelectSectionForm
-            label={"Privacy"}
+            label={t("Privacy")}
             value={advancedFeatures.privacy}
             onChange={handleChangeServiceParameters}
             id="privacy"
             options={[{ name: "None", value: "" }]}
           />
           <SwitchSectionForm
-            label={"Install Subscription Expiry Hour"}
+            label={t("Install Subscription Expiry Hour")}
             value={advancedFeatures.installSubscriptionExpiryHour}
             onChange={handleChangeAdvancedFeatures}
             id="installSubscriptionExpiryHour"
           />
           <SelectSectionForm
-            label={"Allowed Connection Methods"}
+            label={t("Allowed Connection Methods")}
             value={advancedFeatures.allowedConnectionMethods}
             onChange={handleChangeServiceParameters}
             id="allowedConnectionMethods"
             options={[{ name: "None", value: "" }]}
           />
           <SelectSectionForm
-            label={"Free Zone Data"}
+            label={t("Free Zone Data")}
             value={advancedFeatures.freeZoneData}
             onChange={handleChangeServiceParameters}
             id="freeZoneData"
             options={[{ name: "None", value: "" }]}
           />
           <SwitchSectionForm
-            label={"Activation With Loans Permitted"}
+            label={t("Activation With Loans Permitted")}
             value={advancedFeatures.activationWithLoansPermitted}
             onChange={handleChangeAdvancedFeatures}
             id="activationWithLoansPermitted"
           />
           <InputSectionForm
-            label={"Highest Price Final Subscriber"}
+            label={t("Highest Price Final Subscriber")}
             type={"text"}
             value={advancedFeatures.highestPriceFinalSubscriber}
             onChange={handleChangeAdvancedFeatures}
             id="highestPriceFinalSubscriber"
           />
           <InputSectionForm
-            label={"Highest Price Service Manager"}
+            label={t("Highest Price Service Manager")}
             type={"text"}
             value={advancedFeatures.highestPriceServiceManager}
             onChange={handleChangeAdvancedFeatures}
             id="highestPriceServiceManager"
           />
           <SwitchSectionForm
-            label={"Separate Sessions Charged Hotspot Ppp"}
+            label={t("Separate Sessions Charged Hotspot Ppp")}
             value={advancedFeatures.SeparateSessionsChargedHotspotPpp}
             onChange={handleChangeAdvancedFeatures}
             id="SeparateSessionsChargedHotspotPpp"
           />
           <InputSectionForm
-            label={"Grace Period After Subscription EndsHours"}
+            label={t("Grace Period After Subscription EndsHours")}
             type={"text"}
             value={advancedFeatures.gracePeriodAfterSubscriptionEndsHours}
             onChange={handleChangeAdvancedFeatures}
             id="gracePeriodAfterSubscriptionEndsHours"
           />
           <SwitchSectionForm
-            label={"Ignoring Pool Hotspot Mode"}
+            label={t("Ignoring Pool Hotspot Mode")}
             value={advancedFeatures.ignoringPoolHotspotMode}
             onChange={handleChangeAdvancedFeatures}
             id="ignoringPoolHotspotMode"
           />
         </div>
       </SectionForm>
-      <SectionForm title={"Mikrotik Settings"}>
+      <SectionForm title={t("Mikrotik Settings")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <InputSectionForm
-            label={"Address List"}
+            label={t("Address List")}
             type={"text"}
             value={mikrotikSettings.addressList}
             onChange={handleChangeMikrotikSettings}
             id="addressList"
           />
           <InputSectionForm
-            label={"Queue Priority"}
+            label={t("Queue Priority")}
             type={"text"}
             value={mikrotikSettings.queuePriority}
             onChange={handleChangeMikrotikSettings}
@@ -536,17 +537,17 @@ const AddEditPackage = () => {
         </div>
       </SectionForm>
 
-      <SectionForm title={"Cisco Options"}>
+      <SectionForm title={t("Cisco Options")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <InputSectionForm
-            label={"QOS-Policy-In"}
+            label={t("QOS-Policy-In")}
             type={"text"}
             value={ciscoOptions.qosPolicyIn}
             onChange={handleChangeCiscoOptions}
             id="qosPolicyIn"
           />
           <InputSectionForm
-            label={"QOS-Policy-Out"}
+            label={t("QOS-Policy-Out")}
             type={"text"}
             value={ciscoOptions.qosPolicyOut}
             onChange={handleChangeCiscoOptions}
@@ -554,16 +555,16 @@ const AddEditPackage = () => {
           />
         </div>
       </SectionForm>
-      <SectionForm title={"Activation Options"}>
+      <SectionForm title={t("Activation Options")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <SwitchSectionForm
-            label={"Account Monthly Contract"}
+            label={t("Account Monthly Contract")}
             value={activationOptions.accountMonthlyContract}
             onChange={handleChangeActivationOptions}
             id="accountMonthlyContract"
           />
           <SwitchSectionForm
-            label={"Calculating Remaining Quota Previous Activation"}
+            label={t("Calculating Remaining Quota Previous Activation")}
             value={
               activationOptions.calculatingRemainingQuotaPreviousActivation
             }
@@ -571,19 +572,19 @@ const AddEditPackage = () => {
             id="calculatingRemainingQuotaPreviousActivation"
           />
           <SwitchSectionForm
-            label={"Daily Luxury Meter Zero"}
+            label={t("Daily Luxury Meter Zero")}
             value={activationOptions.dailyLuxuryMeterZero}
             onChange={handleChangeActivationOptions}
             id="dailyLuxuryMeterZero"
           />
           <SwitchSectionForm
-            label={"Reset Activation Date"}
+            label={t("Reset Activation Date")}
             value={activationOptions.resetActivationDate}
             onChange={handleChangeActivationOptions}
             id="resetActivationDate"
           />
           <SelectSectionForm
-            label={"Time Add Quota"}
+            label={t("Time Add Quota")}
             value={activationOptions.timeAddQuota}
             onChange={handleChangeActivationOptions}
             id="timeAddQuota"
@@ -593,36 +594,36 @@ const AddEditPackage = () => {
             ]}
           />
           <SwitchSectionForm
-            label={"Maintaining Luxury Meter Express Subscriber"}
+            label={t("Maintaining Luxury Meter Express Subscriber")}
             value={activationOptions.maintainingLuxuryMeterExpressSubscriber}
             onChange={handleChangeActivationOptions}
             id="maintainingLuxuryMeterExpressSubscriber"
           />
           <SwitchSectionForm
-            label={"Can Be Cancelled"}
+            label={t("Can Be Cancelled")}
             value={activationOptions.canBeCancelled}
             onChange={handleChangeActivationOptions}
             id="canBeCancelled"
           />
         </div>
       </SectionForm>
-      <SectionForm title={"Encouraging Points"}>
+      <SectionForm title={t("Encouraging Points")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <InputSectionForm
-            label={"Points Awarded Upon Activation"}
+            label={t("Points Awarded Upon Activation")}
             type={"text"}
             value={encouragingPoints.pointsAwardedUponActivation}
             onChange={handleChangeEncouragingPoints}
             id="pointsAwardedUponActivation"
           />
           <SwitchSectionForm
-            label={"Can Be Cancelled"}
+            label={t("Can Be Cancelled")}
             value={encouragingPoints.maintainingLuxuryMeterExpressSubscriber}
             onChange={handleChangeEncouragingPoints}
             id="maintainingLuxuryMeterExpressSubscriber"
           />
           <InputSectionForm
-            label={"Points Required Activation"}
+            label={t("Points Required Activation")}
             type={"text"}
             value={encouragingPoints.pointsRequiredActivation}
             onChange={handleChangeEncouragingPoints}
@@ -630,10 +631,10 @@ const AddEditPackage = () => {
           />
         </div>
       </SectionForm>
-      <SectionForm title={"Initial values ​​(given when adding the common)"}>
+      <SectionForm title={t("Initial values ​​(given when adding the common)")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <SelectSectionForm
-            label={"Free Days"}
+            label={t("Free Days")}
             value={initialValues.freeDaysType}
             onChange={handleChangeInitialValues}
             id="freeDaysType"
@@ -649,14 +650,14 @@ const AddEditPackage = () => {
             type={"number"}
           />
           <InputSectionForm
-            label={"Quantity Data"}
+            label={t("Quantity Data")}
             type={"text"}
             value={initialValues.quantityData}
             onChange={handleChangeInitialValues}
             id="quantityData"
           />
           <SelectSectionForm
-            label={"Free Days"}
+            label={t("Free Days")}
             value={initialValues.freeTimeType}
             onChange={handleChangeInitialValues}
             id="freeTimeType"
@@ -673,8 +674,8 @@ const AddEditPackage = () => {
         </div>
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">OK</button>
-        <button className="btn_close">Cancel</button>
+        <button className="btn_add">{t("OK")}</button>
+        <button className="btn_close">{t("Cancel")}</button>
       </div>
     </div>
   );

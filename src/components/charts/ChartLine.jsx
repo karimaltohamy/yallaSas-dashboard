@@ -11,6 +11,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { faker } from "@faker-js/faker";
+import "./chart.scss";
 
 const ChartLine = ({ title }) => {
   ChartJS.register(

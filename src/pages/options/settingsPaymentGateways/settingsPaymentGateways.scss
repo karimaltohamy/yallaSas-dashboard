@@ -1,0 +1,197 @@
+@import "../../../sass/variables.scss";
+
+// start settings_paymentgatemay_section
+.settings_paymentgatemay_section {
+  margin: 12px;
+
+  .boxs {
+    background-color: var(--bg-section);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+
+    .box {
+      padding: 15px;
+      cursor: pointer;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      &.active {
+        background-color: #20a8d8;
+        color: white;
+      }
+
+      .head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+
+        .type_payment {
+          margin-bottom: 0;
+        }
+
+        .country {
+          font-size: 14px;
+          color: gray;
+        }
+      }
+
+      .status {
+        color: red;
+        font-size: 14px;
+
+        &.enabled {
+          color: rgb(3, 213, 3);
+        }
+      }
+    }
+  }
+
+  .payment_gateways_content {
+    padding: 15px;
+
+    .title {
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 25px;
+    }
+
+    .form_payment_gateways {
+      .input_item,
+      .input_switch {
+        &:not(:last-child) {
+          margin-bottom: 20px;
+        }
+      }
+
+      .input_item {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+
+        label {
+          font-weight: 600;
+          display: block;
+          margin-bottom: 4px;
+          font-size: 17px;
+          flex: 1;
+          display: flex;
+          align-items: center;
+          gap: 2px;
+
+          .star {
+            font-size: 12px;
+            color: red;
+          }
+        }
+
+        input,
+        select {
+          flex: 2;
+          width: 100%;
+          padding: 5px;
+          border: 1px solid var(--border-color);
+          border-radius: 3px;
+          background-color: transparent;
+          color: var(--text-color);
+
+          option {
+            color: black;
+          }
+        }
+      }
+
+      .input_switch {
+        position: relative;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+
+        span {
+          font-weight: 600;
+          display: block;
+          margin-bottom: 4px;
+          flex: 1;
+        }
+
+        input[type="checkbox"] {
+          height: 0;
+          width: 0;
+          visibility: hidden;
+          display: none;
+        }
+
+        label {
+          cursor: pointer;
+          text-indent: -9999px;
+          width: 40px;
+          height: 20px;
+          background: grey;
+          display: block;
+          border-radius: 100px;
+          position: relative;
+        }
+
+        label:after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 3px;
+          transform: translateY(-50%);
+          width: 15px;
+          height: 15px;
+          background: #fff;
+          border-radius: 90px;
+          transition: 0.3s;
+        }
+
+        input:checked + label {
+          background: $primary-color;
+        }
+
+        input:checked + label:after {
+          left: calc(100% - 3px);
+          transform: translateX(-100%) translateY(-50%);
+        }
+
+        label:active:after {
+          width: 130px;
+        }
+      }
+    }
+  }
+}
+
+.btns_add {
+  margin-top: 30px;
+  padding-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  button {
+    padding: 5px 30px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+
+    &.btn_add {
+      background-color: $primary-color;
+    }
+
+    &.btn_close {
+      background-color: $main-color;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .settings_paymentgatemay_section {
+    .boxs {
+      margin-bottom: 30px;
+    }
+  }
+}
+// end settings_paymentgatemay_section

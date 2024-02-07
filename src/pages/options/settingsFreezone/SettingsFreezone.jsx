@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import MainSection from "../../../components/mainSection/MainSection";
 import "./settingsFreezone.scss";
 import SwitchSectionForm from "../../../components/sectionform/switchSectionForm";
+import { t } from "i18next";
 
 const SettingsFreezone = () => {
   const [enableFreezoneTraffic, setEnableFreezoneTraffic] = useState("");
@@ -14,21 +15,20 @@ const SettingsFreezone = () => {
   return (
     <div className="settings_freezone_section">
       <MainSection
-        title={"Free Zone Settings"}
+        title={t("Free Zone Settings")}
         icon={<i class="fa-solid fa-asterisk"></i>}
       >
         <div class="settings_freezone_content">
           <div class="alert alert-info">
             <p>
-              This feature allows you to exclude some IP ranges from traffic
-              accounting, such as local google traffic or local IPTV service.
-              Enabling it requires enabling Mikrotik IP Accounting service and
-              making it reachable via HTTP.
+              {t(
+                "This feature allows you to exclude some IP ranges from traffic accounting, such as local google traffic or local IPTV service. Enabling it requires enabling Mikrotik IP Accounting service and making it reachable via HTTP."
+              )}
             </p>
           </div>
           <form action="" class="enable_freezone">
             <SwitchSectionForm
-              label={"Enable Freezone Traffic"}
+              label={t("Enable Freezone Traffic")}
               value={enableFreezoneTraffic}
               onChange={changeEnableFreezone}
               id="enableFreezoneTraffic"
@@ -36,15 +36,15 @@ const SettingsFreezone = () => {
           </form>
 
           <div class="freezone_table">
-            Name
+            {t("Name")}
             <table>
               <thead>
                 <tr>
-                  <th>IP</th>
-                  <th>Netmask</th>
-                  <th>Free Ratio(%)</th>
-                  <th>Enabled</th>
-                  <th>Action</th>
+                  <th>{t("IP")}</th>
+                  <th>{t("Netmask")}</th>
+                  <th>{t("Free Ratio(%)")}</th>
+                  <th>{t("Enabled")}</th>
+                  <th>{t("Action")}</th>
                 </tr>
               </thead>
               <tbody>

@@ -1,8 +1,11 @@
+import { t } from "i18next";
+import i18n from "../i18n";
+
 export const columnsSubscibers = [
   { field: "id", headerName: "ID", width: 50 },
   {
     field: "condition",
-    headerName: "Condition",
+    headerName: i18n.t("Condition"),
     renderCell: (paramas) => {
       return (
         <span
@@ -14,786 +17,786 @@ export const columnsSubscibers = [
   },
   {
     field: "loginName",
-    headerName: "Login name",
+    headerName: t("Login name"),
     flex: 1,
     cellClassName: "name-column-cell",
   },
   {
     field: "firstName",
-    headerName: "First Name",
+    headerName: t("First Name"),
     type: "number",
     headerAlign: "left",
   },
-  { field: "lastName", headerName: "Last name", flex: 1 },
-  { field: "endDate", headerName: "End date", flex: 1, width: 220 },
-  { field: "continueTo", headerName: "Continue to", flex: 1 },
-  { field: "package", headerName: "Package" },
-  { field: "loans", headerName: "Loans" },
-  { field: "dailyConsumption", headerName: "Daily consumption" },
-  { field: "remainingDays", headerName: "Remaining days" },
+  { field: "lastName", headerName: t("Last name"), flex: 1 },
+  { field: "endDate", headerName: t("End date"), flex: 1, width: 220 },
+  { field: "continueTo", headerName: t("Continue to"), flex: 1 },
+  { field: "package", headerName: t("Package") },
+  { field: "loans", headerName: t("Loans") },
+  { field: "dailyConsumption", headerName: t("Daily consumption") },
+  { field: "remainingDays", headerName: t("Remaining days") },
 ];
 
 export const columnsSessions = [
-  { field: "startTime", headerName: "Start time" },
-  { field: "endTime", headerName: "End time" },
-  { field: "download", headerName: "Download" },
-  { field: "lift", headerName: "Lift" },
-  { field: "mac", headerName: "Mac" },
-  { field: "connectionPoint", headerName: "Connection point" },
-  { field: "nas", headerName: "Nas" },
+  { field: "startTime", headerName: t("Start time") },
+  { field: "endTime", headerName: t("End time") },
+  { field: "download", headerName: t("Download") },
+  { field: "lift", headerName: t("Lift") },
+  { field: "mac", headerName: t("Mac") },
+  { field: "connectionPoint", headerName: t("Connection point") },
+  { field: "nas", headerName: t("Nas") },
   {
     field: "reasonTermination",
-    headerName: "Reason for termination",
+    headerName: t("Reason for termination"),
     width: 150,
   },
-  { field: "remainingDays", headerName: "Remaining days", width: 150 },
+  { field: "remainingDays", headerName: t("Remaining days"), width: 150 },
 ];
 
 export const columnsInvoices = [
-  { field: "ivoiceNumber", headerName: "Invoice number", width: 150 },
-  { field: "date", headerName: "Date" },
-  { field: "type", headerName: "Type" },
-  { field: "amount", headerName: "Amount" },
-  { field: "details", headerName: "Details" },
-  { field: "publishedBy", headerName: "Published by" },
+  { field: "ivoiceNumber", headerName: t("Invoice number"), width: 150 },
+  { field: "date", headerName: t("Date") },
+  { field: "type", headerName: t("Type") },
+  { field: "amount", headerName: t("Amount") },
+  { field: "details", headerName: t("Details") },
+  { field: "publishedBy", headerName: t("Published by") },
   {
     field: "paymentMethod",
-    headerName: "Payment method",
+    headerName: t("Payment method"),
     width: 150,
   },
-  { field: "paid", headerName: "paid", width: 150 },
+  { field: "paid", headerName: t("paid"), width: 150 },
 ];
 export const columnsPayments = [
-  { field: "receiptDate", headerName: "Receipt date", width: 150 },
-  { field: "date", headerName: "Date" },
-  { field: "type", headerName: "Type" },
-  { field: "amount", headerName: "Amount" },
-  { field: "details", headerName: "Details" },
-  { field: "publishedBy", headerName: "Published by" },
+  { field: "receiptDate", headerName: t("Receipt date"), width: 150 },
+  { field: "date", headerName: t("Date") },
+  { field: "type", headerName: t("Type") },
+  { field: "amount", headerName: t("Amount") },
+  { field: "details", headerName: t("Details") },
+  { field: "publishedBy", headerName: t("Published by") },
 ];
 
 export const columnsRecord = [
-  { field: "date", headerName: "Date" },
-  { field: "process", headerName: "Process" },
-  { field: "details", headerName: "Details" },
-  { field: "workedBefore", headerName: "Worked before", width: 170 },
+  { field: "date", headerName: t("Date") },
+  { field: "process", headerName: t("Process") },
+  { field: "details", headerName: t("Details") },
+  { field: "workedBefore", headerName: t("Worked before"), width: 170 },
 ];
 
 export const columnsDocuments = [
-  { field: "documentName", headerName: "Document Name", width: 170 },
-  { field: "size", headerName: "Size" },
-  { field: "date", headerName: "Date" },
+  { field: "documentName", headerName: t("Document Name"), width: 170 },
+  { field: "size", headerName: t("Size") },
+  { field: "date", headerName: t("Date") },
 ];
 
 export const columnsFinamialRecord = [
-  { field: "date", headerName: "Date", width: 170 },
-  { field: "daet", headerName: "Daet" },
-  { field: "debit", headerName: "Debit" },
-  { field: "amount", headerName: "Amount" },
-  { field: "balance", headerName: "Balance" },
-  { field: "process", headerName: "Process" },
-  { field: "details", headerName: "Details" },
+  { field: "date", headerName: t("Date"), width: 170 },
+  { field: "daet", headerName: t("Daet") },
+  { field: "debit", headerName: t("Debit") },
+  { field: "amount", headerName: t("Amount") },
+  { field: "balance", headerName: t("Balance") },
+  { field: "process", headerName: t("Process") },
+  { field: "details", headerName: t("Details") },
 ];
 
 export const columnsQuotas = [
-  { field: "date", headerName: "Date" },
-  { field: "download", headerName: "Download (MB)" },
-  { field: "upload", headerName: "Upload" },
-  { field: "toltalTraffic", headerName: "Total Traffic" },
-  { field: "effectiveDate", headerName: "Effective Date" },
-  { field: "comment", headerName: "Comment" },
+  { field: "date", headerName: t("Date") },
+  { field: "download", headerName: t("Download (MB)") },
+  { field: "upload", headerName: t("Upload") },
+  { field: "toltalTraffic", headerName: t("Total Traffic") },
+  { field: "effectiveDate", headerName: t("Effective Date") },
+  { field: "comment", headerName: t("Comment") },
 ];
 
 export const columnsOnlineSubscibers = [
-  { field: "status", headerName: "Status" },
-  { field: "loginName", headerName: "Login name" },
-  { field: "donwload", headerName: "Donwload" },
-  { field: "lift", headerName: "Lift" },
-  { field: "continueTo", headerName: "Continue to" },
-  { field: "pacckage", headerName: "Package" },
-  { field: "ip", headerName: "Ip" },
-  { field: "mac", headerName: "Mac" },
-  { field: "callDuration", headerName: "Call duration" },
-  { field: "device", headerName: "Device" },
+  { field: "status", headerName: t("Status") },
+  { field: "loginName", headerName: t("Login name") },
+  { field: "donwload", headerName: t("Donwload") },
+  { field: "lift", headerName: t("Lift") },
+  { field: "continueTo", headerName: t("Continue to") },
+  { field: "pacckage", headerName: t("Package") },
+  { field: "ip", headerName: t("Ip") },
+  { field: "mac", headerName: t("Mac") },
+  { field: "callDuration", headerName: t("Call duration") },
+  { field: "device", headerName: t("Device") },
 ];
 
 export const columnsCompensations = [
-  { field: "date", headerName: "Date" },
-  { field: "loginName", headerName: "Login name" },
-  { field: "day", headerName: "Day" },
-  { field: "data", headerName: "Data" },
-  { field: "time", headerName: "Time" },
-  { field: "manager", headerName: "Manager" },
-  { field: "approved", headerName: "Approved" },
-  { field: "approvedBy", headerName: "Approved bt" },
+  { field: "date", headerName: t("Date") },
+  { field: "loginName", headerName: t("Login name") },
+  { field: "day", headerName: t("Day") },
+  { field: "data", headerName: t("Data") },
+  { field: "time", headerName: t("Time") },
+  { field: "manager", headerName: t("Manager") },
+  { field: "approved", headerName: t("Approved") },
+  { field: "approvedBy", headerName: t("Approved bt") },
 ];
 
 export const columnsUserTickets = [
-  { field: "date", headerName: "Date", width: 140 },
-  { field: "subject", headerName: "Subject", width: 120 },
-  { field: "firstName", headerName: "First name" },
-  { field: "data", headerName: "Data" },
-  { field: "secondName", headerName: "Second name" },
-  { field: "status", headerName: "Status", width: 140 },
+  { field: "date", headerName: t("Date"), width: 140 },
+  { field: "subject", headerName: t("Subject"), width: 120 },
+  { field: "firstName", headerName: t("First name") },
+  { field: "data", headerName: t("Data") },
+  { field: "secondName", headerName: t("Second name") },
+  { field: "status", headerName: t("Status"), width: 140 },
 ];
 
 export const columnsManagers = [
   {
     field: "loginName",
-    headerName: "Login name",
+    headerName: t("Login name"),
     cellClassName: "name-column-cell",
   },
   {
     field: "firstName",
-    headerName: "First Name",
+    headerName: t("First Name"),
     type: "number",
     headerAlign: "left",
   },
-  { field: "lastName", headerName: "Last name" },
-  { field: "balance", headerName: "Balance" },
-  { field: "loans", headerName: "Loans" },
-  { field: "validity", headerName: "Validity" },
-  { field: "followMe", headerName: "Follow me" },
-  { field: "numberSubscribers", headerName: "Number of subscribers" },
+  { field: "lastName", headerName: t("Last name") },
+  { field: "balance", headerName: t("Balance") },
+  { field: "loans", headerName: t("Loans") },
+  { field: "validity", headerName: t("Validity") },
+  { field: "followMe", headerName: t("Follow me") },
+  { field: "numberSubscribers", headerName: t("Number of subscribers") },
 ];
 
 export const columnsInvoicesManagers = [
   {
     field: "invoiceNumber",
-    headerName: "Invoice number",
+    headerName: t("Invoice number"),
     cellClassName: "name-column-cell",
   },
   {
-    field: "date",
+    field: t("date"),
     headerName: "Date",
   },
-  { field: "amount", headerName: "Amount" },
-  { field: "details", headerName: "Details" },
-  { field: "publishedBy", headerName: "Published by" },
-  { field: "paymentMethod", headerName: "Payment Method" },
-  { field: "paid", headerName: "Paid" },
+  { field: "amount", headerName: t("Amount") },
+  { field: "details", headerName: t("Details") },
+  { field: "publishedBy", headerName: t("Published by") },
+  { field: "paymentMethod", headerName: t("Payment Method") },
+  { field: "paid", headerName: t("Paid") },
 ];
 
 export const columnsReceiptManagers = [
   {
     field: "receiptDate",
-    headerName: "Receipt date",
+    headerName: t("Receipt date"),
     cellClassName: "name-column-cell",
   },
   {
     field: "date",
-    headerName: "Date",
+    headerName: t("Date"),
   },
   {
     field: "type",
-    headerName: "Type",
+    headerName: t("Type"),
   },
-  { field: "amount", headerName: "Amount" },
-  { field: "details", headerName: "Details" },
-  { field: "publishedBy", headerName: "Published by" },
+  { field: "amount", headerName: t("Amount") },
+  { field: "details", headerName: t("Details") },
+  { field: "publishedBy", headerName: t("Published by") },
 ];
 
 export const columnsRegisterAccountsManagers = [
   {
     field: "date",
-    headerName: "Date",
+    headerName: t("Date"),
   },
   {
     field: "credit",
-    headerName: "Credit",
+    headerName: t("Credit"),
   },
   {
     field: "debit",
-    headerName: "debit",
+    headerName: t("debit"),
   },
-  { field: "amount", headerName: "Amount" },
-  { field: "balance", headerName: "Balance" },
-  { field: "process", headerName: "Process" },
-  { field: "details", headerName: "Details" },
+  { field: "amount", headerName: t("Amount") },
+  { field: "balance", headerName: t("Balance") },
+  { field: "process", headerName: t("Process") },
+  { field: "details", headerName: t("Details") },
 ];
 
 export const columnsGroups = [
   {
     field: "name",
-    headerName: "Name",
+    headerName: t("Name"),
   },
   {
     field: "details",
-    headerName: "Details",
+    headerName: t("Details"),
   },
   {
     field: "subscribers",
-    headerName: "Subscribers",
+    headerName: t("Subscribers"),
   },
-  { field: "managers", headerName: "Managers" },
+  { field: "managers", headerName: t("Managers") },
 ];
 
 export const columnsNas = [
   {
     field: "name",
-    headerName: "Name",
+    headerName: t("Name"),
   },
   {
     field: "ipAddress",
-    headerName: "Ip Address",
+    headerName: t("Ip Address"),
   },
   {
     field: "type",
-    headerName: "Type",
+    headerName: t("Type"),
   },
-  { field: "secret", headerName: "Secret" },
-  { field: "rtt", headerName: "Rtt" },
-  { field: "onlineUser", headerName: "Online Users" },
-  { field: "packetLoss", headerName: "Packet Loss" },
+  { field: "secret", headerName: t("Secret") },
+  { field: "rtt", headerName: t("Rtt") },
+  { field: "onlineUser", headerName: t("Online Users") },
+  { field: "packetLoss", headerName: t("Packet Loss") },
 ];
 
 export const columnsPackages = [
   {
     field: "name",
-    headerName: "Name",
+    headerName: t("Name"),
   },
   {
     field: "price",
-    headerName: "Price",
+    headerName: t("Price"),
   },
   {
     field: "poolName",
-    headerName: "Pool Name",
+    headerName: t("Pool Name"),
   },
-  { field: "loadingSpeed", headerName: "Loading Speed" },
-  { field: "paymentSpeed", headerName: "Payment Speed" },
-  { field: "type", headerName: "Type" },
-  { field: "subscriptionDuration", headerName: "Subscription Duration" },
-  { field: "subscribers", headerName: "Subscribers" },
-  { field: "onlineSubscribers", headerName: "Online Subscribers" },
+  { field: "loadingSpeed", headerName: t("Loading Speed") },
+  { field: "paymentSpeed", headerName: t("Payment Speed") },
+  { field: "type", headerName: t("Type") },
+  { field: "subscriptionDuration", headerName: t("Subscription Duration") },
+  { field: "subscribers", headerName: t("Subscribers") },
+  { field: "onlineSubscribers", headerName: t("Online Subscribers") },
 ];
 
 export const columnsConsumptionNotices = [
   {
     field: "threshold",
-    headerName: "Threshold",
+    headerName: t("Threshold"),
   },
   {
     field: "profile",
-    headerName: "Profile",
+    headerName: t("Profile"),
   },
   {
     field: "counter",
-    headerName: "Counter",
+    headerName: t("Counter"),
   },
   {
     field: "sms",
-    headerName: "SMS",
+    headerName: t("SMS"),
   },
   {
     field: "telegram",
-    headerName: "Telegram",
+    headerName: t("Telegram"),
   },
   {
     field: "email",
-    headerName: "Email",
+    headerName: t("Email"),
   },
   {
     field: "webhook",
-    headerName: "Wehook",
+    headerName: t("Wehook"),
   },
 ];
 
 export const columnsAddonsServices = [
   {
     field: "addonName",
-    headerName: "Addon Name",
+    headerName: t("Addon Name"),
   },
   {
     field: "expiration",
-    headerName: "Expiration",
+    headerName: t("Expiration"),
   },
   {
     field: "setAddressList",
-    headerName: "Set Address List",
+    headerName: t("Set Address List"),
     width: 130,
   },
   {
     field: "setPoolName",
-    headerName: "Set Pool Name",
+    headerName: t("Set Pool Name"),
     width: 130,
   },
   {
     field: "callUrl",
-    headerName: "Call Url",
+    headerName: t("Call Url"),
   },
 ];
 
 export const columnsCards = [
   {
     field: "series",
-    headerName: "Series",
+    headerName: t("Series"),
   },
   {
     field: "type",
-    headerName: "Type",
+    headerName: t("Type"),
   },
   {
     field: "value",
-    headerName: "Value",
+    headerName: t("Value"),
   },
   {
     field: "quantity",
-    headerName: "Quantity",
+    headerName: t("Quantity"),
     width: 130,
   },
   {
     field: "used",
-    headerName: "Used",
+    headerName: t("Used"),
   },
   {
     field: "owner",
-    headerName: "Owner",
+    headerName: t("Owner"),
   },
   {
     field: "profile",
-    headerName: "Profile",
+    headerName: t("Profile"),
   },
   {
     field: "expiration",
-    headerName: "Expiration",
+    headerName: t("Expiration"),
   },
 ];
 
 export const columnsCardsJobs = [
   {
     field: "type",
-    headerName: "Type",
+    headerName: t("Type"),
   },
   {
     field: "owner",
-    headerName: "Owner",
+    headerName: t("Owner"),
   },
   {
     field: "creator",
-    headerName: "Creator",
+    headerName: t("Creator"),
   },
   {
     field: "dateAdded",
-    headerName: "Date Added",
+    headerName: t("Date Added"),
     width: 130,
   },
   {
     field: "quantity",
-    headerName: "Quantity",
+    headerName: t("Quantity"),
   },
   {
     field: "cardValue",
-    headerName: "Card Value",
+    headerName: t("Card Value"),
   },
   {
     field: "profile",
-    headerName: "Profile",
+    headerName: t("Profile"),
   },
   {
     field: "series",
-    headerName: "Series",
+    headerName: t("Series"),
   },
   {
     field: "status",
-    headerName: "Status",
+    headerName: t("Status"),
   },
 ];
 
 export const columnsSubscribersInvoices = [
   {
     field: "invoiceNo",
-    headerName: "Invoice No",
+    headerName: t("Invoice No"),
   },
   {
     field: "dueDate",
-    headerName: "Due Date",
+    headerName: t("Due Date"),
   },
   {
     field: "username",
-    headerName: "Username",
+    headerName: t("Username"),
   },
   {
     field: "type",
-    headerName: "Type",
+    headerName: t("Type"),
   },
   {
     field: "amount",
-    headerName: "Amount",
+    headerName: t("Amount"),
   },
   {
     field: "description",
-    headerName: "Description",
+    headerName: t("Description"),
     width: 280,
   },
   {
     field: "createdBy",
-    headerName: "Crated By",
+    headerName: t("Crated By"),
   },
   {
     field: "paymentMethod",
-    headerName: "Payment Method",
+    headerName: t("Payment Method"),
   },
   {
     field: "paid",
-    headerName: "Paid",
+    headerName: t("Paid"),
   },
 ];
 
 export const columnsReportsActivations = [
   {
     field: "history",
-    headerName: "History",
+    headerName: t("History"),
   },
   {
     field: "loginName",
-    headerName: "Login name",
+    headerName: t("Login name"),
   },
   {
     field: "firstName",
-    headerName: "First name",
+    headerName: t("First name"),
   },
   {
     field: "secondName",
-    headerName: "Second name",
+    headerName: t("Second name"),
   },
   {
     field: "manager",
-    headerName: "Manager",
+    headerName: t("Manager"),
   },
   {
     field: "service",
-    headerName: "Service",
+    headerName: t("Service"),
     width: 80,
   },
   {
     field: "price",
-    headerName: "Price",
+    headerName: t("Price"),
   },
   {
     field: "previousEndDate",
-    headerName: "Previous end date",
+    headerName: t("Previous end date"),
     width: 160,
   },
   {
     field: "laterExpiryDate",
-    headerName: "Later expiry date",
+    headerName: t("Later expiry date"),
     width: 160,
   },
   {
     field: "activationMethod",
-    headerName: "Activation method",
+    headerName: t("Activation method"),
   },
   {
     field: "numberActivations",
-    headerName: "Number of activations",
+    headerName: t("Number of activations"),
   },
   {
     field: "status",
-    headerName: "Status",
+    headerName: t("Status"),
   },
 ];
 
 export const columnsReportCardsTransfer = [
   {
     field: "date",
-    headerName: "Date",
+    headerName: t("Date"),
   },
   {
     field: "oldOwner",
-    headerName: "Old Owner",
+    headerName: t("Old Owner"),
   },
   {
     field: "number",
-    headerName: "Number",
+    headerName: t("Number"),
   },
   {
     field: "unitValue",
-    headerName: "Unit Value",
+    headerName: t("Unit Value"),
   },
   {
     field: "total",
-    headerName: "Total",
+    headerName: t("Total"),
   },
   {
     field: "type",
-    headerName: "Type",
+    headerName: t("Type"),
   },
   {
     field: "rangeStart",
-    headerName: "Range Start",
+    headerName: t("Range Start"),
   },
   {
     field: "rangeEnd",
-    headerName: "Range End",
+    headerName: t("Range End"),
   },
   {
     field: "manager",
-    headerName: "Manager",
+    headerName: t("Manager"),
   },
 ];
 
 export const columnsReportDebtsJournal = [
   {
     field: "date",
-    headerName: "Date",
+    headerName: t("Date"),
   },
   {
     field: "debtor",
-    headerName: "Debtor",
+    headerName: t("Debtor"),
   },
   {
     field: "creditor",
-    headerName: "Creditor",
+    headerName: t("Creditor"),
   },
   {
     field: "amount",
-    headerName: "Amount",
+    headerName: t("Amount"),
   },
   {
     field: "balance",
-    headerName: "Balance",
+    headerName: t("Balance"),
   },
   {
     field: "notices",
-    headerName: "Notices",
+    headerName: t("Notices"),
   },
 ];
 
 export const columnsReportDaraExportJobs = [
   {
     field: "date",
-    headerName: "Date",
+    headerName: t("Date"),
   },
   {
     field: "filename",
-    headerName: "Filename",
+    headerName: t("Filename"),
   },
   {
     field: "manager",
-    headerName: "Manager",
+    headerName: t("Manager"),
   },
   {
     field: "module",
-    headerName: "Module",
+    headerName: t("Module"),
   },
   {
     field: "status",
-    headerName: "Status",
+    headerName: t("Status"),
   },
   {
     field: "completedAt",
-    headerName: "Completed At",
+    headerName: t("Completed At"),
   },
   {
     field: "size",
-    headerName: "Size",
+    headerName: t("Size"),
   },
 ];
 
 export const columnsReportInvoiceManagers = [
   {
     field: "invoiceNumber",
-    headerName: "Invoice number",
+    headerName: t("Invoice number"),
   },
   {
     field: "history",
-    headerName: "History",
+    headerName: t("History"),
   },
   {
     field: "type",
-    headerName: "Type",
+    headerName: t("Type"),
   },
   {
     field: "manager",
-    headerName: "Manager",
+    headerName: t("Manager"),
   },
   {
     field: "amount",
-    headerName: "Amount",
+    headerName: t("Amount"),
   },
   {
     field: "details",
-    headerName: "Details",
+    headerName: t("Details"),
   },
   {
     field: "publishedBy",
-    headerName: "Published by",
+    headerName: t("Published by"),
   },
   {
     field: "paymentMethod",
-    headerName: "Payment method",
+    headerName: t("Payment method"),
   },
   {
     field: "notes",
-    headerName: "Notes",
+    headerName: t("Notes"),
   },
   {
     field: "paid",
-    headerName: "Paid",
+    headerName: t("Paid"),
   },
 ];
 
 export const columnsReportJournalManagers = [
   {
     field: "history",
-    headerName: "History",
+    headerName: t("History"),
   },
   {
     field: "debit",
-    headerName: "Debit",
+    headerName: t("Debit"),
   },
   {
     field: "credit",
-    headerName: "Credit",
+    headerName: t("Credit"),
   },
   {
     field: "amount",
-    headerName: "Amount",
+    headerName: t("Amount"),
   },
   {
     field: "balance",
-    headerName: "Balance",
+    headerName: t("Balance"),
   },
   {
     field: "process",
-    headerName: "Process",
+    headerName: t("Process"),
   },
   {
     field: "details",
-    headerName: "Details",
+    headerName: t("Details"),
   },
   {
     field: "notes",
-    headerName: "Notes",
+    headerName: t("Notes"),
   },
 ];
 
 export const columnsReportMonetTransfer = [
   {
     field: "history",
-    headerName: "History",
+    headerName: t("History"),
   },
   {
     field: "process",
-    headerName: "Process",
+    headerName: t("Process"),
   },
   {
     field: "credit",
-    headerName: "Credit",
+    headerName: t("Credit"),
   },
   {
     field: "debit",
-    headerName: "Debit",
+    headerName: t("Debit"),
   },
   {
     field: "amount",
-    headerName: "Amount",
+    headerName: t("Amount"),
   },
   {
     field: "notes",
-    headerName: "Notes",
+    headerName: t("Notes"),
   },
 ];
 
 export const columnsPaymentGatewayTransactions = [
   {
     field: "date",
-    headerName: "Date",
+    headerName: t("Date"),
   },
   {
     field: "gateway",
-    headerName: "Gateway",
+    headerName: t("Gateway"),
   },
   {
     field: "manager",
-    headerName: "Manager",
+    headerName: t("Manager"),
   },
   {
     field: "user",
-    headerName: "User",
+    headerName: t("User"),
   },
   {
     field: "amount",
-    headerName: "Amount",
+    headerName: t("Amount"),
   },
   {
     field: "currency",
-    headerName: "Currency",
+    headerName: t("Currency"),
   },
   {
     field: "status",
-    headerName: "Status",
+    headerName: t("Status"),
   },
 ];
 
 export const columnsReportReceiptManagers = [
   {
     field: "dateReceipt",
-    headerName: "Date of receipt",
+    headerName: t("Date of receipt"),
   },
   {
     field: "history",
-    headerName: "History",
+    headerName: t("History"),
   },
   {
     field: "loginName",
-    headerName: "Login name",
+    headerName: t("Login name"),
   },
   {
     field: "type",
-    headerName: "Type",
+    headerName: t("Type"),
   },
   {
     field: "amount",
-    headerName: "Amount",
+    headerName: t("Amount"),
   },
   {
     field: "details",
-    headerName: "Details",
+    headerName: t("Details"),
   },
   {
     field: "publishedBy",
-    headerName: "Published by",
+    headerName: t("Published by"),
   },
 ];
 
 export const columnsReportSessions = [
   {
     field: "loginName",
-    headerName: "Login name",
+    headerName: t("Login name"),
   },
   {
     field: "startTime",
-    headerName: "Start Time",
+    headerName: t("Start Time"),
   },
   {
     field: "endTime",
-    headerName: "End time",
+    headerName: t("End time"),
   },
   {
     field: "ip",
-    headerName: "IP",
+    headerName: t("IP"),
   },
   {
     field: "mac",
-    headerName: "Mac",
+    headerName: t("Mac"),
   },
   {
     field: "lift",
-    headerName: "Lift",
+    headerName: t("Lift"),
   },
   {
     field: "download",
-    headerName: "Download",
+    headerName: t("Download"),
   },
   {
     field: "contactPoint",
-    headerName: "Contact Point",
+    headerName: t("Contact Point"),
   },
   {
     field: "reasonTermination",
-    headerName: "Reason for termination",
+    headerName: t("Reason for termination"),
     width: 170,
   },
 ];
@@ -801,46 +804,46 @@ export const columnsReportSessions = [
 export const columnsReportSuspicious = [
   {
     field: "username",
-    headerName: "Username",
+    headerName: t("Username"),
   },
   {
     field: "expiration",
-    headerName: "Expiration",
+    headerName: t("Expiration"),
   },
   {
     field: "name",
-    headerName: "Name",
+    headerName: t("Name"),
   },
   {
     field: "currentSessions",
-    headerName: "Current Sessions",
+    headerName: t("Current Sessions"),
   },
   {
     field: "flag",
-    headerName: "Flag",
+    headerName: t("Flag"),
   },
 ];
 
 export const columnsSysLog = [
   {
     field: "date",
-    headerName: "Date",
+    headerName: t("Date"),
   },
   {
     field: "event",
-    headerName: "Event",
+    headerName: t("Event"),
   },
   {
     field: "manager",
-    headerName: "Manager",
+    headerName: t("Manager"),
   },
   {
     field: "details",
-    headerName: "Details",
+    headerName: t("Details"),
   },
   {
     field: "internetAddress",
-    headerName: "Internet Address",
+    headerName: t("Internet Address"),
     width: 150,
   },
 ];
@@ -848,61 +851,61 @@ export const columnsSysLog = [
 export const columnsLoginAttempts = [
   {
     field: "date",
-    headerName: "Date",
+    headerName: t("Date"),
   },
   {
     field: "loginName",
-    headerName: "Login name",
+    headerName: t("Login name"),
   },
   {
     field: "serverReply",
-    headerName: "Server Reply",
+    headerName: t("Server Reply"),
   },
   {
     field: "nas",
-    headerName: "NAS",
+    headerName: t("NAS"),
   },
   {
     field: "mac",
-    headerName: "MAC",
+    headerName: t("MAC"),
   },
 ];
 
 export const columnsBackupIndex = [
   {
     field: "fileName",
-    headerName: "FileName",
+    headerName: t("FileName"),
   },
   {
     field: "date",
-    headerName: "Date",
+    headerName: t("Date"),
   },
   {
     field: "size",
-    headerName: "Size",
+    headerName: t("Size"),
   },
   {
     field: "version",
-    headerName: "Version",
+    headerName: t("Version"),
   },
 ];
 
 export const columnsIpPools = [
   {
     field: "poolName",
-    headerName: "Pool Name",
+    headerName: t("Pool Name"),
   },
   {
     field: "fromIp",
-    headerName: "From IP",
+    headerName: t("From IP"),
   },
   {
     field: "toIp",
-    headerName: "To IP",
+    headerName: t("To IP"),
   },
   {
     field: "LeaseTime",
-    headerName: "Lease Time(hours)",
+    headerName: t("Lease Time(hours)"),
     width: 140,
   },
 ];
@@ -910,18 +913,33 @@ export const columnsIpPools = [
 export const columnsFormSettings = [
   {
     field: "key",
-    headerName: "Key",
+    headerName: t("Key"),
   },
   {
     field: "label",
-    headerName: "Label",
+    headerName: t("Label"),
   },
   {
     field: "type",
-    headerName: "Type",
+    headerName: t("Type"),
   },
   {
     field: "requird",
-    headerName: "Required",
+    headerName: t("Required"),
+  },
+];
+
+export const columnsSettingsAcl = [
+  {
+    field: "group",
+    headerName: t("Group"),
+  },
+  {
+    field: "dashboard",
+    headerName: t("Dashboard"),
+  },
+  {
+    field: "permissions",
+    headerName: t("Permissions"),
   },
 ];

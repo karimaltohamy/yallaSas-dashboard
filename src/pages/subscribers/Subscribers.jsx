@@ -7,8 +7,11 @@ import Popup from "../../components/popup/Popup";
 import InputItem from "../../components/popup/inputItem/InputItem";
 import SelectItem from "../../components/popup/selectItem/SelectItem";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Subscribers = () => {
+  const { t } = useTranslation();
+
   // opens and setOpnes popups
   const [openChangeName, setOpenChangeName] = useState(false);
   const [openDataBalance, setOpenDataBalance] = useState(false);
@@ -36,19 +39,19 @@ const Subscribers = () => {
   const statusFilter = [
     {
       color: "rgb(235, 219, 1)",
-      name: "Effective",
+      name: t("Effective"),
     },
     {
       color: "#257e67",
-      name: "Expired",
+      name: t("Expired"),
     },
     {
       color: "rgb(1, 235, 20)",
-      name: "Consumer",
+      name: t("Consumer"),
     },
     {
       color: "#bb3436",
-      name: "Disabled",
+      name: t("Disabled"),
     },
   ];
 
@@ -91,33 +94,33 @@ const Subscribers = () => {
     <div className="main_content_tables">
       <div className="conetnt_table">
         <HeadTable
-          path="subscribers"
+          path={t("Subscribers")}
           statusFilter={statusFilter}
-          title="List of subscribers"
+          title={t("List of subscribers")}
           iconHead={<i className="fa-solid fa-people-group"></i>}
         >
           <div className="content">
             <Link to={"/subscribers/add/1"} className="item">
               <i className="fa-solid fa-plus"></i>
-              <span>Add</span>
+              <span>{t("Add")}</span>
             </Link>
             <Link to={"/subscribers/1"} className="item">
               <i className="fa-regular fa-pen-to-square"></i>
-              <span>Edit</span>
+              <span>{t("Edit")}</span>
             </Link>
             <div
               className="item btn_open_model"
               onClick={() => setOpenChangeName(true)}
             >
               <i className="fa-regular fa-pen-to-square"></i>
-              <span>Name changed</span>
+              <span>{t("Name changed")}</span>
             </div>
             <div
               className="item btn_open_model"
               onClick={() => setOpenDataBalance(true)}
             >
               <i className="fa-solid fa-person-chalkboard"></i>
-              <span>Add data balance</span>
+              <span>{t("Add data balance")}</span>
             </div>
             <Link to={"/subscribers/activate/1"} className="item">
               <i className="fa-solid fa-play"></i>
@@ -125,58 +128,58 @@ const Subscribers = () => {
             </Link>
             <Link to={"/subscribers/extend/1"} className="item">
               <i className="fa-solid fa-star-of-life"></i>
-              <span>extension</span>
+              <span>{t("extension")}</span>
             </Link>
             <div
               className="item btn_open_model"
               onClick={() => setOpenChangePassowrd(true)}
             >
               <i className="fa-solid fa-key"></i>
-              <span>Change password</span>
+              <span>{t("Change password")}</span>
             </div>
             <div
               className="item btn_open_model"
               onClick={() => setOpenJointCompensation(true)}
             >
               <i className="fa-light fa-puzzle-piece"></i>
-              <span> compensation</span>
+              <span> {t("compensation")}</span>
             </div>
             <Link to={"/subscribers/addon/1"} className="item">
               <i className="fa-solid fa-star-of-life"></i>
-              <span>Purchase additional service</span>
+              <span>{t("Purchase additional service")}</span>
             </Link>
             <Link to={"/subscribers/change-package/:id"} className="item">
               <i className="fa-light fa-puzzle-piece"></i>
-              <span>Change the package</span>
+              <span>{t("Change the package")}</span>
             </Link>
             <div
               className="item btn_open_model"
               onClick={() => setOpenDeposit(true)}
             >
               <i className="fa-solid fa-money-bill-transfer"></i>
-              <span>Deposit</span>
+              <span>{t("Deposit")}</span>
             </div>
             <div
               className="item btn_open_model"
               onClick={() => setOpenDiscountAmount(true)}
             >
               <i className="fa-solid fa-money-bill-transfer"></i>
-              <span>Discount amount</span>
+              <span>{t("Discount amount")}</span>
             </div>
             <div
               className="item btn_open_model"
               onClick={() => setOpenPayOffDebts(true)}
             >
               <i className="fa-solid fa-money-bill-transfer"></i>
-              <span>Pay off debts</span>
+              <span>{t("Pay off debts")}</span>
             </div>
             <div className="item">
               <i className="fa-regular fa-handshake"></i>
-              <span> End subscription</span>
+              <span> {t("End subscription")}</span>
             </div>
             <div className="item">
               <i className="fa-solid fa-trash"></i>
-              <span>Delete</span>
+              <span>{t("Delete")}</span>
             </div>
           </div>
         </HeadTable>
@@ -184,19 +187,19 @@ const Subscribers = () => {
       </div>
       {/* popup change name*/}
       <Popup
-        title={"Change Name"}
+        title={t("Change Name")}
         openPopup={openChangeName}
         setOpenPopup={setOpenChangeName}
         onSubmit={handleChangeName}
       >
         <InputItem
-          label={"Current name"}
+          label={t("Current name")}
           type={"text"}
           value={"demo1"}
           classes={"disabled"}
         />
         <InputItem
-          label={"New name"}
+          label={t("New name")}
           type={"text"}
           value={newName}
           onChange={setNewName}
@@ -211,13 +214,13 @@ const Subscribers = () => {
         onSubmit={handleDataBalance}
       >
         <InputItem
-          label={"Current name"}
+          label={t("Current name")}
           type={"text"}
           value={"demo1"}
           classes={"disabled"}
         />
         <SelectItem
-          label={"Data type"}
+          label={t("Data type")}
           value={dataTypeBalance}
           onChange={setDataTypeBalance}
           options={[
@@ -227,14 +230,14 @@ const Subscribers = () => {
           ]}
         />
         <InputItem
-          label={"Quantity (MB)"}
+          label={t("Quantity (MB)")}
           type={"number"}
           value={quantityMb}
           onChange={setQuantityMb}
           placeholder={"0"}
         />
         <InputItem
-          label={"Notice"}
+          label={t("Notice")}
           type={"text"}
           value={noticeDataBalance}
           onChange={setNoticeDataBalance}
@@ -243,20 +246,20 @@ const Subscribers = () => {
       </Popup>
       {/* popup change psassword*/}
       <Popup
-        title={"Change Password"}
+        title={t("Change Password")}
         openPopup={openChangePassword}
         setOpenPopup={setOpenChangePassowrd}
         onSubmit={handleChangePassword}
       >
         <InputItem
-          label={"password"}
+          label={t("password")}
           type={"password"}
           value={password}
           onChange={setPassowrd}
           placeholder={""}
         />
         <InputItem
-          label={"confirm password"}
+          label={t("confirm password")}
           type={"password"}
           value={confirmPassword}
           onChange={setConfirmPassowrd}
@@ -265,38 +268,38 @@ const Subscribers = () => {
       </Popup>
       {/* popup Joint compensation */}
       <Popup
-        title={"Joint compensation"}
+        title={t("Joint compensation")}
         openPopup={openJointCompensation}
         setOpenPopup={setOpenJointCompensation}
         onSubmit={handleJointCompensation}
       >
         <div className="grid grid-cols-1 md:grid-cols-2">
           <InputItem
-            label={"Usernma"}
+            label={t("Username")}
             type={"text"}
             classes={"disabled"}
             value={"demo1"}
           />
           <InputItem
-            label={"Owner"}
+            label={t("Owner")}
             type={"text"}
             classes={"disabled"}
             value={"Manager_2"}
           />
           <InputItem
-            label={"Service"}
+            label={t("Service")}
             type={"text"}
             classes={"disabled"}
             value={"slow"}
           />
           <InputItem
-            label={"Subscription expiration"}
+            label={t("Subscription expiration")}
             type={"text"}
             classes={"disabled"}
             value={"2021-10-08 13:06:00"}
           />
           <SelectItem
-            label={"Type of compensation"}
+            label={t("Type of compensation")}
             value={typeCompensation}
             onChange={setTypeCompensation}
             options={[
@@ -309,26 +312,26 @@ const Subscribers = () => {
       </Popup>
       {/* popup Deposit */}
       <Popup
-        title={"Deposit"}
+        title={t("Deposit")}
         openPopup={openDeposit}
         setOpenPopup={setOpenDeposit}
         onSubmit={handleDeposite}
       >
         <InputItem
-          label={"Username"}
+          label={t("Username")}
           type={"text"}
           classes={"disabled"}
           value={"demo1"}
         />
         <InputItem
-          label={"Amount"}
+          label={t("Amount")}
           type={"number"}
           value={amountDeposit}
           onChange={setAmountDeposot}
           placeholder={""}
         />
         <InputItem
-          label={"Notice"}
+          label={t("Notice")}
           type={"text"}
           value={noticeDeposite}
           onChange={setNoticeDeposite}
@@ -337,26 +340,26 @@ const Subscribers = () => {
       </Popup>
       {/* popup Discount amount */}
       <Popup
-        title={"Discount amount"}
+        title={t("Discount amount")}
         openPopup={openDiscountAmount}
         setOpenPopup={setOpenDiscountAmount}
         onSubmit={handleDicountAmount}
       >
         <InputItem
-          label={"Username"}
+          label={t("Username")}
           type={"text"}
           classes={"disabled"}
           value={"demo1"}
         />
         <InputItem
-          label={"Amount"}
+          label={t("Amount")}
           type={"number"}
           value={amountDiscount}
           onChange={setAmountDiscount}
           placeholder={""}
         />
         <InputItem
-          label={"Notice"}
+          label={t("Notice")}
           type={"text"}
           value={noticeDiscount}
           onChange={setNoticeDiscount}
@@ -365,13 +368,13 @@ const Subscribers = () => {
       </Popup>
       {/* popup Pay off debts*/}
       <Popup
-        title={"Pay off debts"}
+        title={t("Pay off debts")}
         openPopup={openPayOffDebts}
         setOpenPopup={setOpenPayOffDebts}
         onSubmit={handlePayOffDebts}
       >
         <InputItem
-          label={"Username"}
+          label={t("Username")}
           type={"text"}
           classes={"disabled"}
           value={"demo1"}
@@ -384,7 +387,7 @@ const Subscribers = () => {
           placeholder={""}
         />
         <InputItem
-          label={"Notice"}
+          label={t("Notice")}
           type={"text"}
           value={noticePayDebts}
           onChange={setNoticePayDebts}

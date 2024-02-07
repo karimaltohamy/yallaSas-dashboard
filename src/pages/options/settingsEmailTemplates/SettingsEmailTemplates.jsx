@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import MainSection from "../../../components/mainSection/MainSection";
 import InputEditor from "../../../components/inputEditor/InputEditor";
+import { t } from "i18next";
 
 const SettingsEmailTemplates = () => {
   const editorRef = useRef(null);
@@ -29,12 +30,12 @@ const SettingsEmailTemplates = () => {
         </div>
 
         <MainSection
-          title={"Template Editor"}
+          title={t("Template Editor")}
           icon={<i className="fa-regular fa-eye"></i>}
         >
           <div className="form_tamplate">
             <div className="input_item">
-              <input type="text" placeholder="Email subject" />
+              <input type="text" placeholder={t("Email subject")} />
             </div>
             <div className="input_item">
               <InputEditor editorRef={editorRef} />

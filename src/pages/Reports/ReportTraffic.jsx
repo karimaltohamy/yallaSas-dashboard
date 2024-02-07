@@ -1,5 +1,6 @@
 import React from "react";
 import ChartLine from "../../components/charts/ChartLine";
+import { t } from "i18next";
 
 const ReportTraffic = () => {
   return (
@@ -27,20 +28,22 @@ const ReportTraffic = () => {
               <option value="">2017</option>
             </select>
           </div>
-          <button className="btn_detailed">Download Detailed Report</button>
+          <button className="btn_detailed">
+            {t("Download Detailed Report")}
+          </button>
         </div>
       </div>
 
-      <div className="bg-white h-[300px] md:h-[500px] mt-3 md:mt-6 mb-3 md:mb-5">
+      <div className="bg_section h-[300px] md:h-[500px] mt-3 md:mt-6 mb-3 md:mb-5">
         <ChartLine title={"Total Traffic Usage"} />
       </div>
-      <div className="bg-white h-[300px] md:h-[500px] mt-3 md:mt-6 mb-3 md:mb-5">
+      <div className="bg_section h-[300px] md:h-[500px] mt-3 md:mt-6 mb-3 md:mb-5">
         <ChartLine title={"Top Consumers"} />
       </div>
-      <div className="bg-white h-[300px] md:h-[500px] mt-3 md:mt-6 mb-3 md:mb-5">
+      <div className="bg_section h-[300px] md:h-[500px] mt-3 md:mt-6 mb-3 md:mb-5">
         <ChartLine title={"Top Downloaders"} />
       </div>
-      <div className="bg-white h-[300px] md:h-[500px] mt-3 md:mt-6 mb-3 md:mb-5">
+      <div className="bg_section h-[300px] md:h-[500px] mt-3 md:mt-6 mb-3 md:mb-5">
         <ChartLine title={"Top Uploaders"} />
       </div>
     </div>

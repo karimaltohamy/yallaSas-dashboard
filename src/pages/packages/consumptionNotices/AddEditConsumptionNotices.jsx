@@ -3,6 +3,7 @@ import SelectSectionForm from "../../../components/sectionform/SelectSectionForm
 import SwitchSectionForm from "../../../components/sectionform/switchSectionForm";
 import SectionForm from "../../../components/sectionform/SectionForm";
 import InputSectionForm from "../../../components/sectionform/InputSectionForm";
+import { t } from "i18next";
 
 const AddEditConsumptionNotices = () => {
   const [notificationForm, setNotificationForm] = useState({
@@ -26,9 +27,9 @@ const AddEditConsumptionNotices = () => {
 
   return (
     <div className="content_page">
-      <SectionForm title={"Usage Notification Form"}>
+      <SectionForm title={t("Usage Notification Form")}>
         <SelectSectionForm
-          label={"Profile"}
+          label={t("Profile")}
           value={notificationForm.profile}
           onChange={handleChangeNotificationForm}
           id="profile"
@@ -40,7 +41,7 @@ const AddEditConsumptionNotices = () => {
           ]}
         />
         <SelectSectionForm
-          label={"Counter to Check"}
+          label={t("Counter to Check")}
           value={notificationForm.counterCheck}
           onChange={handleChangeNotificationForm}
           id="counterCheck"
@@ -50,40 +51,40 @@ const AddEditConsumptionNotices = () => {
           ]}
         />
         <InputSectionForm
-          label={"Usage Threshold (%)"}
+          label={t("Usage Threshold (%)")}
           type={"number"}
           value={notificationForm.usageThreshold}
           onChange={handleChangeNotificationForm}
           id="usageThreshold"
         />
         <SwitchSectionForm
-          label={"Notify via SMS"}
+          label={t("Notify via SMS")}
           value={notificationForm.notifyViaSMS}
           onChange={handleChangeNotificationForm}
           id="notifyViaSMS"
         />
         <SwitchSectionForm
-          label={"Notify via Telegram"}
+          label={t("Notify via Telegram")}
           value={notificationForm.notifyViaTelegram}
           onChange={handleChangeNotificationForm}
           id="notifyViaTelegram"
         />
         <SwitchSectionForm
-          label={"Notify via Email"}
+          label={t("Notify via Email")}
           value={notificationForm.notifyViaEmail}
           onChange={handleChangeNotificationForm}
           id="notifyViaEmail"
         />
         <SwitchSectionForm
-          label={"Notify via Webhook"}
+          label={t("Notify via Webhook")}
           value={notificationForm.notifyViaWebhook}
           onChange={handleChangeNotificationForm}
           id="notifyViaWebhook"
         />
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">OK</button>
-        <button className="btn_close">Cancel</button>
+        <button className="btn_add">{t("OK")}</button>
+        <button className="btn_close">{t("Cancel")}</button>
       </div>
     </div>
   );

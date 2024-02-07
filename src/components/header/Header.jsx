@@ -3,12 +3,39 @@ import "./header.scss";
 import imgEn from "../../images/Flag-United-States-of-America.webp";
 import imgAr from "../../images/ar.png";
 import imgProfile from "../../images/user-1.jpg";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
-  const [selectLang, setSelectLang] = useState("en");
   const [openListLang, setOpenListLang] = useState(false);
   const [openProfileBox, setProfileBox] = useState(false);
   const [mode, setMode] = useState("light");
+  const { i18n, t } = useTranslation();
+  const lang = localStorage.getItem("lang");
+
+  // change theme
+  const handleModeTheme = (mode) => {
+    localStorage.setItem("mode", mode);
+    if (mode == "light") {
+      setMode(mode);
+      document.body.classList.remove("dark");
+    } else if (mode == "dark") {
+      setMode(mode);
+      document.body.classList.add("dark");
+    }
+  };
+
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+    localStorage.setItem("lang", lang);
+
+    if (lang == "ar") {
+      document.body.classList.add("ar");
+      document.body.classList.remove("en");
+    } else {
+      document.body.classList.add("en");
+      document.body.classList.remove("ar");
+    }
+  };
 
   const handleToggleSidebar = () => {
     document.querySelector(".sidebar").classList.toggle("remove_elemnts");
@@ -61,14 +88,18 @@ const Header = () => {
         <div className="mode btn_mode">
           {mode == "dark" && (
             <i
-              className="fa-regular fa-sun light cursor-pointer"
-              onClick={() => setMode("light")}
+              className={`fa-regular fa-sun light cursor-pointer ${
+                mode == "dark" && "show"
+              }`}
+              onClick={() => handleModeTheme("light")}
             ></i>
           )}
           {mode == "light" && (
             <i
-              className="fa-solid fa-moon dark cursor-pointer"
-              onClick={() => setMode("dark")}
+              className={`fa-solid fa-moon dark cursor-pointer ${
+                mode == "light" && "show"
+              }`}
+              onClick={() => handleModeTheme("dark")}
             ></i>
           )}
         </div>
@@ -81,8 +112,12 @@ const Header = () => {
               loading="lazy"
             />
           </div>
-          <div className={`list list2 ${openListLang ? "active" : ""}`}>
-            <div className="item" onClick={() => setSelectLang("en")}>
+          <div
+            className={`list list2 ${openListLang ? "active" : ""} ${
+              lang == "ar" ? "ar" : ""
+            }`}
+          >
+            <div className="item" onClick={() => changeLanguage("en")}>
               <img
                 src={imgEn}
                 alt="Flag-United-States-of-America"
@@ -90,7 +125,7 @@ const Header = () => {
               />
               <span>English (UK)</span>
             </div>
-            <div className="item" onClick={() => setSelectLang("ar")}>
+            <div className="item" onClick={() => changeLanguage("ar")}>
               <img src={imgAr} alt="ar-img" loading="lazy" />
               <span>Arabic (ar)</span>
             </div>
@@ -127,7 +162,7 @@ const Header = () => {
           <div
             className={`list list2 !min-w-[250px] ${
               openProfileBox ? "active" : ""
-            }`}
+            } ${lang == "ar" ? "ar" : ""}`}
           >
             <h4 className="title">Profile</h4>
             <div className="profile">

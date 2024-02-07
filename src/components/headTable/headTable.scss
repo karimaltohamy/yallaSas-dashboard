@@ -154,6 +154,11 @@
         max-height: 300px;
         overflow-y: auto;
 
+        &.ar {
+          left: 120px;
+          right: auto;
+        }
+
         &::-webkit-scrollbar-track {
           border-radius: 10px;
           background-color: transparent;

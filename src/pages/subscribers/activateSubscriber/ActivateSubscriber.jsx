@@ -3,6 +3,7 @@ import SectionForm from "../../../components/sectionform/SectionForm";
 import InputSectionForm from "../../../components/sectionform/InputSectionForm";
 import SelectSectionForm from "../../../components/sectionform/SelectSectionForm";
 import SwitchSectionForm from "../../../components/sectionform/switchSectionForm";
+import { t } from "i18next";
 
 const ActivateSubscriber = () => {
   const [activateSubscriber, setActivateSubscriber] = useState({
@@ -112,14 +113,14 @@ const ActivateSubscriber = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 border-t border-gray-300 pt-4">
           <InputSectionForm
-            label={"Price per subscriber"}
+            label={t("Price per subscriber")}
             type={"text"}
             value={activateSubscriber.pricePerSubscriber}
             onChange={handleActivateSubscriber}
             id="pricePerSubscriber"
           />
           <InputSectionForm
-            label={"Notice"}
+            label={t("Notice")}
             type={"text"}
             value={activateSubscriber.notice}
             onChange={handleActivateSubscriber}
@@ -133,7 +134,7 @@ const ActivateSubscriber = () => {
             id="NumberActivationTimes"
           />
           <SelectSectionForm
-            label={"Activation method"}
+            label={t("Activation method")}
             type={"text"}
             value={activateSubscriber.ActivationMethod}
             onChange={handleActivateSubscriber}
@@ -146,7 +147,7 @@ const ActivateSubscriber = () => {
             ]}
           />
           <SwitchSectionForm
-            label={"Paid"}
+            label={t("Paid")}
             value={activateSubscriber.paid}
             onChange={handleActivateSubscriber}
             id="paid"
@@ -154,8 +155,8 @@ const ActivateSubscriber = () => {
         </div>
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">OK</button>
-        <button className="btn_close">Cancel</button>
+        <button className="btn_add">{"OK"}</button>
+        <button className="btn_close">{"Cancel"}</button>
       </div>
     </div>
   );

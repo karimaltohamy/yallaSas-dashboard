@@ -3,40 +3,41 @@ import HeadTable from "../../../components/headTable/HeadTable";
 import MainTable from "../../../components/mainTable/MainTable";
 import { columnsBackupIndex } from "../../../utils/columnsTables";
 import { Link } from "react-router-dom";
+import { t } from "i18next";
 
 const BackupIndex = () => {
   return (
     <div className="main_content_tables">
       <div className="conetnt_table">
         <HeadTable
-          path="Backup"
-          title="Backup / Restore"
+          path={t("Backup")}
+          title={t("Backup / Restore")}
           iconHead={<i className="ng-tns-c118-32 fa fa-hdd"></i>}
         >
           <div className="content">
             <div className="item">
               <i className="fa-solid fa-plus"></i>
-              <span>Create Backup</span>
+              <span>{t("Create Backup")}</span>
             </div>
             <div className="item">
               <i className="fa-solid fa-download"></i>
-              <span>Download</span>
+              <span>{t("Download")}</span>
             </div>
             <div className="item">
               <i className="fa-solid fa-upload"></i>
-              <span>Upload</span>
+              <span>{t("Upload")}</span>
             </div>
             <div className="item">
               <i className="fa-solid fa-rotate"></i>
-              <span>Restore</span>
+              <span>{t("Restore")}</span>
             </div>
             <div className="item">
               <i className="fa-solid fa-trash"></i>
-              <span>Delete</span>
+              <span>{t("Delete")}</span>
             </div>
             <Link to={"/backup-index/settings"} className="item">
               <i className="fa-solid fa-gears"></i>
-              <span>Settings</span>
+              <span>{t("Settings")}</span>
             </Link>
           </div>
         </HeadTable>

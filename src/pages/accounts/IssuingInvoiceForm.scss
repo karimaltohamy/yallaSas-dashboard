@@ -2,14 +2,14 @@
 .issuing_invoice_section {
   margin: 0 10px;
   margin-top: 20px;
-  background-color: white;
+  background-color: var(--bg-section);
   border-radius: 5px;
 
   .head {
     display: flex;
     align-items: center;
     gap: 6px;
-    border-bottom: 1px solid rgb(228, 228, 228);
+    border-bottom: 1px solid var(--border-color);
     padding: 8px 12px;
 
     h4 {
@@ -31,7 +31,8 @@
         input {
           width: 100%;
           padding: 5px;
-          border: 1px solid rgb(222, 222, 222);
+          border: 1px solid var(--border-color);
+          background-color: transparent;
           border-radius: 3px;
           max-width: 200px;
         }

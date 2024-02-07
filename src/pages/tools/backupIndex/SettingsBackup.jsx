@@ -3,6 +3,7 @@ import SelectSectionForm from "../../../components/sectionform/SelectSectionForm
 import SwitchSectionForm from "../../../components/sectionform/switchSectionForm";
 import SectionForm from "../../../components/sectionform/SectionForm";
 import InputSectionForm from "../../../components/sectionform/InputSectionForm";
+import { t } from "i18next";
 
 const SettingsBackup = () => {
   const [settings, setSettings] = useState({
@@ -26,44 +27,44 @@ const SettingsBackup = () => {
 
   return (
     <div className="content_page">
-      <SectionForm title={"Backup Settings"}>
+      <SectionForm title={t("Backup Settings")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <SelectSectionForm
-            label={"Backup Disk"}
+            label={t("Backup Disk")}
             value={settings.backupSettings}
             onChange={handleChangeSettings}
             id="backupSettings"
             options={[{ name: "day(s)", value: "" }]}
           />
           <SelectSectionForm
-            label={"Auto Delete Old Backups"}
+            label={t("Auto Delete Old Backups")}
             value={settings.autoDeleteOldBackups}
             onChange={handleChangeSettings}
             id="autoDeleteOldBackups"
             options={[{ name: "day(s)", value: "" }]}
           />
           <SelectSectionForm
-            label={"Disk Partition"}
+            label={t("Disk Partition")}
             value={settings.diskPartition}
             onChange={handleChangeSettings}
             id="diskPartition"
             options={[{ name: "day(s)", value: "" }]}
           />
           <InputSectionForm
-            label={"Daily Backup Time"}
+            label={t("Daily Backup Time")}
             type={"time"}
             value={settings.dailyBackupTime}
             onChange={handleChangeSettings}
             id="dailyBackupTime"
           />
           <SwitchSectionForm
-            label={"Include Session Records"}
+            label={t("Include Session Records")}
             value={settings.includeSessionRecords}
             onChange={handleChangeSettings}
             id="includeSessionRecords"
           />
           <SwitchSectionForm
-            label={"Upload To Google Drive"}
+            label={t("Upload To Google Drive")}
             value={settings.uploadToGoogleDrive}
             onChange={handleChangeSettings}
             id="uploadToGoogleDrive"
@@ -71,8 +72,8 @@ const SettingsBackup = () => {
         </div>
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">OK</button>
-        <button className="btn_close">Cancel</button>
+        <button className="btn_add">{t("OK")}</button>
+        <button className="btn_close">{t("Cancel")}</button>
       </div>
     </div>
   );

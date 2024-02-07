@@ -1,6 +1,7 @@
 import React from "react";
 import "./accordingManagers.scss";
 import ChartPie from "../../../components/charts/ChartPie";
+import { t } from "i18next";
 
 const AccordingManagers = () => {
   return (
@@ -8,11 +9,11 @@ const AccordingManagers = () => {
       <div className="btn_actions">
         <button className="btn_action">
           <i className="fa-solid fa-download"></i>
-          <span>Download</span>
+          <span>{t("Download")}</span>
         </button>
         <button className="btn_action">
           <i className="fa-solid fa-rotate"></i>
-          <span>Update</span>
+          <span>{t("Update")}</span>
         </button>
       </div>
 
@@ -25,15 +26,15 @@ const AccordingManagers = () => {
         <div>
           <div className="list_group">
             <div className="item_group">
-              <h5>Total</h5>
+              <h5>{t("Total")}</h5>
               <span>4</span>
             </div>
             <div className="item_group">
-              <h5>Effective</h5>
+              <h5>{t("Effective")}</h5>
               <span>0</span>
             </div>
             <div className="item_group">
-              <h5>Expired</h5>
+              <h5>{t("Expired")}</h5>
               <span>4</span>
             </div>
           </div>

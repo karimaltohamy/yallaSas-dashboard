@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SectionForm from "../../../components/sectionform/SectionForm";
 import SelectSectionForm from "../../../components/sectionform/SelectSectionForm";
+import { t } from "i18next";
 
 const ChangePackageSubscriber = () => {
   const [changePackage, setChangePackage] = useState({
@@ -19,7 +20,7 @@ const ChangePackageSubscriber = () => {
 
   return (
     <div className="content_page">
-      <SectionForm title={"Extend Subscriber"}>
+      <SectionForm title={t("Extend Subscriber")}>
         <div className="boxs_information mb-5">
           <div className="boxs">
             <div className="box">
@@ -53,7 +54,7 @@ const ChangePackageSubscriber = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 border-t border-gray-300 pt-4">
           <SelectSectionForm
-            label={"New package"}
+            label={t("New package")}
             value={changePackage.newPackage}
             onChange={handleChangePackage}
             id="newPackage"
@@ -64,7 +65,7 @@ const ChangePackageSubscriber = () => {
             ]}
           />
           <SelectSectionForm
-            label={"Change date"}
+            label={t("Change date")}
             value={changePackage.changeDate}
             onChange={handleChangePackage}
             id="changeDate"
@@ -73,8 +74,8 @@ const ChangePackageSubscriber = () => {
         </div>
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">OK</button>
-        <button className="btn_close">Cancel</button>
+        <button className="btn_add">{"OK"}</button>
+        <button className="btn_close">{"Cancel"}</button>
       </div>
     </div>
   );

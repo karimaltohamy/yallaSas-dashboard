@@ -5,27 +5,27 @@ import { Outlet } from "react-router-dom";
 const ProfileManager = () => {
   const itemsNev = [
     {
-      title: "General",
+      title: t("General"),
       icon: <i className="fa-regular fa-user"></i>,
       path: "general",
     },
     {
-      title: "Edit",
+      title: t("Edit"),
       icon: <i className="fa-regular fa-pen-to-square"></i>,
       path: "edit",
     },
     {
-      title: "Invoices",
+      title: t("Invoices"),
       icon: <i className="fa-solid fa-ticket"></i>,
       path: "invoices",
     },
     {
-      title: "Receipt",
+      title: t("Receipt"),
       icon: <i className="fa-solid fa-receipt"></i>,
       path: "receipt",
     },
     {
-      title: "Register the accounts",
+      title: t("Register the accounts"),
       icon: <i className="fa-solid fa-file-invoice"></i>,
       path: "registerAccounts",
     },
