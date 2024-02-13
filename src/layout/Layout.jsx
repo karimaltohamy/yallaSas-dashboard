@@ -50,7 +50,7 @@ const RadiusSubscriber = React.lazy(() =>
   import("../pages/subscribers/profileSubscriber/RadiusSubscriber")
 );
 const FinancialRecordSubscriber = React.lazy(() =>
-  import("../pages/subscribers/profileSubscriber/financialRecordSubscriber")
+  import("../pages/subscribers/profileSubscriber/FinancialRecordSubscriber")
 );
 const FreeZoneSubscriber = React.lazy(() =>
   import("../pages/subscribers/profileSubscriber/FreeZoneSubscriber")
