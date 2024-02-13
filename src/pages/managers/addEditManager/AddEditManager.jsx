@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import InputSectionForm from "../../../components/sectionform/InputSectionForm";
 import SectionForm from "../../../components/sectionform/SectionForm";
 import SelectSectionForm from "../../../components/sectionform/SelectSectionForm";
-import SwitchSectionForm from "../../../components/sectionform/switchSectionForm";
+import SwitchSectionForm from "../../../components/sectionform/SwitchSectionForm";
 import InputFile from "../../../components/popup/inputFile/InputFile";
 import { t } from "i18next";
 

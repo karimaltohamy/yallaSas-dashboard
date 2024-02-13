@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MainSection from "../../../components/mainSection/MainSection";
 import "./settingsFreezone.scss";
-import SwitchSectionForm from "../../../components/sectionform/switchSectionForm";
+import SwitchSectionForm from "../../../components/sectionform/SwitchSectionForm";
 import { t } from "i18next";
 
 const SettingsFreezone = () => {

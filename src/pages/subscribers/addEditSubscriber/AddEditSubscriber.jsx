@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import SectionForm from "../../../components/sectionform/SectionForm";
 import InputSectionForm from "../../../components/sectionform/InputSectionForm";
 import SelectSectionForm from "../../../components/sectionform/SelectSectionForm";
-import SwitchSectionForm from "../../../components/sectionform/switchSectionForm";
+import SwitchSectionForm from "../../../components/sectionform/SwitchSectionForm";
 import "./addEditSubscriber.scss";
 import { t } from "i18next";
 import { toast } from "react-toastify";

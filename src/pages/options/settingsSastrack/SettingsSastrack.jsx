@@ -1,6 +1,6 @@
 import React from "react";
 import SectionForm from "../../../components/sectionform/SectionForm";
-import SwitchSectionForm from "../../../components/sectionform/switchSectionForm";
+import SwitchSectionForm from "../../../components/sectionform/SwitchSectionForm";
 import InputSectionForm from "../../../components/sectionform/InputSectionForm";
 import { t } from "i18next";
 

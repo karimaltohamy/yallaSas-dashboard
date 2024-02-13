@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import MainSection from "../../../components/mainSection/MainSection";
 import "./settingsPaymentGateways.scss";
 import SettingsContent from "./SettingsContent";
-import SwitchSectionForm from "../../../components/sectionform/switchSectionForm";
+import SwitchSectionForm from "../../../components/sectionform/SwitchSectionForm";
 import InputSectionForm from "../../../components/sectionform/InputSectionForm";
 import SelectSectionForm from "../../../components/sectionform/SelectSectionForm";
 
