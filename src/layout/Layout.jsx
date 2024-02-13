@@ -56,7 +56,7 @@ const FreeZoneSubscriber = React.lazy(() =>
   import("../pages/subscribers/profileSubscriber/FreeZoneSubscriber")
 );
 const QuotasSubscriber = React.lazy(() =>
-  import("../pages/subscribers/profileSubscriber/quotasSubscriber")
+  import("../pages/subscribers/profileSubscriber/QuotasSubscriber")
 );
 const OnlineSubscribers = React.lazy(() =>
   import("../pages/subscribers/onlineSubscribers/OnlineSubscribers")
@@ -98,7 +98,7 @@ const AddEditNas = React.lazy(() =>
   import("../pages/nas/addEditNas/AddEditNas")
 );
 const PackagesList = React.lazy(() =>
-  import("../pages/packages/packagesList/packagesList")
+  import("../pages/packages/packagesList/PackagesList")
 );
 const AddEditPackage = React.lazy(() =>
   import("../pages/packages/packagesList/AddEditPackage")
@@ -160,7 +160,7 @@ const ReportJournalManagers = React.lazy(() =>
   import("../pages/Reports/reportJournalManagers/ReportJournalManagers")
 );
 const ReportMoneyTransfer = React.lazy(() =>
-  import("../pages/Reports/reportMoneyTransfer/reportMoneyTransfer")
+  import("../pages/Reports/reportMoneyTransfer/ReportMoneyTransfer")
 );
 const ReportOnline = React.lazy(() =>
   import("../pages/Reports/reportOnline/ReportOnline")
@@ -277,7 +277,7 @@ const SettingsSites = React.lazy(() =>
   import("../pages/options/settingsSites/SettingsSites")
 );
 const SettingsSms = React.lazy(() =>
-  import("../pages/options/settingsSms/settingsSms")
+  import("../pages/options/settingsSms/SettingsSms")
 );
 const SettingsSastrack = React.lazy(() =>
   import("../pages/options/settingsSastrack/SettingsSastrack")
