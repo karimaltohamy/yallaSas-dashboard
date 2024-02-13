@@ -4,13 +4,15 @@ import imgEn from "../../images/Flag-United-States-of-America.webp";
 import imgAr from "../../images/ar.png";
 import imgProfile from "../../images/user-1.jpg";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [openListLang, setOpenListLang] = useState(false);
   const [openProfileBox, setProfileBox] = useState(false);
-  const [mode, setMode] = useState("light");
+  const [mode, setMode] = useState(localStorage.getItem("mode") || "light");
   const { i18n, t } = useTranslation();
   const lang = localStorage.getItem("lang");
+  const { userInfo } = useSelector((state) => state.user);
 
   // change theme
   const handleModeTheme = (mode) => {
@@ -31,7 +33,7 @@ const Header = () => {
     if (lang == "ar") {
       document.body.classList.add("ar");
       document.body.classList.remove("en");
-    } else {
+    } else if (lang == "en") {
       document.body.classList.add("en");
       document.body.classList.remove("ar");
     }
@@ -105,12 +107,7 @@ const Header = () => {
         </div>
         <div className="nav_item">
           <div className="head" onClick={() => setOpenListLang(!openListLang)}>
-            <img
-              className="lang"
-              src={imgEn}
-              alt="Flag-United-States-of-America"
-              loading="lazy"
-            />
+            <i class="fa-solid fa-earth-africa"></i>
           </div>
           <div
             className={`list list2 ${openListLang ? "active" : ""} ${
@@ -165,17 +162,22 @@ const Header = () => {
             } ${lang == "ar" ? "ar" : ""}`}
           >
             <h4 className="title">Profile</h4>
-            <div className="profile">
-              <img src={imgProfile} alt="user-1" loading="lazy" />
-              <div className="text">
-                <div className="name">Mathew Anderson</div>
-                <div className="position">Designer</div>
-                <div className="email">
-                  <i className="fa-regular fa-envelope"></i>
-                  <span>Info@example.com</span>
+            {userInfo?.client && (
+              <div className="profile">
+                <img src={imgProfile} alt="user-1" loading="lazy" />
+                <div className="text">
+                  <div className="name">{userInfo.client.username}</div>
+                  <div className="email">
+                    <i className="fa-regular fa-envelope"></i>
+                    <span>
+                      {userInfo.client.email
+                        ? userInfo.client.email
+                        : "Info@example.com"}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
             <a href="login.html" className="btn_logout">
               Logout
             </a>

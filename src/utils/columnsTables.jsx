@@ -1,8 +1,10 @@
 import { t } from "i18next";
 import i18n from "../i18n";
+import { convertFromBytes } from "./utilsFunctions";
+import { Link } from "react-router-dom";
 
 export const columnsSubscibers = [
-  { field: "id", headerName: "ID", width: 50 },
+  { field: "id", headerName: "ID", width: 90 },
   {
     field: "condition",
     headerName: i18n.t("Condition"),
@@ -14,26 +16,87 @@ export const columnsSubscibers = [
         ></span>
       );
     },
+    width: 70,
   },
   {
-    field: "loginName",
+    field: "username",
     headerName: t("Login name"),
-    flex: 1,
+    width: 120,
     cellClassName: "name-column-cell",
+    renderCell: (params) => {
+      if (params.row["username"]) {
+        return (
+          <Link
+            to={`/subscribers/${params.row.id}/general`}
+            className="text_color"
+          >
+            {params.row["username"]}
+          </Link>
+        );
+      }
+    },
   },
   {
-    field: "firstName",
+    field: "firstname",
     headerName: t("First Name"),
     type: "number",
     headerAlign: "left",
   },
-  { field: "lastName", headerName: t("Last name"), flex: 1 },
-  { field: "endDate", headerName: t("End date"), flex: 1, width: 220 },
-  { field: "continueTo", headerName: t("Continue to"), flex: 1 },
-  { field: "package", headerName: t("Package") },
-  { field: "loans", headerName: t("Loans") },
-  { field: "dailyConsumption", headerName: t("Daily consumption") },
-  { field: "remainingDays", headerName: t("Remaining days") },
+  { field: "lastname", headerName: t("Last name"), flex: 1 },
+  { field: "expiration", headerName: t("End date"), flex: 1, width: 220 },
+  { field: "parent_username", headerName: t("Continue to"), flex: 1 },
+  {
+    field: "package",
+    headerName: t("Package"),
+    valueGetter: (params) => {
+      if (params.row["profile_details"] && params.row["profile_details"].name) {
+        return params.row["profile_details"].name;
+      }
+    },
+  },
+  { field: "loan_balance", headerName: t("Debts") },
+  {
+    field: "daily_traffic_details.traffic",
+    headerName: t("Daily consumption"),
+    valueGetter: (params) => {
+      if (
+        params.row["daily_traffic_details"] &&
+        params.row["daily_traffic_details"].traffic
+      ) {
+        return params.row["daily_traffic_details"].traffic;
+      }
+    },
+  },
+  { field: "remaining_days", headerName: t("Remaining days") },
+];
+
+export const columnsOnlineSubscibers = [
+  { field: "status", headerName: t("Status") },
+  { field: "username", headerName: t("Login name") },
+  {
+    field: "acctoutputoctets",
+    headerName: t("Donwload"),
+    valueGetter: (params) => {
+      if (params.row["acctoutputoctets"]) {
+        return convertFromBytes(params.row["acctoutputoctets"]);
+      }
+    },
+  },
+  {
+    field: "acctinputoctets",
+    headerName: t("Lift"),
+    valueGetter: (params) => {
+      if (params.row["acctinputoctets"]) {
+        return convertFromBytes(params.row["acctinputoctets"]);
+      }
+    },
+  },
+  { field: "parent_username", headerName: t("Continue to") },
+  { field: "user_profile_name", headerName: t("Package") },
+  { field: "framedipaddress", headerName: t("Ip") },
+  { field: "callingstationid", headerName: t("Mac") },
+  { field: "acctsessiontime", headerName: t("Call duration") },
+  { field: "oui", headerName: t("Device") },
 ];
 
 export const columnsSessions = [
@@ -105,19 +168,6 @@ export const columnsQuotas = [
   { field: "toltalTraffic", headerName: t("Total Traffic") },
   { field: "effectiveDate", headerName: t("Effective Date") },
   { field: "comment", headerName: t("Comment") },
-];
-
-export const columnsOnlineSubscibers = [
-  { field: "status", headerName: t("Status") },
-  { field: "loginName", headerName: t("Login name") },
-  { field: "donwload", headerName: t("Donwload") },
-  { field: "lift", headerName: t("Lift") },
-  { field: "continueTo", headerName: t("Continue to") },
-  { field: "pacckage", headerName: t("Package") },
-  { field: "ip", headerName: t("Ip") },
-  { field: "mac", headerName: t("Mac") },
-  { field: "callDuration", headerName: t("Call duration") },
-  { field: "device", headerName: t("Device") },
 ];
 
 export const columnsCompensations = [

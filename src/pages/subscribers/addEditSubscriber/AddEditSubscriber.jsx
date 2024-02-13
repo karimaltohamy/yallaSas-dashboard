@@ -1,48 +1,62 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SectionForm from "../../../components/sectionform/SectionForm";
 import InputSectionForm from "../../../components/sectionform/InputSectionForm";
 import SelectSectionForm from "../../../components/sectionform/SelectSectionForm";
 import SwitchSectionForm from "../../../components/sectionform/switchSectionForm";
 import "./addEditSubscriber.scss";
 import { t } from "i18next";
+import { toast } from "react-toastify";
+import apiAxios from "../../../utils/apiAxios";
+import CryptoJS from "crypto-js";
+import { secretPass } from "../../../utils/data";
+import { useNavigate } from "react-router-dom";
 
-const AddEditSubscriber = () => {
+const AddEditSubscriber = ({ typePage }) => {
+  const [loading, setLoading] = useState(false);
+  const [managers, setManagers] = useState([]);
+  const [groups, setGroups] = useState([]);
+  const [sites, setSites] = useState([]);
+  const [servicesProfile, setServicesProfile] = useState([]);
+  const navigate = useNavigate();
   const [generalinformation, setGeneralinformation] = useState({
     username: "",
+    enabled: 1,
     password: "",
-    confirmPassword: "",
-    followMe: "",
-    package: "",
-    group: "",
-    site: "",
+    confconfirm_passwordirmPassword: "",
+    parent_id: "",
+    profile_id: "",
+    group_id: "",
+    site_id: "",
     effective: "",
-    passwordForSubscriberPage: "",
-    differentPasswordForSubscriberPage: "",
-    MACLock: "",
+    portal_password: "",
+    use_separate_portal_password: "",
+    mac_auth: "",
   });
   const [personalformation, setPersonalformation] = useState({
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     company: "",
     email: "",
     phone: "",
     city: "",
     address: "",
-    apartmentNumber: "",
+    apartment: "",
     street: "",
-    contractNumber: "",
-    idNumber: "",
-    notice: "",
+    contract_id: "",
+    national_id: "",
+    notes: "",
+    auto_renew: "",
   });
   const [specialDetails, setSpecialDetails] = useState({
-    end: "",
-    entryTimes: "",
-    staticIPAddress: "",
-    mikrotikWinboxGroup: "",
-    mikrotikFramedRoute: "",
-    mikrotikAddressList: "",
-    iPv6Prefix: "",
-    subscriberType: "",
+    expiration: "",
+    simultaneous_sessions: "",
+    static_ip: "",
+    mikrotik_winbox_group: "",
+    mikrotik_framed_route: "",
+    mikrotik_addresslist: "",
+    mikrotik_ipv6_prefix: "",
+    user_type: "",
+    restricted: 0,
   });
 
   const handleChangeGeneralUnformation = (e) => {
@@ -68,6 +82,66 @@ const AddEditSubscriber = () => {
         [e.target.id]: e.target.checked ? e.target.checked : e.target.value,
       };
     });
+  };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await apiAxios.get("api/index/manager");
+        setManagers(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    (async () => {
+      try {
+        const { data } = await apiAxios.get("api/list/profile/5");
+        setServicesProfile(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    (async () => {
+      try {
+        const { data } = await apiAxios.get("api/group");
+        setGroups(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    (async () => {
+      try {
+        const { data } = await apiAxios.get("api/site");
+        setSites(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+
+  const handleForm = async () => {
+    setLoading(true);
+    let encrypted;
+    if (generalinformation && personalformation && specialDetails) {
+      const dataToEncrypt = JSON.stringify({
+        ...generalinformation,
+        ...personalformation,
+        ...specialDetails,
+      });
+      encrypted = CryptoJS.AES.encrypt(dataToEncrypt, secretPass).toString();
+    }
+
+    try {
+      const { data } = await apiAxios.post("api/user", {
+        payload: encrypted,
+      });
+      toast.success("Successful add");
+      navigate("/subscribers");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.reponse.data.message);
+    }
+    setLoading(false);
   };
 
   return (
@@ -98,43 +172,39 @@ const AddEditSubscriber = () => {
           <SelectSectionForm
             label={t("Follow me")}
             type={"text"}
-            value={generalinformation.followMe}
+            value={generalinformation.parent_id}
             onChange={handleChangeGeneralUnformation}
-            id="followMe"
-            options={[
-              { name: "manager_1", value: "manager_1" },
-              { name: "manager_2", value: "manager_2" },
-              { name: "manager_3", value: "manager_3" },
-            ]}
+            id="parent_id"
+            options={managers.map((item) => {
+              return { name: item.username, value: item.id };
+            })}
           />
           <SelectSectionForm
             label={t("The Package")}
-            value={generalinformation.package}
+            value={generalinformation.profile_id}
             onChange={handleChangeGeneralUnformation}
-            id="package"
-            options={[
-              { name: "slow", value: "slow" },
-              { name: "plus", value: "plus" },
-              { name: "standard", value: "standard" },
-            ]}
+            id="profile_id"
+            options={servicesProfile.map((item) => {
+              return { name: item.name, value: item.id };
+            })}
           />
-          <InputSectionForm
+          <SelectSectionForm
             label={t("Group")}
-            type={"text"}
-            value={generalinformation.group}
+            value={generalinformation.group_id}
             onChange={handleChangeGeneralUnformation}
-            id="group"
+            id="group_id"
+            options={groups.map((item) => {
+              return { name: item.name, value: item.id };
+            })}
           />
           <SelectSectionForm
             label={t("The Site")}
-            value={generalinformation.package}
+            value={generalinformation.site_id}
             onChange={handleChangeGeneralUnformation}
-            id="package"
-            options={[
-              { name: "slow", value: "slow" },
-              { name: "plus", value: "plus" },
-              { name: "standard", value: "standard" },
-            ]}
+            id="site_id"
+            options={sites.map((item) => {
+              return { name: item.name, value: item.id };
+            })}
           />
           <SwitchSectionForm
             label={t("Effective")}
@@ -145,21 +215,21 @@ const AddEditSubscriber = () => {
           <InputSectionForm
             label={t("Password for subscriber page")}
             type={"text"}
-            value={generalinformation.passwordForSubscriberPage}
+            value={generalinformation.portal_password}
             onChange={handleChangeGeneralUnformation}
-            id="passwordForSubscriberPage"
+            id="portal_password"
           />
           <SwitchSectionForm
             label={t("MAC Lock")}
-            value={generalinformation.MACLock}
+            value={generalinformation.mac_auth}
             onChange={handleChangeGeneralUnformation}
-            id="MACLock"
+            id="mac_auth"
           />
           <SwitchSectionForm
             label={t("Use a different password for the subscriber page")}
-            value={generalinformation.differentPasswordForSubscriberPage}
+            value={generalinformation.use_separate_portal_password}
             onChange={handleChangeGeneralUnformation}
-            id="differentPasswordForSubscriberPage"
+            id="use_separate_portal_password"
           />
         </div>
       </SectionForm>
@@ -168,16 +238,16 @@ const AddEditSubscriber = () => {
           <InputSectionForm
             label={t("First name")}
             type={"text"}
-            value={personalformation.firstName}
+            value={personalformation.firstname}
             onChange={handleChangePersonalformation}
-            id="firstName"
+            id="firstname"
           />
           <InputSectionForm
             label={t("Last name")}
             type={"text"}
-            value={personalformation.lastName}
+            value={personalformation.lastname}
             onChange={handleChangePersonalformation}
-            id="lastName"
+            id="lastname"
           />
           <InputSectionForm
             label={t("Company")}
@@ -185,13 +255,6 @@ const AddEditSubscriber = () => {
             value={personalformation.company}
             onChange={handleChangePersonalformation}
             id="company"
-          />
-          <InputSectionForm
-            label={t("Email")}
-            type={"text"}
-            value={personalformation.email}
-            onChange={handleChangePersonalformation}
-            id="email"
           />
           <InputSectionForm
             label={t("Email")}
@@ -224,9 +287,9 @@ const AddEditSubscriber = () => {
           <InputSectionForm
             label={t("Apartment number")}
             type={"text"}
-            value={personalformation.apartmentNumber}
+            value={personalformation.apartment}
             onChange={handleChangePersonalformation}
-            id="apartmentNumber"
+            id="apartment"
           />
           <InputSectionForm
             label={t("The street")}
@@ -238,23 +301,29 @@ const AddEditSubscriber = () => {
           <InputSectionForm
             label={t("Contract number")}
             type={"text"}
-            value={personalformation.contractNumber}
+            value={personalformation.contract_id}
             onChange={handleChangePersonalformation}
-            id="contractNumber"
+            id="contract_id"
           />
           <InputSectionForm
             label={t("Id number")}
             type={"text"}
-            value={personalformation.idNumber}
+            value={personalformation.national_id}
             onChange={handleChangePersonalformation}
-            id="idNumber"
+            id="national_id"
           />
           <InputSectionForm
             label={t("Notice")}
             type={"text"}
-            value={personalformation.notice}
+            value={personalformation.notes}
             onChange={handleChangePersonalformation}
-            id="notice"
+            id="notes"
+          />
+          <SwitchSectionForm
+            label={t("Automatic renewal")}
+            value={personalformation.auto_renew}
+            onChange={handleChangeGeneralUnformation}
+            id="auto_renew"
           />
         </div>
       </SectionForm>
@@ -263,67 +332,75 @@ const AddEditSubscriber = () => {
           <InputSectionForm
             label={t("End")}
             type={"date"}
-            value={specialDetails.end}
+            value={specialDetails.expiration}
             onChange={handleChangeSpecialDetails}
-            id="end"
+            id="expiration"
           />
           <InputSectionForm
             label={t("Entry times")}
             type={"text"}
-            value={specialDetails.entryTimes}
+            value={specialDetails.simultaneous_sessions}
             onChange={handleChangeSpecialDetails}
-            id="entryTimes"
+            id="simultaneous_sessions"
           />
           <InputSectionForm
             label={t("Static iP address")}
             type={"text"}
-            value={specialDetails.staticIPAddress}
+            value={specialDetails.static_ip}
             onChange={handleChangeSpecialDetails}
-            id="staticIPAddress"
+            id="static_ip"
           />
           <InputSectionForm
             label={t("Mikrotik Winbox Group")}
             type={"text"}
-            value={specialDetails.mikrotikWinboxGroup}
+            value={specialDetails.mikrotik_winbox_group}
             onChange={handleChangeSpecialDetails}
-            id="mikrotikWinboxGroup"
+            id="mikrotik_winbox_group"
           />
           <InputSectionForm
             label={t("Mikrotik Framed Route")}
             type={"text"}
-            value={specialDetails.mikrotikFramedRoute}
+            value={specialDetails.mikrotik_framed_route}
             onChange={handleChangeSpecialDetails}
-            id="mikrotikFramedRoute"
+            id="mikrotik_framed_route"
           />
           <InputSectionForm
             label={t("Mikrotik Address List")}
             type={"text"}
-            value={specialDetails.mikrotikAddressList}
+            value={specialDetails.mikrotik_addresslist}
             onChange={handleChangeSpecialDetails}
-            id="mikrotikAddressList"
+            id="mikrotik_addresslist"
           />
           <InputSectionForm
             label={t("IPv6 Prefix")}
             type={"text"}
-            value={specialDetails.iPv6Prefix}
+            value={specialDetails.mikrotik_ipv6_prefix}
             onChange={handleChangeSpecialDetails}
-            id="iPv6Prefix"
+            id="mikrotik_ipv6_prefix"
           />
           <SelectSectionForm
             label={t("Subscriber type")}
             type={"text"}
-            value={specialDetails.subscriberType}
+            value={specialDetails.user_type}
             onChange={handleChangeSpecialDetails}
-            id="subscriberType"
+            id="user_type"
             options={[
-              { name: "Regular User", value: "" },
-              { name: "Wireless Access Point", value: "" },
+              { name: "Regular User", value: "Regular User" },
+              { name: "Wireless Access Point", value: "Wireless Access Point" },
             ]}
+          />
+          <SwitchSectionForm
+            label={t("Automatic renewal")}
+            value={specialDetails.restricted}
+            onChange={handleChangeGeneralUnformation}
+            id="restricted"
           />
         </div>
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">{t("OK")}</button>
+        <button className="btn_add" onClick={handleForm}>
+          {t("OK")}
+        </button>
         <button className="btn_close">{t("Cancel")}</button>
       </div>
     </div>

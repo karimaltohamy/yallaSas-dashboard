@@ -36,34 +36,34 @@ const SettingsAcl = () => {
         </HeadTable>
         <MainTable rows={[]} columns={columnsSettingsAcl} />
       </div>
-      <div class="boxs_trees">
-        <div class="row line">
-          <div class="col-12 col-md-5">
-            <div class="box_tree">
-              <div class="head">
-                <i class="fa-solid fa-user"></i>
+      <div className="boxs_trees">
+        <div className="row line">
+          <div className="col-12 col-md-5">
+            <div className="box_tree">
+              <div className="head">
+                <i className="fa-solid fa-user"></i>
                 <h4>{t("Given Permissions")}</h4>
               </div>
-              <div class="box_content"></div>
+              <div className="box_content"></div>
             </div>
           </div>
-          <div class="col-12 col-md-2">
-            <div class="btns">
-              <button class="btn_exchange">
-                <i class="fa-solid fa-chevron-left"></i>
+          <div className="col-12 col-md-2">
+            <div className="btns">
+              <button className="btn_exchange">
+                <i className="fa-solid fa-chevron-left"></i>
               </button>
-              <button class="btn_exchange">
-                <i class="fa-solid fa-chevron-right"></i>
+              <button className="btn_exchange">
+                <i className="fa-solid fa-chevron-right"></i>
               </button>
             </div>
           </div>
-          <div class="col-12 col-md-5">
-            <div class="box_tree">
-              <div class="head">
-                <i class="fa-solid fa-desktop"></i>
+          <div className="col-12 col-md-5">
+            <div className="box_tree">
+              <div className="head">
+                <i className="fa-solid fa-desktop"></i>
                 <h4>{t("Available Permissions")}</h4>
               </div>
-              <div class="box_content"></div>
+              <div className="box_content"></div>
             </div>
           </div>
         </div>

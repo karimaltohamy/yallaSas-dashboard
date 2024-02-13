@@ -107,10 +107,10 @@
         right: 0;
         padding: 15px;
         border-radius: 6px;
-        box-shadow: 5px 5px 12px rgb(206, 208, 221);
+        box-shadow: 5px 5px 12px var(--color-shadow);
         min-width: 170px;
         z-index: 5;
-        background-color: white;
+        background-color: var(--bg-section);
         display: none;
 
         &.ar {
@@ -148,22 +148,22 @@
         }
 
         .title {
-          font-size: 22px;
+          font-size: 20px;
           font-weight: 500;
+          margin-bottom: 8px;
         }
 
         .profile {
-          display: flex;
-          align-items: center;
-          gap: 15px;
-
+          text-align: center;
           img {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
+            margin: auto;
             border-radius: 50%;
           }
 
           .text {
+            margin-top: 5px;
             .name {
               font-weight: 500;
             }
@@ -176,6 +176,7 @@
             .email {
               display: flex;
               align-items: center;
+              justify-content: center;
               gap: 5px;
               font-size: 15px;
               color: gray;
@@ -188,8 +189,8 @@
           padding: 5px;
           width: 100%;
           background-color: transparent;
-          color: $main-color !important;
-          border: 1px solid $main-color;
+          color: $primary-color !important;
+          border: 1px solid $primary-color;
           border-radius: 6px;
           display: block;
           margin-top: 15px;

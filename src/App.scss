@@ -2,6 +2,8 @@ $primary-color: #257e67;
 
 @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap");
 
+@import "./sass/variables.scss";
+
 * {
   margin: 0;
   padding: 0;
@@ -19,7 +21,7 @@ html {
   --text-color: black;
   --box-shadow: 0 5px 8px 0 rgba(188, 193, 200, 0.5);
   --color-sidebar: rgb(129, 129, 129);
-  --color-shadow: rgba(226, 232, 240, 0.5);
+  --color-shadow: rgb(181 193 210 / 60%);
 }
 
 body {
@@ -65,6 +67,10 @@ svg {
 button {
   border: none;
   background-color: transparent;
+}
+
+.text_color {
+  color: $primary-color !important;
 }
 
 .bg_main {
@@ -127,6 +133,29 @@ main {
 
     &.close_sidebar {
       width: 95%;
+    }
+  }
+}
+
+.btns_add {
+  margin-top: 30px;
+  padding-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  button {
+    padding: 5px 30px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+
+    &.btn_add {
+      background-color: $primary-color;
+    }
+
+    &.btn_close {
+      background-color: $main-color;
     }
   }
 }

@@ -8,12 +8,12 @@ const AboutCompany = () => {
   const itemsNev = [
     {
       title: t("About the company"),
-      icon: <i class="fa-solid fa-info"></i>,
+      icon: <i className="fa-solid fa-info"></i>,
       path: "about",
     },
     {
       title: t("Hardware"),
-      icon: <i class="fa-solid fa-server"></i>,
+      icon: <i className="fa-solid fa-server"></i>,
       path: "hardware",
     },
   ];

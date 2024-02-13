@@ -3,12 +3,12 @@ import "./mainBox.scss";
 
 const MainBox = ({ title, children }) => {
   return (
-    <div class="main_box">
-      <div class="head">
+    <div className="main_box">
+      <div className="head">
         <h5>{title}</h5>
       </div>
 
-      <div class="content">{children}</div>
+      <div className="content">{children}</div>
     </div>
   );
 };

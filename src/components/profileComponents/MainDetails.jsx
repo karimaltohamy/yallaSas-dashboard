@@ -1,10 +1,11 @@
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Popup from "../popup/Popup";
 import InputItem from "../popup/inputItem/InputItem";
 import { t } from "i18next";
 
-const MainDetails = () => {
+const MainDetails = ({ subsciberData }) => {
+  const { id } = useParams();
   // opens and setOpnes popups
   const [openChangeName, setOpenChangeName] = useState(false);
   const [openDeposit, setOpenDeposit] = useState(false);
@@ -38,8 +39,9 @@ const MainDetails = () => {
           <div className="image">
             <img src="./images/profile-img.jpeg" alt="" loading="lazy" />
           </div>
-          <h5 className="name">Rick James</h5>
-          <span className="position">Lead Designer / Developer</span>
+          <h5 className="name">
+            {subsciberData.firstname && subsciberData.firstname}
+          </h5>
         </div>
         <div className="box_details">
           <div className="head">
@@ -47,20 +49,20 @@ const MainDetails = () => {
           </div>
           <div className="item">
             <i className="fa-solid fa-phone"></i>
-            <span>0100569856</span>
+            <span>{subsciberData.phone && subsciberData.phone}</span>
           </div>
           <div className="item">
             <i className="fa-solid fa-location-dot"></i>
-            <span>936 Kiehn Route, West Ned</span>
+            <span>{subsciberData.address && subsciberData.address}</span>
           </div>
           <div className="item">
             <i className="fa-regular fa-envelope"></i>
-            <span>example@example.com</span>
+            <span>{subsciberData.email && subsciberData.email}</span>
           </div>
         </div>
         <div className="box_btns_utils">
           <div className="box">
-            <Link to={"/subscribers/activate/:id"} className="item">
+            <Link to={`/subscribers/activate/${id}`} className="item">
               <i className="fa-regular fa-pen-to-square"></i>
               <span>{t("Activate")}</span>
             </Link>
@@ -69,7 +71,7 @@ const MainDetails = () => {
               <span>{t("Issuing an invoice")}</span>
             </Link>
             <Link
-              to={"/subscribers/change-package/:id"}
+              to={`/subscribers/change-package/${id}`}
               href="change-package-subscriber.html"
               className="item"
             >

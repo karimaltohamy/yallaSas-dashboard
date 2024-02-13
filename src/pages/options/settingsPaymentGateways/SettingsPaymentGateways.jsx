@@ -10,106 +10,110 @@ export const SettingsPaymentGateways = () => {
   const [selectSection, setSelectSection] = useState("bKash");
 
   return (
-    <div class="settings_paymentgatemay_section">
-      <div class="row line">
-        <div class="col-12 col-md-4">
-          <div class="boxs">
+    <div className="settings_paymentgatemay_section">
+      <div className="row line">
+        <div className="col-12 col-md-4">
+          <div className="boxs">
             <div
-              class={`box ${selectSection == "bKash" ? "active" : ""}`}
+              className={`box ${selectSection == "bKash" ? "active" : ""}`}
               onClick={() => setSelectSection("bKash")}
             >
-              <div class="head">
-                <h6 class="type_payment">bKash</h6>
-                <span class="country">Bangladesh</span>
+              <div className="head">
+                <h6 className="type_payment">bKash</h6>
+                <span className="country">Bangladesh</span>
               </div>
-              <div class="status">disabled</div>
+              <div className="status">disabled</div>
             </div>
             <div
-              class={`box ${selectSection == "Flutterwave" ? "active" : ""}`}
+              className={`box ${
+                selectSection == "Flutterwave" ? "active" : ""
+              }`}
               onClick={() => setSelectSection("Flutterwave")}
             >
-              <div class="head">
-                <h6 class="type_payment">Flutterwave</h6>
-                <span class="country">Global</span>
+              <div className="head">
+                <h6 className="type_payment">Flutterwave</h6>
+                <span className="country">Global</span>
               </div>
-              <div class="status">disabled</div>
+              <div className="status">disabled</div>
             </div>
             <div
-              class={`box ${selectSection == "FosterPayments" ? "active" : ""}`}
+              className={`box ${
+                selectSection == "FosterPayments" ? "active" : ""
+              }`}
               onClick={() => setSelectSection("FosterPayments")}
             >
-              <div class="head">
-                <h6 class="type_payment">Foster Payments</h6>
-                <span class="country">Bangladesh</span>
+              <div className="head">
+                <h6 className="type_payment">Foster Payments</h6>
+                <span className="country">Bangladesh</span>
               </div>
-              <div class="status">disabled</div>
+              <div className="status">disabled</div>
             </div>
             <div
-              class={`box ${selectSection == "Kushok" ? "active" : ""}`}
+              className={`box ${selectSection == "Kushok" ? "active" : ""}`}
               onClick={() => setSelectSection("Kushok")}
             >
-              <div class="head">
-                <h6 class="type_payment">Kushok</h6>
-                <span class="country">Iraq </span>
+              <div className="head">
+                <h6 className="type_payment">Kushok</h6>
+                <span className="country">Iraq </span>
               </div>
-              <div class="status">disabled</div>
+              <div className="status">disabled</div>
             </div>
             <div
-              class={`box ${selectSection == "PayPal" ? "active" : ""}`}
+              className={`box ${selectSection == "PayPal" ? "active" : ""}`}
               onClick={() => setSelectSection("PayPal")}
             >
-              <div class="head">
-                <h6 class="type_payment">PayPal</h6>
-                <span class="country">Global</span>
+              <div className="head">
+                <h6 className="type_payment">PayPal</h6>
+                <span className="country">Global</span>
               </div>
-              <div class="status enabled">enabled</div>
+              <div className="status enabled">enabled</div>
             </div>
             <div
-              class={`box ${selectSection == "Switch" ? "active" : ""}`}
+              className={`box ${selectSection == "Switch" ? "active" : ""}`}
               onClick={() => setSelectSection("Switch")}
             >
-              <div class="head">
-                <h6 class="type_payment">Switch</h6>
-                <span class="country">Iraq</span>
+              <div className="head">
+                <h6 className="type_payment">Switch</h6>
+                <span className="country">Iraq</span>
               </div>
-              <div class="status">disabled</div>
+              <div className="status">disabled</div>
             </div>
             <div
-              class={`box ${selectSection == "Tasdid" ? "active" : ""}`}
+              className={`box ${selectSection == "Tasdid" ? "active" : ""}`}
               onClick={() => setSelectSection("Tasdid")}
             >
-              <div class="head">
-                <h6 class="type_payment">Tasdid</h6>
-                <span class="country">Iraq</span>
+              <div className="head">
+                <h6 className="type_payment">Tasdid</h6>
+                <span className="country">Iraq</span>
               </div>
-              <div class="status">disabled</div>
+              <div className="status">disabled</div>
             </div>
             <div
-              class={`box ${selectSection == "Voucher" ? "active" : ""}`}
+              className={`box ${selectSection == "Voucher" ? "active" : ""}`}
               onClick={() => setSelectSection("Voucher")}
             >
-              <div class="head">
-                <h6 class="type_payment">Voucher</h6>
-                <span class="country">Global</span>
+              <div className="head">
+                <h6 className="type_payment">Voucher</h6>
+                <span className="country">Global</span>
               </div>
-              <div class="status">disabled</div>
+              <div className="status">disabled</div>
             </div>
             <div
-              class={`box ${selectSection == "ZainCash" ? "active" : ""}`}
+              className={`box ${selectSection == "ZainCash" ? "active" : ""}`}
               onClick={() => setSelectSection("ZainCash")}
             >
-              <div class="head">
-                <h6 class="type_payment">ZainCash</h6>
-                <span class="country">Global</span>
+              <div className="head">
+                <h6 className="type_payment">ZainCash</h6>
+                <span className="country">Global</span>
               </div>
-              <div class="status">disabled</div>
+              <div className="status">disabled</div>
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-8">
+        <div className="col-12 col-md-8">
           <MainSection
             title={"Payment Gateways Settings"}
-            icon={<i class="fa-solid fa-credit-card"></i>}
+            icon={<i className="fa-solid fa-credit-card"></i>}
           >
             {selectSection == "bKash" && (
               <SettingsContent title={"bKash"}>

@@ -16,17 +16,17 @@ const SettingsFreezone = () => {
     <div className="settings_freezone_section">
       <MainSection
         title={t("Free Zone Settings")}
-        icon={<i class="fa-solid fa-asterisk"></i>}
+        icon={<i className="fa-solid fa-asterisk"></i>}
       >
-        <div class="settings_freezone_content">
-          <div class="alert alert-info">
+        <div className="settings_freezone_content">
+          <div className="alert alert-info">
             <p>
               {t(
                 "This feature allows you to exclude some IP ranges from traffic accounting, such as local google traffic or local IPTV service. Enabling it requires enabling Mikrotik IP Accounting service and making it reachable via HTTP."
               )}
             </p>
           </div>
-          <form action="" class="enable_freezone">
+          <form action="" className="enable_freezone">
             <SwitchSectionForm
               label={t("Enable Freezone Traffic")}
               value={enableFreezoneTraffic}
@@ -35,7 +35,7 @@ const SettingsFreezone = () => {
             />
           </form>
 
-          <div class="freezone_table">
+          <div className="freezone_table">
             {t("Name")}
             <table>
               <thead>
@@ -61,16 +61,16 @@ const SettingsFreezone = () => {
                   <td>
                     <input
                       type="range"
-                      class="range"
+                      className="range"
                       id="range_freezone"
                       min="0"
                       max="100"
                     />
-                    <div class="value text-center">%0</div>
+                    <div className="value text-center">%0</div>
                   </td>
                   <td>
                     <button>
-                      <i class="fa-solid fa-floppy-disk save"></i>
+                      <i className="fa-solid fa-floppy-disk save"></i>
                     </button>
                   </td>
                 </tr>

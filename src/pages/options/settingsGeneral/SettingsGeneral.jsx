@@ -3,6 +3,7 @@ import SectionForm from "../../../components/sectionform/SectionForm";
 import FileInput from "../../../components/sectionform/FileInput";
 import SwitchSectionForm from "../../../components/sectionform/switchSectionForm";
 import SelectSectionForm from "../../../components/sectionform/SelectSectionForm";
+import { t } from "i18next";
 
 const SettingsGeneral = () => {
   const [generalSettings, setGeneralSettings] = useState({
@@ -135,8 +136,8 @@ const SettingsGeneral = () => {
         </div>
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">OK</button>
-        <button className="btn_close">Cancel</button>
+        <button className="btn_add">{t("OK")}</button>
+        <button className="btn_close">{t("global_button_cancel")}</button>
       </div>
     </div>
   );

@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeadTable from "../../../components/headTable/HeadTable";
 import { Link } from "react-router-dom";
 import MainTable from "../../../components/mainTable/MainTable";
-import { columnsSubscibers } from "../../../utils/columnsTables";
+import { columnsOnlineSubscibers } from "../../../utils/columnsTables";
 import { useTranslation } from "react-i18next";
+import CryptoJS from "crypto-js";
+import apiAxios from "../../../utils/apiAxios";
+import { secretPass } from "../../../utils/data";
 
 const OnlineSubscribers = () => {
   const { t } = useTranslation();
+  const [onlineSubscribers, setOnlineSubscribers] = useState([]);
 
   const statusFilter = [
     {
@@ -34,6 +38,40 @@ const OnlineSubscribers = () => {
       name: t("Online, unblocked"),
     },
   ];
+
+  useEffect(() => {
+    (async () => {
+      let encrypted;
+      const dataToEncrypt = JSON.stringify({
+        page: 1,
+        count: 10,
+        sortBy: null,
+        direction: "asc",
+        search: "",
+        columns: [
+          "id",
+          "username",
+          "acctoutputoctets",
+          "acctinputoctets",
+          "user_profile_name",
+          "framedipaddress",
+          "callingstationid",
+          "acctsessiontime",
+          "oui",
+        ],
+      });
+      encrypted = CryptoJS.AES.encrypt(dataToEncrypt, secretPass).toString();
+
+      try {
+        const { data } = await apiAxios.post("api/index/online", {
+          payload: encrypted,
+        });
+        setOnlineSubscribers(data.data);
+      } catch (error) {
+        console.log();
+      }
+    })();
+  }, []);
 
   return (
     <div className="main_content_tables">
@@ -70,7 +108,7 @@ const OnlineSubscribers = () => {
             </div>
           </div>
         </HeadTable>
-        <MainTable rows={[]} columns={columnsSubscibers} />
+        <MainTable rows={onlineSubscribers} columns={columnsOnlineSubscibers} />
       </div>
     </div>
   );

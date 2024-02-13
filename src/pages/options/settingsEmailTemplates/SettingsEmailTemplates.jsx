@@ -8,23 +8,23 @@ const SettingsEmailTemplates = () => {
 
   return (
     <div className="settings_email_templates m-[10px]">
-      <div class="dashboard_manager_content">
-        <div class="selected_dashboard">
+      <div className="dashboard_manager_content">
+        <div className="selected_dashboard">
           <form action="">
             <select name="" id="select-dashboard">
               <option value="">select template</option>
               <option value="">add</option>
             </select>
           </form>
-          <div class="utils_form">
-            <button class="btn_utils btn_add">
-              <i class="fa-solid fa-plus"></i>
+          <div className="utils_form">
+            <button className="btn_utils btn_add">
+              <i className="fa-solid fa-plus"></i>
             </button>
-            <button class="btn_utils btn_save">
-              <i class="fa-solid fa-floppy-disk"></i>
+            <button className="btn_utils btn_save">
+              <i className="fa-solid fa-floppy-disk"></i>
             </button>
-            <button class="btn_utils btn_remove">
-              <i class="fa-solid fa-trash"></i>
+            <button className="btn_utils btn_remove">
+              <i className="fa-solid fa-trash"></i>
             </button>
           </div>
         </div>

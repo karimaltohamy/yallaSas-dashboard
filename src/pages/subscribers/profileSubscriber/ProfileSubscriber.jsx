@@ -66,6 +66,7 @@ const ProfileSubscriber = () => {
       path: "quotas",
     },
   ];
+
   return (
     <div className="content_page">
       <NavProfile itemsNev={itemsNev} />

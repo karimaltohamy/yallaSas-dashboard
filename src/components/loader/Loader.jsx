@@ -3,11 +3,11 @@ import "./loader.scss";
 
 const Loader = () => {
   return (
-    <div className="absolute top-[50%] left-[50%]">
-      <div class="loader">
-        <li class="ball"></li>
-        <li class="ball"></li>
-        <li class="ball"></li>
+    <div className="container_loader absolute top-[50%] left-[50%]">
+      <div className="loader">
+        <li className="ball"></li>
+        <li className="ball"></li>
+        <li className="ball"></li>
       </div>
     </div>
   );

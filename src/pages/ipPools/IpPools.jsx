@@ -12,7 +12,7 @@ const IpPools = () => {
         <HeadTable
           path={t("IP Pools")}
           title={t("IP Pools")}
-          iconHead={<i class="ng-tns-c118-58 fa-cabinet-filing fal"></i>}
+          iconHead={<i className="ng-tns-c118-58 fa-cabinet-filing fal"></i>}
         >
           <div className="content">
             <Link to={"/add-ip-pools"} className="item">

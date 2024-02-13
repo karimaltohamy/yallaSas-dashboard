@@ -1,5 +1,9 @@
 @import "../../sass/variables.scss";
 
+.container_loader {
+  background-color: var(--bg-main);
+}
+
 .loader {
   width: 60px;
   display: flex;

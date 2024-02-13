@@ -9,26 +9,26 @@ const SettingsNetwork = () => {
     <div className="m-[10px]">
       <MainSection
         title={t("Network Settings")}
-        icon={<i class="fa-solid fa-asterisk"></i>}
+        icon={<i className="fa-solid fa-asterisk"></i>}
       >
-        <div class="settings_network_content">
-          <div class="global_settings">
-            <h4 class="title">{t("Global Settings")}</h4>
-            <form action="" class="global_form">
+        <div className="settings_network_content">
+          <div className="global_settings">
+            <h4 className="title">{t("Global Settings")}</h4>
+            <form action="" className="global_form">
               <InputItem label={t("Hostname")} />
               <InputItem label={t("Default Gateway")} />
               <InputItem label={t("DNS(s)")} />
             </form>
           </div>
-          <div class="network_interfaces">
-            <h4 class="title">{t("Network Interfaces")}</h4>
+          <div className="network_interfaces">
+            <h4 className="title">{t("Network Interfaces")}</h4>
 
-            <button class="btn_add_col">
-              <i class="fa-solid fa-plus"></i>
+            <button className="btn_add_col">
+              <i className="fa-solid fa-plus"></i>
               <span>{t("Add Adress")}</span>
             </button>
 
-            <div class="network_table">
+            <div className="network_table">
               <table>
                 <thead>
                   <tr>
@@ -53,12 +53,12 @@ const SettingsNetwork = () => {
                       <input type="text" placeholder="x.x.x" />
                     </td>
                     <td>
-                      <div class="btns">
+                      <div className="btns">
                         <button>
-                          <i class="fa-solid fa-check"></i>
+                          <i className="fa-solid fa-check"></i>
                         </button>
                         <button>
-                          <i class="fa-solid fa-xmark"></i>
+                          <i className="fa-solid fa-xmark"></i>
                         </button>
                       </div>
                     </td>
@@ -68,9 +68,9 @@ const SettingsNetwork = () => {
                     <td>0</td>
                     <td>1</td>
                     <td>
-                      <div class="btns">
+                      <div className="btns">
                         <button>
-                          <i class="fa-solid fa-xmark"></i>
+                          <i className="fa-solid fa-xmark"></i>
                         </button>
                       </div>
                     </td>
@@ -79,15 +79,15 @@ const SettingsNetwork = () => {
               </table>
             </div>
           </div>
-          <div class="static_interfaces">
-            <h4 class="title">{t("Static Routes")}</h4>
+          <div className="static_interfaces">
+            <h4 className="title">{t("Static Routes")}</h4>
 
-            <button class="btn_add_col">
-              <i class="fa-solid fa-plus"></i>
+            <button className="btn_add_col">
+              <i className="fa-solid fa-plus"></i>
               <span>{t("Add Route")}</span>
             </button>
 
-            <div class="network_table">
+            <div className="network_table">
               <table>
                 <thead>
                   <tr>
@@ -109,12 +109,12 @@ const SettingsNetwork = () => {
                       <input type="text" placeholder="x.x.x" />
                     </td>
                     <td>
-                      <div class="btns">
+                      <div className="btns">
                         <button>
-                          <i class="fa-solid fa-check"></i>
+                          <i className="fa-solid fa-check"></i>
                         </button>
                         <button>
-                          <i class="fa-solid fa-xmark"></i>
+                          <i className="fa-solid fa-xmark"></i>
                         </button>
                       </div>
                     </td>
@@ -124,9 +124,9 @@ const SettingsNetwork = () => {
                     <td>0</td>
                     <td>1</td>
                     <td>
-                      <div class="btns">
+                      <div className="btns">
                         <button>
-                          <i class="fa-solid fa-xmark"></i>
+                          <i className="fa-solid fa-xmark"></i>
                         </button>
                       </div>
                     </td>
@@ -136,8 +136,8 @@ const SettingsNetwork = () => {
             </div>
           </div>
 
-          <button class="btn_saveChanges">
-            <i class="fa-regular fa-floppy-disk"></i>
+          <button className="btn_saveChanges">
+            <i className="fa-regular fa-floppy-disk"></i>
             {t("Save")}
           </button>
         </div>

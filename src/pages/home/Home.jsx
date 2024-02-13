@@ -1,92 +1,180 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MainBox from "../../components/mainBox/MainBox";
 import ChartLine from "../../components/charts/ChartLine";
 import ProgressLine from "../../components/charts/ProgressLine";
 import { useTranslation } from "react-i18next";
+import apiAxios from "../../utils/apiAxios";
+import CryptoJS from "crypto-js";
+import { secretPass } from "../../utils/data";
 
 const Home = () => {
   const { t } = useTranslation();
+  const [subscribers, setSubscribers] = useState({});
+  const [onlineReport, setOnlineRport] = useState({});
+  const [finance, setFinance] = useState({});
+  const [systemHealth, setSystemHealth] = useState({});
+  const [cpuUsage, setCpuUsage] = useState("");
+  const [diskUsage, setDiskUsage] = useState("");
+  const [memoryUsage, setMemoryUsage] = useState("");
+  const [typeOnlineReport, setTypeOnlineReport] = useState("monthly");
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await apiAxios.get(
+          "api/advancedDashboard/subscribers"
+        );
+        console.log(data);
+        setSubscribers(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    (async () => {
+      let encrypted;
+      const dataToEncrypt = JSON.stringify("monthly");
+      encrypted = CryptoJS.AES.encrypt(dataToEncrypt, secretPass).toString();
+      try {
+        const { data } = await apiAxios.post("api/onlineReport?type=hourly", {
+          payload: encrypted,
+        });
+        console.log(data);
+        setOnlineRport(data.data);
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
+    })();
+    (async () => {
+      try {
+        const { data } = await apiAxios.get("api/advancedDashboard/finance");
+        console.log(data);
+        setFinance(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    (async () => {
+      try {
+        const { data } = await apiAxios.get(
+          "api/advancedDashboard/systemHealth"
+        );
+        console.log(data);
+        setSystemHealth(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    (async () => {
+      try {
+        const { data } = await apiAxios.get("api/advancedDashboard/CpuUsage");
+        console.log(data);
+        setCpuUsage(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    (async () => {
+      try {
+        const { data } = await apiAxios.get("api/advancedDashboard/DiskUsage");
+        console.log(data);
+        setDiskUsage(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    (async () => {
+      try {
+        const { data } = await apiAxios.get(
+          "api/advancedDashboard/MemoryUsage"
+        );
+        console.log(data);
+        setMemoryUsage(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
 
   return (
     <div className="home_section my-[12px] mx-[10px]">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-[25px] mb-[25px]">
         <MainBox title={t("Subscribers")}>
-          <div class="items">
-            <div class="item">
-              <div class="text">
-                <div class="icon">
-                  <i class="fa-solid fa-people-group"></i>
+          <div className="items">
+            <div className="item">
+              <div className="text">
+                <div className="icon">
+                  <i className="fa-solid fa-people-group"></i>
                 </div>
-                <h4>{"Number of subscribers"}</h4>
+                <h4>{t("Number of subscribers")}</h4>
               </div>
-              <div class="num">4</div>
+              <div className="num">{subscribers.total}</div>
             </div>
-            <div class="item">
-              <div class="text">
-                <div class="icon">
-                  <i class="fa-regular fa-address-book"></i>
+            <div className="item">
+              <div className="text">
+                <div className="icon">
+                  <i className="fa-regular fa-address-book"></i>
                 </div>
-                <h4>{"Callers"}</h4>
+                <h4>{t("Callers")}</h4>
               </div>
-              <div class="num">4</div>
+              <div className="num">{subscribers.online}</div>
             </div>
-            <div class="item">
-              <div class="text">
-                <div class="icon">
-                  <i class="fa-solid fa-people-line"></i>
+            <div className="item">
+              <div className="text">
+                <div className="icon">
+                  <i className="fa-solid fa-people-line"></i>
                 </div>
-                <h4>{"Almost finished"}</h4>
+                <h4>{t("Almost finished")}</h4>
               </div>
-              <div class="num">4</div>
+              <div className="num">{subscribers.expired}</div>
             </div>
-            <div class="item">
-              <div class="text">
-                <div class="icon">
-                  <i class="fa-solid fa-people-roof"></i>
+            <div className="item">
+              <div className="text">
+                <div className="icon">
+                  <i className="fa-solid fa-people-roof"></i>
                 </div>
-                <h4>{"Active subscribers"}</h4>
+                <h4>{t("Active subscribers")}</h4>
               </div>
-              <div class="num">0</div>
+              <div className="num">{subscribers.active}</div>
             </div>
-            <div class="item">
-              <div class="text">
-                <div class="icon">
-                  <i class="fa-solid fa-person-falling"></i>
+            <div className="item">
+              <div className="text">
+                <div className="icon">
+                  <i className="fa-solid fa-person-falling"></i>
                 </div>
-                <h4>{"Their subscription has expired"}</h4>
+                <h4>{t("Expiring Today")}</h4>
               </div>
-              <div class="num">3</div>
+              <div className="num">{subscribers.expiring_today}</div>
             </div>
-            <div class="item">
-              <div class="text">
-                <div class="icon">
-                  <i class="fa-solid fa-users-slash"></i>
+            <div className="item">
+              <div className="text">
+                <div className="icon">
+                  <i className="fa-solid fa-users-slash"></i>
                 </div>
-                <h4>{"Their subscription ends"}</h4>
+                <h4>{t("About to finish")}</h4>
               </div>
-              <div class="num">1</div>
+              <div className="num">{subscribers.expiring_soon}</div>
             </div>
-            <div class="item">
-              <div class="text">
-                <div class="icon">
-                  <i class="fa-solid fa-person-military-pointing"></i>
+            <div className="item">
+              <div className="text">
+                <div className="icon">
+                  <i className="fa-solid fa-person-military-pointing"></i>
                 </div>
-                <h4>{"Managers"}</h4>
+                <h4>{t("Managers")}</h4>
               </div>
-              <div class="num">5</div>
+              <div className="num">{subscribers.managers}</div>
             </div>
-            <div class="item">
-              <div class="text">
-                <div class="icon">
-                  <i class="fa-solid fa-signal"></i>
+            <div className="item">
+              <div className="text">
+                <div className="icon">
+                  <i className="fa-solid fa-signal"></i>
                 </div>
-                <h4>{"Online FUP"}</h4>
+                <h4>{t("Online FUP")}</h4>
               </div>
-              <div class="num">10</div>
+              <div className="num">{subscribers.fup}</div>
             </div>
           </div>
         </MainBox>
-        <MainBox title={t("Callers")}>
+        <MainBox title={t("Online User")}>
           <div className="h-[380px]">
             <ChartLine />
           </div>
@@ -94,118 +182,127 @@ const Home = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-[30px] mb-[25px]">
         <MainBox title={t("Financial accounts")}>
-          <div class="items">
-            <div class="item">
-              <div class="text">
-                <div class="icon">
-                  <i class="fa-solid fa-money-check-dollar"></i>
+          <div className="items">
+            <div className="item">
+              <div className="text">
+                <div className="icon">
+                  <i className="fa-solid fa-money-check-dollar"></i>
                 </div>
                 <h4>{t("Balance")}</h4>
               </div>
-              <div class="num">$ -2,011,721.00</div>
+              <div className="num">{finance.balance}</div>
             </div>
-            <div class="item">
-              <div class="text">
-                <div class="icon">
-                  <i class="fa-solid fa-braille"></i>
+            <div className="item">
+              <div className="text">
+                <div className="icon">
+                  <i className="fa-solid fa-braille"></i>
                 </div>
-                <h4>{t("Encouraging points")}</h4>
+                <h4>{t("Reward Points")}</h4>
               </div>
-              <div class="num">0</div>
+              <div className="num">{finance.reward_points}</div>
             </div>
-            <div class="item">
-              <div class="text">
-                <div class="icon">
-                  <i class="fa-solid fa-fire"></i>
+            <div className="item">
+              <div className="text">
+                <div className="icon">
+                  <i className="fa-solid fa-fire"></i>
                 </div>
                 <h4>{t("Activities today")}</h4>
               </div>
-              <div class="num">10</div>
+              <div className="num">{finance.activations}</div>
             </div>
-            <div class="item">
-              <div class="text">
-                <div class="icon">
-                  <i class="fa-solid fa-cash-register"></i>
+            <div className="item">
+              <div className="text">
+                <div className="icon">
+                  <i className="fa-solid fa-cash-register"></i>
                 </div>
                 <h4>{t("For new registrations")}</h4>
               </div>
-              <div class="num">9</div>
+              <div className="num">{finance.registrations}</div>
             </div>
-            <div class="item">
-              <div class="text">
-                <div class="icon">
-                  <i class="fa-solid fa-wallet"></i>
+            <div className="item">
+              <div className="text">
+                <div className="icon">
+                  <i className="fa-solid fa-wallet"></i>
                 </div>
-                <h4>{t("Debts owed")}</h4>
+                <h4>{t("Outstanding Debts")}</h4>
               </div>
-              <div class="num">$ 0.00</div>
+              <div className="num">{finance.outstanding_debts}</div>
             </div>
-            <div class="item">
-              <div class="text">
-                <div class="icon">
-                  <i class="fa-solid fa-receipt"></i>
+            <div className="item">
+              <div className="text">
+                <div className="icon">
+                  <i className="fa-solid fa-receipt"></i>
                 </div>
-                <h4>{t("Financial Claims")}</h4>
+                <h4>{t("Outstanding Claims")}</h4>
               </div>
-              <div class="num">$ 0.00</div>
+              <div className="num">{finance.outstanding_claims}</div>
             </div>
           </div>
         </MainBox>
         <MainBox title={t("System Status")}>
-          <div class="items">
-            <div class="item">
-              <div class="text">
-                <div class="icon">
-                  <i class="fa-solid fa-business-time"></i>
+          <div className="items">
+            <div className="item">
+              <div className="text">
+                <div className="icon">
+                  <i className="fa-solid fa-business-time"></i>
                 </div>
                 <h4>{t("System operating time")}</h4>
               </div>
-              <div class="num">575 days 16 hours 11 min</div>
+              <div className="num">{systemHealth.uptime}</div>
             </div>
-            <div class="item">
-              <div class="text">
-                <div class="icon">
-                  <i class="fa-regular fa-hard-drive"></i>
+            <div className="item">
+              <div className="text">
+                <div className="icon">
+                  <i className="fa-regular fa-hard-drive"></i>
                 </div>
                 <h4>{t("Backup Storage")}</h4>
               </div>
-              <div class="num">None, using system disk</div>
+              <div className="num">{systemHealth.backup}</div>
             </div>
-            <div class="item">
-              <div class="text">
-                <div class="icon">
-                  <i class="fa-solid fa-server"></i>
+            <div className="item">
+              <div className="text">
+                <div className="icon">
+                  <i className="fa-solid fa-server"></i>
                 </div>
                 <h4>{t("Network Status")}</h4>
               </div>
-              <div class="num">Internet Reachable</div>
+              <div className="num">{systemHealth.network}</div>
             </div>
-            <div class="item">
-              <div class="text">
-                <div class="icon">
-                  <i class="fa-solid fa-database"></i>
+            <div className="item">
+              <div className="text">
+                <div className="icon">
+                  <i className="fa-solid fa-database"></i>
                 </div>
                 <h4>{t("Database time")}</h4>
               </div>
-              <div class="num">2023-09-03 15:22:21</div>
+              <div className="num">{systemHealth.db_time}</div>
             </div>
-            <div class="item">
-              <div class="text">
-                <div class="icon">
-                  <i class="fa-solid fa-chart-area"></i>
+            <div className="item">
+              <div className="text">
+                <div className="icon">
+                  <i className="fa-solid fa-chart-area"></i>
                 </div>
-                <h4>{t("Region")}</h4>
+                <h4>{t("Time Zone")}</h4>
               </div>
-              <div class="num">Asia/Baghdad</div>
+              <div className="num">{systemHealth.timezone}</div>
             </div>
-            <div class="item">
-              <div class="text">
-                <div class="icon">
-                  <i class="fa-regular fa-id-card"></i>
+            <div className="item">
+              <div className="text">
+                <div className="icon">
+                  <i className="fa-solid fa-chart-area"></i>
+                </div>
+                <h4>{t("System Version")}</h4>
+              </div>
+              <div className="num">{systemHealth.version}</div>
+            </div>
+            <div className="item">
+              <div className="text">
+                <div className="icon">
+                  <i className="fa-regular fa-id-card"></i>
                 </div>
                 <h4>{t("System License")}</h4>
               </div>
-              <div class="num">active</div>
+              <div className="num">{systemHealth.license}</div>
             </div>
           </div>
         </MainBox>
@@ -213,17 +310,17 @@ const Home = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px]">
         <MainBox title={t("Processor")}>
           <div className="w-[300px] h-[300px] mx-auto">
-            <ProgressLine />
+            <ProgressLine percentage={cpuUsage} />
           </div>
         </MainBox>
         <MainBox title={t("Random Memory")}>
           <div className="w-[300px] h-[300px] mx-auto">
-            <ProgressLine />
+            <ProgressLine percentage={memoryUsage} />
           </div>
         </MainBox>
         <MainBox title={t("Storage unit")}>
           <div className="w-[300px] h-[300px] mx-auto">
-            <ProgressLine />
+            <ProgressLine percentage={diskUsage} />
           </div>
         </MainBox>
       </div>

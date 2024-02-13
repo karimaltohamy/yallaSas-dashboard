@@ -1,7 +1,8 @@
 import React, { Fragment, Suspense } from "react";
 import Sidebar from "../components/sidebar/Sidebar";
 import Header from "../components/header/Header";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+const Login = React.lazy(() => import("../pages/login/Login"));
 const Home = React.lazy(() => import("../pages/home/Home"));
 const Subscribers = React.lazy(() =>
   import("../pages/subscribers/Subscribers")
@@ -298,17 +299,34 @@ const Hardware = React.lazy(() => import("../pages/aboutCompany/Hardware"));
 const Loader = React.lazy(() => import("../components/loader/Loader"));
 
 const Layout = () => {
+  const location = useLocation();
   return (
     <main>
-      <Sidebar />
+      {!location.pathname.includes("login") && <Sidebar />}
       <div className="main_content_page">
-        <Header />
+        {!location.pathname.includes("login") && <Header />}
         <Routes>
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<Loader />}>
+                <Navigate to={"/home"} />
+              </Suspense>
+            }
+          />
           <Route
             path="/home"
             element={
               <Suspense fallback={<Loader />}>
                 <Home />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <Suspense fallback={<Loader />}>
+                <Login />
               </Suspense>
             }
           />
@@ -420,10 +438,10 @@ const Layout = () => {
             />
           </Route>
           <Route
-            path="/subscribers/add/:id"
+            path="/subscribers/add"
             element={
               <Suspense fallback={<Loader />}>
-                <AddEditSubscriber />
+                <AddEditSubscriber typePage={"addPage"} />
               </Suspense>
             }
           />

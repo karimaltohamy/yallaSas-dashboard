@@ -7,23 +7,23 @@ import { t } from "i18next";
 
 const SettingsSites = () => {
   return (
-    <div class="sites_section">
-      <div class="sites_content mb-3">
-        <div class="selected_dashboard">
+    <div className="sites_section">
+      <div className="sites_content mb-3">
+        <div className="selected_dashboard">
           <form action="">
             <select name="" id="select-dashboard">
               <option value="">_default</option>
             </select>
           </form>
-          <div class="utils_form">
-            <button class="btn_utils btn_add">
-              <i class="fa-solid fa-plus"></i>
+          <div className="utils_form">
+            <button className="btn_utils btn_add">
+              <i className="fa-solid fa-plus"></i>
             </button>
-            <button class="btn_utils btn_save">
-              <i class="fa-solid fa-floppy-disk"></i>
+            <button className="btn_utils btn_save">
+              <i className="fa-solid fa-floppy-disk"></i>
             </button>
-            <button class="btn_utils btn_remove">
-              <i class="fa-solid fa-trash"></i>
+            <button className="btn_utils btn_remove">
+              <i className="fa-solid fa-trash"></i>
             </button>
           </div>
         </div>
@@ -44,7 +44,7 @@ const SettingsSites = () => {
         <InputSectionForm label={t("Support Email")} />
         <SwitchSectionForm label={t("Enabled")} />
         <FileInput label={t("Towers from which entry is permitted")} />
-        <button class="btn_reset_background">
+        <button className="btn_reset_background">
           {t("Reset Background Image")}
         </button>
       </SectionForm>

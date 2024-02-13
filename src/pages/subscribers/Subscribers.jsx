@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeadTable from "../../components/headTable/HeadTable";
 import MainTable from "../../components/mainTable/MainTable";
 import { mockDataSubscribes } from "../../utils/mockData";
@@ -8,9 +8,14 @@ import InputItem from "../../components/popup/inputItem/InputItem";
 import SelectItem from "../../components/popup/selectItem/SelectItem";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import apiAxios from "../../utils/apiAxios";
+import { secretPass } from "../../utils/data";
+import CryptoJS from "crypto-js";
 
 const Subscribers = () => {
   const { t } = useTranslation();
+  const [subscribers, setSubscribers] = useState([]);
+  const [selectedRowData, setSelectedRowData] = useState([]);
 
   // opens and setOpnes popups
   const [openChangeName, setOpenChangeName] = useState(false);
@@ -90,6 +95,40 @@ const Subscribers = () => {
     console.log({});
   };
 
+  useEffect(() => {
+    (async () => {
+      let encrypted;
+      const dataToEncrypt = JSON.stringify({
+        page: 1,
+        count: 10,
+        sortBy: "username",
+        direction: "asc",
+        search: "",
+        columns: [
+          "idx",
+          "username",
+          "firstname",
+          "lastname",
+          "expiration",
+          "parent_username",
+          "name",
+          "loan_balance",
+          "traffic",
+          "remaining_days",
+        ],
+      });
+      encrypted = CryptoJS.AES.encrypt(dataToEncrypt, secretPass).toString();
+      try {
+        const { data } = await apiAxios.post("api/index/user", {
+          payload: encrypted,
+        });
+        setSubscribers(data.data);
+      } catch (error) {
+        console.log();
+      }
+    })();
+  }, []);
+
   return (
     <div className="main_content_tables">
       <div className="conetnt_table">
@@ -100,11 +139,17 @@ const Subscribers = () => {
           iconHead={<i className="fa-solid fa-people-group"></i>}
         >
           <div className="content">
-            <Link to={"/subscribers/add/1"} className="item">
+            <Link to={"/subscribers/add"} className="item">
               <i className="fa-solid fa-plus"></i>
               <span>{t("Add")}</span>
             </Link>
-            <Link to={"/subscribers/1"} className="item">
+            <Link
+              to={
+                selectedRowData.length > 0 &&
+                `subscribers/${selectedRowData[0]}/edit`
+              }
+              className="item"
+            >
               <i className="fa-regular fa-pen-to-square"></i>
               <span>{t("Edit")}</span>
             </Link>
@@ -122,11 +167,23 @@ const Subscribers = () => {
               <i className="fa-solid fa-person-chalkboard"></i>
               <span>{t("Add data balance")}</span>
             </div>
-            <Link to={"/subscribers/activate/1"} className="item">
+            <Link
+              to={
+                selectedRowData.length > 0 &&
+                `/subscribers/activate/${selectedRowData[0]}`
+              }
+              className="item"
+            >
               <i className="fa-solid fa-play"></i>
               <span>Activate</span>
             </Link>
-            <Link to={"/subscribers/extend/1"} className="item">
+            <Link
+              to={
+                selectedRowData.length > 0 &&
+                `/subscribers/extend/${selectedRowData[0]}`
+              }
+              className="item"
+            >
               <i className="fa-solid fa-star-of-life"></i>
               <span>{t("extension")}</span>
             </Link>
@@ -144,11 +201,23 @@ const Subscribers = () => {
               <i className="fa-light fa-puzzle-piece"></i>
               <span> {t("compensation")}</span>
             </div>
-            <Link to={"/subscribers/addon/1"} className="item">
+            <Link
+              to={
+                selectedRowData.length > 0 &&
+                `/subscribers/addon/${selectedRowData[0]}`
+              }
+              className="item"
+            >
               <i className="fa-solid fa-star-of-life"></i>
               <span>{t("Purchase additional service")}</span>
             </Link>
-            <Link to={"/subscribers/change-package/:id"} className="item">
+            <Link
+              to={
+                selectedRowData.length > 0 &&
+                `/subscribers/change-package/${selectedRowData[0]}`
+              }
+              className="item"
+            >
               <i className="fa-light fa-puzzle-piece"></i>
               <span>{t("Change the package")}</span>
             </Link>
@@ -183,7 +252,11 @@ const Subscribers = () => {
             </div>
           </div>
         </HeadTable>
-        <MainTable rows={mockDataSubscribes} columns={columnsSubscibers} />
+        <MainTable
+          rows={subscribers}
+          columns={columnsSubscibers}
+          setSelectedRowData={setSelectedRowData}
+        />
       </div>
       {/* popup change name*/}
       <Popup

@@ -1,12 +1,14 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "./sidebar.scss";
 import logo from "../../images/logo.png";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import apiAxios from "../../utils/apiAxios";
 
 const Sidebar = () => {
   const [openLinksList, setOpenLinksList] = useState(null);
   const { t } = useTranslation();
+  const [menu, setMenu] = useState([]);
 
   const toggleList = (index) => {
     if (openLinksList === index) {
@@ -46,7 +48,7 @@ const Sidebar = () => {
         },
         {
           titleLink: t("Online"),
-          pathLink: "subscribers-online",
+          pathLink: "/subscribers-online",
         },
         {
           titleLink: t("Compensations"),
@@ -388,6 +390,16 @@ const Sidebar = () => {
     },
   ];
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await apiAxios.get("api/resources/menu");
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+
   return (
     <Fragment>
       <div className="overflow_sidebar"></div>
@@ -415,7 +427,7 @@ const Sidebar = () => {
                 );
               } else {
                 return (
-                  <div className="mini_list">
+                  <div className="mini_list" key={index}>
                     <div
                       className={`link_item ${
                         openLinksList === index ? "active" : ""
