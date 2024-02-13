@@ -24,7 +24,6 @@ const Home = () => {
         const { data } = await apiAxios.get(
           "api/advancedDashboard/subscribers"
         );
-        console.log(data);
         setSubscribers(data.data);
       } catch (error) {
         console.log(error);
@@ -38,7 +37,6 @@ const Home = () => {
         const { data } = await apiAxios.post("api/onlineReport?type=hourly", {
           payload: encrypted,
         });
-        console.log(data);
         setOnlineRport(data.data);
       } catch (error) {
         console.log(error.response.data.message);
@@ -47,7 +45,6 @@ const Home = () => {
     (async () => {
       try {
         const { data } = await apiAxios.get("api/advancedDashboard/finance");
-        console.log(data);
         setFinance(data.data);
       } catch (error) {
         console.log(error);
@@ -58,7 +55,6 @@ const Home = () => {
         const { data } = await apiAxios.get(
           "api/advancedDashboard/systemHealth"
         );
-        console.log(data);
         setSystemHealth(data.data);
       } catch (error) {
         console.log(error);
@@ -67,7 +63,6 @@ const Home = () => {
     (async () => {
       try {
         const { data } = await apiAxios.get("api/advancedDashboard/CpuUsage");
-        console.log(data);
         setCpuUsage(data.data);
       } catch (error) {
         console.log(error);
@@ -76,7 +71,6 @@ const Home = () => {
     (async () => {
       try {
         const { data } = await apiAxios.get("api/advancedDashboard/DiskUsage");
-        console.log(data);
         setDiskUsage(data.data);
       } catch (error) {
         console.log(error);
@@ -87,7 +81,6 @@ const Home = () => {
         const { data } = await apiAxios.get(
           "api/advancedDashboard/MemoryUsage"
         );
-        console.log(data);
         setMemoryUsage(data.data);
       } catch (error) {
         console.log(error);
