@@ -2,41 +2,40 @@
 
 .container_loader {
   background-color: var(--bg-main);
-}
-
-.loader {
-  width: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.685);
   display: flex;
-  justify-content: space-evenly;
+  align-items: center;
+  justify-content: center;
+  z-index: 100000;
 }
 
-.ball {
-  list-style: none;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: #e5e5e5;
+.custom-loader {
+  width: 120px;
+  height: 22px;
+  border-radius: 20px;
+  color: $primary-color;
+  border: 2px solid;
+  position: relative;
 }
 
-.ball:nth-child(1) {
-  animation: bounce-1 2.1s ease-in-out infinite;
+.custom-loader::before {
+  content: "";
+  position: absolute;
+  margin: 2px;
+  inset: 0 100% 0 0;
+  border-radius: inherit;
+  background: $primary-color;
+  animation: p6 2s infinite;
 }
 
-@keyframes bounce-1 {
-  50% {
-    transform: translateY(-18px);
-    background-color: $primary-color;
-  }
-}
-
-.ball:nth-child(2) {
-  animation: bounce-3 2.1s ease-in-out 0.3s infinite;
-}
-
-@keyframes bounce-2 {
-  50% {
-    transform: translateY(-18px);
-    background-color: $primary-color;
+@keyframes p6 {
+  100% {
+    inset: 0;
   }
 }
 

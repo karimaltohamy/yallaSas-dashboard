@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import HeadTable from "../../components/headTable/HeadTable";
 import MainTable from "../../components/mainTable/MainTable";
-import { mockDataSubscribes } from "../../utils/mockData";
 import { columnsSubscibers } from "../../utils/columnsTables";
 import Popup from "../../components/popup/Popup";
 import InputItem from "../../components/popup/inputItem/InputItem";
@@ -11,10 +10,17 @@ import { useTranslation } from "react-i18next";
 import apiAxios from "../../utils/apiAxios";
 import { secretPass } from "../../utils/data";
 import CryptoJS from "crypto-js";
+import Loader from "../../components/loader/Loader";
 
 const Subscribers = () => {
   const { t } = useTranslation();
   const [subscribers, setSubscribers] = useState([]);
+  const [numberSubscribers, setNumberSubscribers] = useState(0);
+  const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [perPage, setPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [lastPage, setLastePage] = useState(0);
   const [selectedRowData, setSelectedRowData] = useState([]);
 
   // opens and setOpnes popups
@@ -43,15 +49,15 @@ const Subscribers = () => {
 
   const statusFilter = [
     {
-      color: "rgb(235, 219, 1)",
+      color: "#9fe22b",
       name: t("Effective"),
     },
     {
-      color: "#257e67",
+      color: "#ff9416",
       name: t("Expired"),
     },
     {
-      color: "rgb(1, 235, 20)",
+      color: "#e3dd4e",
       name: t("Consumer"),
     },
     {
@@ -99,11 +105,11 @@ const Subscribers = () => {
     (async () => {
       let encrypted;
       const dataToEncrypt = JSON.stringify({
-        page: 1,
-        count: 10,
+        page: currentPage,
+        count: perPage,
         sortBy: "username",
         direction: "asc",
-        search: "",
+        search,
         columns: [
           "idx",
           "username",
@@ -118,16 +124,21 @@ const Subscribers = () => {
         ],
       });
       encrypted = CryptoJS.AES.encrypt(dataToEncrypt, secretPass).toString();
+      setLoading(true);
       try {
         const { data } = await apiAxios.post("api/index/user", {
           payload: encrypted,
         });
         setSubscribers(data.data);
+        setNumberSubscribers(data.total);
+        setLastePage(data.last_page);
+        setLoading(false);
       } catch (error) {
-        console.log();
+        console.log(error);
+        setLoading(false);
       }
     })();
-  }, []);
+  }, [search, perPage, currentPage]);
 
   return (
     <div className="main_content_tables">
@@ -135,8 +146,13 @@ const Subscribers = () => {
         <HeadTable
           path={t("Subscribers")}
           statusFilter={statusFilter}
-          title={t("List of subscribers")}
+          title={[
+            t("List of subscribers"),
+            ` | ${numberSubscribers}`,
+            t("records found"),
+          ]}
           iconHead={<i className="fa-solid fa-people-group"></i>}
+          setSearch={setSearch}
         >
           <div className="content">
             <Link to={"/subscribers/add"} className="item">
@@ -256,8 +272,14 @@ const Subscribers = () => {
           rows={subscribers}
           columns={columnsSubscibers}
           setSelectedRowData={setSelectedRowData}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          perPage={perPage}
+          setPerPage={setPerPage}
+          lastPage={lastPage}
         />
       </div>
+      {loading && <Loader />}
       {/* popup change name*/}
       <Popup
         title={t("Change Name")}

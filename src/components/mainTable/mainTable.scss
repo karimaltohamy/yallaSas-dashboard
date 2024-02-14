@@ -12,15 +12,19 @@
     color: var(--text-color);
   }
 
+  .MuiDataGrid-columnHeaderTitleContainer {
+    justify-content: center;
+  }
+
   .MuiDataGrid-columnHeaders,
-  .MuiDataGrid-footerContainer {
+  .MuiDataGrid-footerContainer,
+  .pagination {
     background-color: $primary-color;
     color: white;
   }
 
   .MuiDataGrid-footerContainer {
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    display: none;
   }
 
   .MuiToolbar-root {
@@ -33,6 +37,47 @@
 
   .MuiDataGrid-cell--textRight {
     justify-content: flex-start !important;
+  }
+
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    .page_count_component,
+    .per_page_component {
+      display: flex;
+      align-items: center;
+      border: 1px solid white;
+      border-radius: 5px;
+
+      .page_item {
+        padding: 4px 0;
+        width: 40px;
+        text-align: center;
+        cursor: pointer;
+
+        &:not(:last-child) {
+          border-left: 1px solid white;
+        }
+
+        &.active {
+          background-color: white;
+          color: $primary-color;
+        }
+      }
+    }
+
+    .per_page_component {
+      direction: ltr;
+
+      .page_item {
+        border-left: 1px solid white;
+      }
+    }
   }
 
   .status {

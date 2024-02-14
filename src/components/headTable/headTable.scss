@@ -13,6 +13,10 @@
   flex-wrap: wrap;
   gap: 6px;
   margin-bottom: 20px;
+  background-color: var(--bg-section);
+  padding: 10px 18px;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
 
   .item {
     display: flex;
@@ -20,8 +24,8 @@
     gap: 8px;
 
     span {
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       background-color: $primary-color;
     }
@@ -31,34 +35,34 @@
       font-weight: 600;
     }
 
-    &:nth-child(1) {
-      span {
-        background-color: rgb(235, 219, 1);
-      }
-    }
+    // &:nth-child(1) {
+    //   span {
+    //     background-color: rgb(235, 219, 1);
+    //   }
+    // }
 
-    &:nth-child(3) {
-      span {
-        background-color: rgb(1, 235, 20);
-      }
-    }
+    // &:nth-child(3) {
+    //   span {
+    //     background-color: rgb(1, 235, 20);
+    //   }
+    // }
 
-    &:nth-child(4) {
-      span {
-        background-color: #bb3436;
-      }
-    }
+    // &:nth-child(4) {
+    //   span {
+    //     background-color: #bb3436;
+    //   }
+    // }
 
-    &:nth-child(5) {
-      span {
-        background-color: #7c40a5;
-      }
-    }
-    &:nth-child(6) {
-      span {
-        background-color: black;
-      }
-    }
+    // &:nth-child(5) {
+    //   span {
+    //     background-color: #7c40a5;
+    //   }
+    // }
+    // &:nth-child(6) {
+    //   span {
+    //     background-color: black;
+    //   }
+    // }
   }
 }
 
@@ -102,7 +106,6 @@
     align-items: center;
     gap: 10px;
     border-radius: 6px;
-    display: none;
 
     input {
       border: none;

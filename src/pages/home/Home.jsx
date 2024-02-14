@@ -18,74 +18,103 @@ const Home = () => {
   const [memoryUsage, setMemoryUsage] = useState("");
   const [typeOnlineReport, setTypeOnlineReport] = useState("monthly");
 
+  const getSubscribers = async () => {
+    try {
+      const { data } = await apiAxios.get("api/advancedDashboard/subscribers");
+      setSubscribers(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getOnlineReport = async () => {
+    let encrypted;
+    const dataToEncrypt = JSON.stringify("monthly");
+    encrypted = CryptoJS.AES.encrypt(dataToEncrypt, secretPass).toString();
+    try {
+      const { data } = await apiAxios.post("api/onlineReport?type=hourly", {
+        payload: encrypted,
+      });
+      setOnlineRport(data.data);
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  };
+
+  const getFinance = async () => {
+    try {
+      const { data } = await apiAxios.get("api/advancedDashboard/finance");
+      setFinance(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getSystemHealth = async () => {
+    try {
+      const { data } = await apiAxios.get("api/advancedDashboard/systemHealth");
+      setSystemHealth(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getCpuUsage = async () => {
+    try {
+      const { data } = await apiAxios.get("api/advancedDashboard/CpuUsage");
+      setCpuUsage(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getDiskUsage = async () => {
+    try {
+      const { data } = await apiAxios.get("api/advancedDashboard/DiskUsage");
+      setDiskUsage(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getMemoryUsage = async () => {
+    try {
+      const { data } = await apiAxios.get("api/advancedDashboard/MemoryUsage");
+      setMemoryUsage(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await apiAxios.get(
-          "api/advancedDashboard/subscribers"
-        );
-        setSubscribers(data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-    (async () => {
-      let encrypted;
-      const dataToEncrypt = JSON.stringify("monthly");
-      encrypted = CryptoJS.AES.encrypt(dataToEncrypt, secretPass).toString();
-      try {
-        const { data } = await apiAxios.post("api/onlineReport?type=hourly", {
-          payload: encrypted,
-        });
-        setOnlineRport(data.data);
-      } catch (error) {
-        console.log(error.response.data.message);
-      }
-    })();
-    (async () => {
-      try {
-        const { data } = await apiAxios.get("api/advancedDashboard/finance");
-        setFinance(data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-    (async () => {
-      try {
-        const { data } = await apiAxios.get(
-          "api/advancedDashboard/systemHealth"
-        );
-        setSystemHealth(data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-    (async () => {
-      try {
-        const { data } = await apiAxios.get("api/advancedDashboard/CpuUsage");
-        setCpuUsage(data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-    (async () => {
-      try {
-        const { data } = await apiAxios.get("api/advancedDashboard/DiskUsage");
-        setDiskUsage(data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-    (async () => {
-      try {
-        const { data } = await apiAxios.get(
-          "api/advancedDashboard/MemoryUsage"
-        );
-        setMemoryUsage(data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
+    const executeRequestsAfterEvery10sec = async () => {
+      await getSubscribers();
+      await getOnlineReport();
+      await getFinance();
+      await getSystemHealth();
+    };
+
+    const executeRequestsAfterEvery5sec = async () => {
+      await getCpuUsage();
+      await getDiskUsage();
+      await getMemoryUsage();
+    };
+
+    executeRequestsAfterEvery10sec();
+    executeRequestsAfterEvery5sec();
+
+    const intervalAfterEvery10sec = setInterval(
+      executeRequestsAfterEvery10sec,
+      10000
+    );
+
+    const intervalAfterEvery5sec = setInterval(
+      executeRequestsAfterEvery5sec,
+      5000
+    );
+
+    return () => {
+      clearInterval(intervalAfterEvery10sec);
+      clearInterval(intervalAfterEvery5sec);
+    };
   }, []);
 
   return (
@@ -302,18 +331,27 @@ const Home = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px]">
         <MainBox title={t("Processor")}>
-          <div className="w-[300px] h-[300px] mx-auto">
+          <div className="mt-3 w-[200px] h-[200px] mx-auto relative">
             <ProgressLine percentage={cpuUsage} />
+            <h3 className="font-semibold text-[23px] mt-2 text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+              {cpuUsage}%
+            </h3>
           </div>
         </MainBox>
         <MainBox title={t("Random Memory")}>
-          <div className="w-[300px] h-[300px] mx-auto">
+          <div className="mt-3 w-[200px] h-[200px] mx-auto relative">
             <ProgressLine percentage={memoryUsage} />
-          </div>
+            <h3 className="font-semibold text-[23px] mt-2 text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+              {memoryUsage}%
+            </h3>
+          </div>{" "}
         </MainBox>
         <MainBox title={t("Storage unit")}>
-          <div className="w-[300px] h-[300px] mx-auto">
+          <div className="mt-3 w-[200px] h-[200px] mx-auto relative">
             <ProgressLine percentage={diskUsage} />
+            <h3 className="font-semibold text-[23px] mt-2 text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+              {diskUsage}%
+            </h3>
           </div>
         </MainBox>
       </div>

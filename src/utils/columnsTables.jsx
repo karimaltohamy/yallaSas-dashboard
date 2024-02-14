@@ -6,15 +6,45 @@ import { Link } from "react-router-dom";
 export const columnsSubscibers = [
   { field: "id", headerName: "ID", width: 90 },
   {
-    field: "condition",
+    field: "enabled",
     headerName: i18n.t("Condition"),
-    renderCell: (paramas) => {
-      return (
-        <span
-          className="status"
-          style={{ backgroundColor: paramas.value }}
-        ></span>
-      );
+    renderCell: ({ row }) => {
+      if (row.enabled == 0) {
+        return (
+          <span
+            className="status"
+            style={{ backgroundColor: "rgb(187, 52, 54)" }}
+          ></span>
+        );
+      } else if (row.status.status) {
+        return (
+          <span
+            className="status"
+            style={{ backgroundColor: "rgb(159, 226, 43)" }}
+          ></span>
+        );
+      } else if (row.status.expiration) {
+        return (
+          <span
+            className="status"
+            style={{ backgroundColor: "rgb(255, 148, 22)" }}
+          ></span>
+        );
+      } else if (row.status.traffic || row.status.uptime) {
+        return (
+          <span
+            className="status"
+            style={{ backgroundColor: "rgb(227, 221, 78)" }}
+          ></span>
+        );
+      } else {
+        return (
+          <span
+            className="status"
+            style={{ backgroundColor: "#14b1e5" }}
+          ></span>
+        );
+      }
     },
     width: 70,
   },
@@ -63,7 +93,7 @@ export const columnsSubscibers = [
         params.row["daily_traffic_details"] &&
         params.row["daily_traffic_details"].traffic
       ) {
-        return params.row["daily_traffic_details"].traffic;
+        return convertFromBytes(params.row["daily_traffic_details"].traffic);
       }
     },
   },
@@ -71,7 +101,41 @@ export const columnsSubscibers = [
 ];
 
 export const columnsOnlineSubscibers = [
-  { field: "status", headerName: t("Status") },
+  {
+    field: "status",
+    headerName: t("Status"),
+    renderCell: ({ row }) => {
+      if (row.status.status) {
+        return (
+          <span
+            className="status"
+            style={{ backgroundColor: "rgb(159, 226, 43)" }}
+          ></span>
+        );
+      } else if (row.status.expiration) {
+        return (
+          <span
+            className="status"
+            style={{ backgroundColor: "rgb(255, 148, 22)" }}
+          ></span>
+        );
+      } else if (row.status.traffic || row.status.uptime) {
+        return (
+          <span
+            className="status"
+            style={{ backgroundColor: "rgb(227, 221, 78)" }}
+          ></span>
+        );
+      } else {
+        return (
+          <span
+            className="status"
+            style={{ backgroundColor: "#14b1e5" }}
+          ></span>
+        );
+      }
+    },
+  },
   { field: "username", headerName: t("Login name") },
   {
     field: "acctoutputoctets",
