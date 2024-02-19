@@ -20,7 +20,7 @@ const Sidebar = () => {
 
   const sidebarLinks = [
     {
-      title: t("Home"),
+      title: t("menu_dashboard"),
       path: "/home",
       icon: (
         <svg
@@ -39,23 +39,23 @@ const Sidebar = () => {
       ),
     },
     {
-      title: t("Subscribers"),
+      title: t("menu_users"),
       icon: <i className="fa-regular fa-file"></i>,
       linksList: [
         {
-          titleLink: t("Subscribers list"),
+          titleLink: t("menu_users_list"),
           pathLink: "/subscribers",
         },
         {
-          titleLink: t("Online"),
+          titleLink: t("menu_users_online"),
           pathLink: "/subscribers-online",
         },
         {
-          titleLink: t("Compensations"),
+          titleLink: t("menu_users_compensation"),
           pathLink: "/compensations-subscibers",
         },
         {
-          titleLink: t("Support Tickets"),
+          titleLink: t("menu_users_tickets"),
           pathLink: "/subscriber-tickets",
         },
       ],
@@ -100,291 +100,291 @@ const Sidebar = () => {
       icon: <i className="fa-solid fa-puzzle-piece"></i>,
     },
     {
-      title: t("Managers"),
+      title: t("menu_managers"),
       path: "/managers",
       icon: <i className="fa-solid fa-people-roof"></i>,
     },
     {
-      title: t("Groups"),
+      title: t("menu_groups"),
       path: "/groups",
       icon: <i className="fa-solid fa-user-group"></i>,
     },
     {
-      title: "NAS",
+      title: t("menu_nas"),
       path: "/NAS",
       icon: <i className="fa-solid fa-user-group"></i>,
     },
     {
-      title: t("Packages"),
+      title: t("menu_profiles"),
       icon: <i className="fa-solid fa-cubes"></i>,
       linksList: [
         {
-          titleLink: t("Package List"),
+          titleLink: t("menu_profiles_list"),
           pathLink: "/packages",
         },
         {
-          titleLink: t("Pricing table"),
+          titleLink: t("menu_profiles_pricing"),
           pathLink: "pricing-table",
         },
         {
-          titleLink: t("Consumption notices"),
+          titleLink: t("menu_profiles_usage_notifications"),
           pathLink: "/consumption-notices",
         },
         {
-          titleLink: t("Additional services"),
+          titleLink: t("menu_profiles_addons"),
           pathLink: "/additional-services",
         },
       ],
     },
     {
-      title: t("Cards"),
+      title: t("menu_cards"),
       path: "/Cards",
       icon: <i className="fa-regular fa-credit-card"></i>,
     },
     {
-      title: t("Accounts"),
+      title: t("menu_billing"),
       icon: <i className="fa-solid fa-file-invoice-dollar"></i>,
       linksList: [
         {
-          titleLink: t("Subscriber invoices"),
+          titleLink: t("menu_billing_user_invoices"),
           pathLink: "/subscriber-invoices",
         },
         {
-          titleLink: t("Issuing the invoice"),
+          titleLink: t("menu_billing_user_invoice_issue"),
           pathLink: "issuing-invoice",
         },
       ],
     },
     {
-      title: t("Reports"),
+      title: t("menu_reports"),
       icon: <i className="fa-regular fa-clipboard"></i>,
       linksList: [
         {
-          titleLink: t("Activations"),
+          titleLink: t("menu_reports_activations"),
           pathLink: "/report-activations",
         },
         {
-          titleLink: t("Activation statistics"),
+          titleLink: t("menu_reports_activations_stats"),
           pathLink: "/activation-stats",
         },
         {
-          titleLink: t("Cards used"),
+          titleLink: t("menu_reports_cards_usage"),
           pathLink: "/reportcards-usage",
         },
         {
-          titleLink: t("Card transfers"),
+          titleLink: t("menu_reports_cards_transfers"),
           pathLink: "/report-cards-transfer",
         },
         {
-          titleLink: t("Debt bills"),
+          titleLink: t("menu_reports_debts"),
           pathLink: "/report-debts-journal",
         },
         {
-          titleLink: t("Data Export"),
+          titleLink: t("menu_reports_export"),
           pathLink: "/report-data-export-jobs",
         },
         {
-          titleLink: t("Managers' invoices"),
+          titleLink: t("menu_reports_managers_invoices"),
           pathLink: "/report-invoice-managers",
         },
         {
-          titleLink: t("Financial record"),
+          titleLink: t("menu_reports_managers_journal"),
           pathLink: "/report-journal-managers",
         },
         {
-          titleLink: t("Money transfer"),
+          titleLink: t("menu_reports_money_transfer"),
           pathLink: "/report-money-transfer",
         },
         {
-          titleLink: t("Presence rate"),
+          titleLink: t("menu_reports_online"),
           pathLink: "/report-online",
         },
         {
-          titleLink: t("Profits"),
+          titleLink: t("menu_reports_profits"),
           pathLink: "/report-profits",
         },
         {
-          titleLink: t("Gateway Transactions"),
+          titleLink: t("menu_reports_payment_gateway_transactions"),
           pathLink: "/payment-gateway-transaction",
         },
         {
-          titleLink: t("Managers' receipts"),
+          titleLink: t("menu_reports_managers_receipts"),
           pathLink: "/report-receipts-managers",
         },
         {
-          titleLink: t("Sessions"),
+          titleLink: t("menu_reports_sessions"),
           pathLink: "/report-sessions",
         },
         {
-          titleLink: t("Suspicious cases"),
+          titleLink: t("menu_reports_suspicious"),
           pathLink: "/report-suspicious",
         },
         {
-          titleLink: t("Data consumption"),
+          titleLink: t("menu_reports_traffic"),
           pathLink: "/report-traffic",
         },
         {
-          titleLink: t("Customers"),
+          titleLink: t("menu_report_users"),
           pathLink: "/report-users/accordingManagers",
         },
       ],
     },
     {
-      title: "Log",
+      title: t("menu_log"),
       icon: <i className="fa-solid fa-clock-rotate-left"></i>,
       linksList: [
         {
-          titleLink: "RADIUS Log",
+          titleLink: t("menu_log_radius"),
           pathLink: "/log-radius",
         },
         {
-          titleLink: t("System log"),
+          titleLink: t("menu_reports_syslog"),
           pathLink: "system-log",
         },
         {
-          titleLink: t("Login attempts"),
+          titleLink: t("menu_reports_user_auth_logs"),
           pathLink: "login-attempts",
         },
       ],
     },
     {
-      title: t("Tools"),
+      title: t("menu_reports_user_auth_log"),
       icon: <i className="fa-solid fa-screwdriver-wrench"></i>,
       linksList: [
         {
-          titleLink: t("Dashboard Manager "),
+          titleLink: t("menu_tools_dashboard_manager"),
           pathLink: "/tools-dashboard-manager",
         },
         {
-          titleLink: t("Widget Factory "),
+          titleLink: t("menu_tools_widget_factory"),
           pathLink: "/widget-factory",
         },
         {
-          titleLink: t("System Services"),
+          titleLink: t("menu_tools_system_services"),
           pathLink: "/system-services",
         },
         {
-          titleLink: t("System Update"),
+          titleLink: t("menu_tools_system_update"),
           pathLink: "/system-update",
         },
         {
-          titleLink: t("System Maintenance"),
+          titleLink: t("menu_tools_maintenance"),
           pathLink: "/system-maintenance",
         },
         {
-          titleLink: t("Announcements"),
+          titleLink: t("menu_tools_announcements"),
           pathLink: "/tools-announcements",
         },
         {
-          titleLink: t("Import Data"),
+          titleLink: t("menu_tools_import"),
           pathLink: "/tools-import",
         },
         {
-          titleLink: t("Speed ​​control"),
+          titleLink: t("menu_bandwidth_controller"),
           pathLink: "/tools-bandwidth-control",
         },
         {
-          titleLink: t("Backup"),
+          titleLink: t("menu_settings_backup"),
           pathLink: "/backup-index",
         },
         {
-          titleLink: t("Bulk Changes"),
+          titleLink: t("menu_tools_bulk_changes"),
           pathLink: "/bulk-changes",
         },
       ],
     },
     {
-      title: t("IP Pools"),
+      title: t("menu_ip_pools"),
       path: "/ip-pools",
       icon: <i className="fa-solid fa-server"></i>,
     },
     {
-      title: t("Options"),
+      title: t("menu_settings"),
       icon: <i className="fa-solid fa-gear"></i>,
       linksList: [
         {
-          titleLink: t("Advanced"),
+          titleLink: t("menu_settings_advanced"),
           pathLink: "/settings-advanced",
         },
         {
-          titleLink: t("Backup"),
+          titleLink: t("menu_settings_backup"),
           pathLink: "/add-settings-backup",
         },
         {
-          titleLink: t("Email"),
+          titleLink: t("menu_settings_email"),
           pathLink: "/settings-email",
         },
         {
-          titleLink: t("Email Templates"),
+          titleLink: t("menu_settings_email_template"),
           pathLink: "/settings-email-templates",
         },
         {
-          titleLink: t("Free Zone"),
+          titleLink: t("menu_settings_freezone"),
           pathLink: "/settings-freezone",
         },
         {
-          titleLink: t("Fields"),
+          titleLink: t("menu_settings_forms"),
           pathLink: "/settings-forms",
         },
         {
-          titleLink: t("General options"),
+          titleLink: t("menu_settings_general"),
           pathLink: "/settings-general",
         },
 
         {
-          titleLink: t("License"),
+          titleLink: t("menu_settings_license"),
           pathLink: "/settings-license",
         },
         {
-          titleLink: t("Network"),
+          titleLink: t("menu_settings_network"),
           pathLink: "/settings-network",
         },
 
         {
-          titleLink: t("Notfication"),
+          titleLink: t("menu_settings_notifications"),
           pathLink: "/settings-notifications",
         },
         {
-          titleLink: t("Permissions"),
+          titleLink: t("menu_settings_acl"),
           pathLink: "/settings-acl",
         },
 
         {
-          titleLink: t("Payment Gateway"),
+          titleLink: t("menu_settings_payment_gateways"),
           pathLink: "/settings-paymentgateways",
         },
         {
-          titleLink: t("Invoice"),
+          titleLink: t("menu_settings_billing"),
           pathLink: "/settings-billing",
         },
         {
-          titleLink: t("Sites"),
+          titleLink: t("menu_settings_sites"),
           pathLink: "/settings-sites",
         },
         {
-          titleLink: t("Sms"),
+          titleLink: t("menu_settings_sms"),
           pathLink: "/settings-sms",
         },
         {
-          titleLink: t("SASTrack"),
+          titleLink: t("menu_settings_sastrack"),
           pathLink: "/settings-sastrack",
         },
         {
-          titleLink: t("Telegram"),
+          titleLink: t("menu_settings_telegram"),
           pathLink: "/settings-telegraml",
         },
         {
-          titleLink: t("Subscribers panel"),
+          titleLink: t("menu_settings_ucp"),
           pathLink: "/settings-ucp",
         },
         {
-          titleLink: t("Web"),
+          titleLink: t("menu_settings_portal"),
           pathLink: "/settings-web",
         },
       ],
     },
     {
-      title: t("About the company"),
+      title: t("menu_about"),
       path: "/about-company/about",
       icon: <i className="fa-solid fa-info"></i>,
     },

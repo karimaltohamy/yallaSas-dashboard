@@ -11,6 +11,8 @@ const MainTable = ({
   currentPage,
   setCurrentPage,
   lastPage,
+  rowId,
+  showToolbar = true,
 }) => {
   const [siblingCount, setSiblingCount] = useState(0);
   const totalPages = Array.from({ length: lastPage }, (_, i) => i + 1).splice(
@@ -27,13 +29,12 @@ const MainTable = ({
       <DataGrid
         rows={rows}
         columns={columns}
+        getRowId={(row) => (rowId ? row[rowId] : row.id)}
         checkboxSelection={true}
         onRowSelectionModelChange={handleRowSelectionModelChange}
         noRowsOverlay={<div>No rows found!</div>}
         loading={false}
-        components={{
-          Toolbar: GridToolbar,
-        }}
+        components={showToolbar ? { Toolbar: GridToolbar } : {}}
       />
       <div className="pagination">
         <div className="page_count_component">

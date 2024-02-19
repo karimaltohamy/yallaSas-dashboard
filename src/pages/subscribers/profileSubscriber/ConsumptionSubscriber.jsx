@@ -7,6 +7,7 @@ import CryptoJS from "crypto-js";
 import { secretPass } from "../../../utils/data";
 import apiAxios from "../../../utils/apiAxios";
 import Loader from "../../../components/loader/Loader";
+import { convertFromBytes } from "../../../utils/utilsFunctions";
 
 const ConsumptionSubscriber = () => {
   const date = new Date();
@@ -15,6 +16,7 @@ const ConsumptionSubscriber = () => {
   const [years, setYears] = useState([]);
   const [year, setYear] = useState(date.getFullYear());
   const [month, setMonth] = useState(date.getMonth());
+  const [days, setDays] = useState([]);
   const [reportType, setReportType] = useState("daily");
   const [loading, setLoading] = useState([]);
 
@@ -31,7 +33,6 @@ const ConsumptionSubscriber = () => {
       const { data } = await apiAxios.post("api/user/traffic", {
         payload: encrypted,
       });
-      console.log(data.data);
       setConsumptionData(data.data);
       setLoading(false);
     } catch (error) {
@@ -40,6 +41,130 @@ const ConsumptionSubscriber = () => {
     }
   };
 
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+        display: true,
+      },
+      title: {
+        display: false,
+        text: "Chart.js Line Chart",
+      },
+    },
+    scales: {
+      x: {
+        offset: true, // Add space data to the left
+      },
+    },
+  };
+
+  const labels =
+    reportType == "monthly"
+      ? [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Spt",
+          "Oct",
+          "Nov",
+          "Dec",
+        ]
+      : [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "15",
+          "16",
+          "17",
+          "18",
+          "19",
+          "20",
+          "21",
+          "22",
+          "23",
+          "24",
+          "25",
+          "26",
+          "27",
+          "28",
+          "29",
+          "30",
+        ];
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Real Traffic",
+        data: labels.map(
+          (_, i) =>
+            consumptionData?.total_real && consumptionData?.total_real[i]
+        ),
+        borderColor: "#f7994c",
+        backgroundColor: "#f7994c",
+      },
+      {
+        label: "Total",
+        data: labels.map(
+          (_, i) => consumptionData?.total && consumptionData?.total[i]
+        ),
+        borderColor: "#90ED7D",
+        backgroundColor: "#90ED7D",
+      },
+      {
+        label: "Upload",
+        data: labels.map(
+          (_, i) => consumptionData?.tx && consumptionData?.tx[i]
+        ),
+        borderColor: "#434348",
+        backgroundColor: "#434348",
+      },
+      {
+        label: "Download",
+        data: labels.map(
+          (_, i) => consumptionData?.rx && consumptionData?.rx[i]
+        ),
+        borderColor: "#7CB5EC",
+        backgroundColor: "#7CB5EC",
+      },
+    ],
+  };
+
+  function getDaysInMonth(passMonth, passYear) {
+    const date = new Date();
+    const year = passYear || date.getFullYear();
+    const monthF = passMonth || month;
+    let daysArray = [];
+
+    const lastDay = new Date(year, monthF, 0).getDate();
+
+    for (let i = 1; i <= lastDay; i++) {
+      daysArray.push(i);
+    }
+
+    const optionsDays = daysArray.map((day) => {
+      return { value: day, label: `${year}-${monthF}-${day}` };
+    });
+
+    setDays(optionsDays);
+  }
+
   useEffect(() => {
     // this for loop for set years in select options
     const yearArray = [];
@@ -47,6 +172,8 @@ const ConsumptionSubscriber = () => {
       yearArray.push(i);
     }
     setYears(yearArray);
+    // generate dates of month
+    getDaysInMonth(date.getMonth());
   }, []);
 
   useEffect(() => {
@@ -59,7 +186,12 @@ const ConsumptionSubscriber = () => {
       <div className="consumption mt-6">
         <div className="filter_consumption">
           <div className="input_select">
-            <select onChange={(e) => setYear(e.target.value)}>
+            <select
+              onChange={(e) => {
+                setYear(e.target.value);
+                getDaysInMonth(null, e.target.value);
+              }}
+            >
               <option className="text-[13px]">{t("Annual consumption")}</option>
               {years &&
                 years.map((item, index) => (
@@ -70,7 +202,12 @@ const ConsumptionSubscriber = () => {
             </select>
           </div>
           <div className="input_select">
-            <select onChange={(e) => setMonth(e.target.value)}>
+            <select
+              onChange={(e) => {
+                setMonth(month);
+                getDaysInMonth(e.target.value, year);
+              }}
+            >
               <option className="text-[13px]">
                 {t("Monthly consumption")}
               </option>
@@ -94,7 +231,7 @@ const ConsumptionSubscriber = () => {
           </select>
         </div>
         <div className="h-[250px] md:h-[500px]">
-          <ChartLine />
+          <ChartLine options={options} labels={labels} data={data} />
         </div>
       </div>
 
@@ -102,64 +239,65 @@ const ConsumptionSubscriber = () => {
         <table>
           <thead>
             <tr>
-              <th>{t("Day")}</th>
-              <th>{t("Download")}</th>
-              <th>{t("Upload")}</th>
-              <th>{t("Total")}</th>
+              <th>{t("global_day")}</th>
+              <th>{t("global_download")}</th>
+              <th>{t("users_table_ul")}</th>
+              <th>{t("global_total")}</th>
               <th>{t("Real Traffic")}</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>2023-8-1</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>2023-8-1</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-
-            <tr>
-              <td>2023-8-1</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>2023-8-1</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>2023-8-1</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>2023-8-1</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>2023-8-1</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
+            {reportType == "monthly"
+              ? labels.map((item, i) => (
+                  <tr>
+                    <td>{item}</td>
+                    <td>
+                      {convertFromBytes(
+                        consumptionData.rx && consumptionData.rx[i]
+                      )}
+                    </td>
+                    <td>
+                      {convertFromBytes(
+                        consumptionData.rx && consumptionData.tx[i]
+                      )}
+                    </td>
+                    <td>
+                      {convertFromBytes(
+                        consumptionData.rx && consumptionData.total[i]
+                      )}
+                    </td>
+                    <td>
+                      {convertFromBytes(
+                        consumptionData.rx && consumptionData.total_real[i]
+                      )}
+                    </td>
+                  </tr>
+                ))
+              : days.map((item, i) => (
+                  <tr>
+                    <td>{item.label}</td>
+                    <td>
+                      {convertFromBytes(
+                        consumptionData.rx && consumptionData.rx[i]
+                      )}
+                    </td>
+                    <td>
+                      {convertFromBytes(
+                        consumptionData.rx && consumptionData.tx[i]
+                      )}
+                    </td>
+                    <td>
+                      {convertFromBytes(
+                        consumptionData.rx && consumptionData.total[i]
+                      )}
+                    </td>
+                    <td>
+                      {convertFromBytes(
+                        consumptionData.rx && consumptionData.total_real[i]
+                      )}
+                    </td>
+                  </tr>
+                ))}
           </tbody>
         </table>
       </div>

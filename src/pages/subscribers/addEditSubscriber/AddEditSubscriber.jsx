@@ -9,28 +9,31 @@ import { toast } from "react-toastify";
 import apiAxios from "../../../utils/apiAxios";
 import CryptoJS from "crypto-js";
 import { secretPass } from "../../../utils/data";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const AddEditSubscriber = ({ typePage }) => {
+  const { id } = useParams();
   const [loading, setLoading] = useState(false);
+  const [subscriber, setSubscriber] = useState(null);
   const [managers, setManagers] = useState([]);
   const [groups, setGroups] = useState([]);
   const [sites, setSites] = useState([]);
   const [servicesProfile, setServicesProfile] = useState([]);
   const navigate = useNavigate();
+
   const [generalinformation, setGeneralinformation] = useState({
     username: "",
-    enabled: 1,
+    enabled: false,
     password: "",
-    confconfirm_passwordirmPassword: "",
+    confirmPassword: "",
     parent_id: "",
     profile_id: "",
     group_id: "",
     site_id: "",
     effective: "",
     portal_password: "",
-    use_separate_portal_password: "",
-    mac_auth: "",
+    use_separate_portal_password: false,
+    mac_auth: false,
   });
   const [personalformation, setPersonalformation] = useState({
     firstname: "",
@@ -45,7 +48,7 @@ const AddEditSubscriber = ({ typePage }) => {
     contract_id: "",
     national_id: "",
     notes: "",
-    auto_renew: "",
+    auto_renew: false,
   });
   const [specialDetails, setSpecialDetails] = useState({
     expiration: "",
@@ -56,14 +59,15 @@ const AddEditSubscriber = ({ typePage }) => {
     mikrotik_addresslist: "",
     mikrotik_ipv6_prefix: "",
     user_type: "",
-    restricted: 0,
+    restricted: false,
   });
 
   const handleChangeGeneralUnformation = (e) => {
     setGeneralinformation((prev) => {
       return {
         ...prev,
-        [e.target.id]: e.target.checked ? e.target.checked : e.target.value,
+        [e.target.id]:
+          e.target.type === "checkbox" ? e.target.checked : e.target.value,
       };
     });
   };
@@ -71,7 +75,8 @@ const AddEditSubscriber = ({ typePage }) => {
     setPersonalformation((prev) => {
       return {
         ...prev,
-        [e.target.id]: e.target.checked ? e.target.checked : e.target.value,
+        [e.target.id]:
+          e.target.type === "checkbox" ? e.target.checked : e.target.value,
       };
     });
   };
@@ -79,12 +84,67 @@ const AddEditSubscriber = ({ typePage }) => {
     setSpecialDetails((prev) => {
       return {
         ...prev,
-        [e.target.id]: e.target.checked ? e.target.checked : e.target.value,
+        [e.target.id]:
+          e.target.type === "checkbox" ? e.target.checked : e.target.value,
       };
     });
   };
 
   useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await apiAxios.get(`api/user/${id}`);
+        setSubscriber(data.data);
+        setGeneralinformation((prevState) => ({
+          ...prevState,
+          username: data.data && data.data.username,
+          enabled: data.data && data.data.enabled == 1 ? true : false,
+          password: data.data && data.data.password,
+          confirmPassword: data.data && data.data.confirmPassword,
+          parent_id: data.data && data.data.parent_id,
+          profile_id: data.data && data.data.profile_id,
+          group_id: data.data && data.data.group_id,
+          site_id: data.data && data.data?.site_id,
+          effective: data.data && data.data?.effective == 1 ? true : false,
+          portal_password: data.data && data.data?.portal_password,
+          use_separate_portal_password:
+            data.data && data.data?.use_separate_portal_password == 1
+              ? true
+              : false,
+          mac_auth: data.data && data.data?.mac_auth == 1 ? true : false,
+        }));
+        setPersonalformation((prevState) => ({
+          ...prevState,
+          firstname: data.data && data.data?.firstname,
+          lastname: data.data && data.data?.lastname,
+          company: data.data && data.data?.company,
+          email: data.data && data.data?.email,
+          phone: data.data && data.data?.phone,
+          city: data.data && data.data?.city,
+          address: data.data && data.data?.address,
+          apartment: data.data && data.data?.apartment,
+          street: data.data && data.data?.street,
+          contract_id: data.data && data.data?.contract_id,
+          national_id: data.data && data.data?.national_id,
+          notes: data.data && data.data?.notes,
+          auto_renew: data.data && data.data?.auto_renew == 1 ? true : false,
+        }));
+        setSpecialDetails((prevState) => ({
+          ...prevState,
+          expiration: data.data && data.data?.expiration,
+          simultaneous_sessions: data.data && data.data?.simultaneous_sessions,
+          static_ip: data.data && data.data?.static_ip,
+          mikrotik_winbox_group: data.data && data.data?.mikrotik_winbox_group,
+          mikrotik_framed_route: data.data && data.data?.mikrotik_framed_route,
+          mikrotik_addresslist: data.data && data.data?.mikrotik_addresslist,
+          mikrotik_ipv6_prefix: data.data && data.data?.mikrotik_ipv6_prefix,
+          user_type: data.data && data.data?.user_type,
+          restricted: data.data && data.data?.restricted == 1 ? true : false,
+        }));
+      } catch (error) {
+        console.log(error);
+      }
+    })();
     (async () => {
       try {
         const { data } = await apiAxios.get("api/index/manager");
@@ -123,18 +183,42 @@ const AddEditSubscriber = ({ typePage }) => {
     setLoading(true);
     let encrypted;
     if (generalinformation && personalformation && specialDetails) {
-      const dataToEncrypt = JSON.stringify({
+      const transformedGeneralInformation = {
         ...generalinformation,
+        enabled: generalinformation.effective ? 1 : 0,
+        use_separate_portal_password:
+          generalinformation.use_separate_portal_password ? 1 : 0,
+        mac_auth: generalinformation.mac_auth ? 1 : 0,
+      };
+
+      const transformedPersonalformation = {
         ...personalformation,
+        auto_renew: personalformation.auto_renew ? 1 : 0,
+      };
+
+      const transformedSpecialDetails = {
         ...specialDetails,
+        restricted: specialDetails.restricted ? 1 : 0,
+      };
+      const dataToEncrypt = JSON.stringify({
+        ...transformedGeneralInformation,
+        ...transformedPersonalformation,
+        ...transformedSpecialDetails,
       });
       encrypted = CryptoJS.AES.encrypt(dataToEncrypt, secretPass).toString();
     }
 
     try {
-      const { data } = await apiAxios.post("api/user", {
-        payload: encrypted,
-      });
+      if (typePage == "addPage") {
+        await apiAxios.post("api/user", {
+          payload: encrypted,
+        });
+      } else if (typePage == "editPage") {
+        await apiAxios.put(`api/user/${id}`, {
+          payload: encrypted,
+        });
+      }
+
       toast.success("Successful add");
       navigate("/subscribers");
     } catch (error) {
@@ -146,31 +230,31 @@ const AddEditSubscriber = ({ typePage }) => {
 
   return (
     <div className="content_page">
-      <SectionForm title={t("General information")}>
+      <SectionForm title={t("user_form_label_basic_information")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <InputSectionForm
-            label={t("Username")}
+            label={t("user_form_label_username")}
             type={"text"}
             value={generalinformation.username}
             onChange={handleChangeGeneralUnformation}
             id="username"
           />
           <InputSectionForm
-            label={t("Password")}
+            label={t("user_form_label_password")}
             type={"password"}
             value={generalinformation.password}
             onChange={handleChangeGeneralUnformation}
             id="password"
           />
           <InputSectionForm
-            label={t("Confirm password")}
+            label={t("user_form_label_password_confirm")}
             type={"password"}
             value={generalinformation.confirmPassword}
             onChange={handleChangeGeneralUnformation}
             id="confirmPassword"
           />
           <SelectSectionForm
-            label={t("Follow me")}
+            label={t("user_form_label_parent")}
             type={"text"}
             value={generalinformation.parent_id}
             onChange={handleChangeGeneralUnformation}
@@ -180,7 +264,7 @@ const AddEditSubscriber = ({ typePage }) => {
             })}
           />
           <SelectSectionForm
-            label={t("The Package")}
+            label={t("user_form_label_profile")}
             value={generalinformation.profile_id}
             onChange={handleChangeGeneralUnformation}
             id="profile_id"
@@ -189,7 +273,7 @@ const AddEditSubscriber = ({ typePage }) => {
             })}
           />
           <SelectSectionForm
-            label={t("Group")}
+            label={t("user_form_label_group")}
             value={generalinformation.group_id}
             onChange={handleChangeGeneralUnformation}
             id="group_id"
@@ -198,7 +282,7 @@ const AddEditSubscriber = ({ typePage }) => {
             })}
           />
           <SelectSectionForm
-            label={t("The Site")}
+            label={t("user_form_label_site")}
             value={generalinformation.site_id}
             onChange={handleChangeGeneralUnformation}
             id="site_id"
@@ -207,144 +291,144 @@ const AddEditSubscriber = ({ typePage }) => {
             })}
           />
           <SwitchSectionForm
-            label={t("Effective")}
-            value={generalinformation.effective}
+            label={t("user_form_label_enabled")}
+            value={generalinformation.enabled}
             onChange={handleChangeGeneralUnformation}
-            id="effective"
+            id="enabled"
           />
           <InputSectionForm
-            label={t("Password for subscriber page")}
+            label={t("user_form_portal_password")}
             type={"text"}
             value={generalinformation.portal_password}
             onChange={handleChangeGeneralUnformation}
             id="portal_password"
           />
           <SwitchSectionForm
-            label={t("MAC Lock")}
+            label={t("user_form_label_mac_lock")}
             value={generalinformation.mac_auth}
             onChange={handleChangeGeneralUnformation}
             id="mac_auth"
           />
           <SwitchSectionForm
-            label={t("Use a different password for the subscriber page")}
+            label={t("user_form_use_separate_user_portal")}
             value={generalinformation.use_separate_portal_password}
             onChange={handleChangeGeneralUnformation}
             id="use_separate_portal_password"
           />
         </div>
       </SectionForm>
-      <SectionForm title={t("Personal information")}>
+      <SectionForm title={t("user_form_label_personnel_information")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <InputSectionForm
-            label={t("First name")}
+            label={t("global_firstname")}
             type={"text"}
             value={personalformation.firstname}
             onChange={handleChangePersonalformation}
             id="firstname"
           />
           <InputSectionForm
-            label={t("Last name")}
+            label={t("global_lastname")}
             type={"text"}
             value={personalformation.lastname}
             onChange={handleChangePersonalformation}
             id="lastname"
           />
           <InputSectionForm
-            label={t("Company")}
+            label={t("label_about")}
             type={"text"}
             value={personalformation.company}
             onChange={handleChangePersonalformation}
             id="company"
           />
           <InputSectionForm
-            label={t("Email")}
+            label={t("menu_settings_email")}
             type={"text"}
             value={personalformation.email}
             onChange={handleChangePersonalformation}
             id="email"
           />
           <InputSectionForm
-            label={t("Phone")}
+            label={t("global_phone")}
             type={"text"}
             value={personalformation.phone}
             onChange={handleChangePersonalformation}
             id="phone"
           />
           <InputSectionForm
-            label={t("City")}
+            label={t("user_form_label_city")}
             type={"text"}
             value={personalformation.city}
             onChange={handleChangePersonalformation}
             id="city"
           />
           <InputSectionForm
-            label={t("Address")}
+            label={t("user_form_label_address")}
             type={"text"}
             value={personalformation.address}
             onChange={handleChangePersonalformation}
             id="address"
           />
           <InputSectionForm
-            label={t("Apartment number")}
+            label={t("user_form_label_apartment")}
             type={"text"}
             value={personalformation.apartment}
             onChange={handleChangePersonalformation}
             id="apartment"
           />
           <InputSectionForm
-            label={t("The street")}
+            label={t("user_form_label_street")}
             type={"text"}
             value={personalformation.street}
             onChange={handleChangePersonalformation}
             id="street"
           />
           <InputSectionForm
-            label={t("Contract number")}
+            label={t("user_form_label_contract")}
             type={"text"}
             value={personalformation.contract_id}
             onChange={handleChangePersonalformation}
             id="contract_id"
           />
           <InputSectionForm
-            label={t("Id number")}
+            label={t("user_form_label_national_id")}
             type={"text"}
             value={personalformation.national_id}
             onChange={handleChangePersonalformation}
             id="national_id"
           />
           <InputSectionForm
-            label={t("Notice")}
+            label={t("user_form_label_notes")}
             type={"text"}
             value={personalformation.notes}
             onChange={handleChangePersonalformation}
             id="notes"
           />
           <SwitchSectionForm
-            label={t("Automatic renewal")}
+            label={t("user_form_label_auto_renew")}
             value={personalformation.auto_renew}
-            onChange={handleChangeGeneralUnformation}
+            onChange={handleChangePersonalformation}
             id="auto_renew"
           />
         </div>
       </SectionForm>
-      <SectionForm title={t("Special details")}>
+      <SectionForm title={t("user_form_label_advanced")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <InputSectionForm
-            label={t("End")}
-            type={"date"}
+            label={t("users_table_expiration")}
+            type={"text"}
             value={specialDetails.expiration}
             onChange={handleChangeSpecialDetails}
             id="expiration"
           />
           <InputSectionForm
-            label={t("Entry times")}
+            label={t("users_table_simultaneous_sessions")}
             type={"text"}
             value={specialDetails.simultaneous_sessions}
             onChange={handleChangeSpecialDetails}
             id="simultaneous_sessions"
           />
           <InputSectionForm
-            label={t("Static iP address")}
+            label={t("users_table_static_ip")}
             type={"text"}
             value={specialDetails.static_ip}
             onChange={handleChangeSpecialDetails}
@@ -379,7 +463,7 @@ const AddEditSubscriber = ({ typePage }) => {
             id="mikrotik_ipv6_prefix"
           />
           <SelectSectionForm
-            label={t("Subscriber type")}
+            label={t("user_form_label_user_type")}
             type={"text"}
             value={specialDetails.user_type}
             onChange={handleChangeSpecialDetails}
@@ -390,18 +474,18 @@ const AddEditSubscriber = ({ typePage }) => {
             ]}
           />
           <SwitchSectionForm
-            label={t("Automatic renewal")}
+            label={t("user_form_label_restricted")}
             value={specialDetails.restricted}
-            onChange={handleChangeGeneralUnformation}
+            onChange={handleChangeSpecialDetails}
             id="restricted"
           />
         </div>
       </SectionForm>
       <div className="btns_add">
         <button className="btn_add" onClick={handleForm}>
-          {t("OK")}
+          {t("global_button_dismiss")}
         </button>
-        <button className="btn_close">{t("Cancel")}</button>
+        <button className="btn_close">{t("global_button_submit")}</button>
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ const CardJobsQueue = () => {
           <div className="content">
             <div className="item">
               <i className="fa-solid fa-xmark"></i>
-              <span>{t("Cancel")}</span>
+              <span>{t("global_button_cancel")}</span>
             </div>
             <div className="item">
               <i className="fa-solid fa-play"></i>

@@ -11,6 +11,8 @@ import apiAxios from "../../utils/apiAxios";
 import { secretPass } from "../../utils/data";
 import CryptoJS from "crypto-js";
 import Loader from "../../components/loader/Loader";
+import { toast } from "react-toastify";
+import { generateUUID } from "../../utils/utilsFunctions";
 
 const Subscribers = () => {
   const { t } = useTranslation();
@@ -22,6 +24,7 @@ const Subscribers = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastePage] = useState(0);
   const [selectedRowData, setSelectedRowData] = useState([]);
+  const [subscriber, setSubscriber] = useState({});
 
   // opens and setOpnes popups
   const [openChangeName, setOpenChangeName] = useState(false);
@@ -50,30 +53,77 @@ const Subscribers = () => {
   const statusFilter = [
     {
       color: "#9fe22b",
-      name: t("Effective"),
+      name: t("users_status_active"),
     },
     {
       color: "#ff9416",
-      name: t("Expired"),
+      name: t("users_status_expired"),
     },
     {
       color: "#e3dd4e",
-      name: t("Consumer"),
+      name: t("users_status_traffic_depleted"),
     },
     {
       color: "#bb3436",
-      name: t("Disabled"),
+      name: t("users_status_disabled"),
     },
   ];
 
-  const handleChangeName = (e) => {
-    e.preventDefault();
-    console.log({ newName });
+  const encryptedData = (data) => {
+    const dataToEncrypt = JSON.stringify(data);
+    let encrypted = CryptoJS.AES.encrypt(dataToEncrypt, secretPass).toString();
+
+    return encrypted;
   };
 
-  const handleDataBalance = (e) => {
+  // get subscriber to use data in popups
+  const getSubscriber = () => {
+    setSubscriber(subscribers.find((item) => item.id == selectedRowData));
+  };
+
+  const handleChangeName = async (e) => {
     e.preventDefault();
-    console.log({ quantityMb, noticeDataBalance });
+    setLoading(true);
+    try {
+      await apiAxios.post(`api/user/rename/${subscriber.id}`, {
+        payload: encryptedData({ new_username: newName }),
+      });
+      toast.success("Successful operation");
+      setOpenChangeName(false);
+      setLoading(false);
+    } catch (error) {
+      toast.error(error.response.data.error);
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  // handle Add or withdraw data balance
+  const handleDataBalance = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const { data } = await apiAxios.post(`api/user/addTraffic`, {
+        payload: encryptedData({
+          user_id: subscriber.id,
+          username: subscriber.username,
+          amount: quantityMb,
+          comment: noticeDataBalance,
+          transaction_id: generateUUID(),
+          target: dataTypeBalance,
+        }),
+      });
+      toast.success("Successful operation");
+      setOpenDataBalance(false);
+      setQuantityMb("");
+      setNoticeDataBalance("");
+      setDataTypeBalance("");
+      setLoading(false);
+    } catch (error) {
+      toast.error(error.response.data.error);
+      console.log(error);
+      setLoading(false);
+    }
   };
 
   const handleChangePassword = (e) => {
@@ -86,19 +136,76 @@ const Subscribers = () => {
     console.log({ typeCompensation });
   };
 
-  const handleDeposite = (e) => {
+  const handleDeposite = async (e) => {
     e.preventDefault();
-    console.log({ noticeDeposite, amountDeposit });
+    setLoading(true);
+    try {
+      await apiAxios.post("api/user/deposit", {
+        payload: encryptedData({
+          user_id: subscriber.id,
+          username: subscriber.username,
+          amount: amountDeposit,
+          transaction_id: generateUUID(),
+        }),
+      });
+      toast.success("Successful operation");
+      setLoading(false);
+      setOpenDeposit(false);
+      setAmountDeposot("");
+      setNoticeDeposite("");
+    } catch (error) {
+      toast.error(error.response.data.error);
+      console.log(error);
+      setLoading(false);
+    }
   };
 
-  const handleDicountAmount = (e) => {
+  const handleDicountAmount = async (e) => {
     e.preventDefault();
-    console.log({ noticeAmount, amountAmount });
+    setLoading(true);
+    try {
+      await apiAxios.post("api/user/withdraw", {
+        payload: encryptedData({
+          user_id: subscriber.id,
+          username: subscriber.username,
+          amount: amountDiscount,
+          transaction_id: generateUUID(),
+        }),
+      });
+      toast.success("Successful operation");
+      setLoading(false);
+      setOpenDiscountAmount(false);
+      setAmountDiscount("");
+      setNoticeDiscount("");
+    } catch (error) {
+      toast.error(error.response.data.error);
+      console.log(error);
+      setLoading(false);
+    }
   };
 
-  const handlePayOffDebts = (e) => {
+  const handlePayOffDebts = async (e) => {
     e.preventDefault();
-    console.log({});
+  };
+
+  const handleDeleteSubsciber = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      if (selectedRowData.length > 1) {
+        await apiAxios.post(`api/user/bulkDelete`, {
+          payload: encryptedData(selectedRowData),
+        });
+      } else {
+        await apiAxios.delete(`api/user/${subscriber.id}`);
+      }
+      toast.success("Successful operation");
+      setLoading(false);
+    } catch (error) {
+      toast.error(error.response.data.error);
+      console.log(error);
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -140,16 +247,22 @@ const Subscribers = () => {
     })();
   }, [search, perPage, currentPage]);
 
+  useEffect(() => {
+    getSubscriber();
+  }, [selectedRowData]);
+
   return (
     <div className="main_content_tables">
       <div className="conetnt_table">
         <HeadTable
-          path={t("Subscribers")}
+          path={t("users - index")}
           statusFilter={statusFilter}
           title={[
-            t("List of subscribers"),
-            ` | ${numberSubscribers}`,
-            t("records found"),
+            t("users_table_title"),
+            ` | `,
+            t("global_table_label_found"),
+            `${numberSubscribers}`,
+            t("global_table_label_records"),
           ]}
           iconHead={<i className="fa-solid fa-people-group"></i>}
           setSearch={setSearch}
@@ -157,31 +270,35 @@ const Subscribers = () => {
           <div className="content">
             <Link to={"/subscribers/add"} className="item">
               <i className="fa-solid fa-plus"></i>
-              <span>{t("Add")}</span>
+              <span>{t("global_actions_new")}</span>
             </Link>
             <Link
               to={
                 selectedRowData.length > 0 &&
-                `subscribers/${selectedRowData[0]}/edit`
+                `/subscribers/${selectedRowData[0]}/edit`
               }
               className="item"
             >
               <i className="fa-regular fa-pen-to-square"></i>
-              <span>{t("Edit")}</span>
+              <span>{t("global_actions_edit")}</span>
             </Link>
             <div
               className="item btn_open_model"
-              onClick={() => setOpenChangeName(true)}
+              onClick={() =>
+                selectedRowData.length > 0 && setOpenChangeName(true)
+              }
             >
               <i className="fa-regular fa-pen-to-square"></i>
-              <span>{t("Name changed")}</span>
+              <span>{t("global_actions_rename")}</span>
             </div>
             <div
               className="item btn_open_model"
-              onClick={() => setOpenDataBalance(true)}
+              onClick={() =>
+                selectedRowData.length > 0 && setOpenDataBalance(true)
+              }
             >
               <i className="fa-solid fa-person-chalkboard"></i>
-              <span>{t("Add data balance")}</span>
+              <span>{t("users_action_add_traffic")}</span>
             </div>
             <Link
               to={
@@ -191,7 +308,7 @@ const Subscribers = () => {
               className="item"
             >
               <i className="fa-solid fa-play"></i>
-              <span>Activate</span>
+              <span>{t("users_action_activate")}</span>
             </Link>
             <Link
               to={
@@ -201,21 +318,25 @@ const Subscribers = () => {
               className="item"
             >
               <i className="fa-solid fa-star-of-life"></i>
-              <span>{t("extension")}</span>
+              <span>{t("users_action_extend")}</span>
             </Link>
             <div
               className="item btn_open_model"
-              onClick={() => setOpenChangePassowrd(true)}
+              onClick={() =>
+                selectedRowData.length > 0 && setOpenChangePassowrd(true)
+              }
             >
               <i className="fa-solid fa-key"></i>
-              <span>{t("Change password")}</span>
+              <span>{t("users_action_change_password")}</span>
             </div>
             <div
               className="item btn_open_model"
-              onClick={() => setOpenJointCompensation(true)}
+              onClick={() =>
+                selectedRowData.length > 0 && setOpenJointCompensation(true)
+              }
             >
               <i className="fa-light fa-puzzle-piece"></i>
-              <span> {t("compensation")}</span>
+              <span> {t("users_action_compensate")}</span>
             </div>
             <Link
               to={
@@ -225,7 +346,7 @@ const Subscribers = () => {
               className="item"
             >
               <i className="fa-solid fa-star-of-life"></i>
-              <span>{t("Purchase additional service")}</span>
+              <span>{t("users_action_addon")}</span>
             </Link>
             <Link
               to={
@@ -235,36 +356,43 @@ const Subscribers = () => {
               className="item"
             >
               <i className="fa-light fa-puzzle-piece"></i>
-              <span>{t("Change the package")}</span>
+              <span>{t("users_action_change_profile")}</span>
             </Link>
             <div
               className="item btn_open_model"
-              onClick={() => setOpenDeposit(true)}
+              onClick={() => selectedRowData.length > 0 && setOpenDeposit(true)}
             >
               <i className="fa-solid fa-money-bill-transfer"></i>
-              <span>{t("Deposit")}</span>
+              <span>{t("global_actions_deposit")}</span>
             </div>
             <div
               className="item btn_open_model"
-              onClick={() => setOpenDiscountAmount(true)}
+              onClick={() =>
+                selectedRowData.length > 0 && setOpenDiscountAmount(true)
+              }
             >
               <i className="fa-solid fa-money-bill-transfer"></i>
-              <span>{t("Discount amount")}</span>
+              <span>{t("global_actions_withdrawal")}</span>
             </div>
             <div
               className="item btn_open_model"
-              onClick={() => setOpenPayOffDebts(true)}
+              onClick={() =>
+                selectedRowData.length > 0 && setOpenPayOffDebts(true)
+              }
             >
               <i className="fa-solid fa-money-bill-transfer"></i>
-              <span>{t("Pay off debts")}</span>
+              <span>{t("global_actions_pay_debt")}</span>
             </div>
             <div className="item">
               <i className="fa-regular fa-handshake"></i>
-              <span> {t("End subscription")}</span>
+              <span> {t("users_action_cancel")}</span>
             </div>
-            <div className="item">
+            <div
+              className="item"
+              onClick={selectedRowData.length > 0 && handleDeleteSubsciber}
+            >
               <i className="fa-solid fa-trash"></i>
-              <span>{t("Delete")}</span>
+              <span>{t("global_actions_delete")}</span>
             </div>
           </div>
         </HeadTable>
@@ -282,19 +410,19 @@ const Subscribers = () => {
       {loading && <Loader />}
       {/* popup change name*/}
       <Popup
-        title={t("Change Name")}
+        title={t("user_rename_form_title")}
         openPopup={openChangeName}
         setOpenPopup={setOpenChangeName}
         onSubmit={handleChangeName}
       >
         <InputItem
-          label={t("Current name")}
+          label={t("user_rename_form_current_username")}
           type={"text"}
-          value={"demo1"}
+          value={subscriber ? subscriber.firstname : null}
           classes={"disabled"}
         />
         <InputItem
-          label={t("New name")}
+          label={t("user_rename_form_new_username")}
           type={"text"}
           value={newName}
           onChange={setNewName}
@@ -303,36 +431,36 @@ const Subscribers = () => {
       </Popup>
       {/* popup Add or withdraw data balance*/}
       <Popup
-        title={"Add or withdraw data balance"}
+        title={"user_traffic_form_title"}
         openPopup={openDataBalance}
         setOpenPopup={setOpenDataBalance}
         onSubmit={handleDataBalance}
       >
         <InputItem
-          label={t("Current name")}
+          label={t("global_username")}
           type={"text"}
-          value={"demo1"}
+          value={subscriber ? subscriber.firstname : null}
           classes={"disabled"}
         />
         <SelectItem
-          label={t("Data type")}
+          label={t("user_traffic_form_target")}
           value={dataTypeBalance}
           onChange={setDataTypeBalance}
           options={[
             { name: "Download + Upload", value: "rxtx_mbytes" },
             { name: "Download", value: "rx_mbytes" },
-            { name: "Download", value: "tx_mbytes" },
+            { name: "Upload", value: "tx_mbytes" },
           ]}
         />
         <InputItem
-          label={t("Quantity (MB)")}
+          label={t("user_traffic_form_amount")}
           type={"number"}
           value={quantityMb}
           onChange={setQuantityMb}
           placeholder={"0"}
         />
         <InputItem
-          label={t("Notice")}
+          label={t("global_comment")}
           type={"text"}
           value={noticeDataBalance}
           onChange={setNoticeDataBalance}
@@ -341,20 +469,20 @@ const Subscribers = () => {
       </Popup>
       {/* popup change psassword*/}
       <Popup
-        title={t("Change Password")}
+        title={t("users_action_change_password")}
         openPopup={openChangePassword}
         setOpenPopup={setOpenChangePassowrd}
         onSubmit={handleChangePassword}
       >
         <InputItem
-          label={t("password")}
+          label={t("user_form_label_password")}
           type={"password"}
           value={password}
           onChange={setPassowrd}
           placeholder={""}
         />
         <InputItem
-          label={t("confirm password")}
+          label={t("user_form_label_password_confirm")}
           type={"password"}
           value={confirmPassword}
           onChange={setConfirmPassowrd}
@@ -363,70 +491,71 @@ const Subscribers = () => {
       </Popup>
       {/* popup Joint compensation */}
       <Popup
-        title={t("Joint compensation")}
+        title={t("user_compensation_title")}
         openPopup={openJointCompensation}
         setOpenPopup={setOpenJointCompensation}
         onSubmit={handleJointCompensation}
       >
         <div className="grid grid-cols-1 md:grid-cols-2">
           <InputItem
-            label={t("Username")}
+            label={t("global_username")}
             type={"text"}
             classes={"disabled"}
             value={"demo1"}
           />
           <InputItem
-            label={t("Owner")}
+            label={t("global_owner")}
             type={"text"}
             classes={"disabled"}
             value={"Manager_2"}
           />
           <InputItem
-            label={t("Service")}
+            label={t("global_profile")}
             type={"text"}
             classes={"disabled"}
             value={"slow"}
           />
           <InputItem
-            label={t("Subscription expiration")}
+            label={t("global_expiration")}
             type={"text"}
             classes={"disabled"}
             value={"2021-10-08 13:06:00"}
           />
           <SelectItem
-            label={t("Type of compensation")}
+            label={t("user_compensation_target")}
             value={typeCompensation}
             onChange={setTypeCompensation}
             options={[
-              { name: "days", value: "days" },
-              { name: "traffic", value: "traffic" },
-              { name: "time", value: "uptime" },
+              { name: "What to compensate ?", value: "" },
+              { name: "Uptime", value: "uptime" },
+              { name: "Traffic", value: "traffic" },
+              { name: "Days", value: "days" },
             ]}
           />
         </div>
       </Popup>
       {/* popup Deposit */}
       <Popup
-        title={t("Deposit")}
+        title={t("user_depodrawal_form_title_deposit")}
         openPopup={openDeposit}
         setOpenPopup={setOpenDeposit}
         onSubmit={handleDeposite}
       >
         <InputItem
-          label={t("Username")}
+          label={t("user_depodrawal_form_username")}
           type={"text"}
           classes={"disabled"}
-          value={"demo1"}
+          value={subscriber ? subscriber.username : null}
         />
         <InputItem
-          label={t("Amount")}
+          label={t("user_depodrawal_form_amount")}
           type={"number"}
           value={amountDeposit}
           onChange={setAmountDeposot}
           placeholder={""}
         />
         <InputItem
-          label={t("Notice")}
+          label={t("user_depodrawal_form_comment")}
           type={"text"}
           value={noticeDeposite}
           onChange={setNoticeDeposite}
@@ -435,26 +564,26 @@ const Subscribers = () => {
       </Popup>
       {/* popup Discount amount */}
       <Popup
-        title={t("Discount amount")}
+        title={t("user_depodrawal_form_title_withdrawal")}
         openPopup={openDiscountAmount}
         setOpenPopup={setOpenDiscountAmount}
         onSubmit={handleDicountAmount}
       >
         <InputItem
-          label={t("Username")}
+          label={t("user_depodrawal_form_username")}
           type={"text"}
           classes={"disabled"}
-          value={"demo1"}
+          value={subscriber ? subscriber.username : null}
         />
         <InputItem
-          label={t("Amount")}
+          label={t("user_depodrawal_form_amount")}
           type={"number"}
           value={amountDiscount}
           onChange={setAmountDiscount}
           placeholder={""}
         />
         <InputItem
-          label={t("Notice")}
+          label={t("user_depodrawal_form_comment")}
           type={"text"}
           value={noticeDiscount}
           onChange={setNoticeDiscount}
@@ -463,26 +592,26 @@ const Subscribers = () => {
       </Popup>
       {/* popup Pay off debts*/}
       <Popup
-        title={t("Pay off debts")}
+        title={t("global_actions_pay_debt")}
         openPopup={openPayOffDebts}
         setOpenPopup={setOpenPayOffDebts}
         onSubmit={handlePayOffDebts}
       >
         <InputItem
-          label={t("Username")}
+          label={t("user_depodrawal_form_username")}
           type={"text"}
           classes={"disabled"}
-          value={"demo1"}
+          value={subscriber ? subscriber.username : null}
         />
         <InputItem
-          label={"Amount"}
+          label={"user_depodrawal_form_amount"}
           type={"number"}
           value={amountPayDebts}
           onChange={setAmountPayDebts}
           placeholder={""}
         />
         <InputItem
-          label={t("Notice")}
+          label={t("user_depodrawal_form_comment")}
           type={"text"}
           value={noticePayDebts}
           onChange={setNoticePayDebts}

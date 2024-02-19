@@ -12,14 +12,15 @@ const AdditionalServiceSubscriber = () => {
     setAdditionalService((prev) => {
       return {
         ...prev,
-        [e.target.id]: e.target.checked ? e.target.checked : e.target.value,
+        [e.target.id]:
+          e.target.type === "checkbox" ? e.target.checked : e.target.value,
       };
     });
   };
 
   return (
     <div className="content_page">
-      <SectionForm title={t("Extend Subscriber")}>
+      <SectionForm title={t("Euser_addon_form_title")}>
         <div className="boxs_information mb-5">
           <div className="boxs">
             <div className="box">
@@ -53,7 +54,7 @@ const AdditionalServiceSubscriber = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 border-t border-gray-300 pt-4">
           <SelectSectionForm
-            label={t("Type service")}
+            label={t("user_addon_form_select_addon")}
             value={additionalService.typeService}
             onChange={handleAdditionalService}
             id="typeService"
@@ -61,8 +62,8 @@ const AdditionalServiceSubscriber = () => {
         </div>
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">{"OK"}</button>
-        <button className="btn_close">{t("Cancel")}</button>
+        <button className="btn_add">{t("global_button_submit")}</button>
+        <button className="btn_close">{t("global_button_cancel")}</button>
       </div>
     </div>
   );

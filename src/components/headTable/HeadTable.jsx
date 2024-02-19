@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import "./headTable.scss";
 import { useTranslation } from "react-i18next";
 
@@ -12,13 +12,30 @@ const HeadTable = ({
   setSearch,
 }) => {
   const [openProcesses, setOpenProcesses] = useState(false);
+  const processesRef = useRef();
   const lang = localStorage.getItem("lang");
   const { t } = useTranslation();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        processesRef.current &&
+        !processesRef.current.contains(event.target)
+      ) {
+        setOpenProcesses(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
     <Fragment>
       <div className="path">
-        <span>{t("Home")}</span> /<span>{path}</span>
+        <span>{path}</span>
       </div>
       {statusFilter && (
         <div className="status_filter">
@@ -41,7 +58,7 @@ const HeadTable = ({
         </div>
 
         <div className="flex items-center gap-2 md:gap-3 flex-col md:flex-row">
-          <div className="utils">
+          <div className="utils" ref={processesRef}>
             {actions && (
               <div className="actions_box">
                 <button
@@ -49,7 +66,7 @@ const HeadTable = ({
                   onClick={() => setOpenProcesses(!openProcesses)}
                 >
                   <i className="fa-solid fa-wrench"></i>
-                  {t("Processes")}
+                  {t("global_table_actions")}
                 </button>
 
                 <div
@@ -65,7 +82,7 @@ const HeadTable = ({
           <div className="input_search">
             <input
               type="text"
-              placeholder={t("Search...")}
+              placeholder={t("placeholder_search")}
               onChange={(e) => setSearch(e.target.value)}
             />
             <svg

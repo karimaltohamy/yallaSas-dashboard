@@ -23,7 +23,8 @@ const VerifyCards = () => {
     setCardVerification((prev) => {
       return {
         ...prev,
-        [e.target.id]: e.target.checked ? e.target.checked : e.target.value,
+        [e.target.id]:
+          e.target.type === "checkbox" ? e.target.checked : e.target.value,
       };
     });
   };

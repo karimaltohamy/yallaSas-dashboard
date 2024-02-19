@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import "./popup.scss";
+import { t } from "i18next";
 
 const Popup = ({ title, children, setOpenPopup, openPopup, onSubmit }) => {
   return (
@@ -15,7 +16,7 @@ const Popup = ({ title, children, setOpenPopup, openPopup, onSubmit }) => {
           </div>
           <form action="" onSubmit={onSubmit}>
             {children}
-            <button className="btn_submit">Submit</button>
+            <button className="btn_submit">{t("global_button_submit")}</button>
           </form>
         </div>
       </div>

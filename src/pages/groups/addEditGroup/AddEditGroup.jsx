@@ -13,7 +13,8 @@ const AddEditGroup = () => {
     setGeneralinformation((prev) => {
       return {
         ...prev,
-        [e.target.id]: e.target.checked ? e.target.checked : e.target.value,
+        [e.target.id]:
+          e.target.type === "checkbox" ? e.target.checked : e.target.value,
       };
     });
   };
@@ -39,8 +40,8 @@ const AddEditGroup = () => {
         </div>
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">{t("OK")}</button>
-        <button className="btn_close">{t("Cancel")}</button>
+        <button className="btn_add">{t("global_button_submit")}</button>
+        <button className="btn_close">{t("global_button_cancel")}</button>
       </div>
     </div>
   );

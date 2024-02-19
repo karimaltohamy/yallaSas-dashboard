@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { secretPass } from "../../utils/data";
 import Loader from "../../components/loader/Loader";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -15,6 +16,7 @@ const Login = () => {
   const [lang, setLang] = useState("en");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     (async () => {
@@ -26,6 +28,19 @@ const Login = () => {
       }
     })();
   }, []);
+
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+    localStorage.setItem("lang", lang);
+
+    if (lang == "ar") {
+      document.body.classList.add("ar");
+      document.body.classList.remove("en");
+    } else if (lang == "en") {
+      document.body.classList.add("en");
+      document.body.classList.remove("ar");
+    }
+  };
 
   // handle login
   const handleLogin = async (e) => {
@@ -51,8 +66,9 @@ const Login = () => {
       );
       setLoading(false);
       navigate("/");
+      changeLanguage(lang);
     } catch (error) {
-      toast.error(error.reponse.data.message);
+      toast.error(error.response.data.error);
       console.log(error);
       setLoading(false);
     }
@@ -77,7 +93,7 @@ const Login = () => {
                 <span>{t("Your Admin Dashboard")}</span>
               </div>
               <div className="input_item">
-                <label htmlFor=""> {t("Username")} </label>
+                <label htmlFor=""> {t("global_username")} </label>
                 <input
                   type="text"
                   placeholder={t("Enter your username")}
@@ -86,7 +102,7 @@ const Login = () => {
                 />
               </div>
               <div className="input_item">
-                <label htmlFor=""> {t("Password")} </label>
+                <label htmlFor=""> {t("user_form_label_password")} </label>
                 <input
                   type="password"
                   placeholder={t("Enter your password")}
@@ -96,7 +112,12 @@ const Login = () => {
               </div>
               <div className="input_item">
                 <label htmlFor=""> {t("Language")} </label>
-                <select name="" id="" onChange={(e) => setLang(e.target.value)}>
+                <select
+                  name=""
+                  id=""
+                  value={lang}
+                  onChange={(e) => setLang(e.target.value)}
+                >
                   <option value="">Select Language</option>
                   {languages &&
                     languages.map((lang, i) => {

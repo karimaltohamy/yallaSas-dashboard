@@ -5,6 +5,7 @@ import { getUser } from "./store/actions/getUser";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import apiAxios from "./utils/apiAxios";
 
 function App() {
   const dispatch = useDispatch();

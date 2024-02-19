@@ -23,23 +23,23 @@ const OnlineSubscribers = () => {
   const statusFilter = [
     {
       color: "#9fe22b",
-      name: t("Effective"),
+      name: t("users_status_active"),
     },
     {
       color: "#ff9416",
-      name: t("Expired"),
+      name: t("users_status_expired"),
     },
     {
       color: "#bb3436",
-      name: t("Disabled"),
+      name: t("users_status_disabled"),
     },
     {
       color: "#7c40a5",
-      name: t("Connected to a secondary package"),
+      name: t("users_status_fup"),
     },
     {
       color: "black",
-      name: t("Online, unblocked"),
+      name: t("users_status_zombie"),
     },
   ];
 
@@ -87,32 +87,32 @@ const OnlineSubscribers = () => {
         <HeadTable
           path={t("Subscribers")}
           statusFilter={statusFilter}
-          title={t("List of online subscribers")}
+          title={t("menu_users_online")}
           iconHead={<i className="fa-solid fa-people-group"></i>}
         >
           <div className="content">
             <div className="item">
-              <span>data flow</span>
+              <span>{t("users_action_live_traffic")}</span>
             </div>
             <div className="item">
               <i className="fa-solid fa-eye"></i>
-              <span>Show</span>
+              <span>{t("users_action_view")}</span>
             </div>
             <div className="item">
               <i className="fa-regular fa-pen-to-square"></i>
-              <span>Edit</span>
+              <span>{t("users_tab_edit")}</span>
             </div>
             <div className="item">
               <i className="fa-solid fa-plug-circle-xmark"></i>
-              <span>Disconnect</span>
+              <span>{t("users_action_disconnect")}</span>
             </div>
             <div className="item">
               <i className="fa-solid fa-lock"></i>
-              <span>MAC lock</span>
+              <span>{t("user_form_label_mac_lock")}</span>
             </div>
             <div className="item">
               <i className="fa-solid fa-arrows-left-right"></i>
-              <span>Ping</span>
+              <span>{t("users_action_ping")}</span>
             </div>
           </div>
         </HeadTable>

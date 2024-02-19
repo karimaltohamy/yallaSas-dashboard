@@ -4,10 +4,9 @@ import { convertFromBytes } from "./utilsFunctions";
 import { Link } from "react-router-dom";
 
 export const columnsSubscibers = [
-  { field: "id", headerName: "ID", width: 90 },
   {
     field: "enabled",
-    headerName: i18n.t("Condition"),
+    headerName: i18n.t("users_table_status"),
     renderCell: ({ row }) => {
       if (row.enabled == 0) {
         return (
@@ -50,7 +49,7 @@ export const columnsSubscibers = [
   },
   {
     field: "username",
-    headerName: t("Login name"),
+    headerName: t("users_table_username"),
     width: 120,
     cellClassName: "name-column-cell",
     renderCell: (params) => {
@@ -68,26 +67,31 @@ export const columnsSubscibers = [
   },
   {
     field: "firstname",
-    headerName: t("First Name"),
+    headerName: t("users_table_firstname"),
     type: "number",
     headerAlign: "left",
   },
-  { field: "lastname", headerName: t("Last name"), flex: 1 },
-  { field: "expiration", headerName: t("End date"), flex: 1, width: 220 },
-  { field: "parent_username", headerName: t("Continue to"), flex: 1 },
+  { field: "lastname", headerName: t("users_table_lastname"), flex: 1 },
+  {
+    field: "expiration",
+    headerName: t("users_table_expiration"),
+    flex: 1,
+    width: 220,
+  },
+  { field: "parent_username", headerName: t("users_table_parent"), flex: 1 },
   {
     field: "package",
-    headerName: t("Package"),
+    headerName: t("users_table_profile"),
     valueGetter: (params) => {
       if (params.row["profile_details"] && params.row["profile_details"].name) {
         return params.row["profile_details"].name;
       }
     },
   },
-  { field: "loan_balance", headerName: t("Debts") },
+  { field: "loan_balance", headerName: t("users_table_balance") },
   {
     field: "daily_traffic_details.traffic",
-    headerName: t("Daily consumption"),
+    headerName: t("users_table_daily_traffic"),
     valueGetter: (params) => {
       if (
         params.row["daily_traffic_details"] &&
@@ -97,13 +101,13 @@ export const columnsSubscibers = [
       }
     },
   },
-  { field: "remaining_days", headerName: t("Remaining days") },
+  { field: "remaining_days", headerName: t("users_table_remaining_days") },
 ];
 
 export const columnsOnlineSubscibers = [
   {
     field: "status",
-    headerName: t("Status"),
+    headerName: t("global_status"),
     renderCell: ({ row }) => {
       if (row.status.status) {
         return (
@@ -136,10 +140,10 @@ export const columnsOnlineSubscibers = [
       }
     },
   },
-  { field: "username", headerName: t("Login name") },
+  { field: "username", headerName: t("global_username") },
   {
     field: "acctoutputoctets",
-    headerName: t("Donwload"),
+    headerName: t("global_download"),
     valueGetter: (params) => {
       if (params.row["acctoutputoctets"]) {
         return convertFromBytes(params.row["acctoutputoctets"]);
@@ -148,130 +152,252 @@ export const columnsOnlineSubscibers = [
   },
   {
     field: "acctinputoctets",
-    headerName: t("Lift"),
+    headerName: t("users_table_ul"),
     valueGetter: (params) => {
       if (params.row["acctinputoctets"]) {
         return convertFromBytes(params.row["acctinputoctets"]);
       }
     },
   },
-  { field: "parent_username", headerName: t("Continue to") },
-  { field: "user_profile_name", headerName: t("Package") },
-  { field: "framedipaddress", headerName: t("Ip") },
-  { field: "callingstationid", headerName: t("Mac") },
-  { field: "acctsessiontime", headerName: t("Call duration") },
-  { field: "oui", headerName: t("Device") },
+  { field: "parent_username", headerName: t("users_table_parent") },
+  { field: "user_profile_name", headerName: t("users_table_profile") },
+  { field: "framedipaddress", headerName: t("global_ip") },
+  { field: "callingstationid", headerName: t("user_session_table_mac") },
+  { field: "acctsessiontime", headerName: t("users_table_uptime") },
+  { field: "oui", headerName: t("users_table_hardware") },
 ];
 
 export const columnsSessions = [
-  { field: "startTime", headerName: t("Start time") },
-  { field: "endTime", headerName: t("End time") },
-  { field: "download", headerName: t("Download") },
-  { field: "lift", headerName: t("Lift") },
-  { field: "mac", headerName: t("Mac") },
-  { field: "connectionPoint", headerName: t("Connection point") },
-  { field: "nas", headerName: t("Nas") },
+  { field: "acctstarttime", headerName: t("user_session_table_started") },
+  { field: "acctstoptime", headerName: t("user_session_table_ended") },
+  { field: "framedipaddress", headerName: t("user_session_table_ip") },
   {
-    field: "reasonTermination",
-    headerName: t("Reason for termination"),
+    field: "acctoutputoctets",
+    headerName: t("user_session_table_download"),
+    valueGetter: (params) => {
+      if (params.row["acctoutputoctets"]) {
+        return convertFromBytes(params.row["acctoutputoctets"]);
+      }
+    },
+  },
+  {
+    field: "acctinputoctets",
+    headerName: t("user_session_table_upload"),
+    valueGetter: (params) => {
+      if (params.row["acctinputoctets"]) {
+        return convertFromBytes(params.row["acctinputoctets"]);
+      }
+    },
+  },
+  { field: "callingstationid", headerName: t("user_session_table_mac") },
+  { field: "calledstationid", headerName: t("user_session_table_profile") },
+  { field: "nasipaddress", headerName: t("user_session_table_service") },
+  {
+    field: "acctterminatecause",
+    headerName: t("user_session_table_protocol"),
     width: 150,
   },
-  { field: "remainingDays", headerName: t("Remaining days"), width: 150 },
+  {
+    field: "acctterminatecause",
+    headerName: t("user_session_table_termination_cause"),
+    width: 150,
+  },
 ];
 
 export const columnsInvoices = [
-  { field: "ivoiceNumber", headerName: t("Invoice number"), width: 150 },
-  { field: "date", headerName: t("Date") },
-  { field: "type", headerName: t("Type") },
-  { field: "amount", headerName: t("Amount") },
-  { field: "details", headerName: t("Details") },
-  { field: "publishedBy", headerName: t("Published by") },
   {
-    field: "paymentMethod",
-    headerName: t("Payment method"),
+    field: "invoice_number",
+    headerName: t("user_invoice_table_number"),
     width: 150,
   },
-  { field: "paid", headerName: t("paid"), width: 150 },
+  { field: "created_at", headerName: t("user_invoice_table_date") },
+  { field: "type", headerName: t("user_invoice_table_type") },
+  { field: "amount", headerName: t("user_invoice_table_amount") },
+  { field: "description", headerName: t("user_invoice_table_description") },
+  {
+    field: "user_details.parent_username",
+    headerName: t("user_invoice_table_created_by"),
+    valueGetter: (params) => {
+      if (params.row["user_details"]) {
+        return params.row["user_details"].parent_username;
+      }
+    },
+  },
+  {
+    field: "payment_method",
+    headerName: t("user_invoice_table_method"),
+    width: 150,
+  },
+  { field: "paid", headerName: t("user_invoice_table_paid"), width: 150 },
 ];
 export const columnsPayments = [
-  { field: "receiptDate", headerName: t("Receipt date"), width: 150 },
-  { field: "date", headerName: t("Date") },
-  { field: "type", headerName: t("Type") },
-  { field: "amount", headerName: t("Amount") },
-  { field: "details", headerName: t("Details") },
-  { field: "publishedBy", headerName: t("Published by") },
+  {
+    field: "receipt_number",
+    headerName: t("user_receipt_table_no"),
+    width: 150,
+  },
+  { field: "created_at", headerName: t("user_receipt_table_date") },
+  { field: "type", headerName: t("user_receipt_table_type") },
+  { field: "amount", headerName: t("user_receipt_table_amount") },
+  { field: "description", headerName: t("user_receipt_table_description") },
+  {
+    field: "user_details.parent_username",
+    headerName: t("user_receipt_table_created_by"),
+    valueGetter: (params) => {
+      if (params.row["user_details"]) {
+        return params.row["user_details"].parent_username;
+      }
+    },
+  },
 ];
 
 export const columnsRecord = [
-  { field: "date", headerName: t("Date") },
-  { field: "process", headerName: t("Process") },
-  { field: "details", headerName: t("Details") },
-  { field: "workedBefore", headerName: t("Worked before"), width: 170 },
+  { field: "created_at", headerName: t("user_history_table_date"), width: 180 },
+  { field: "event", headerName: t("user_history_table_action"), width: 130 },
+  {
+    field: "description",
+    headerName: t("user_history_table_description"),
+    width: 180,
+  },
+  {
+    field: "manager_details.firstname",
+    headerName: t("user_history_table_created_by"),
+    width: 170,
+    valueGetter: (params) => {
+      if (params.row["manager_details"]) {
+        return params.row["manager_details"].firstname;
+      }
+    },
+  },
 ];
 
 export const columnsDocuments = [
-  { field: "documentName", headerName: t("Document Name"), width: 170 },
-  { field: "size", headerName: t("Size") },
-  { field: "date", headerName: t("Date") },
+  {
+    field: "documentName",
+    headerName: t("user_document_table_name"),
+    width: 170,
+  },
+  { field: "size", headerName: t("user_document_table_size") },
+  { field: "date", headerName: t("user_document_table_date") },
 ];
 
 export const columnsFinamialRecord = [
-  { field: "date", headerName: t("Date"), width: 170 },
-  { field: "daet", headerName: t("Daet") },
-  { field: "debit", headerName: t("Debit") },
-  { field: "amount", headerName: t("Amount") },
-  { field: "balance", headerName: t("Balance") },
-  { field: "process", headerName: t("Process") },
-  { field: "details", headerName: t("Details") },
+  { field: "created_at", headerName: t("user_journal_table_date"), width: 170 },
+  { field: "cr", headerName: t("user_journal_table_cr"), width: 190 },
+  { field: "dr", headerName: t("user_journal_table_dr"), width: 190 },
+  { field: "amount", headerName: t("user_journal_table_amount") },
+  { field: "balance", headerName: t("user_journal_table_balance") },
+  { field: "created_at", headerName: t("user_journal_table_operation") },
+  { field: "description", headerName: t("user_journal_table_description") },
 ];
 
 export const columnsQuotas = [
-  { field: "date", headerName: t("Date") },
-  { field: "download", headerName: t("Download (MB)") },
-  { field: "upload", headerName: t("Upload") },
-  { field: "toltalTraffic", headerName: t("Total Traffic") },
-  { field: "effectiveDate", headerName: t("Effective Date") },
-  { field: "comment", headerName: t("Comment") },
+  { field: "created_at", headerName: t("global_date"), width: 150 },
+  {
+    field: "download",
+    headerName: t("user_activate_download"),
+    valueGetter: (params) => {
+      if (params.row.rx_mbytes) {
+        return convertFromBytes(params.row.rx_mbytes);
+      }
+    },
+  },
+  {
+    field: "upload",
+    headerName: t("user_activate_upload"),
+    valueGetter: (params) => {
+      if (params.row.tx_mbytes) {
+        return convertFromBytes(params.row.tx_mbytes);
+      }
+    },
+  },
+  {
+    field: "rxtx_mbytes",
+    headerName: t("Total Traffic (MB)"),
+    valueGetter: (params) => {
+      if (params.row.rxtx_mbytes) {
+        return convertFromBytes(params.row.rxtx_mbytes);
+      }
+    },
+  },
+  { field: "effective_date", headerName: t("Effective Date"), width: 150 },
+  { field: "comment", headerName: t("global_comment") },
 ];
 
 export const columnsCompensations = [
-  { field: "date", headerName: t("Date") },
-  { field: "loginName", headerName: t("Login name") },
-  { field: "day", headerName: t("Day") },
-  { field: "data", headerName: t("Data") },
-  { field: "time", headerName: t("Time") },
-  { field: "manager", headerName: t("Manager") },
+  { field: "created_at", headerName: t("global_date"), width: 140 },
+  {
+    field: "user_details",
+    headerName: t("global_username"),
+    valueGetter: (params) => {
+      if (params.row["user_details"]) {
+        return params.row["user_details"].username;
+      }
+    },
+    width: 140,
+  },
+  { field: "days", headerName: t("global_days") },
+  { field: "traffic", headerName: t("menu_reports_traffic") },
+  { field: "hours", headerName: t("users_table_uptime") },
+  { field: "created_by_username", headerName: t("global_manager") },
   { field: "approved", headerName: t("Approved") },
-  { field: "approvedBy", headerName: t("Approved bt") },
+  { field: "approved_by_username", headerName: t("Approved By") },
 ];
 
 export const columnsUserTickets = [
-  { field: "date", headerName: t("Date"), width: 140 },
-  { field: "subject", headerName: t("Subject"), width: 120 },
-  { field: "firstName", headerName: t("First name") },
-  { field: "data", headerName: t("Data") },
-  { field: "secondName", headerName: t("Second name") },
-  { field: "status", headerName: t("Status"), width: 140 },
+  { field: "created_at", headerName: t("global_date"), width: 140 },
+  { field: "subject", headerName: t("global_subject"), width: 120 },
+  {
+    field: "user_details.username",
+    headerName: t("global_username"),
+    valueGetter: (params) => {
+      if (params.row["user_details"]) {
+        return params.row["user_details"].username;
+      }
+    },
+    width: 140,
+  },
+  {
+    field: "user_details.firstname",
+    headerName: t("global_firstname"),
+    valueGetter: (params) => {
+      if (params.row["user_details"]) {
+        return params.row["user_details"].firstname;
+      }
+    },
+    width: 140,
+  },
+  {
+    field: "user_details.lastname",
+    headerName: t("global_lastname"),
+    valueGetter: (params) => {
+      if (params.row["user_details"]) {
+        return params.row["user_details"].lastname;
+      }
+    },
+    width: 140,
+  },
+  { field: "closed", headerName: t("global_status"), width: 140 },
 ];
 
 export const columnsManagers = [
   {
     field: "loginName",
-    headerName: t("Login name"),
+    headerName: t("users_table_username"),
     cellClassName: "name-column-cell",
   },
   {
     field: "firstName",
-    headerName: t("First Name"),
+    headerName: t("users_table_firstname"),
     type: "number",
     headerAlign: "left",
   },
-  { field: "lastName", headerName: t("Last name") },
-  { field: "balance", headerName: t("Balance") },
-  { field: "loans", headerName: t("Loans") },
-  { field: "validity", headerName: t("Validity") },
-  { field: "followMe", headerName: t("Follow me") },
-  { field: "numberSubscribers", headerName: t("Number of subscribers") },
+  { field: "lastName", headerName: t("users_table_lastname") },
+  { field: "balance", headerName: t("managers_table_balance") },
+  { field: "loans", headerName: t("managers_table_loan_balance") },
+  { field: "validity", headerName: t("managers_table_acl_group") },
+  { field: "followMe", headerName: t("managers_table_parent") },
+  { field: "numberSubscribers", headerName: t("managers_table_users_count") },
 ];
 
 export const columnsInvoicesManagers = [

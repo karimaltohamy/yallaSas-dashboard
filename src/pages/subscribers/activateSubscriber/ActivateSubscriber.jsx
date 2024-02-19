@@ -6,9 +6,9 @@ import SwitchSectionForm from "../../../components/sectionform/SwitchSectionForm
 import { t } from "i18next";
 import { toast } from "react-toastify";
 import apiAxios from "../../../utils/apiAxios";
-import CryptoJS from "crypto-js";
-import { secretPass } from "../../../utils/data";
 import { useNavigate, useParams } from "react-router-dom";
+import Loader from "../../../components/loader/Loader";
+import { encryptedData, generateUUID } from "../../../utils/utilsFunctions";
 
 const ActivateSubscriber = () => {
   const { id } = useParams();
@@ -16,16 +16,20 @@ const ActivateSubscriber = () => {
   const [activateSubscriber, setActivateSubscriber] = useState({
     user_price: "",
     comments: "",
-    activation_units: "",
+    activation_units: 1,
     method: "",
-    paid: "",
+    money_collected: false,
+    pin: "",
   });
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleActivateSubscriber = (e) => {
     setActivateSubscriber((prev) => {
       return {
         ...prev,
-        [e.target.id]: e.target.checked ? e.target.checked : e.target.value,
+        [e.target.id]:
+          e.target.type === "checkbox" ? e.target.checked : e.target.value,
       };
     });
   };
@@ -39,42 +43,50 @@ const ActivateSubscriber = () => {
         console.log(error);
       }
     })();
+    (async () => {
+      try {
+        const { data } = await apiAxios.get(
+          `api/allowedExtensions/${activiationData.profile_id}`
+        );
+        console.log(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
   }, []);
 
   const handleForm = async () => {
     setLoading(true);
-    let encrypted;
-    if (activateSubscriber) {
-      const dataToEncrypt = JSON.stringify({
-        method: "credit",
-        pin: "",
-        user_id: "1",
-        money_collected: 1,
-        comments: null,
-        user_price: 20,
-        issue_invoice: true,
-        transaction_id: "afd69923-c472-9055-af10-674586243416",
-        activation_units: 1,
-      });
-      encrypted = CryptoJS.AES.encrypt(dataToEncrypt, secretPass).toString();
-
+    if (activateSubscriber.method) {
       try {
-        const { data } = await apiAxios.post("api/user", {
-          payload: encrypted,
+        const { data } = await apiAxios.post("api/user/activate", {
+          payload: encryptedData({
+            method: activateSubscriber.method,
+            pin: activateSubscriber.pin,
+            user_id: id,
+            money_collected: activateSubscriber.money_collected ? 1 : 0,
+            comments: activateSubscriber.comments,
+            user_price: activiationData.user_price
+              ? activiationData.user_price
+              : activateSubscriber.user_price,
+            issue_invoice: 0,
+            transaction_id: generateUUID(),
+            activation_units: activateSubscriber.activation_units,
+          }),
         });
         toast.success("Successful add");
         navigate("/subscribers");
       } catch (error) {
         console.log(error);
-        toast.error(error.reponse.data.message);
+        toast.error(error.reponse.data.error);
       }
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   return (
     <div className="content_page">
-      <SectionForm title={"Activate Subscriber"}>
+      <SectionForm title={t("user_activate_form_title")}>
         <div className="boxs_information mb-5">
           <div className="boxs">
             <div className="box">
@@ -178,55 +190,83 @@ const ActivateSubscriber = () => {
                 </span>
               </div>
             </div>
+            <div className="box">
+              <div className="icon">
+                <i className="fa-regular fa-user"></i>
+              </div>
+              <div className="text">
+                <h4>VAT</h4>
+                <span>{activiationData.vat && activiationData.vat}</span>
+              </div>
+            </div>
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 border-t border-gray-300 pt-4">
           <InputSectionForm
-            label={t("Price per subscriber")}
+            label={t("user_activate_end_user_price")}
             type={"text"}
-            value={activateSubscriber.pricePerSubscriber}
+            value={
+              activiationData.user_price
+                ? activiationData.user_price
+                : activateSubscriber.user_price
+            }
             onChange={handleActivateSubscriber}
-            id="pricePerSubscriber"
+            id="user_price"
           />
           <InputSectionForm
-            label={t("Notice")}
+            label={t("global_comment")}
             type={"text"}
-            value={activateSubscriber.notice}
+            value={activateSubscriber.comments}
             onChange={handleActivateSubscriber}
-            id="notice"
+            id="comments"
           />
-          <InputSectionForm
-            label={"Number activation times"}
-            type={"text"}
-            value={activateSubscriber.NumberActivationTimes}
-            onChange={handleActivateSubscriber}
-            id="NumberActivationTimes"
-          />
+
           <SelectSectionForm
-            label={t("Activation method")}
+            label={t("user_activate_method")}
             type={"text"}
-            value={activateSubscriber.ActivationMethod}
+            value={activateSubscriber.method}
             onChange={handleActivateSubscriber}
-            id="ActivationMethod"
+            id="method"
             options={[
-              { name: "Manager balance", value: "" },
-              { name: "the card", value: "" },
-              { name: "Shared balance", value: "" },
-              { name: "Encouraging points", value: "" },
+              { name: "Manager balance", value: "credit" },
+              { name: "Prepaid card", value: "card" },
+              { name: "User balance", value: "user_balance" },
+              { name: "Reward Points", value: "reward_points" },
             ]}
           />
+          {activateSubscriber.method == "card" && (
+            <InputSectionForm
+              label={t("user_activate_card_number")}
+              type={"number"}
+              value={activateSubscriber.pin}
+              onChange={handleActivateSubscriber}
+              id="pin"
+            />
+          )}
+          {activateSubscriber.method == "credit" && (
+            <InputSectionForm
+              label={t("user_activate_units")}
+              type={"number"}
+              value={activateSubscriber.activation_units}
+              onChange={handleActivateSubscriber}
+              id="activation_units"
+            />
+          )}
           <SwitchSectionForm
-            label={t("Paid")}
-            value={activateSubscriber.paid}
+            label={t("user_activate_money_collected")}
+            value={activateSubscriber.money_collected}
             onChange={handleActivateSubscriber}
-            id="paid"
+            id="money_collected"
           />
         </div>
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">{"OK"}</button>
-        <button className="btn_close">{"Cancel"}</button>
+        <button className="btn_add" onClick={handleForm}>
+          {t("global_button_submit")}
+        </button>
+        <button className="btn_close">{t("global_button_cancel")}</button>
       </div>
+      {loading && <Loader />}
     </div>
   );
 };

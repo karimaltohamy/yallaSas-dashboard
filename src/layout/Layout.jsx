@@ -2,6 +2,7 @@ import React, { Fragment, Suspense } from "react";
 import Sidebar from "../components/sidebar/Sidebar";
 import Header from "../components/header/Header";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Login = React.lazy(() => import("../pages/login/Login"));
 const Home = React.lazy(() => import("../pages/home/Home"));
 const Subscribers = React.lazy(() =>
@@ -298,6 +299,16 @@ const About = React.lazy(() => import("../pages/aboutCompany/About"));
 const Hardware = React.lazy(() => import("../pages/aboutCompany/Hardware"));
 const Loader = React.lazy(() => import("../components/loader/Loader"));
 
+const ProidectedRoute = ({ children }) => {
+  const token = localStorage.getItem("token");
+
+  if (token === null) {
+    return <Navigate to={"/login"} />;
+  }
+
+  return children;
+};
+
 const Layout = () => {
   const location = useLocation();
   return (
@@ -318,7 +329,9 @@ const Layout = () => {
             path="/home"
             element={
               <Suspense fallback={<Loader />}>
-                <Home />
+                <ProidectedRoute>
+                  <Home />
+                </ProidectedRoute>
               </Suspense>
             }
           />
@@ -335,7 +348,9 @@ const Layout = () => {
             path="/subscribers"
             element={
               <Suspense fallback={<Loader />}>
-                <Subscribers />
+                <ProidectedRoute>
+                  <Subscribers />
+                </ProidectedRoute>
               </Suspense>
             }
           />
@@ -343,7 +358,9 @@ const Layout = () => {
             path="/subscribers/:id"
             element={
               <Suspense fallback={<Loader />}>
-                <ProfileSubscriber />
+                <ProidectedRoute>
+                  <ProfileSubscriber />
+                </ProidectedRoute>
               </Suspense>
             }
           >
@@ -352,7 +369,9 @@ const Layout = () => {
               path="edit"
               element={
                 <Suspense fallback={<Loader />}>
-                  <AddEditSubscriber typePage={"editPage"} />
+                  <ProidectedRoute>
+                    <AddEditSubscriber typePage={"editPage"} />
+                  </ProidectedRoute>
                 </Suspense>
               }
             />
@@ -360,7 +379,9 @@ const Layout = () => {
               path="consumption"
               element={
                 <Suspense fallback={<Loader />}>
-                  <ConsumptionSubscriber />
+                  <ProidectedRoute>
+                    <ConsumptionSubscriber />
+                  </ProidectedRoute>
                 </Suspense>
               }
             />
@@ -368,7 +389,9 @@ const Layout = () => {
               path="sessions"
               element={
                 <Suspense fallback={<Loader />}>
-                  <SessionsSubscriber />
+                  <ProidectedRoute>
+                    <SessionsSubscriber />
+                  </ProidectedRoute>
                 </Suspense>
               }
             />
@@ -376,7 +399,9 @@ const Layout = () => {
               path="invoices"
               element={
                 <Suspense fallback={<Loader />}>
-                  <InvoicesSubscriber />
+                  <ProidectedRoute>
+                    <InvoicesSubscriber />
+                  </ProidectedRoute>
                 </Suspense>
               }
             />
@@ -384,7 +409,9 @@ const Layout = () => {
               path="payments"
               element={
                 <Suspense fallback={<Loader />}>
-                  <PaymentsSubscriber />
+                  <ProidectedRoute>
+                    <PaymentsSubscriber />
+                  </ProidectedRoute>
                 </Suspense>
               }
             />
@@ -392,7 +419,9 @@ const Layout = () => {
               path="record"
               element={
                 <Suspense fallback={<Loader />}>
-                  <RecordSubscriber />
+                  <ProidectedRoute>
+                    <RecordSubscriber />
+                  </ProidectedRoute>
                 </Suspense>
               }
             />
@@ -400,7 +429,9 @@ const Layout = () => {
               path="documents"
               element={
                 <Suspense fallback={<Loader />}>
-                  <DocumentsSubscriber />
+                  <ProidectedRoute>
+                    <DocumentsSubscriber />
+                  </ProidectedRoute>
                 </Suspense>
               }
             />
@@ -408,7 +439,9 @@ const Layout = () => {
               path="radius"
               element={
                 <Suspense fallback={<Loader />}>
-                  <RadiusSubscriber />
+                  <ProidectedRoute>
+                    <RadiusSubscriber />
+                  </ProidectedRoute>
                 </Suspense>
               }
             />
@@ -416,7 +449,9 @@ const Layout = () => {
               path="free-zone"
               element={
                 <Suspense fallback={<Loader />}>
-                  <FreeZoneSubscriber />
+                  <ProidectedRoute>
+                    <FreeZoneSubscriber />
+                  </ProidectedRoute>
                 </Suspense>
               }
             />
@@ -424,7 +459,9 @@ const Layout = () => {
               path="quotas"
               element={
                 <Suspense fallback={<Loader />}>
-                  <FinancialRecordSubscriber />
+                  <ProidectedRoute>
+                    <QuotasSubscriber />
+                  </ProidectedRoute>
                 </Suspense>
               }
             />
@@ -432,7 +469,9 @@ const Layout = () => {
               path="financial-record"
               element={
                 <Suspense fallback={<Loader />}>
-                  <QuotasSubscriber />
+                  <ProidectedRoute>
+                    <FinancialRecordSubscriber />
+                  </ProidectedRoute>
                 </Suspense>
               }
             />
@@ -441,7 +480,9 @@ const Layout = () => {
             path="/subscribers/add"
             element={
               <Suspense fallback={<Loader />}>
-                <AddEditSubscriber typePage={"addPage"} />
+                <ProidectedRoute>
+                  <AddEditSubscriber typePage={"addPage"} />
+                </ProidectedRoute>
               </Suspense>
             }
           />
@@ -449,7 +490,9 @@ const Layout = () => {
             path="/subscribers/activate/:id"
             element={
               <Suspense fallback={<Loader />}>
-                <ActivateSubscriber />
+                <ProidectedRoute>
+                  <ActivateSubscriber />
+                </ProidectedRoute>
               </Suspense>
             }
           />
@@ -457,7 +500,9 @@ const Layout = () => {
             path="/subscribers/extend/:id"
             element={
               <Suspense fallback={<Loader />}>
-                <ExtendSubscriber />
+                <ProidectedRoute>
+                  <ExtendSubscriber />
+                </ProidectedRoute>
               </Suspense>
             }
           />
@@ -465,7 +510,9 @@ const Layout = () => {
             path="/subscribers/addon/:id"
             element={
               <Suspense fallback={<Loader />}>
-                <AdditionalServiceSubscriber />
+                <ProidectedRoute>
+                  <AdditionalServiceSubscriber />
+                </ProidectedRoute>
               </Suspense>
             }
           />
@@ -473,7 +520,9 @@ const Layout = () => {
             path="/subscribers/change-package/:id"
             element={
               <Suspense fallback={<Loader />}>
-                <ChangePackageSubscriber />
+                <ProidectedRoute>
+                  <ChangePackageSubscriber />
+                </ProidectedRoute>
               </Suspense>
             }
           />
@@ -481,7 +530,9 @@ const Layout = () => {
             path="/subscribers-online"
             element={
               <Suspense fallback={<Loader />}>
-                <OnlineSubscribers />
+                <ProidectedRoute>
+                  <OnlineSubscribers />
+                </ProidectedRoute>
               </Suspense>
             }
           />
@@ -489,7 +540,9 @@ const Layout = () => {
             path="/compensations-subscibers"
             element={
               <Suspense fallback={<Loader />}>
-                <CompensationsSubscribers />
+                <ProidectedRoute>
+                  <CompensationsSubscribers />
+                </ProidectedRoute>
               </Suspense>
             }
           />
@@ -497,7 +550,9 @@ const Layout = () => {
             path="/subscriber-tickets"
             element={
               <Suspense fallback={<Loader />}>
-                <SubscriberTickets />
+                <ProidectedRoute>
+                  <SubscriberTickets />
+                </ProidectedRoute>
               </Suspense>
             }
           />

@@ -77,59 +77,63 @@ const Managers = () => {
     <div className="main_content_tables">
       <div className="conetnt_table">
         <HeadTable
-          path={t("Managers")}
-          title={t("List of managers")}
+          path={t("prm_managers_index")}
+          title={t("managers_table_title")}
           iconHead={<i className="fa-solid fa-people-group"></i>}
         >
           <div className="content">
             <Link to={"/managers/add/1"} className="item">
               <i className="fa-solid fa-plus"></i>
-              <span>{t("Add")}</span>
+              <span>{t("global_actions_new")}</span>
             </Link>
             <Link to={"/managers/profile/1/general"} className="item">
               <i className="fa-regular fa-pen-to-square"></i>
-              <span>{"Edit"}</span>
+              <span>{t("managers_tab_edit")}</span>
             </Link>
             <div className="item" onClick={() => setOpenEditName(true)}>
               <i className="fa-regular fa-pen-to-square"></i>
-              <span>{t("Edit name")}</span>
+              <span>{t("global_actions_rename")}</span>
             </div>
             <div className="item" onClick={() => setOpenEditSite(true)}>
               <i className="fa-regular fa-pen-to-square"></i>
-              <span>{t("Edit site")}</span>
+              <span>{t("manager_actions_assign_site")}</span>
             </div>
             <div className="item" onClick={() => setOpenEditGroup(true)}>
               <i className="fa-regular fa-pen-to-square"></i>
-              <span>{t("Edit group")}</span>
+              <span>{t("manager_actions_assign_group")}</span>
             </div>
             <div className="item" onClick={() => setOpenDeposit(true)}>
               <i className="fa-solid fa-money-bill-transfer"></i>
-              <span>{t("Deposit")}</span>
+              <span>{t("global_actions_deposit")}</span>
             </div>
             <div className="item" onClick={() => setOpenDiscountAmount(true)}>
               <i className="fa-solid fa-money-bill-transfer"></i>
-              <span>{t("Discount amount")}</span>
+              <span>{t("global_actions_withdrawal")}</span>
             </div>
             <div
               className="item btn_open_model"
               onClick={() => setOpenPayOffDebts(true)}
             >
               <i className="fa-solid fa-money-bill-transfer"></i>
-              <span>{t("Pay off debts")}</span>
+              <span>{t("global_actions_pay_debt")}</span>
             </div>
             <div
               className="item btn_open_model"
               onClick={() => setOpenAddPoints(true)}
             >
               <i className="fa-regular fa-file-powerpoint"></i>
-              <span>{t("Add points")}</span>
+              <span>{t("manager_label_add_reward_point")}</span>
             </div>
             <div
               className="item btn_open_model"
               onClick={() => setOpenRecoverPoints(true)}
             >
               <i className="fa-regular fa-file-powerpoint"></i>
-              <span>{t("Recover points")}</span>
+              <span>{t("manager_label_deduct_reward_point")}</span>
+            </div>
+            <div className="item">
+              <i className="fa-solid fa-trash"></i>
+              <span>{t("global_actions_delete")}</span>
             </div>
           </div>
         </HeadTable>

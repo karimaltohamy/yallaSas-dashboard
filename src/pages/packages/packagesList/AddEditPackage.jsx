@@ -102,7 +102,8 @@ const AddEditPackage = () => {
     setGeneralinformation((prev) => {
       return {
         ...prev,
-        [e.target.id]: e.target.checked ? e.target.checked : e.target.value,
+        [e.target.id]:
+          e.target.type === "checkbox" ? e.target.checked : e.target.value,
       };
     });
   };
@@ -111,7 +112,8 @@ const AddEditPackage = () => {
     setServiceParameters((prev) => {
       return {
         ...prev,
-        [e.target.id]: e.target.checked ? e.target.checked : e.target.value,
+        [e.target.id]:
+          e.target.type === "checkbox" ? e.target.checked : e.target.value,
       };
     });
   };
@@ -120,7 +122,8 @@ const AddEditPackage = () => {
     setAdvancedFeatures((prev) => {
       return {
         ...prev,
-        [e.target.id]: e.target.checked ? e.target.checked : e.target.value,
+        [e.target.id]:
+          e.target.type === "checkbox" ? e.target.checked : e.target.value,
       };
     });
   };
@@ -129,7 +132,8 @@ const AddEditPackage = () => {
     setDailySOADeterminants((prev) => {
       return {
         ...prev,
-        [e.target.id]: e.target.checked ? e.target.checked : e.target.value,
+        [e.target.id]:
+          e.target.type === "checkbox" ? e.target.checked : e.target.value,
       };
     });
   };
@@ -138,7 +142,8 @@ const AddEditPackage = () => {
     setMikrotikSettings((prev) => {
       return {
         ...prev,
-        [e.target.id]: e.target.checked ? e.target.checked : e.target.value,
+        [e.target.id]:
+          e.target.type === "checkbox" ? e.target.checked : e.target.value,
       };
     });
   };
@@ -147,7 +152,8 @@ const AddEditPackage = () => {
     setCiscoOptions((prev) => {
       return {
         ...prev,
-        [e.target.id]: e.target.checked ? e.target.checked : e.target.value,
+        [e.target.id]:
+          e.target.type === "checkbox" ? e.target.checked : e.target.value,
       };
     });
   };
@@ -156,7 +162,8 @@ const AddEditPackage = () => {
     setActivationOptions((prev) => {
       return {
         ...prev,
-        [e.target.id]: e.target.checked ? e.target.checked : e.target.value,
+        [e.target.id]:
+          e.target.type === "checkbox" ? e.target.checked : e.target.value,
       };
     });
   };
@@ -165,7 +172,8 @@ const AddEditPackage = () => {
     setEncouragingPoints((prev) => {
       return {
         ...prev,
-        [e.target.id]: e.target.checked ? e.target.checked : e.target.value,
+        [e.target.id]:
+          e.target.type === "checkbox" ? e.target.checked : e.target.value,
       };
     });
   };
@@ -174,7 +182,8 @@ const AddEditPackage = () => {
     setInitialValues((prev) => {
       return {
         ...prev,
-        [e.target.id]: e.target.checked ? e.target.checked : e.target.value,
+        [e.target.id]:
+          e.target.type === "checkbox" ? e.target.checked : e.target.value,
       };
     });
   };
@@ -674,8 +683,8 @@ const AddEditPackage = () => {
         </div>
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">{t("OK")}</button>
-        <button className="btn_close">{t("Cancel")}</button>
+        <button className="btn_add">{t("global_button_submit")}</button>
+        <button className="btn_close">{t("global_button_cancel")}</button>
       </div>
     </div>
   );
