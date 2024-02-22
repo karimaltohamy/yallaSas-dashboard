@@ -6,6 +6,7 @@ import { t } from "i18next";
 import { encryptedData } from "../../../utils/utilsFunctions";
 import apiAxios from "../../../utils/apiAxios";
 import Loader from "../../../components/loader/Loader";
+import { toast } from "react-toastify";
 
 const CompensationsSubscribers = () => {
   const [compensationsSubscribers, setCompensationsSubscribers] = useState([]);
@@ -16,6 +17,26 @@ const CompensationsSubscribers = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastePage] = useState(0);
   const [selectedRowData, setSelectedRowData] = useState([]);
+
+  const handleDeleteSubsciber = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      if (selectedRowData.length > 1) {
+        await apiAxios.post(`api/user/bulkDelete`, {
+          payload: encryptedData(selectedRowData),
+        });
+      } else {
+        await apiAxios.delete(`api/user/${subscriber.id}`);
+      }
+      toast.success("Successful operation");
+      setLoading(false);
+    } catch (error) {
+      toast.error(error.response.data.error);
+      console.log(error);
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -65,7 +86,7 @@ const CompensationsSubscribers = () => {
               <i className="fa-solid fa-check"></i>
               <span>{t("Approved")}</span>
             </div>
-            <div className="item">
+            <div className="item" onClick={handleDeleteSubsciber}>
               <i className="fa-solid fa-trash"></i>
               <span>{t("global_actions_delete")}</span>
             </div>

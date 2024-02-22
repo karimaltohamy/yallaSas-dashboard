@@ -1,7 +1,25 @@
 import React from "react";
 import "./managersTreeBox.scss";
 import { t } from "i18next";
-const ManagersTreeBox = () => {
+import { TreeView } from "@mui/x-tree-view/TreeView";
+import { TreeItem, treeItemClasses } from "@mui/x-tree-view/TreeItem";
+import styled from "@emotion/styled";
+
+const ManagersTreeBox = ({ managers, getManager }) => {
+  function buildTree(data) {
+    const buildNode = (parentId) => {
+      const children = data
+        .filter((item) => item.parent_id === parentId)
+        .map((item) => ({ ...item, children: buildNode(item.id) }));
+      return children.length > 0 ? children : null;
+    };
+
+    const roots = data.filter((item) => item.parent === null);
+    return roots.map((root) => ({ ...root, children: buildNode(root.id) }));
+  }
+
+  const treeData = managers && buildTree(managers);
+
   return (
     <div className="managers_tree_box">
       <div className="head">
@@ -28,7 +46,41 @@ const ManagersTreeBox = () => {
             </svg>
           </div>
         </div>
-        <div className="result"></div>
+        <div className="result">
+          <TreeView
+            aria-label="customized"
+            defaultCollapseIcon={<i class="fa-solid fa-chevron-down"></i>}
+            defaultExpandIcon={<i class="fa-solid fa-chevron-right"></i>}
+            sx={{
+              height: 240,
+              flexGrow: 1,
+              maxWidth: 400,
+              overflowY: "auto",
+            }}
+          >
+            {treeData &&
+              treeData.map((root, i) => {
+                return (
+                  <TreeItem
+                    nodeId={root.id}
+                    label={root.username}
+                    onClick={() => getManager(root.id)}
+                    key={i}
+                  >
+                    {root.children &&
+                      root.children.map((item, index) => (
+                        <TreeItem
+                          nodeId={item.id}
+                          label={item.username}
+                          key={index}
+                          onClick={() => getManager(item.id)}
+                        />
+                      ))}
+                  </TreeItem>
+                );
+              })}
+          </TreeView>
+        </div>
       </div>
     </div>
   );

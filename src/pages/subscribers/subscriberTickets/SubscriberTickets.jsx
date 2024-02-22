@@ -7,6 +7,8 @@ import InputItem from "../../../components/popup/inputItem/InputItem";
 import { t } from "i18next";
 import apiAxios from "../../../utils/apiAxios";
 import { encryptedData } from "../../../utils/utilsFunctions";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const SubscriberTickets = () => {
   const [subscriberTickets, setSubscriberTickets] = useState([]);
@@ -22,39 +24,118 @@ const SubscriberTickets = () => {
   const [clientSuport, setClientSupport] = useState("");
   const [subjectSuport, setSubjectSuport] = useState("");
 
-  useEffect(() => {
-    (async () => {
-      setLoading(true);
-      try {
-        const { data } = await apiAxios.post("api/index/tickets", {
-          payload: encryptedData({
-            page: currentPage,
-            count: perPage,
-            sortBy: "id",
-            direction: "desc",
-            search,
-            columns: [
-              "created_at",
-              "subject",
-              "username",
-              "firstname",
-              "lastname",
-              "closed",
-            ],
-          }),
-        });
-        setSubscriberTickets(data.data);
-        setNumberSubscribers(data.total);
-        setLastePage(data.last_page);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      }
-    })();
-  }, [search, perPage, currentPage]);
+  const getSubscribersTickets = async () => {
+    setLoading(true);
+    try {
+      const { data } = await apiAxios.post("api/index/tickets", {
+        payload: encryptedData({
+          page: currentPage,
+          count: perPage,
+          sortBy: "id",
+          direction: "desc",
+          search,
+          columns: [
+            "created_at",
+            "subject",
+            "username",
+            "firstname",
+            "lastname",
+            "closed",
+          ],
+        }),
+      });
+      setSubscriberTickets(data.data);
+      setNumberSubscribers(data.total);
+      setLastePage(data.last_page);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
 
-  const handleSupportTicket = async () => {};
+  const handleAddTicket = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const { data } = await apiAxios.post("api/ticket/create", {
+        payload: encryptedData({ subject: subjectSuport }),
+      });
+      toast.success(data.status == 200 && data.message);
+      setOpenSupportTicket(false);
+      setClientSupport("");
+      setSubjectSuport("");
+    } catch (error) {
+      toast.error(error.response.data.error);
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCloseTicket = () => {
+    Swal.fire({
+      title: "Close Tickets",
+      showCancelButton: true,
+      confirmButtonText: "OK",
+      cancelButtonText: "Cancel",
+      input: "checkbox",
+      inputValue: false,
+      inputPlaceholder: "Problem Solved",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const { data } = await apiAxios.post(`api/ticket/close`, {
+            payload: encryptedData({
+              thread_id: selectedRowData[0],
+              is_solved: result.value ? 1 : 0,
+            }),
+          });
+          toast.success(data.status == 200 && data.message);
+          getSubscribersTickets();
+        } catch (error) {
+          console.log(error);
+          toast.error(error.response.data.error);
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        console.log("User clicked Cancel");
+      }
+    });
+  };
+
+  const handleDeleteSubsciberTicket = async (e) => {
+    e.preventDefault();
+    Swal.fire({
+      title: "Delete Ticket?",
+      showCancelButton: true,
+      confirmButtonText: "OK",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          if (selectedRowData.length > 1) {
+            await apiAxios.post(`api/user/bulkDelete`, {
+              payload: encryptedData(selectedRowData),
+            });
+          } else {
+            await apiAxios.delete(`api/ticket/${selectedRowData[0]}`);
+          }
+          toast.success("Successful operation");
+          setLoading(false);
+          getSubscribersTickets();
+        } catch (error) {
+          console.log(error);
+          toast.error(error.response.data.error);
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        console.log("User clicked Cancel");
+      }
+    });
+  };
+
+  useEffect(() => {
+    getSubscribersTickets();
+  }, [search, perPage, currentPage]);
 
   return (
     <div className="main_content_tables">
@@ -69,11 +150,19 @@ const SubscriberTickets = () => {
               <i className="fa-solid fa-plus"></i>
               <span>{t("tickets_action_create")}</span>
             </div>
-            <div className="item">
+            <div
+              className="item"
+              onClick={() => selectedRowData.length > 0 && handleCloseTicket()}
+            >
               <i className="fa-solid fa-xmark"></i>
               <span>{t("tickets_action_close")}</span>
             </div>
-            <div className="item">
+            <div
+              className="item"
+              onClick={
+                selectedRowData.length > 0 && handleDeleteSubsciberTicket
+              }
+            >
               <i className="fa-solid fa-trash"></i>
               <span>{t("global_actions_delete")}</span>
             </div>
@@ -96,7 +185,7 @@ const SubscriberTickets = () => {
         title={t("New Support Ticket")}
         openPopup={openSupportTicket}
         setOpenPopup={setOpenSupportTicket}
-        onSubmit={handleSupportTicket}
+        onSubmit={handleAddTicket}
       >
         <InputItem
           label={t("Client")}

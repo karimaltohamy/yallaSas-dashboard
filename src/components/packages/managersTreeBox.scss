@@ -50,6 +50,11 @@
 
     .result {
       height: 70vh;
+      padding: 20px 0;
+
+      .css-2cq9xd-MuiTreeView-root {
+        height: 100% !important;
+      }
     }
   }
 }

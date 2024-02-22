@@ -1,8 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import "./pricingTableBox.scss";
 import { t } from "i18next";
+import apiAxios from "../../utils/apiAxios";
+import { encryptedData } from "../../utils/utilsFunctions";
+import Loader from "../loader/Loader";
 
-const PricingTableBox = () => {
+const PricingTableBox = ({
+  mangerPriceList,
+  setManagerPriceList,
+  managerId,
+}) => {
+  const [loading, setLoading] = useState(false);
+  const handlePriceChange = (e, index) => {
+    const { value } = e.target;
+    setManagerPriceList((prevList) =>
+      prevList.map((item, i) =>
+        i === index ? { ...item, price: value } : item
+      )
+    );
+  };
+
+  const handleUserPriceChange = (e, index) => {
+    const { value } = e.target;
+    setManagerPriceList((prevList) =>
+      prevList.map((item, i) =>
+        i === index ? { ...item, user_price: value } : item
+      )
+    );
+  };
+
+  const handleSetPriceList = async () => {
+    setLoading(true);
+    const priceList = mangerPriceList.map((item) => ({
+      profile_id: item.id,
+      profile_name: item.name,
+      ...item,
+    }));
+    try {
+      await apiAxios.post("api/priceList", {
+        payload: encryptedData({
+          manager_id: managerId,
+          priceList,
+        }),
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="pricing_table_box">
       <div className="pricing_table">
@@ -19,34 +66,40 @@ const PricingTableBox = () => {
               <th>{t("End User Price")}</th>
             </thead>
             <tbody>
-              <tr>
-                <td>slow</td>
-                <td>20</td>
-                <td>
-                  <input type="number" value={"20"} />
-                </td>
-                <td>
-                  <input type="number" value={"20"} />
-                </td>
-              </tr>
-              <tr>
-                <td>slow</td>
-                <td>20</td>
-                <td>
-                  <input type="number" value={"20"} />
-                </td>
-                <td>
-                  <input type="number" value={"20"} />
-                </td>
-              </tr>
+              {mangerPriceList &&
+                mangerPriceList.map((item, i) => (
+                  <tr key={i}>
+                    <td>{item.name}</td>
+                    <td>{item.cost}</td>
+                    <td>
+                      <input
+                        type="number"
+                        value={item.price}
+                        onChange={(e) => handlePriceChange(e, i)}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        value={item.user_price}
+                        onChange={(e) => handleUserPriceChange(e, i)}
+                      />
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
-        <div className="btns">
-          <button className="btn_ok">OK</button>
-          <button className="btn_close">Cancel</button>
-        </div>
+        {mangerPriceList && (
+          <div className="btns">
+            <button className="btn_ok" onClick={handleSetPriceList}>
+              OK
+            </button>
+            <button className="btn_close">Cancel</button>
+          </div>
+        )}
       </div>
+      {loading && <Loader />}
     </div>
   );
 };

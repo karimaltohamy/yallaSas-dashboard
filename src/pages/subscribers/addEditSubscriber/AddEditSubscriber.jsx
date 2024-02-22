@@ -218,12 +218,11 @@ const AddEditSubscriber = ({ typePage }) => {
           payload: encrypted,
         });
       }
-
       toast.success("Successful add");
       navigate("/subscribers");
     } catch (error) {
       console.log(error);
-      toast.error(error.reponse.data.message);
+      toast.error(error.response.data.message);
     }
     setLoading(false);
   };

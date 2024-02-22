@@ -240,7 +240,9 @@ const IpPools = React.lazy(() => import("../pages/ipPools/IpPools"));
 const SettingsAdvanced = React.lazy(() =>
   import("../pages/options/settingsAdvanced/SettingsAdvanced")
 );
-const AddIpPools = React.lazy(() => import("../pages/ipPools/AddIpPools"));
+const AddEditIpPools = React.lazy(() =>
+  import("../pages/ipPools/AddEditIpPools")
+);
 const EmailSettings = React.lazy(() =>
   import("../pages/options/emailSettings/EmailSettings")
 );
@@ -313,9 +315,9 @@ const Layout = () => {
   const location = useLocation();
   return (
     <main>
-      {!location.pathname.includes("login") && <Sidebar />}
+      {location.pathname != "/login" && <Sidebar />}
       <div className="main_content_page">
-        {!location.pathname.includes("login") && <Header />}
+        {location.pathname != "/login" && <Header />}
         <Routes>
           <Route
             path="/"
@@ -635,7 +637,15 @@ const Layout = () => {
             path="/groups/add/:id"
             element={
               <Suspense fallback={<Loader />}>
-                <AddEditGroup />
+                <AddEditGroup typePage={"addPage"} />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/groups/:id/edit"
+            element={
+              <Suspense fallback={<Loader />}>
+                <AddEditGroup typePage={"editPage"} />
               </Suspense>
             }
           />
@@ -649,10 +659,10 @@ const Layout = () => {
             }
           />
           <Route
-            path="/NAS/add/:id"
+            path="/NAS/add"
             element={
               <Suspense fallback={<Loader />}>
-                <AddEditNas />
+                <AddEditNas typePage={"addPage"} />
               </Suspense>
             }
           />
@@ -660,7 +670,7 @@ const Layout = () => {
             path="/NAS/profile/:id/edit"
             element={
               <Suspense fallback={<Loader />}>
-                <AddEditNas />
+                <AddEditNas typePage={"editPage"} />
               </Suspense>
             }
           />
@@ -673,10 +683,13 @@ const Layout = () => {
               </Suspense>
             }
           />
-          <Route path="/packages/add/:id" element={<AddEditPackage />} />
+          <Route
+            path="/packages/add/:id"
+            element={<AddEditPackage typePage="addPage" />}
+          />
           <Route
             path="/packages/profile/:id/edit"
-            element={<AddEditPackage />}
+            element={<AddEditPackage typePage="editPage" />}
           />
           <Route
             path="/pricing-table"
@@ -1081,7 +1094,15 @@ const Layout = () => {
             path="/add-ip-pools"
             element={
               <Suspense fallback={<Loader />}>
-                <AddIpPools />
+                <AddEditIpPools typePage="addPage" />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/ip-pools/:id/edit"
+            element={
+              <Suspense fallback={<Loader />}>
+                <AddEditIpPools typePage="editPage" />
               </Suspense>
             }
           />

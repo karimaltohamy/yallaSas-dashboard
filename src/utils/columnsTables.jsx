@@ -139,8 +139,9 @@ export const columnsOnlineSubscibers = [
         );
       }
     },
+    flex: 1,
   },
-  { field: "username", headerName: t("global_username") },
+  { field: "username", headerName: t("global_username"), flex: 1 },
   {
     field: "acctoutputoctets",
     headerName: t("global_download"),
@@ -149,6 +150,7 @@ export const columnsOnlineSubscibers = [
         return convertFromBytes(params.row["acctoutputoctets"]);
       }
     },
+    flex: 1,
   },
   {
     field: "acctinputoctets",
@@ -158,13 +160,18 @@ export const columnsOnlineSubscibers = [
         return convertFromBytes(params.row["acctinputoctets"]);
       }
     },
+    flex: 1,
   },
-  { field: "parent_username", headerName: t("users_table_parent") },
-  { field: "user_profile_name", headerName: t("users_table_profile") },
-  { field: "framedipaddress", headerName: t("global_ip") },
-  { field: "callingstationid", headerName: t("user_session_table_mac") },
-  { field: "acctsessiontime", headerName: t("users_table_uptime") },
-  { field: "oui", headerName: t("users_table_hardware") },
+  { field: "parent_username", headerName: t("users_table_parent"), flex: 1 },
+  { field: "user_profile_name", headerName: t("users_table_profile"), flex: 1 },
+  { field: "framedipaddress", headerName: t("global_ip"), flex: 1 },
+  {
+    field: "callingstationid",
+    headerName: t("user_session_table_mac"),
+    flex: 1,
+  },
+  { field: "acctsessiontime", headerName: t("users_table_uptime"), flex: 1 },
+  { field: "oui", headerName: t("users_table_hardware"), flex: 1 },
 ];
 
 export const columnsSessions = [
@@ -235,11 +242,16 @@ export const columnsPayments = [
     field: "receipt_number",
     headerName: t("user_receipt_table_no"),
     width: 150,
+    flex: 1,
   },
-  { field: "created_at", headerName: t("user_receipt_table_date") },
-  { field: "type", headerName: t("user_receipt_table_type") },
-  { field: "amount", headerName: t("user_receipt_table_amount") },
-  { field: "description", headerName: t("user_receipt_table_description") },
+  { field: "created_at", headerName: t("user_receipt_table_date"), flex: 1 },
+  { field: "type", headerName: t("user_receipt_table_type"), flex: 1 },
+  { field: "amount", headerName: t("user_receipt_table_amount"), flex: 1 },
+  {
+    field: "description",
+    headerName: t("user_receipt_table_description"),
+    flex: 1,
+  },
   {
     field: "user_details.parent_username",
     headerName: t("user_receipt_table_created_by"),
@@ -248,16 +260,28 @@ export const columnsPayments = [
         return params.row["user_details"].parent_username;
       }
     },
+    flex: 1,
   },
 ];
 
 export const columnsRecord = [
-  { field: "created_at", headerName: t("user_history_table_date"), width: 180 },
-  { field: "event", headerName: t("user_history_table_action"), width: 130 },
+  {
+    field: "created_at",
+    headerName: t("user_history_table_date"),
+    width: 180,
+    flex: 1,
+  },
+  {
+    field: "event",
+    headerName: t("user_history_table_action"),
+    width: 130,
+    flex: 1,
+  },
   {
     field: "description",
     headerName: t("user_history_table_description"),
     width: 180,
+    flex: 1,
   },
   {
     field: "manager_details.firstname",
@@ -268,6 +292,7 @@ export const columnsRecord = [
         return params.row["manager_details"].firstname;
       }
     },
+    flex: 1,
   },
 ];
 
@@ -276,9 +301,10 @@ export const columnsDocuments = [
     field: "documentName",
     headerName: t("user_document_table_name"),
     width: 170,
+    flex: 1,
   },
-  { field: "size", headerName: t("user_document_table_size") },
-  { field: "date", headerName: t("user_document_table_date") },
+  { field: "size", headerName: t("user_document_table_size"), flex: 1 },
+  { field: "date", headerName: t("user_document_table_date"), flex: 1 },
 ];
 
 export const columnsFinamialRecord = [
@@ -325,7 +351,7 @@ export const columnsQuotas = [
 ];
 
 export const columnsCompensations = [
-  { field: "created_at", headerName: t("global_date"), width: 140 },
+  { field: "created_at", headerName: t("global_date"), width: 140, flex: 1 },
   {
     field: "user_details",
     headerName: t("global_username"),
@@ -335,13 +361,14 @@ export const columnsCompensations = [
       }
     },
     width: 140,
+    flex: 1,
   },
-  { field: "days", headerName: t("global_days") },
-  { field: "traffic", headerName: t("menu_reports_traffic") },
-  { field: "hours", headerName: t("users_table_uptime") },
-  { field: "created_by_username", headerName: t("global_manager") },
-  { field: "approved", headerName: t("Approved") },
-  { field: "approved_by_username", headerName: t("Approved By") },
+  { field: "days", headerName: t("global_days"), flex: 1 },
+  { field: "traffic", headerName: t("menu_reports_traffic"), flex: 1 },
+  { field: "hours", headerName: t("users_table_uptime"), flex: 1 },
+  { field: "created_by_username", headerName: t("global_manager"), flex: 1 },
+  { field: "approved", headerName: t("Approved"), flex: 1 },
+  { field: "approved_by_username", headerName: t("Approved By"), flex: 1 },
 ];
 
 export const columnsUserTickets = [
@@ -458,57 +485,78 @@ export const columnsRegisterAccountsManagers = [
 export const columnsGroups = [
   {
     field: "name",
-    headerName: t("Name"),
+    headerName: t("global_name"),
+    renderCell: (params) => {
+      if (params.row["name"]) {
+        return (
+          <Link to={`/groups/${params.row.id}/edit`} className="text_color">
+            {params.row["name"]}
+          </Link>
+        );
+      }
+    },
   },
   {
-    field: "details",
-    headerName: t("Details"),
+    field: "description",
+    headerName: t("global_description"),
   },
   {
-    field: "subscribers",
-    headerName: t("Subscribers"),
+    field: "users_count",
+    headerName: t("menu_users"),
   },
-  { field: "managers", headerName: t("Managers") },
+  { field: "managers_count", headerName: t("menu_managers") },
 ];
 
 export const columnsNas = [
   {
-    field: "name",
-    headerName: t("Name"),
+    field: "shortname",
+    headerName: t("global_name"),
+    renderCell: (params) => {
+      if (params.row["shortname"]) {
+        return (
+          <Link
+            to={`/NAS/profile/${params.row.id}/edit`}
+            className="text_color"
+          >
+            {params.row["shortname"]}
+          </Link>
+        );
+      }
+    },
   },
   {
-    field: "ipAddress",
-    headerName: t("Ip Address"),
+    field: "nasname",
+    headerName: t("nas_form_ip_address"),
   },
   {
     field: "type",
-    headerName: t("Type"),
+    headerName: t("nas_form_type"),
   },
-  { field: "secret", headerName: t("Secret") },
-  { field: "rtt", headerName: t("Rtt") },
-  { field: "onlineUser", headerName: t("Online Users") },
-  { field: "packetLoss", headerName: t("Packet Loss") },
+  { field: "secret", headerName: t("nas_form_secret") },
+  { field: "online_users_count", headerName: t("RTT") },
+  { field: "ping_time", headerName: t("menu_users_online") },
+  { field: "ping_loss", headerName: t("Packet Loss") },
 ];
 
 export const columnsPackages = [
   {
     field: "name",
-    headerName: t("Name"),
+    headerName: t("global_name"),
   },
   {
     field: "price",
-    headerName: t("Price"),
+    headerName: t("global_price"),
   },
   {
-    field: "poolName",
-    headerName: t("Pool Name"),
+    field: "pool",
+    headerName: t("ippool_form_name"),
   },
-  { field: "loadingSpeed", headerName: t("Loading Speed") },
-  { field: "paymentSpeed", headerName: t("Payment Speed") },
-  { field: "type", headerName: t("Type") },
-  { field: "subscriptionDuration", headerName: t("Subscription Duration") },
-  { field: "subscribers", headerName: t("Subscribers") },
-  { field: "onlineSubscribers", headerName: t("Online Subscribers") },
+  { field: "downrate", headerName: t("profiles_table_downrate") },
+  { field: "uprate", headerName: t("profiles_table_uprate") },
+  { field: "type", headerName: t("global_type") },
+  { field: "expiration_amount", headerName: t("profiles_table_expiry") },
+  { field: "users_count", headerName: t("menu_users") },
+  { field: "online_users_count", headerName: t("menu_users_online") },
 ];
 
 export const columnsConsumptionNotices = [
@@ -1066,48 +1114,60 @@ export const columnsReportSuspicious = [
 
 export const columnsSysLog = [
   {
-    field: "date",
-    headerName: t("Date"),
+    field: "created_at",
+    headerName: t("global_date"),
+    width: 150,
   },
   {
     field: "event",
-    headerName: t("Event"),
+    headerName: t("report_syslog_event"),
+    width: 150,
   },
   {
-    field: "manager",
-    headerName: t("Manager"),
+    field: "manager_details",
+    headerName: t("global_manager"),
+    valueGetter: (params) => {
+      if (params.row["manager_details"]) {
+        return params.row["manager_details"].username;
+      }
+    },
   },
   {
-    field: "details",
-    headerName: t("Details"),
+    field: "description",
+    headerName: t("global_description"),
   },
   {
-    field: "internetAddress",
-    headerName: t("Internet Address"),
+    field: "ip",
+    headerName: t("global_ip"),
     width: 150,
   },
 ];
 
 export const columnsLoginAttempts = [
   {
-    field: "date",
-    headerName: t("Date"),
+    field: "created_at",
+    headerName: t("global_date"),
+    width: 160,
   },
   {
-    field: "loginName",
-    headerName: t("Login name"),
+    field: "username",
+    headerName: t("global_username"),
+    width: 160,
   },
   {
-    field: "serverReply",
+    field: "reply",
     headerName: t("Server Reply"),
+    width: 160,
   },
   {
-    field: "nas",
-    headerName: t("NAS"),
+    field: "nas_ip_address",
+    headerName: t("menu_nas"),
+    width: 160,
   },
   {
     field: "mac",
-    headerName: t("MAC"),
+    headerName: t("user_session_table_mac"),
+    width: 160,
   },
 ];
 
@@ -1132,19 +1192,29 @@ export const columnsBackupIndex = [
 
 export const columnsIpPools = [
   {
-    field: "poolName",
-    headerName: t("Pool Name"),
+    field: "name",
+    headerName: t("nas_form_pool"),
+    renderCell: (params) => {
+      if (params.row["name"]) {
+        return (
+          <Link to={`/ip-pools/${params.row.id}/edit`} className="text_color">
+            {params.row["name"]}
+          </Link>
+        );
+      }
+    },
+    width: 150,
   },
   {
-    field: "fromIp",
+    field: "start_ip",
     headerName: t("From IP"),
   },
   {
-    field: "toIp",
+    field: "end_ip",
     headerName: t("To IP"),
   },
   {
-    field: "LeaseTime",
+    field: "lease_time",
     headerName: t("Lease Time(hours)"),
     width: 140,
   },

@@ -234,7 +234,7 @@ const Sidebar = () => {
       icon: <i className="fa-solid fa-clock-rotate-left"></i>,
       linksList: [
         {
-          titleLink: t("menu_log_radius"),
+          titleLink: t("menu_reports_radius_log"),
           pathLink: "/log-radius",
         },
         {
@@ -242,7 +242,7 @@ const Sidebar = () => {
           pathLink: "system-log",
         },
         {
-          titleLink: t("menu_reports_user_auth_logs"),
+          titleLink: t("menu_reports_user_auth_log"),
           pathLink: "login-attempts",
         },
       ],

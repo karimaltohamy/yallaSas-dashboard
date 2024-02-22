@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import MainTable from "../../../components/mainTable/MainTable";
 import { columnsOnlineSubscibers } from "../../../utils/columnsTables";
 import { useTranslation } from "react-i18next";
-import CryptoJS from "crypto-js";
 import apiAxios from "../../../utils/apiAxios";
-import { secretPass } from "../../../utils/data";
 import Loader from "../../../components/loader/Loader";
+import { encryptedData } from "../../../utils/utilsFunctions";
+import Swal from "sweetalert2";
 
 const OnlineSubscribers = () => {
   const { t } = useTranslation();
@@ -43,32 +43,53 @@ const OnlineSubscribers = () => {
     },
   ];
 
+  const showAlertDisconnect = () => {
+    Swal.fire({
+      title: "Disconnect User",
+      text: "Disconnect Selected User(s) ?",
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonText: "OK",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const { data } = await apiAxios.get(
+            `api/user/disconnect/userid/${selectedRowData[0]}`
+          );
+          toast.success(data.status == 200 && data.message);
+        } catch (error) {
+          console.log(error);
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        console.log("User clicked Cancel");
+      }
+    });
+  };
+
   useEffect(() => {
     (async () => {
-      let encrypted;
-      const dataToEncrypt = JSON.stringify({
-        page: currentPage,
-        count: perPage,
-        sortBy: null,
-        direction: "asc",
-        search,
-        columns: [
-          "id",
-          "username",
-          "acctoutputoctets",
-          "acctinputoctets",
-          "user_profile_name",
-          "framedipaddress",
-          "callingstationid",
-          "acctsessiontime",
-          "oui",
-        ],
-      });
-      encrypted = CryptoJS.AES.encrypt(dataToEncrypt, secretPass).toString();
       setLoading(true);
       try {
         const { data } = await apiAxios.post("api/index/online", {
-          payload: encrypted,
+          payload: encryptedData({
+            page: currentPage,
+            count: perPage,
+            sortBy: null,
+            direction: "asc",
+            search,
+            columns: [
+              "id",
+              "username",
+              "acctoutputoctets",
+              "acctinputoctets",
+              "user_profile_name",
+              "framedipaddress",
+              "callingstationid",
+              "acctsessiontime",
+              "oui",
+            ],
+          }),
         });
         setOnlineSubscribers(data.data);
         setNumberOnlineSubscribers(data.total);
@@ -89,20 +110,36 @@ const OnlineSubscribers = () => {
           statusFilter={statusFilter}
           title={t("menu_users_online")}
           iconHead={<i className="fa-solid fa-people-group"></i>}
+          setSearch={setSearch}
         >
           <div className="content">
             <div className="item">
               <span>{t("users_action_live_traffic")}</span>
             </div>
-            <div className="item">
+            <Link
+              to={
+                selectedRowData.length > 0 &&
+                `/subscribers/${selectedRowData[0]}/general`
+              }
+              className="item"
+            >
               <i className="fa-solid fa-eye"></i>
               <span>{t("users_action_view")}</span>
-            </div>
-            <div className="item">
+            </Link>
+            <Link
+              to={
+                selectedRowData.length > 0 &&
+                `/subscribers/${selectedRowData[0]}/edit`
+              }
+              className="item"
+            >
               <i className="fa-regular fa-pen-to-square"></i>
-              <span>{t("users_tab_edit")}</span>
-            </div>
-            <div className="item">
+              <span>{t("global_actions_edit")}</span>
+            </Link>
+            <div
+              className="item"
+              onClick={selectedRowData.length > 0 && showAlertDisconnect}
+            >
               <i className="fa-solid fa-plug-circle-xmark"></i>
               <span>{t("users_action_disconnect")}</span>
             </div>
@@ -119,11 +156,13 @@ const OnlineSubscribers = () => {
         <MainTable
           rows={onlineSubscribers}
           columns={columnsOnlineSubscibers}
+          setSelectedRowData={setSelectedRowData}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           perPage={perPage}
           setPerPage={setPerPage}
           lastPage={lastPage}
+          rowId={"user_details"}
         />
         {loading && <Loader />}
       </div>

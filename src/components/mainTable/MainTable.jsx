@@ -29,7 +29,9 @@ const MainTable = ({
       <DataGrid
         rows={rows}
         columns={columns}
-        getRowId={(row) => (rowId ? row[rowId] : row.id)}
+        getRowId={(row) =>
+          typeof rowId == "object" ? row[rowId].id : rowId ? row[rowId] : row.id
+        }
         checkboxSelection={true}
         onRowSelectionModelChange={handleRowSelectionModelChange}
         noRowsOverlay={<div>No rows found!</div>}
