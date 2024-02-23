@@ -568,10 +568,10 @@ const Layout = () => {
             }
           />
           <Route
-            path="/managers/add/:id"
+            path="/managers/add"
             element={
               <Suspense fallback={<Loader />}>
-                <AddEditManager />
+                <AddEditManager typePage={"addPage"} />
               </Suspense>
             }
           />
@@ -595,7 +595,7 @@ const Layout = () => {
               path="edit"
               element={
                 <Suspense fallback={<Loader />}>
-                  <AddEditManager />
+                  <AddEditManager typePage={"editPage"} />
                 </Suspense>
               }
             />
@@ -685,11 +685,19 @@ const Layout = () => {
           />
           <Route
             path="/packages/add/:id"
-            element={<AddEditPackage typePage="addPage" />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <AddEditPackage typePage="addPage" />
+              </Suspense>
+            }
           />
           <Route
             path="/packages/profile/:id/edit"
-            element={<AddEditPackage typePage="editPage" />}
+            element={
+              <Suspense fallback={<Loader />}>
+                <AddEditPackage typePage="editPage" />
+              </Suspense>
+            }
           />
           <Route
             path="/pricing-table"
@@ -708,10 +716,10 @@ const Layout = () => {
             }
           />
           <Route
-            path="/consumption-notices/add/:id"
+            path="/consumption-notices/add"
             element={
               <Suspense fallback={<Loader />}>
-                <AddEditConsumptionNotices />
+                <AddEditConsumptionNotices typePage="addPage" />
               </Suspense>
             }
           />
@@ -719,7 +727,7 @@ const Layout = () => {
             path="/consumption-notices/profile/:id/edit"
             element={
               <Suspense fallback={<Loader />}>
-                <AddEditConsumptionNotices />
+                <AddEditConsumptionNotices typePage="editPage" />
               </Suspense>
             }
           />
@@ -732,10 +740,10 @@ const Layout = () => {
             }
           />
           <Route
-            path="/additional-services/add/:id"
+            path="/additional-services/add"
             element={
               <Suspense fallback={<Loader />}>
-                <AddEditAddonsServices />
+                <AddEditAddonsServices typePage="addPage" />
               </Suspense>
             }
           />
@@ -743,7 +751,7 @@ const Layout = () => {
             path="/additional-services/profile/:id/edit"
             element={
               <Suspense fallback={<Loader />}>
-                <AddEditAddonsServices />
+                <AddEditAddonsServices typePage="editPage" />
               </Suspense>
             }
           />

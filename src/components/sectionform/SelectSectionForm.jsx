@@ -13,6 +13,7 @@ const SelectSectionForm = ({
   valueInput,
   onChangeInput,
   idInput,
+  required = false,
 }) => {
   return (
     <div className={`input_item ${classes}`}>
@@ -26,7 +27,12 @@ const SelectSectionForm = ({
           id={idInput}
         />
       )}
-      <select value={value} onChange={(e) => onChange(e)} id={id}>
+      <select
+        value={value}
+        onChange={(e) => onChange(e)}
+        id={id}
+        required={required}
+      >
         <option value="">{label}</option>
         {options &&
           options.map((item, i) => (

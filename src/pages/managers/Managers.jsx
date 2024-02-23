@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeadTable from "../../components/headTable/HeadTable";
 import MainTable from "../../components/mainTable/MainTable";
 import { Link } from "react-router-dom";
@@ -8,8 +8,19 @@ import SelectItem from "../../components/popup/selectItem/SelectItem";
 import { mockDataManagers } from "../../utils/mockData";
 import { columnsManagers } from "../../utils/columnsTables";
 import { t } from "i18next";
+import { encryptedData } from "../../utils/utilsFunctions";
+import Loader from "../../components/loader/Loader";
+import apiAxios from "../../utils/apiAxios";
 
 const Managers = () => {
+  const [managers, setManagers] = useState([]);
+  const [numberManagers, setNumberManagers] = useState(0);
+  const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [perPage, setPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [lastPage, setLastePage] = useState(0);
+  const [selectedRowData, setSelectedRowData] = useState([]);
   // opens and setOpnes popups
   const [openEditName, setOpenEditName] = useState(false);
   const [openEditSite, setOpenEditSite] = useState(false);
@@ -73,6 +84,42 @@ const Managers = () => {
     console.log({});
   };
 
+  const getManagers = async () => {
+    setLoading(true);
+    try {
+      const { data } = await apiAxios.post("api/index/manager", {
+        payload: encryptedData({
+          page: currentPage,
+          count: perPage,
+          sortBy: "username",
+          direction: "asc",
+          search,
+          columns: [
+            "username",
+            "firstname",
+            "lastname",
+            "balance",
+            "loan_balance",
+            "name",
+            "username",
+            "users_count",
+          ],
+        }),
+      });
+      setManagers(data.data);
+      setNumberManagers(data.total);
+      setLastePage(data.last_page);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getManagers();
+  }, [search, perPage, currentPage]);
+
   return (
     <div className="main_content_tables">
       <div className="conetnt_table">
@@ -80,53 +127,75 @@ const Managers = () => {
           path={t("prm_managers_index")}
           title={t("managers_table_title")}
           iconHead={<i className="fa-solid fa-people-group"></i>}
+          setSearch={setSearch}
         >
           <div className="content">
-            <Link to={"/managers/add/1"} className="item">
+            <Link to={"/managers/add"} className="item">
               <i className="fa-solid fa-plus"></i>
               <span>{t("global_actions_new")}</span>
             </Link>
-            <Link to={"/managers/profile/1/general"} className="item">
+            <Link
+              to={
+                selectedRowData[0] &&
+                `/managers/profile/${selectedRowData[0]}/edit`
+              }
+              className="item"
+            >
               <i className="fa-regular fa-pen-to-square"></i>
               <span>{t("managers_tab_edit")}</span>
             </Link>
-            <div className="item" onClick={() => setOpenEditName(true)}>
+            <div
+              className="item"
+              onClick={() => selectedRowData[0] && setOpenEditName(true)}
+            >
               <i className="fa-regular fa-pen-to-square"></i>
               <span>{t("global_actions_rename")}</span>
             </div>
-            <div className="item" onClick={() => setOpenEditSite(true)}>
+            <div
+              className="item"
+              onClick={() => selectedRowData[0] && setOpenEditSite(true)}
+            >
               <i className="fa-regular fa-pen-to-square"></i>
               <span>{t("manager_actions_assign_site")}</span>
             </div>
-            <div className="item" onClick={() => setOpenEditGroup(true)}>
+            <div
+              className="item"
+              onClick={() => selectedRowData[0] && setOpenEditGroup(true)}
+            >
               <i className="fa-regular fa-pen-to-square"></i>
               <span>{t("manager_actions_assign_group")}</span>
             </div>
-            <div className="item" onClick={() => setOpenDeposit(true)}>
+            <div
+              className="item"
+              onClick={() => selectedRowData[0] && setOpenDeposit(true)}
+            >
               <i className="fa-solid fa-money-bill-transfer"></i>
               <span>{t("global_actions_deposit")}</span>
             </div>
-            <div className="item" onClick={() => setOpenDiscountAmount(true)}>
+            <div
+              className="item"
+              onClick={() => selectedRowData[0] && setOpenDiscountAmount(true)}
+            >
               <i className="fa-solid fa-money-bill-transfer"></i>
               <span>{t("global_actions_withdrawal")}</span>
             </div>
             <div
               className="item btn_open_model"
-              onClick={() => setOpenPayOffDebts(true)}
+              onClick={() => selectedRowData[0] && setOpenPayOffDebts(true)}
             >
               <i className="fa-solid fa-money-bill-transfer"></i>
               <span>{t("global_actions_pay_debt")}</span>
             </div>
             <div
               className="item btn_open_model"
-              onClick={() => setOpenAddPoints(true)}
+              onClick={() => selectedRowData[0] && setOpenAddPoints(true)}
             >
               <i className="fa-regular fa-file-powerpoint"></i>
               <span>{t("manager_label_add_reward_point")}</span>
             </div>
             <div
               className="item btn_open_model"
-              onClick={() => setOpenRecoverPoints(true)}
+              onClick={() => selectedRowData[0] && setOpenRecoverPoints(true)}
             >
               <i className="fa-regular fa-file-powerpoint"></i>
               <span>{t("manager_label_deduct_reward_point")}</span>
@@ -137,9 +206,18 @@ const Managers = () => {
             </div>
           </div>
         </HeadTable>
-        <MainTable rows={mockDataManagers} columns={columnsManagers} />
+        <MainTable
+          rows={managers}
+          columns={columnsManagers}
+          setSelectedRowData={setSelectedRowData}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          perPage={perPage}
+          setPerPage={setPerPage}
+          lastPage={lastPage}
+        />
       </div>
-
+      {loading && <Loader />}
       {/* popup edit name */}
       <Popup
         title={"Edit name"}

@@ -6,6 +6,7 @@ const InputSectionForm = ({
   onChange,
   classes,
   id,
+  required = false,
 }) => {
   return (
     <div className={`input_item ${classes}`}>
@@ -16,6 +17,7 @@ const InputSectionForm = ({
         value={value}
         onChange={(e) => onChange(e)}
         id={id}
+        required={required}
       />
     </div>
   );

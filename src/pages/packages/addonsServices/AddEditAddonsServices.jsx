@@ -4,18 +4,29 @@ import InputSectionForm from "../../../components/sectionform/InputSectionForm";
 import SelectSectionForm from "../../../components/sectionform/SelectSectionForm";
 import SwitchSectionForm from "../../../components/sectionform/SwitchSectionForm";
 import { t } from "i18next";
+import apiAxios from "../../../utils/apiAxios";
+import { encryptedData } from "../../../utils/utilsFunctions";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import Loader from "../../../components/loader/Loader";
 
-const AddEditAddonsServices = () => {
+const AddEditAddonsServices = ({ typePage }) => {
+  const { id } = useParams();
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const [addonForm, setAddonForm] = useState({
     name: "",
-    expirationNumber: "",
-    expirationType: "",
-    pricingMode: "",
+    expiration_amount: "1",
+    expiration_unit: 1,
+    set_address_list: false,
+    address_list: null,
+    set_pool_name: false,
+    pool_name: "testpool",
+    call_url: false,
+    url: null,
+    pricing_type: 1,
     price: "",
     description: "",
-    mikrotikAddressList: "",
-    poolName: "",
-    callUrlConnect: "",
   });
 
   const handleChangeAddonForm = (e) => {
@@ -28,81 +39,142 @@ const AddEditAddonsServices = () => {
     });
   };
 
+  const handleForm = async () => {
+    setLoading(true);
+    const addonFormFormTransform = {
+      ...addonForm,
+      set_address_list: addonForm.set_address_list ? 1 : 0,
+      set_pool_name: addonForm.set_pool_name ? 1 : 0,
+      call_url: addonForm.call_url ? 1 : 0,
+    };
+    try {
+      if (typePage == "addPage") {
+        await apiAxios.post("api/Addon", {
+          payload: encryptedData(addonFormFormTransform),
+        });
+      } else if (typePage == "editPage") {
+        await apiAxios.put(`api/Addon/${id}`, {
+          payload: encryptedData(addonFormFormTransform),
+        });
+      }
+      toast.success("Successful add");
+      navigate(-1);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="content_page">
       <SectionForm title={t("Addon Form")}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <InputSectionForm
+          label={t("Name")}
+          type={"text"}
+          value={addonForm.name}
+          onChange={handleChangeAddonForm}
+          id="name"
+          required={true}
+        />
+        <SelectSectionForm
+          label={t("Expiration")}
+          value={addonForm.expiration_unit}
+          onChange={handleChangeAddonForm}
+          id="expiration_unit"
+          options={[
+            { name: "day(s)", value: "0" },
+            { name: "month(s)", value: "1" },
+            { name: "hour(s)", value: "2" },
+          ]}
+          valueInput={addonForm.expiration_amount}
+          onChangeInput={handleChangeAddonForm}
+          idInput={"expiration_amount"}
+          input={true}
+          type={"number"}
+          required={true}
+        />
+        <SwitchSectionForm
+          label={t("Set Mikrotik Address List")}
+          value={addonForm.set_address_list}
+          onChange={handleChangeAddonForm}
+          id="set_address_list"
+        />
+        {addonForm.set_address_list && (
           <InputSectionForm
-            label={t("Name")}
+            label={t("Address List Name")}
             type={"text"}
-            value={addonForm.name}
+            value={addonForm.address_list}
             onChange={handleChangeAddonForm}
-            id="name"
+            id="address_list"
           />
-          <SelectSectionForm
-            label={t("Expiration")}
-            value={addonForm.expirationType}
-            onChange={handleChangeAddonForm}
-            id="expirationType"
-            options={[
-              { name: "day(s)", value: "" },
-              { name: "month(s)", value: "" },
-              { name: "hour(s)", value: "" },
-            ]}
-            valueInput={addonForm.expirationNumber}
-            onChangeInput={handleChangeAddonForm}
-            idInput={"expirationNumber"}
-            input={true}
-            type={"number"}
-          />
-          <SelectSectionForm
-            label={t("Pricing Mode")}
-            value={addonForm.pricingMode}
-            onChange={handleChangeAddonForm}
-            id="pricingMode"
-            options={[
-              { name: "Percentage of User's Profile Price", value: "" },
-              { name: "Fixed Price", value: "" },
-            ]}
-          />
+        )}
+        <SwitchSectionForm
+          label={t("Set Pool Name")}
+          value={addonForm.set_pool_name}
+          onChange={handleChangeAddonForm}
+          id="set_pool_name"
+        />
+        {addonForm.set_pool_name && (
           <InputSectionForm
-            label={t("Price")}
+            label={t("Pool Name")}
             type={"text"}
-            value={addonForm.price}
+            value={addonForm.pool_name}
             onChange={handleChangeAddonForm}
-            id="price"
+            id="pool_name"
           />
+        )}
+        <SwitchSectionForm
+          label={t("Call Url On Connect")}
+          value={addonForm.call_url}
+          onChange={handleChangeAddonForm}
+          id="call_url"
+        />
+        {addonForm.call_url && (
           <InputSectionForm
-            label={t("Description")}
+            label={t("Pool Name")}
             type={"text"}
-            value={addonForm.description}
+            value={addonForm.url}
             onChange={handleChangeAddonForm}
-            id="description"
+            id="url"
           />
-          <SwitchSectionForm
-            label={t("Set Mikrotik Address List")}
-            value={addonForm.mikrotikAddressList}
-            onChange={handleChangeAddonForm}
-            id="mikrotikAddressList"
-          />
-          <SwitchSectionForm
-            label={t("Set Pool Name")}
-            value={addonForm.poolName}
-            onChange={handleChangeAddonForm}
-            id="poolName"
-          />
-          <SwitchSectionForm
-            label={t("Call Url On Connect")}
-            value={addonForm.callUrlConnect}
-            onChange={handleChangeAddonForm}
-            id="callUrlConnect"
-          />
-        </div>
+        )}
+        <SelectSectionForm
+          label={t("Pricing Mode")}
+          value={addonForm.pricing_type}
+          onChange={handleChangeAddonForm}
+          id="pricing_type"
+          options={[
+            { name: "Percentage of User's Profile Price", value: 0 },
+            { name: "Fixed Price", value: 1 },
+          ]}
+          required={true}
+        />
+        <InputSectionForm
+          label={t("Price")}
+          type={"text"}
+          value={addonForm.price}
+          onChange={handleChangeAddonForm}
+          id="price"
+          required={true}
+        />
+        <InputSectionForm
+          label={t("Description")}
+          type={"text"}
+          value={addonForm.description}
+          onChange={handleChangeAddonForm}
+          id="description"
+          required={true}
+        />
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">{t("global_button_submit")}</button>
+        <button className="btn_add" onClick={handleForm}>
+          {t("global_button_submit")}
+        </button>
         <button className="btn_close">{t("global_button_cancel")}</button>
       </div>
+      {loading && <Loader />}
     </div>
   );
 };

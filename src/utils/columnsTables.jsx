@@ -409,77 +409,157 @@ export const columnsUserTickets = [
 
 export const columnsManagers = [
   {
-    field: "loginName",
-    headerName: t("users_table_username"),
+    field: "username",
+    headerName: t("managers_table_parent"),
     cellClassName: "name-column-cell",
+    flex: 1,
+    renderCell: (params) => {
+      if (params.row["username"]) {
+        return (
+          <Link
+            to={`/managers/profile/${params.row.id}/general`}
+            className="text_color"
+          >
+            {params.row["username"]}
+          </Link>
+        );
+      }
+    },
   },
   {
-    field: "firstName",
+    field: "firstname",
     headerName: t("users_table_firstname"),
     type: "number",
     headerAlign: "left",
+    flex: 1,
+    renderCell: (params) => {
+      if (params.row["firstname"]) {
+        return (
+          <Link
+            to={`/managers/profile/${params.row.id}/general`}
+            className="text_color"
+          >
+            {params.row["firstname"]}
+          </Link>
+        );
+      }
+    },
   },
-  { field: "lastName", headerName: t("users_table_lastname") },
-  { field: "balance", headerName: t("managers_table_balance") },
-  { field: "loans", headerName: t("managers_table_loan_balance") },
-  { field: "validity", headerName: t("managers_table_acl_group") },
-  { field: "followMe", headerName: t("managers_table_parent") },
-  { field: "numberSubscribers", headerName: t("managers_table_users_count") },
+  { field: "lastname", headerName: t("users_table_lastname"), flex: 1 },
+  { field: "balance", headerName: t("managers_table_balance"), flex: 1 },
+  {
+    field: "loan_balance",
+    headerName: t("managers_table_loan_balance"),
+    flex: 1,
+  },
+  {
+    field: "parent_details",
+    headerName: t("managers_table_acl_group"),
+    valueGetter: (params) => {
+      if (params.row["parent_details"]) {
+        return params.row["parent_details"].username;
+      }
+    },
+    flex: 1,
+  },
+  { field: "username", headerName: t("managers_table_parent"), flex: 1 },
+  {
+    field: "users_count",
+    headerName: t("managers_table_users_count"),
+    flex: 1,
+  },
 ];
 
 export const columnsInvoicesManagers = [
   {
-    field: "invoiceNumber",
-    headerName: t("Invoice number"),
+    field: "invoice_number",
+    headerName: t("user_invoice_table_number"),
     cellClassName: "name-column-cell",
+    flex: 1,
   },
   {
-    field: t("date"),
-    headerName: "Date",
+    field: "created_at",
+    headerName: t("user_invoice_table_date"),
+    flex: 1,
   },
-  { field: "amount", headerName: t("Amount") },
-  { field: "details", headerName: t("Details") },
-  { field: "publishedBy", headerName: t("Published by") },
-  { field: "paymentMethod", headerName: t("Payment Method") },
-  { field: "paid", headerName: t("Paid") },
+  { field: "type", headerName: t("user_invoice_table_type"), flex: 1 },
+  { field: "amount", headerName: t("user_invoice_table_amount"), flex: 1 },
+  {
+    field: "description",
+    headerName: t("user_invoice_table_description"),
+    flex: 1,
+  },
+  {
+    field: "username",
+    headerName: t("manager_invoice_table_created_by"),
+    flex: 1,
+  },
+  {
+    field: "payment_method",
+    headerName: t("manager_invoice_table_method"),
+    flex: 1,
+  },
+  { field: "paid", headerName: t("manager_invoice_table_paid"), flex: 1 },
 ];
 
 export const columnsReceiptManagers = [
   {
-    field: "receiptDate",
-    headerName: t("Receipt date"),
+    field: "receipt_number",
+    headerName: t("user_receipt_table_no"),
     cellClassName: "name-column-cell",
+    flex: 1,
   },
   {
-    field: "date",
-    headerName: t("Date"),
+    field: "created_at",
+    headerName: t("user_receipt_table_date"),
+    flex: 1,
   },
   {
     field: "type",
-    headerName: t("Type"),
+    headerName: t("user_receipt_table_type"),
+    flex: 1,
   },
-  { field: "amount", headerName: t("Amount") },
-  { field: "details", headerName: t("Details") },
-  { field: "publishedBy", headerName: t("Published by") },
+  { field: "amount", headerName: t("user_receipt_table_amount"), flex: 1 },
+  {
+    field: "description",
+    headerName: t("user_receipt_table_description"),
+    flex: 1,
+  },
+  {
+    field: "username",
+    headerName: t("user_receipt_table_created_by"),
+    flex: 1,
+  },
 ];
 
 export const columnsRegisterAccountsManagers = [
   {
-    field: "date",
-    headerName: t("Date"),
+    field: "created_at",
+    headerName: t("global_date"),
+    flex: 1,
   },
   {
-    field: "credit",
-    headerName: t("Credit"),
+    field: "cr",
+    headerName: t("user_journal_table_cr"),
+    flex: 1,
   },
   {
-    field: "debit",
-    headerName: t("debit"),
+    field: "dr",
+    headerName: t("user_journal_table_dr"),
+    flex: 1,
   },
-  { field: "amount", headerName: t("Amount") },
-  { field: "balance", headerName: t("Balance") },
-  { field: "process", headerName: t("Process") },
-  { field: "details", headerName: t("Details") },
+  { field: "amount", headerName: t("user_journal_table_amount"), flex: 1 },
+  { field: "balance", headerName: t("user_journal_table_balance"), flex: 1 },
+  {
+    field: "operation",
+    headerName: t("user_journal_table_operation"),
+    flex: 1,
+  },
+  {
+    field: "description",
+    headerName: t("user_journal_table_description"),
+    flex: 1,
+  },
 ];
 
 export const columnsGroups = [
@@ -542,6 +622,18 @@ export const columnsPackages = [
   {
     field: "name",
     headerName: t("global_name"),
+    renderCell: (params) => {
+      if (params.row["name"]) {
+        return (
+          <Link
+            to={`/packages/profile/${params.row.id}/edit`}
+            className="text_color"
+          >
+            {params.row["name"]}
+          </Link>
+        );
+      }
+    },
   },
   {
     field: "price",
@@ -563,55 +655,91 @@ export const columnsConsumptionNotices = [
   {
     field: "threshold",
     headerName: t("Threshold"),
+    renderCell: (params) => {
+      if (params.row["threshold"]) {
+        return (
+          <Link
+            to={`/consumption-notices/profile/${params.row.id}/edit`}
+            className="text_color"
+          >
+            {params.row["threshold"]}
+          </Link>
+        );
+      }
+    },
+    flex: 1,
   },
   {
-    field: "profile",
+    field: "ProfileName",
     headerName: t("Profile"),
+    flex: 1,
   },
   {
-    field: "counter",
+    field: "check_counter",
     headerName: t("Counter"),
+    flex: 1,
   },
   {
-    field: "sms",
+    field: "sms_enabled",
     headerName: t("SMS"),
+    flex: 1,
   },
   {
-    field: "telegram",
+    field: "telegram_enabled",
     headerName: t("Telegram"),
+    flex: 1,
   },
   {
-    field: "email",
+    field: "email_enabled",
     headerName: t("Email"),
+    flex: 1,
   },
   {
-    field: "webhook",
+    field: "webhook_enabled",
     headerName: t("Wehook"),
+    flex: 1,
   },
 ];
 
 export const columnsAddonsServices = [
   {
-    field: "addonName",
+    field: "name",
     headerName: t("Addon Name"),
+    renderCell: (params) => {
+      if (params.row["name"]) {
+        return (
+          <Link
+            to={`/additional-services/profile/${params.row.id}/edit`}
+            className="text_color"
+          >
+            {params.row["name"]}
+          </Link>
+        );
+      }
+    },
+    flex: 1,
   },
   {
-    field: "expiration",
+    field: "expiration_amount",
     headerName: t("Expiration"),
+    flex: 1,
   },
   {
-    field: "setAddressList",
+    field: "set_address_list",
     headerName: t("Set Address List"),
     width: 130,
+    flex: 1,
   },
   {
-    field: "setPoolName",
+    field: "set_pool_name",
     headerName: t("Set Pool Name"),
     width: 130,
+    flex: 1,
   },
   {
-    field: "callUrl",
+    field: "call_url",
     headerName: t("Call Url"),
+    flex: 1,
   },
 ];
 

@@ -8,6 +8,7 @@ import apiAxios from "../../../utils/apiAxios";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { encryptedData } from "../../../utils/utilsFunctions";
+import Loader from "../../../components/loader/Loader";
 
 const AddEditPackage = ({ typePage }) => {
   const { id } = useParams();
@@ -499,6 +500,7 @@ const AddEditPackage = ({ typePage }) => {
             value={generalinformation.name}
             onChange={handleChangeGeneralInformation}
             id="name"
+            required={true}
           />
           <SwitchSectionForm
             label={t("global_enabled")}
@@ -512,6 +514,7 @@ const AddEditPackage = ({ typePage }) => {
             value={generalinformation.price}
             onChange={handleChangeGeneralInformation}
             id="price"
+            required={true}
           />
           <SwitchSectionForm
             label={t("profile_form_available_ucp")}
@@ -525,6 +528,7 @@ const AddEditPackage = ({ typePage }) => {
             value={generalinformation.downrate}
             onChange={handleChangeGeneralInformation}
             id="downrate"
+            required={true}
           />
           <InputSectionForm
             label={t("profile_form_uprate")}
@@ -532,6 +536,7 @@ const AddEditPackage = ({ typePage }) => {
             value={generalinformation.uprate}
             onChange={handleChangeGeneralInformation}
             id="uprate"
+            required={true}
           />
           <SelectSectionForm
             label={t("profile_form_type")}
@@ -544,6 +549,7 @@ const AddEditPackage = ({ typePage }) => {
               { name: "Fair usage service", value: "2" },
               { name: "Extension", value: "3" },
             ]}
+            required={true}
           />
           {generalinformation.type == "3" && (
             <SelectSectionForm
@@ -579,7 +585,7 @@ const AddEditPackage = ({ typePage }) => {
             label={t("profile_form_limit_expiration")}
             value={serviceParameters.limit_expiration}
             onChange={handleChangeServiceParameters}
-            id="determinedDuration"
+            id="limit_expiration"
           />
           <SelectSectionForm
             label={t("profile_form_expiration_units")}
@@ -587,9 +593,9 @@ const AddEditPackage = ({ typePage }) => {
             onChange={handleChangeServiceParameters}
             id="expiration_unit"
             options={[
-              { name: "day", value: "0" },
-              { name: "month", value: "1" },
-              { name: "hour", value: "2" },
+              { name: "days", value: "0" },
+              { name: "months", value: "1" },
+              { name: "hours", value: "2" },
             ]}
             valueInput={serviceParameters.expiration_amount}
             onChangeInput={handleChangeServiceParameters}
@@ -609,8 +615,8 @@ const AddEditPackage = ({ typePage }) => {
             onChange={handleChangeServiceParameters}
             id="uptime_unit"
             options={[
-              { name: "minute", value: "0" },
-              { name: "hour", value: "1" },
+              { name: "minutes", value: "0" },
+              { name: "hours", value: "1" },
             ]}
             valueInput={serviceParameters.uptime_amount}
             onChangeInput={handleChangeServiceParameters}
@@ -704,7 +710,7 @@ const AddEditPackage = ({ typePage }) => {
           <SelectSectionForm
             label={t("profile_form_pool_mode")}
             value={advancedFeatures.ippool_mode}
-            onChange={handleChangeServiceParameters}
+            onChange={handleChangeAdvancedFeatures}
             id="ippool_mode"
             options={[
               { name: "use NAS IP Pools", value: "0" },
@@ -724,7 +730,7 @@ const AddEditPackage = ({ typePage }) => {
             <SelectSectionForm
               label={t("SAS4 Pool Name")}
               value={advancedFeatures.sas_ippool_id}
-              onChange={handleChangeServiceParameters}
+              onChange={handleChangeAdvancedFeatures}
               id="sas_ippool_id"
               options={selectionIpPool.map((item) => ({
                 name: item.name,
@@ -745,6 +751,7 @@ const AddEditPackage = ({ typePage }) => {
               value={advancedFeatures.burst_limit_dl}
               onChange={handleChangeAdvancedFeatures}
               id="burst_limit_dl"
+              placeholder={"kbps"}
             />
           )}
           {advancedFeatures.burst_enabled && (
@@ -754,6 +761,7 @@ const AddEditPackage = ({ typePage }) => {
               value={advancedFeatures.burst_limit_ul}
               onChange={handleChangeAdvancedFeatures}
               id="burst_limit_ul"
+              placeholder={"kbps"}
             />
           )}
           {advancedFeatures.burst_enabled && (
@@ -763,6 +771,7 @@ const AddEditPackage = ({ typePage }) => {
               value={advancedFeatures.burst_threshold_dl}
               onChange={handleChangeAdvancedFeatures}
               id="burst_threshold_dl"
+              placeholder={"kbps"}
             />
           )}
           {advancedFeatures.burst_enabled && (
@@ -772,6 +781,7 @@ const AddEditPackage = ({ typePage }) => {
               value={advancedFeatures.burst_threshold_ul}
               onChange={handleChangeAdvancedFeatures}
               id="burst_threshold_ul"
+              placeholder={"kbps"}
             />
           )}
           {advancedFeatures.burst_enabled && (
@@ -781,6 +791,7 @@ const AddEditPackage = ({ typePage }) => {
               value={advancedFeatures.burst_time_dl}
               onChange={handleChangeAdvancedFeatures}
               id="burst_time_dl"
+              placeholder={"seconds"}
             />
           )}
           {advancedFeatures.burst_enabled && (
@@ -790,6 +801,7 @@ const AddEditPackage = ({ typePage }) => {
               value={advancedFeatures.burst_time_ul}
               onChange={handleChangeAdvancedFeatures}
               id="burst_time_ul"
+              placeholder={"seconds"}
             />
           )}
           <SelectSectionForm
@@ -833,7 +845,10 @@ const AddEditPackage = ({ typePage }) => {
             value={advancedFeatures.site_id}
             onChange={handleChangeAdvancedFeatures}
             id="site_id"
-            options={[{ name: "None", value: "" }]}
+            options={selectionSite.map((item) => ({
+              name: item.name,
+              value: item.id,
+            }))}
           />
 
           <SelectSectionForm
@@ -841,10 +856,10 @@ const AddEditPackage = ({ typePage }) => {
             value={advancedFeatures.private}
             onChange={handleChangeAdvancedFeatures}
             id="private"
-            options={selectionSite.map((item) => ({
-              name: item.name,
-              value: item.id,
-            }))}
+            options={[
+              { name: "public", value: "0" },
+              { name: "private", value: "1" },
+            ]}
           />
           {advancedFeatures.private == "private" && (
             <SelectSectionForm
@@ -871,7 +886,11 @@ const AddEditPackage = ({ typePage }) => {
             value={advancedFeatures.allowed_services}
             onChange={handleChangeAdvancedFeatures}
             id="allowed_services"
-            options={[{ name: "None", value: "" }]}
+            options={[
+              { name: "any", value: "0" },
+              { name: "ppp", value: "1" },
+              { name: "Hotspot", value: "2" },
+            ]}
           />
           <SwitchSectionForm
             label={t("profile_form_fix_expiration_time")}
@@ -890,7 +909,10 @@ const AddEditPackage = ({ typePage }) => {
             value={advancedFeatures.no_freezone}
             onChange={handleChangeAdvancedFeatures}
             id="no_freezone"
-            options={[{ name: "None", value: "" }]}
+            options={[
+              { name: "Allowed", value: "0" },
+              { name: "Disable freezone", value: "1" },
+            ]}
           />
           <InputSectionForm
             label={t("profile_form_max_price")}
@@ -1010,8 +1032,8 @@ const AddEditPackage = ({ typePage }) => {
             onChange={handleChangeActivationOptions}
             id="quota_addition_date"
             options={[
-              { name: "Preparing the pool from the router", value: "" },
-              { name: "Preparing the pool from scratch", value: "" },
+              { name: "Immediate", value: "0" },
+              { name: "Next Billing Date", value: "1" },
             ]}
           />
           <SwitchSectionForm
@@ -1062,9 +1084,9 @@ const AddEditPackage = ({ typePage }) => {
             onChange={handleChangeInitialValues}
             id="initial_expiration_unit"
             options={[
-              { name: "day", value: "" },
-              { name: "month", value: "" },
-              { name: "hour", value: "" },
+              { name: "days", value: "0" },
+              { name: "months", value: "1" },
+              { name: "hours", value: "2" },
             ]}
             valueInput={initialValues.initial_expiration_amount}
             onChangeInput={handleChangeInitialValues}
@@ -1085,8 +1107,8 @@ const AddEditPackage = ({ typePage }) => {
             onChange={handleChangeInitialValues}
             id="initial_uptime_unit"
             options={[
-              { name: "minute", value: "" },
-              { name: "hour", value: "" },
+              { name: "minutes", value: "0" },
+              { name: "hours", value: "1" },
             ]}
             valueInput={initialValues.initial_uptime_amount}
             onChangeInput={handleChangeInitialValues}
@@ -1097,7 +1119,9 @@ const AddEditPackage = ({ typePage }) => {
         </div>
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">{t("global_button_submit")}</button>
+        <button className="btn_add" onClick={handleForm}>
+          {t("global_button_submit")}
+        </button>
         <button className="btn_close">{t("global_button_cancel")}</button>
       </div>
       {loading && <Loader />}
