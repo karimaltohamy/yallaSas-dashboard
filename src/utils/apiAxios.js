@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiAxios = axios.create({
-  baseURL: "http://5.249.164.150:811/admin/api/index.php/",
+  baseURL: "http://194.62.29.119:8055/admin/api/index.php/",
   withCredentials: false,
 });
 

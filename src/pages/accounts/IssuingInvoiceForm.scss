@@ -1,41 +1,51 @@
 // start issuing_invoice_section
-.issuing_invoice_section {
+.issuing_invoice {
   margin: 0 10px;
   margin-top: 20px;
   background-color: var(--bg-section);
   border-radius: 5px;
 
-  .head {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    border-bottom: 1px solid var(--border-color);
-    padding: 8px 12px;
+  .search_client {
+    margin-bottom: 30px;
 
-    h4 {
-      font-size: 22px;
-      font-weight: 600;
-    }
-
-    span {
-      font-size: 20px;
-      font-weight: 60;
+    input {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid var(--border-color);
+      background-color: transparent;
+      border-radius: 3px;
+      max-width: 200px;
     }
   }
 
   .issuing_invoice_content {
-    padding: 15px;
+    .items {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      padding: 30px 0;
+      border-bottom: 1px solid var(--border-color);
 
-    form {
-      .input {
-        input {
-          width: 100%;
-          padding: 5px;
-          border: 1px solid var(--border-color);
-          background-color: transparent;
-          border-radius: 3px;
-          max-width: 200px;
+      .item {
+        h4 {
+          font-weight: 700;
+          font-size: 17px;
+          margin-bottom: 5px;
         }
+
+        span {
+          color: gray;
+        }
+      }
+    }
+
+    .add_service {
+      padding: 30px 0;
+
+      .btns {
+        display: flex;
+        align-items: center;
+        gap: 15px;
       }
     }
   }

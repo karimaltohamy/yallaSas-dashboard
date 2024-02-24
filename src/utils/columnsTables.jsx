@@ -821,41 +821,59 @@ export const columnsCardsJobs = [
 
 export const columnsSubscribersInvoices = [
   {
-    field: "invoiceNo",
-    headerName: t("Invoice No"),
+    field: "invoice_number",
+    headerName: t("user_invoice_table_number"),
   },
   {
-    field: "dueDate",
-    headerName: t("Due Date"),
+    field: "due_date",
+    headerName: t("user_invoice_table_date"),
   },
   {
     field: "username",
-    headerName: t("Username"),
+    headerName: t("global_username"),
+    valueGetter: (params) => {
+      if (params.row.manager_details) {
+        return params.row.manager_details.username;
+      }
+    },
   },
   {
     field: "type",
-    headerName: t("Type"),
+    headerName: t("global_type"),
   },
   {
     field: "amount",
-    headerName: t("Amount"),
+    headerName: t("user_invoice_table_amount"),
   },
   {
     field: "description",
-    headerName: t("Description"),
+    headerName: t("user_invoice_table_description"),
     width: 280,
   },
+
   {
-    field: "createdBy",
-    headerName: t("Crated By"),
+    field: "username",
+    headerName: t("user_invoice_table_created_by"),
+    valueGetter: (params) => {
+      if (params.row.manager_details) {
+        return params.row.manager_details.username;
+      }
+    },
   },
   {
-    field: "paymentMethod",
-    headerName: t("Payment Method"),
+    field: "payment_method",
+    headerName: t("user_invoice_table_method"),
   },
   {
     field: "paid",
-    headerName: t("Paid"),
+    headerName: t("user_invoice_table_paid"),
+    renderCell: (params) => {
+      if (params.row.paid == 1) {
+        return <i class="fa-solid fa-check"></i>;
+      } else {
+        return <i class="fa-solid fa-xmark"></i>;
+      }
+    },
   },
 ];
 

@@ -1,60 +1,74 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputSectionForm from "../../../components/sectionform/InputSectionForm";
 import SectionForm from "../../../components/sectionform/SectionForm";
 import SelectSectionForm from "../../../components/sectionform/SelectSectionForm";
 import SwitchSectionForm from "../../../components/sectionform/SwitchSectionForm";
 import InputFile from "../../../components/popup/inputFile/InputFile";
 import { t } from "i18next";
+import { useNavigate, useParams } from "react-router-dom";
+import apiAxios from "../../../utils/apiAxios";
+import { encryptedData } from "../../../utils/utilsFunctions";
+import { toast } from "react-toastify";
+import Loader from "../../../components/loader/Loader";
 
-const AddEditManager = () => {
+const AddEditManager = ({ typePage }) => {
+  const { id } = useParams();
+  const [loading, setLoading] = useState(false);
+  const [parents, setParents] = useState([]);
+  const [securityGroups, setSecurityGroups] = useState([]);
+  const [nas, setNas] = useState([]);
+  const [groups, setGroups] = useState([]);
+  const [sites, setSites] = useState([]);
+  const navigate = useNavigate();
+
   const [generalinformation, setGeneralinformation] = useState({
     username: "",
     password: "",
-    confirmPassword: "",
-    followMe: "",
+    confirm_password: "",
+    parent_id: "",
     package: "",
-    group: "",
-    site: "",
-    effective: "",
+    acl_group_id: "",
+    enabled: false,
   });
 
   const [personalformation, setPersonalformation] = useState({
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     company: "",
     email: "",
     phone: "",
     city: "",
     address: "",
-    notice: "",
+    notes: "",
   });
 
   const [specialDetails, setSpecialDetails] = useState({
-    selectDeletion: "",
-    subscribersSuffix: "",
-    maximumSubscribers: "",
-    group: "",
-    site: "",
-    maximumDebtLimit: "",
-    discountPercentage: "",
-    addressList: "",
-    towers: "",
-    allowedNAS: "",
-    requiresTwoFactorLogin: "",
-    requiresTwoFactorLoginSwitch: "",
-    notRequireCptcha: "",
-    forceChangePassword: "",
+    subscriber_prefix: "",
+    subscriber_suffix: "",
+    max_users: "",
+    group_id: "",
+    site_id: "",
+    debt_limit: "",
+    discount_rate: "",
+    mikrotik_addresslist: "",
+    allowed_ppp_services: "",
+    allowed_nases: "",
+    requires_2fa: "",
+    ignore_captcha: false,
+    notRequireCptcha: false,
+    admin_notes: "",
+    force_change_password: false,
   });
 
   const [determinants, setDeterminants] = useState({
-    selectDeletion: "",
-    deletionTimesMonth: "",
-    selectChangName: "",
-    nameChangeTimesMonth: "",
-    profileChangeTimes: "",
-    timesChangeProfileMonth: "",
-    determineTimesChangeMac: "",
-    macChangeTimesMonth: "",
+    limit_delete: "",
+    limit_delete_count: false,
+    limit_rename: "",
+    limit_rename_count: false,
+    limit_profile_change: "",
+    limit_profile_change_count: false,
+    limit_mac_change: "",
+    limit_mac_change_count: false,
   });
 
   const handleChangeGeneralUnformation = (e) => {
@@ -97,115 +111,282 @@ const AddEditManager = () => {
     });
   };
 
+  const getManager = async () => {
+    setLoading(true);
+    try {
+      const { data } = await apiAxios.get(`api/manager/overview/${id}`);
+      setGeneralinformation((prev) => {
+        return {
+          ...prev,
+          username: data.data && data.data?.username,
+          password: data.data && data.data?.password,
+          confirm_password: data.data && data.data?.confirm_password,
+          parent_id: data.data && data.data?.parent_id,
+          package: data.data && data.data?.package,
+          acl_group_id: data.data && data.data?.acl_group_id,
+          enabled: data.data && data.data?.enabled == 1 ? true : false,
+        };
+      });
+      setPersonalformation((prev) => {
+        return {
+          ...prev,
+          firstname: data.data && data.data?.firstname,
+          lastname: data.data && data.data?.lastname,
+          company: data.data && data.data?.company,
+          email: data.data && data.data?.email,
+          phone: data.data && data.data?.phone,
+          city: data.data && data.data?.city,
+          address: data.data && data.data?.address,
+          notes: data.data && data.data?.notes,
+        };
+      });
+      setSpecialDetails((prev) => {
+        return {
+          ...prev,
+          subscriber_prefix: data.data && data.data?.subscriber_prefix,
+          subscriber_suffix: data.data && data.data?.subscriber_suffix,
+          max_users: data.data && data.data?.max_users,
+          group_id: data.data && data.data?.group_id,
+          site_id: data.data && data.data?.site_id,
+          debt_limit: data.data && data.data?.debt_limit,
+          discount_rate: data.data && data.data?.discount_rate,
+          mikrotik_addresslist: data.data && data.data?.mikrotik_addresslist,
+          allowed_ppp_services: data.data && data.data?.allowed_ppp_services,
+          allowed_nases: data.data && data.data?.allowed_nases,
+          requires_2fa: data.data && data.data?.requires_2fa,
+          ignore_captcha:
+            data.data && data.data?.ignore_captcha == 1 ? true : false,
+          notRequireCptcha:
+            data.data && data.data?.notRequireCptcha == 1 ? true : false,
+          admin_notes: data.data && data.data?.admin_notes,
+          force_change_password:
+            data.data && data.data?.force_change_password == 1 ? true : false,
+        };
+      });
+      setDeterminants((prev) => {
+        return {
+          ...prev,
+          limit_delete: data.data && data.data?.limit_delete,
+          limit_delete_count:
+            data.data && data.data?.limit_delete_count == 1 ? true : false,
+          limit_rename: data.data && data.data?.limit_rename,
+          limit_rename_count:
+            data.data && data.data?.limit_rename_count == 1 ? true : false,
+          limit_profile_change: data.data && data.data?.limit_profile_change,
+          limit_profile_change_count:
+            data.data && data.data?.limit_profile_change_count == 1
+              ? true
+              : false,
+          limit_mac_change: data.data && data.data?.limit_mac_change,
+          limit_mac_change_count:
+            data.data && data.data?.limit_mac_change_count == 1 ? true : false,
+        };
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    id && getManager();
+    (async () => {
+      try {
+        const { data } = await apiAxios.get("api/index/manager");
+        setParents(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    (async () => {
+      try {
+        const { data } = await apiAxios.get("api/index/acl");
+        setSecurityGroups(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    (async () => {
+      try {
+        const { data } = await apiAxios.get("api/nas");
+        setNas(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    (async () => {
+      try {
+        const { data } = await apiAxios.get("api/group");
+        setGroups(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    (async () => {
+      try {
+        const { data } = await apiAxios.get("api/site");
+        setSites(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+
+  const handleForm = async () => {
+    setLoading(true);
+    const generalinformationTransform = {
+      ...generalinformation,
+      enabled: generalinformation.enabled ? 1 : 0,
+    };
+    const specialDetailsTransform = {
+      ...specialDetails,
+      ignore_captcha: specialDetails.ignore_captcha ? 1 : 0,
+      notRequireCptcha: specialDetails.notRequireCptcha ? 1 : 0,
+      force_change_password: specialDetails.force_change_password ? 1 : 0,
+    };
+    const determinantsTransform = {
+      ...determinants,
+      limit_delete_count: determinants.limit_delete_count ? 1 : 0,
+      limit_rename_count: determinants.limit_rename_count ? 1 : 0,
+      limit_profile_change_count: determinants.limit_profile_change_count
+        ? 1
+        : 0,
+      limit_mac_change_count: determinants.limit_mac_change_count ? 1 : 0,
+    };
+    try {
+      if (typePage == "addPage") {
+        await apiAxios.post("api/manager", {
+          payload: encryptedData({
+            ...generalinformationTransform,
+            ...personalformation,
+            ...specialDetailsTransform,
+            ...determinantsTransform,
+          }),
+        });
+      } else if (typePage == "editPage") {
+        await apiAxios.put(`api/user/${id}`, {
+          payload: encryptedData({
+            ...generalinformationTransform,
+            ...personalformation,
+            ...specialDetailsTransform,
+            ...determinantsTransform,
+          }),
+        });
+      }
+      toast.success("Successful add");
+      navigate("/managers");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+    }
+    setLoading(false);
+  };
+
   return (
     <div className="content_page">
-      <SectionForm title={t("General information")}>
+      <SectionForm title={t("user_form_label_basic_information")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <InputSectionForm
-            label={t("Username")}
+            label={t("user_form_label_username")}
             type={"text"}
             value={generalinformation.username}
             onChange={handleChangeGeneralUnformation}
             id="username"
           />
           <InputSectionForm
-            label={t("Password")}
+            label={t("user_form_label_password")}
             type={"password"}
             value={generalinformation.password}
             onChange={handleChangeGeneralUnformation}
             id="password"
           />
           <InputSectionForm
-            label={t("Confirm password")}
+            label={t("user_form_label_password_confirm")}
             type={"password"}
-            value={generalinformation.confirmPassword}
+            value={generalinformation.confirm_password}
             onChange={handleChangeGeneralUnformation}
-            id="confirmPassword"
+            id="confirm_password"
           />
           <SelectSectionForm
-            label={t("Follow me")}
+            label={t("user_form_label_parent")}
             type={"text"}
-            value={generalinformation.followMe}
+            value={generalinformation.parent_id}
             onChange={handleChangeGeneralUnformation}
-            id="followMe"
-            options={[
-              { name: "manager_1", value: "manager_1" },
-              { name: "manager_2", value: "manager_2" },
-              { name: "manager_3", value: "manager_3" },
-            ]}
+            id="parent_id"
+            options={
+              parents &&
+              parents.map((item) => {
+                return { name: item.username, value: item.id };
+              })
+            }
           />
           <SelectSectionForm
-            label={t("Group")}
-            value={generalinformation.group}
+            label={t("manager_form_security_group")}
+            value={generalinformation.acl_group_id}
             onChange={handleChangeGeneralUnformation}
-            id="group"
-            options={[
-              { name: "adminostrator", value: "Adminostrator" },
-              { name: "normalReseller", value: "Normal Reseller" },
-              { name: "Super Resller", value: "Super Resller" },
-            ]}
+            id="acl_group_id"
+            options={
+              securityGroups &&
+              securityGroups.map((item) => {
+                return { name: item.name, value: item.id };
+              })
+            }
           />
           <SwitchSectionForm
-            label={t("Effective")}
-            value={generalinformation.effective}
+            label={t("global_enabled")}
+            value={generalinformation.enabled}
             onChange={handleChangeGeneralUnformation}
-            id="effective"
+            id="enabled"
           />
         </div>
       </SectionForm>
-      <SectionForm title={t("Personal information")}>
+      <SectionForm title={t("user_form_label_personnel_information")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <InputSectionForm
-            label={t("First name")}
+            label={t("global_firstname")}
             type={"text"}
-            value={personalformation.firstName}
+            value={personalformation.firstname}
             onChange={handleChangePersonalformation}
-            id="firstName"
+            id="firstname"
           />
           <InputSectionForm
-            label={t("Last name")}
+            label={t("global_lastname")}
             type={"text"}
-            value={personalformation.lastName}
+            value={personalformation.lastname}
             onChange={handleChangePersonalformation}
-            id="lastName"
+            id="lastname"
           />
           <InputSectionForm
-            label={t("Company")}
+            label={t("user_form_label_company")}
             type={"text"}
             value={personalformation.company}
             onChange={handleChangePersonalformation}
             id="company"
           />
           <InputSectionForm
-            label={t("Email")}
+            label={t("user_form_label_email")}
             type={"text"}
             value={personalformation.email}
             onChange={handleChangePersonalformation}
             id="email"
           />
           <InputSectionForm
-            label={t("Email")}
-            type={"text"}
-            value={personalformation.email}
-            onChange={handleChangePersonalformation}
-            id="email"
-          />
-          <InputSectionForm
-            label={t("Phone")}
+            label={t("user_form_label_phone")}
             type={"text"}
             value={personalformation.phone}
             onChange={handleChangePersonalformation}
             id="phone"
           />
           <InputSectionForm
-            label={t("City")}
+            label={t("managers_table_city")}
             type={"text"}
             value={personalformation.city}
             onChange={handleChangePersonalformation}
             id="city"
           />
           <InputSectionForm
-            label={t("Address")}
+            label={t("users_table_address")}
             type={"text"}
             value={personalformation.address}
             onChange={handleChangePersonalformation}
@@ -213,7 +394,7 @@ const AddEditManager = () => {
           />
 
           <InputSectionForm
-            label={t("Notice")}
+            label={t("users_table_notes")}
             type={t("text")}
             value={personalformation.notice}
             onChange={handleChangePersonalformation}
@@ -221,158 +402,182 @@ const AddEditManager = () => {
           />
         </div>
       </SectionForm>
-      <SectionForm title={t("Special details")}>
+      <SectionForm title={t("manager_form_label3")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <InputSectionForm
-            label={t("select deletion")}
-            type={"date"}
-            value={specialDetails.selectDeletion}
+            label={t("manager_form_prefix")}
+            type={"text"}
+            value={specialDetails.subscriber_prefix}
             onChange={handleChangeSpecialDetails}
-            id="selectDeletion"
+            id="subscriber_prefix"
           />
           <InputSectionForm
-            label={t("Subscribers Suffix")}
+            label={t("manager_form_suffix")}
             type={"text"}
-            value={specialDetails.subscribersSuffix}
+            value={specialDetails.subscriber_suffix}
             onChange={handleChangeSpecialDetails}
-            id="subscribersSuffix"
+            id="subscriber_suffix"
           />
           <InputSectionForm
-            label={t("Maximum subscribers")}
+            label={t("manager_form_max_users")}
             type={"text"}
-            value={specialDetails.maximumSubscribers}
+            value={specialDetails.max_users}
             onChange={handleChangeSpecialDetails}
-            id="maximumSubscribers"
-          />
-          <InputSectionForm
-            label={t("Group")}
-            type={"text"}
-            value={specialDetails.group}
-            onChange={handleChangeSpecialDetails}
-            id="group"
+            id="max_users"
           />
           <SelectSectionForm
-            label={t("Site")}
-            type={"text"}
-            value={specialDetails.site}
+            label={t("global_group")}
+            value={specialDetails.group_id}
             onChange={handleChangeSpecialDetails}
-            id="site"
-            options={[{ name: "any", value: "" }]}
+            id="group_id"
+            options={
+              groups &&
+              groups.map((item) => {
+                return { name: item.name, value: item.id };
+              })
+            }
+          />
+          <SelectSectionForm
+            label={t("manager_form_site")}
+            value={specialDetails.site_id}
+            onChange={handleChangeSpecialDetails}
+            id="site_id"
+            options={
+              sites &&
+              sites.map((item) => {
+                return { name: item.name, value: item.id };
+              })
+            }
           />
           <InputSectionForm
-            label={t("maximumDebtLimit")}
+            label={t("manager_form_deb_limit")}
             type={"text"}
-            value={specialDetails.maximumDebtLimit}
+            value={specialDetails.debt_limit}
             onChange={handleChangeSpecialDetails}
-            id="maximumDebtLimit"
+            id="debt_limit"
+          />
+          <InputSectionForm
+            label={t("manager_form_discount_rate")}
+            type={"text"}
+            value={specialDetails.discount_rate}
+            onChange={handleChangeSpecialDetails}
+            id="discount_rate"
           />
           <InputSectionForm
             label={t("Address List")}
             type={"text"}
-            value={specialDetails.addressList}
+            value={specialDetails.mikrotik_addresslist}
             onChange={handleChangeSpecialDetails}
-            id="addressList"
+            id="mikrotik_addresslist"
           />
           <InputFile
-            label={t("Towers from which entry is permitted")}
-            value={specialDetails.towers}
+            label={t("manager_form_label_allowed_ppp_services")}
+            value={specialDetails.allowed_ppp_services}
             onChange={handleChangeSpecialDetails}
-            id="towers"
+            id="allowed_ppp_services"
           />
           <SelectSectionForm
             label={"Allowed NAS(s)"}
-            value={specialDetails.allowedNAS}
+            value={specialDetails.allowed_nases}
             onChange={handleChangeSpecialDetails}
-            id="allowedNAS"
-            options={[{ name: "any", value: "" }]}
+            id="allowed_nases"
+            options={
+              nas &&
+              nas.map((item) => {
+                return { name: item.name, value: item.id };
+              })
+            }
+          />
+          <SwitchSectionForm
+            label={t("manager_form_requires_2fa")}
+            value={specialDetails.requires_2fa}
+            onChange={handleChangeSpecialDetails}
+            id="requires_2fa"
+          />
+          <SwitchSectionForm
+            label={t("manager_form_ignore_captcha")}
+            value={specialDetails.ignore_captcha}
+            onChange={handleChangeSpecialDetails}
+            id="ignore_captcha"
           />
           <InputSectionForm
-            label={t("Requires two-factor authentication to login")}
+            label={t("manager_form_admin_notes")}
             type={"text"}
-            value={specialDetails.requiresTwoFactorLogin}
+            value={specialDetails.admin_notes}
             onChange={handleChangeSpecialDetails}
-            id="requiresTwoFactorLogin"
+            id="admin_notes"
           />
           <SwitchSectionForm
-            label={t("Requires Two Factor Login Switch")}
-            value={specialDetails.requiresTwoFactorLoginSwitch}
+            label={t("manager_form_force_change_password")}
+            value={specialDetails.force_change_password}
             onChange={handleChangeSpecialDetails}
-            id="requiresTwoFactorLoginSwitch"
-          />
-          <SwitchSectionForm
-            label={t("Not Require Cptcha")}
-            value={specialDetails.notRequireCptcha}
-            onChange={handleChangeSpecialDetails}
-            id="notRequireCptcha"
-          />
-          <SwitchSectionForm
-            label={t("Not Require Cptcha")}
-            value={specialDetails.forceChangePassword}
-            onChange={handleChangeSpecialDetails}
-            id="forceChangePassword"
+            id="force_change_password"
           />
         </div>
       </SectionForm>
-      <SectionForm title={t("Determinants")}>
+      <SectionForm title={t("manager_form_label4")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <SwitchSectionForm
-            label={t("Select Deletion")}
-            value={determinants.selectDeletion}
+            label={t("manager_form_limit_delete")}
+            value={determinants.limit_delete}
             onChange={handleChangeDeterminants}
-            id="selectDeletion"
+            id="limit_delete"
           />
           <InputSectionForm
-            label={t("Deletion times per month")}
+            label={t("manager_form_limit_delete_count")}
             type={"text"}
-            value={specialDetails.deletionTimesMonth}
+            value={determinants.limit_delete_count}
             onChange={handleChangeDeterminants}
-            id="deletionTimesMonth"
+            id="limit_delete_count"
           />
           <SwitchSectionForm
-            label={t("Determine the frequency of changing the name")}
-            value={determinants.selectChangName}
+            label={t("manager_form_limit_rename")}
+            value={determinants.limit_rename}
             onChange={handleChangeDeterminants}
-            id="selectChangName"
+            id="limit_rename"
           />
           <InputSectionForm
-            label={t("Name change times per month")}
+            label={t("manager_form_limit_rename_count")}
             type={"text"}
-            value={specialDetails.nameChangeTimesMonth}
+            value={determinants.limit_rename_count}
             onChange={handleChangeDeterminants}
-            id="nameChangeTimesMonth"
+            id="limit_rename_count"
           />
           <SwitchSectionForm
-            label={t("Profile change times")}
-            value={determinants.profileChangeTimes}
+            label={t("manager_form_limit_profile_change")}
+            value={determinants.limit_profile_change}
             onChange={handleChangeDeterminants}
-            id="profileChangeTimes"
+            id="limit_profile_change"
           />
           <InputSectionForm
-            label={t("Times to change the profile per month")}
+            label={t("manager_form_limit_profile_change_count")}
             type={"text"}
-            value={specialDetails.timesChangeProfileMonth}
+            value={determinants.limit_profile_change_count}
             onChange={handleChangeDeterminants}
-            id="timesChangeProfileMonth"
+            id="limit_profile_change_count"
           />
           <SwitchSectionForm
-            label={t("Determine the times to change the Mac")}
-            value={determinants.determineTimesChangeMac}
+            label={t("manager_form_limit_mac_change")}
+            value={determinants.limit_mac_change}
             onChange={handleChangeDeterminants}
-            id="determineTimesChangeMac"
+            id="limit_mac_change"
           />
           <InputSectionForm
-            label={t("Mac change times per month")}
+            label={t("manager_form_limit_mac_change_count")}
             type={"text"}
-            value={specialDetails.macChangeTimesMonth}
+            value={determinants.limit_mac_change_count}
             onChange={handleChangeDeterminants}
-            id="macChangeTimesMonth"
+            id="limit_mac_change_count"
           />
         </div>
       </SectionForm>
       <div className="btns_add">
-        <button className="btn_add">{t("global_button_submit")}</button>
+        <button className="btn_add" onClick={handleForm}>
+          {t("global_button_submit")}
+        </button>
         <button className="btn_close">{t("global_button_cancel")}</button>
       </div>
+      {loading && <Loader />}
     </div>
   );
 };

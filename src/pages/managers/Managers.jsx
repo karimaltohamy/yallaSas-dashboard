@@ -5,15 +5,17 @@ import { Link } from "react-router-dom";
 import Popup from "../../components/popup/Popup";
 import InputItem from "../../components/popup/inputItem/InputItem";
 import SelectItem from "../../components/popup/selectItem/SelectItem";
-import { mockDataManagers } from "../../utils/mockData";
 import { columnsManagers } from "../../utils/columnsTables";
 import { t } from "i18next";
-import { encryptedData } from "../../utils/utilsFunctions";
+import { encryptedData, generateUUID } from "../../utils/utilsFunctions";
 import Loader from "../../components/loader/Loader";
 import apiAxios from "../../utils/apiAxios";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const Managers = () => {
   const [managers, setManagers] = useState([]);
+  const [manager, setManager] = useState({});
   const [numberManagers, setNumberManagers] = useState(0);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
@@ -21,6 +23,9 @@ const Managers = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastePage] = useState(0);
   const [selectedRowData, setSelectedRowData] = useState([]);
+  const [sites, setSites] = useState([]);
+  const [groups, setGroups] = useState([]);
+
   // opens and setOpnes popups
   const [openEditName, setOpenEditName] = useState(false);
   const [openEditSite, setOpenEditSite] = useState(false);
@@ -43,46 +48,6 @@ const Managers = () => {
   const [noticePayDebts, setNoticePayDebts] = useState("");
   const [addPoints, setAddPoints] = useState("");
   const [recoverPoints, setRecoverPoints] = useState("");
-
-  const handleEditName = (e) => {
-    e.preventDefault();
-    console.log({});
-  };
-
-  const handleEditSite = (e) => {
-    e.preventDefault();
-    console.log({});
-  };
-
-  const handleEditGroup = (e) => {
-    e.preventDefault();
-    console.log({});
-  };
-
-  const handleDeposite = () => {
-    e.preventDefault();
-    console.log({ noticeDeposite, amountDeposit });
-  };
-
-  const handleDicountAmount = () => {
-    e.preventDefault();
-    console.log({ noticeAmount, amountAmount });
-  };
-
-  const handlePayOffDebts = (e) => {
-    e.preventDefault();
-    console.log({});
-  };
-
-  const handleAddPoints = (e) => {
-    e.preventDefault();
-    console.log({});
-  };
-
-  const handleRecoverPoints = (e) => {
-    e.preventDefault();
-    console.log({});
-  };
 
   const getManagers = async () => {
     setLoading(true);
@@ -116,9 +81,254 @@ const Managers = () => {
     }
   };
 
+  // get subscriber to use data in popups
+  const getManager = () => {
+    setManager(managers.find((item) => item.id == selectedRowData));
+  };
+
+  const handleChangeName = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await apiAxios.put(`api/manager/${selectedRowData[0]}`, {
+        payload: encryptedData({ username: newName }),
+      });
+      toast.success("Successful operation");
+      setOpenEditName(false);
+      setNewName("");
+      getManagers();
+      setLoading(false);
+    } catch (error) {
+      toast.error(error.response.data.message);
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  const handleEditSite = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await apiAxios.post(`api/manager/site`, {
+        payload: encryptedData({
+          manager_id: selectedRowData[0],
+          site_id: newSite,
+          propagate_managers: 1,
+          propagate_users: 1,
+        }),
+      });
+      toast.success("Successful operation");
+      setOpenEditSite(false);
+      setNewSite("");
+      getManagers();
+      setLoading(false);
+    } catch (error) {
+      toast.error(error.response.data.message);
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  const handleEditGroup = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await apiAxios.post(`api/manager/group`, {
+        payload: encryptedData({
+          manager_id: selectedRowData[0],
+          group_id: newGroup,
+          propagate_managers: 1,
+          propagate_users: 1,
+        }),
+      });
+      toast.success("Successful operation");
+      setOpenEditGroup(false);
+      setNewGroup("");
+      getManagers();
+      setLoading(false);
+    } catch (error) {
+      toast.error(error.response.data.message);
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  const handleDeposite = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await apiAxios.post("api/manager/deposit", {
+        payload: encryptedData({
+          manager_id: selectedRowData[0],
+          manager_username: manager.username,
+          amount: amountDeposit,
+          comment: noticeDeposite,
+          transaction_id: generateUUID(),
+          is_loan: false,
+        }),
+      });
+      toast.success("Successful operation");
+      setOpenDeposit(false);
+      setAmountDeposot("");
+      setNoticeDeposite("");
+    } catch (error) {
+      toast.error(error.response.data.message);
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDicountAmount = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await apiAxios.post("api/manager/withdraw", {
+        payload: encryptedData({
+          manager_id: selectedRowData[0],
+          manager_username: manager.username,
+          amount: amountDiscount,
+          comment: noticeDiscount,
+          transaction_id: generateUUID(),
+          is_loan: false,
+        }),
+      });
+      toast.success("Successful operation");
+      setOpenDiscountAmount(false);
+      setAmountDiscount("");
+      setNoticeDiscount("");
+    } catch (error) {
+      toast.error(error.response.data.message);
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handlePayOffDebts = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await apiAxios.post("api/manager/payDebt", {
+        payload: encryptedData({
+          manager_id: selectedRowData[0],
+          manager_username: manager.username,
+          amount: amountDiscount,
+          comment: noticeDiscount,
+          transaction_id: generateUUID(),
+          is_loan: false,
+        }),
+      });
+      toast.success("Successful operation");
+      setLoading(false);
+      setOpenPayOffDebts(false);
+      setAmountPayDebts("");
+      setNoticePayDebts("");
+    } catch (error) {
+      toast.error(error.response.data.message);
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  const handleAddPoints = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await apiAxios.post("api/manager/addRewardPoints", {
+        payload: encryptedData({
+          manager_id: selectedRowData[0],
+          amount: addPoints,
+        }),
+      });
+      toast.success("Successful operation");
+      setOpenAddPoints(false);
+      setAddPoints("");
+    } catch (error) {
+      toast.error(error.response.data.message);
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRecoverPoints = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await apiAxios.post("api/manager/deductRewardPoints", {
+        payload: encryptedData({
+          manager_id: selectedRowData[0],
+          amount: recoverPoints,
+        }),
+      });
+      toast.success("Successful operation");
+      setOpenRecoverPoints(false);
+      setRecoverPoints("");
+    } catch (error) {
+      toast.error(error.response.data.message);
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteManager = (e) => {
+    Swal.fire({
+      title: "Delete Manager?",
+      showCancelButton: true,
+      confirmButtonText: "OK",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          if (selectedRowData.length > 1) {
+            await apiAxios.post(`api/manager/bulkDelete`, {
+              payload: encryptedData(selectedRowData),
+            });
+            await apiAxios.delete(`api/manager/${selectedRowData[0]}`);
+          } else {
+            await apiAxios.delete(`api/manager/${selectedRowData[0]}`);
+          }
+          toast.success("Successful operation");
+          setLoading(false);
+          navigate(-1);
+        } catch (error) {
+          console.log(error);
+          toast.error(error.response.data.error);
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        console.log("User clicked Cancel");
+      }
+    });
+  };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await apiAxios.get("api/site");
+        setSites(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    (async () => {
+      try {
+        const { data } = await apiAxios.get("api/group");
+        setGroups(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+
   useEffect(() => {
     getManagers();
   }, [search, perPage, currentPage]);
+
+  useEffect(() => {
+    getManager();
+  }, [selectedRowData]);
 
   return (
     <div className="main_content_tables">
@@ -200,7 +410,12 @@ const Managers = () => {
               <i className="fa-regular fa-file-powerpoint"></i>
               <span>{t("manager_label_deduct_reward_point")}</span>
             </div>
-            <div className="item">
+            <div
+              className="item"
+              onClick={() =>
+                selectedRowData.length > 0 && handleDeleteManager()
+              }
+            >
               <i className="fa-solid fa-trash"></i>
               <span>{t("global_actions_delete")}</span>
             </div>
@@ -220,19 +435,19 @@ const Managers = () => {
       {loading && <Loader />}
       {/* popup edit name */}
       <Popup
-        title={"Edit name"}
+        title={t("manager_rename_form_title")}
         openPopup={openEditName}
         setOpenPopup={setOpenEditName}
-        onSubmit={handleEditName}
+        onSubmit={handleChangeName}
       >
         <InputItem
-          label={"Username"}
+          label={t("user_rename_form_current_username")}
           type={"text"}
           classes={"disabled"}
-          value={"demo1"}
+          value={manager && manager.id}
         />
         <InputItem
-          label={"New name"}
+          label={t("user_rename_form_new_username")}
           type={"text"}
           value={newName}
           onChange={setNewName}
@@ -242,80 +457,90 @@ const Managers = () => {
 
       {/* popup detect location */}
       <Popup
-        title={"Detect location"}
+        title={t("manager_actions_assign_site")}
         openPopup={openEditSite}
         setOpenPopup={setOpenEditSite}
         onSubmit={handleEditSite}
       >
         <InputItem
-          label={"Username"}
+          label={t("user_rename_form_current_username")}
           type={"text"}
           classes={"disabled"}
-          value={"demo1"}
+          value={manager && manager.id}
         />
         <SelectItem
-          label={"The site"}
-          value={newGroup}
-          onChange={setNewGroup}
-          options={[{ name: "default", value: "default" }]}
+          label={t("user_form_label_site")}
+          value={newSite}
+          onChange={setNewSite}
+          options={
+            sites &&
+            sites.map((item) => {
+              return { name: item.name, value: item.id };
+            })
+          }
         />
       </Popup>
 
       {/* popup detect group */}
       <Popup
-        title={"Detect group"}
+        title={t("manager_actions_assign_group")}
         openPopup={openEditGroup}
         setOpenPopup={setOpenEditGroup}
         onSubmit={handleEditGroup}
       >
         <InputItem
-          label={"Username"}
+          label={t("user_rename_form_current_username")}
           type={"text"}
           classes={"disabled"}
-          value={"demo1"}
+          value={manager && manager.id}
         />
         <SelectItem
-          label={"The group"}
-          value={newSite}
-          onChange={setNewSite}
-          options={[{ name: "default", value: "default" }]}
+          label={t("global_group")}
+          value={newGroup}
+          onChange={setNewGroup}
+          options={
+            groups &&
+            groups.map((item) => {
+              return { name: item.name, value: item.id };
+            })
+          }
         />
       </Popup>
 
       {/* popup Deposit */}
       <Popup
-        title={"Deposit"}
+        title={t("user_depodrawal_form_title_deposit")}
         openPopup={openDeposit}
         setOpenPopup={setOpenDeposit}
         onSubmit={handleDeposite}
       >
         <InputItem
-          label={"Username"}
+          label={t("user_rename_form_current_username")}
           type={"text"}
           classes={"disabled"}
-          value={"demo1"}
+          value={manager && manager.id}
         />
         <InputItem
-          label={"Balance (Manager_4)"}
+          label={`Balance (${manager && manager.username})`}
           type={"text"}
           classes={"disabled"}
-          value={"2,011,721.00"}
+          value={manager && manager.balance}
         />
         <InputItem
-          label={"Balance (admin)"}
+          label={`Balance (${manager && manager?.parent_details?.username})`}
           type={"text"}
           classes={"disabled"}
-          value={"2,011,721.00"}
+          value={manager && manager.balance}
         />
         <InputItem
-          label={"Amount"}
+          label={t("user_depodrawal_form_amount")}
           type={"number"}
           value={amountDeposit}
           onChange={setAmountDeposot}
           placeholder={""}
         />
         <InputItem
-          label={"Notice"}
+          label={t("global_comment")}
           type={"text"}
           value={noticeDeposite}
           onChange={setNoticeDeposite}
@@ -324,38 +549,38 @@ const Managers = () => {
       </Popup>
       {/* popup Discount amount */}
       <Popup
-        title={"Discount amount"}
+        title={t("user_depodrawal_form_title_withdrawal")}
         openPopup={openDiscountAmount}
         setOpenPopup={setOpenDiscountAmount}
         onSubmit={handleDicountAmount}
       >
         <InputItem
-          label={"Username"}
+          label={t("user_rename_form_current_username")}
           type={"text"}
           classes={"disabled"}
-          value={"demo1"}
+          value={manager && manager.id}
         />
         <InputItem
-          label={"Balance (Manager_4)"}
+          label={`Balance (${manager && manager.username})`}
           type={"text"}
           classes={"disabled"}
-          value={"2,011,721.00"}
+          value={manager && manager.balance}
         />
         <InputItem
-          label={"Balance (admin)"}
+          label={`Balance (${manager && manager?.parent_details?.username})`}
           type={"text"}
           classes={"disabled"}
-          value={"2,011,721.00"}
+          value={manager && manager.balance}
         />
         <InputItem
-          label={"Amount"}
+          label={t("user_depodrawal_form_amount")}
           type={"number"}
           value={amountDiscount}
           onChange={setAmountDiscount}
           placeholder={""}
         />
         <InputItem
-          label={"Notice"}
+          label={t("global_comment")}
           type={"text"}
           value={noticeDiscount}
           onChange={setNoticeDiscount}
@@ -364,38 +589,38 @@ const Managers = () => {
       </Popup>
       {/* popup Pay off debts*/}
       <Popup
-        title={"Pay off debts"}
+        title={t("global_actions_pay_debt")}
         openPopup={openPayOffDebts}
         setOpenPopup={setOpenPayOffDebts}
         onSubmit={handlePayOffDebts}
       >
         <InputItem
-          label={"Username"}
+          label={t("user_rename_form_current_username")}
           type={"text"}
           classes={"disabled"}
-          value={"demo1"}
+          value={manager && manager.id}
         />
         <InputItem
-          label={"Balance (Manager_4)"}
+          label={`Balance (${manager && manager.username})`}
           type={"text"}
           classes={"disabled"}
-          value={"2,011,721.00"}
+          value={manager && manager.balance}
         />
         <InputItem
-          label={"Balance (admin)"}
+          label={`Balance (${manager && manager?.parent_details?.username})`}
           type={"text"}
           classes={"disabled"}
-          value={"2,011,721.00"}
+          value={manager && manager.balance}
         />
         <InputItem
-          label={t("Amount")}
+          label={t("user_depodrawal_form_amount")}
           type={"number"}
           value={amountPayDebts}
           onChange={setAmountPayDebts}
           placeholder={""}
         />
         <InputItem
-          label={"Notice"}
+          label={t("global_comment")}
           type={"text"}
           value={noticePayDebts}
           onChange={setNoticePayDebts}
@@ -414,13 +639,13 @@ const Managers = () => {
       </Popup>
       {/* popup add points*/}
       <Popup
-        title={"Add points"}
+        title={t("manager_label_add_reward_point")}
         openPopup={openAddPoints}
         setOpenPopup={setOpenAddPoints}
         onSubmit={handleAddPoints}
       >
         <InputItem
-          label={"points"}
+          label={t("points")}
           type={"text"}
           value={addPoints}
           onChange={setAddPoints}
@@ -428,13 +653,13 @@ const Managers = () => {
       </Popup>
       {/* popup recover points*/}
       <Popup
-        title={"Recover points"}
+        title={t("manager_label_deduct_reward_point")}
         openPopup={openRecoverPoints}
         setOpenPopup={setOpenRecoverPoints}
         onSubmit={handleRecoverPoints}
       >
         <InputItem
-          label={"points"}
+          label={t("points")}
           type={"text"}
           value={recoverPoints}
           onChange={setRecoverPoints}
