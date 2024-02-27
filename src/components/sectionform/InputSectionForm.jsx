@@ -7,6 +7,8 @@ const InputSectionForm = ({
   classes,
   id,
   required = false,
+  min = null,
+  max = null,
 }) => {
   return (
     <div className={`input_item ${classes}`}>

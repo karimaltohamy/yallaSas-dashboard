@@ -879,55 +879,84 @@ export const columnsSubscribersInvoices = [
 
 export const columnsReportsActivations = [
   {
-    field: "history",
-    headerName: t("History"),
+    field: "created_at",
+    headerName: t("global_date"),
   },
   {
-    field: "loginName",
-    headerName: t("Login name"),
+    field: "user_details.username",
+    headerName: t("global_username"),
+    valueGetter: (params) => {
+      if (params.row.user_details) {
+        return params.row.user_details.username;
+      }
+    },
   },
   {
-    field: "firstName",
-    headerName: t("First name"),
+    field: "user_details.firstname",
+    headerName: t("global_firstname"),
+    valueGetter: (params) => {
+      if (params.row.user_details) {
+        return params.row.user_details.firstname;
+      }
+    },
   },
   {
-    field: "secondName",
-    headerName: t("Second name"),
+    field: "user_details.lastname",
+    headerName: t("global_lastname"),
+    valueGetter: (params) => {
+      if (params.row.user_details) {
+        return params.row.user_details.lastname;
+      }
+    },
   },
   {
-    field: "manager",
-    headerName: t("Manager"),
+    field: "manager_details.username",
+    headerName: t("global_manager"),
+    valueGetter: (params) => {
+      if (params.row.manager_details) {
+        return params.row.manager_details.username;
+      }
+    },
   },
   {
-    field: "service",
-    headerName: t("Service"),
+    field: "profile_details.name",
+    headerName: t("global_profile"),
     width: 80,
+    valueGetter: (params) => {
+      if (params.row.profile_details) {
+        return params.row.profile_details.name;
+      }
+    },
   },
   {
     field: "price",
-    headerName: t("Price"),
+    headerName: t("global_price"),
   },
   {
-    field: "previousEndDate",
-    headerName: t("Previous end date"),
+    field: "user_price",
+    headerName: t("user_activate_end_user_price"),
     width: 160,
   },
   {
-    field: "laterExpiryDate",
-    headerName: t("Later expiry date"),
+    field: "old_expiration",
+    headerName: t("report_activations_old_expiration"),
     width: 160,
   },
   {
-    field: "activationMethod",
-    headerName: t("Activation method"),
+    field: "new_expiration",
+    headerName: t("report_activations_new_expiration"),
   },
   {
-    field: "numberActivations",
-    headerName: t("Number of activations"),
+    field: "activation_method",
+    headerName: t("user_activate_method"),
   },
   {
-    field: "status",
-    headerName: t("Status"),
+    field: "user_activations_count",
+    headerName: t("report_activations_count"),
+  },
+  {
+    field: "refunded",
+    headerName: t("global_status"),
   },
 ];
 

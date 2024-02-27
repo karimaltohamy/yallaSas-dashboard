@@ -1,12 +1,16 @@
+@import "../../sass/variables.scss";
+
 // start issuing_invoice_section
 .issuing_invoice {
   margin: 0 10px;
   margin-top: 20px;
   background-color: var(--bg-section);
   border-radius: 5px;
+  min-height: 70vh;
 
   .search_client {
     margin-bottom: 30px;
+    position: relative;
 
     input {
       width: 100%;
@@ -15,6 +19,26 @@
       background-color: transparent;
       border-radius: 3px;
       max-width: 200px;
+    }
+
+    .result {
+      position: absolute;
+      top: 35px;
+      left: 0;
+      padding: 8px;
+      border-radius: 6px;
+      box-shadow: var(--box-shadow);
+      height: 200px;
+      max-height: 200px;
+      width: 200px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background-color: var(--bg-section);
+
+      .item {
+        cursor: pointer;
+        padding: 2px;
+      }
     }
   }
 
@@ -46,7 +70,115 @@
         display: flex;
         align-items: center;
         gap: 15px;
+
+        .btn_add {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          background-color: black;
+          border-radius: 5px;
+          color: white;
+          padding: 5px 10px;
+          font-size: 14px;
+        }
       }
+    }
+
+    .table {
+      padding: 0 0 40px;
+      border-bottom: 1px solid var(--border-color);
+      table {
+        width: 100%;
+
+        thead {
+          th {
+            padding: 5px;
+          }
+        }
+
+        tbody {
+          td {
+            padding: 6px;
+
+            .actions {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+
+              .btn_check,
+              .btn_trash {
+                background-color: black;
+                color: white;
+                border-radius: 5px;
+                padding: 3px 8px;
+                font-size: 13px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .form_invoice {
+      .input_item {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+
+        &:not(:last-child) {
+          margin-bottom: 15px;
+        }
+
+        &.remove {
+          display: none;
+        }
+
+        &.disabled {
+          input {
+            background-color: rgb(227, 227, 227);
+            border: none;
+          }
+        }
+
+        label {
+          font-weight: 600;
+          display: block;
+          font-size: 17px;
+          flex: 1;
+          display: flex;
+          align-items: center;
+          gap: 2px;
+
+          .star {
+            font-size: 12px;
+            color: red;
+          }
+        }
+
+        input,
+        select {
+          flex: 2;
+          width: 100%;
+          padding: 5px;
+          border: 1px solid var(--border-color);
+          border-radius: 3px;
+          outline: none;
+          background-color: transparent;
+
+          &:focus {
+            border: 1px solid $primary-color;
+          }
+        }
+
+        select {
+          padding: 2px;
+        }
+      }
+    }
+
+    .btns_add {
+      padding-top: 30px;
+      border-top: 1px solid var(--border-color);
     }
   }
 }
