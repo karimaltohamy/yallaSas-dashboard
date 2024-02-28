@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./reportsActivationsStatistics.scss";
 import ChartLine from "../../../components/charts/ChartLine";
 import { t } from "i18next";
-import { encryptedData } from "../../../utils/utilsFunctions";
+import { encryptedData, getRandomColor } from "../../../utils/utilsFunctions";
 import apiAxios from "../../../utils/apiAxios";
 import Loader from "../../../components/loader/Loader";
 
@@ -11,6 +11,7 @@ const ReportsActivationsStatistics = () => {
   const [activationsStatisticsData, setActivationsStatisticsData] = useState(
     []
   );
+  const [profiles, setProfiles] = useState([]);
   const [years, setYears] = useState([]);
   const [year, setYear] = useState(date.getFullYear());
   const [month, setMonth] = useState(date.getMonth());
@@ -28,12 +29,13 @@ const ReportsActivationsStatistics = () => {
           type: typeStatistics,
           month: month + 1,
           year,
-          manager_id: 2,
+          manager_id: 1,
           sub_managers: subManagers,
           activation_method: activationMethod,
         }),
       });
       setActivationsStatisticsData(data.data);
+      setProfiles(data.profiles);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -96,55 +98,19 @@ const ReportsActivationsStatistics = () => {
 
   const data = {
     labels,
-    datasets: [
-      {
-        label: "default-2Mbit-1Month",
-        data: labels.map(
-          (_, i) =>
-            activationsStatisticsData?.total_real &&
-            activationsStatisticsData?.total_real[i]
-        ),
-        borderColor: "#f7994c",
-        backgroundColor: "#f7994c",
-      },
-      {
-        label: "Plus",
-        data: labels.map(
-          (_, i) =>
-            activationsStatisticsData?.total &&
-            activationsStatisticsData?.total[i]
-        ),
-        borderColor: "#90ED7D",
-        backgroundColor: "#90ED7D",
-      },
-      {
-        label: "Slow",
-        data: labels.map(
-          (_, i) =>
-            activationsStatisticsData?.tx && activationsStatisticsData?.tx[i]
-        ),
-        borderColor: "#434348",
-        backgroundColor: "#434348",
-      },
-      {
-        label: "Standard",
-        data: labels.map(
-          (_, i) =>
-            activationsStatisticsData?.rx && activationsStatisticsData?.rx[i]
-        ),
-        borderColor: "#7CB5EC",
-        backgroundColor: "#7CB5EC",
-      },
-      {
-        label: "Total",
-        data: labels.map(
-          (_, i) =>
-            activationsStatisticsData?.rx && activationsStatisticsData?.rx[i]
-        ),
-        borderColor: "#7CB5EC",
-        backgroundColor: "#7CB5EC",
-      },
-    ],
+    datasets:
+      profiles.length > 0
+        ? profiles?.map((item) => {
+            return {
+              label: item.name,
+              data: activationsStatisticsData?.map((ele, i) =>
+                item.id == ele.profile_id ? ele?.total : 0
+              ),
+              borderColor: getRandomColor(),
+              backgroundColor: getRandomColor(),
+            };
+          })
+        : [],
   };
 
   function getDaysInMonth(passMonth, passYear) {
@@ -199,7 +165,7 @@ const ReportsActivationsStatistics = () => {
             {t("Monthly")}
           </button>
         </div>
-        <form action="">
+        <form>
           {typeStatistics == "daily" && (
             <div className="input">
               <select

@@ -1,0 +1,25 @@
+.report_online_section {
+  .form_states {
+    form {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      .input {
+        input,
+        select {
+          padding: 5px 10px;
+          border-radius: 5px;
+          max-width: 250px;
+          width: 100%;
+          background-color: var(--bg-section);
+          box-shadow: var(--box-shadow);
+        }
+
+        select {
+          padding: 1px 10px;
+        }
+      }
+    }
+  }
+}

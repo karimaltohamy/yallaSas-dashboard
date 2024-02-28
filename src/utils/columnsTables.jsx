@@ -962,304 +962,377 @@ export const columnsReportsActivations = [
 
 export const columnsReportCardsTransfer = [
   {
-    field: "date",
-    headerName: t("Date"),
+    field: "created_at",
+    headerName: t("global_date"),
   },
   {
-    field: "oldOwner",
-    headerName: t("Old Owner"),
+    field: "old_owner_username",
+    headerName: t("cards_log_old_owner"),
   },
   {
-    field: "number",
-    headerName: t("Number"),
+    field: "new_owner_username",
+    headerName: t("cards_log_new_owner"),
   },
   {
-    field: "unitValue",
-    headerName: t("Unit Value"),
+    field: "qty",
+    headerName: t("global_qty"),
   },
   {
-    field: "total",
-    headerName: t("Total"),
+    field: "unit_value",
+    headerName: t("cards_log_unit_value"),
   },
   {
-    field: "type",
-    headerName: t("Type"),
+    field: "total_value",
+    headerName: t("cards_log_total_value"),
   },
   {
-    field: "rangeStart",
-    headerName: t("Range Start"),
+    field: "card_type",
+    headerName: t("global_type"),
   },
   {
-    field: "rangeEnd",
-    headerName: t("Range End"),
+    field: "range_start",
+    headerName: t("cards_log_range_start"),
   },
   {
-    field: "manager",
-    headerName: t("Manager"),
+    field: "range_end",
+    headerName: t("cards_log_range_end"),
+  },
+  {
+    field: "username",
+    headerName: t("global_manager"),
   },
 ];
 
 export const columnsReportDebtsJournal = [
   {
-    field: "date",
-    headerName: t("Date"),
+    field: "created_at",
+    headerName: t("global_date"),
   },
   {
-    field: "debtor",
-    headerName: t("Debtor"),
+    field: "cr",
+    headerName: t("report_journal_cr"),
   },
   {
-    field: "creditor",
-    headerName: t("Creditor"),
+    field: "dr",
+    headerName: t("report_journal_dr"),
   },
   {
     field: "amount",
-    headerName: t("Amount"),
+    headerName: t("report_journal_amount"),
   },
   {
     field: "balance",
-    headerName: t("Balance"),
+    headerName: t("report_journal_balance"),
   },
   {
-    field: "notices",
-    headerName: t("Notices"),
+    field: "comment",
+    headerName: t("user_depodrawal_form_comment"),
   },
 ];
 
 export const columnsReportDaraExportJobs = [
   {
-    field: "date",
-    headerName: t("Date"),
+    field: "created_at",
+    headerName: t("global_date"),
+    flex: 1,
   },
   {
     field: "filename",
     headerName: t("Filename"),
+    flex: 1,
   },
   {
-    field: "manager",
-    headerName: t("Manager"),
+    field: "manager_details.username",
+    headerName: t("global_manager"),
+    flex: 1,
+    valueGetter: (params) => {
+      if (params.row.manager_details) {
+        return params.row.manager_details.username;
+      }
+    },
   },
   {
     field: "module",
     headerName: t("Module"),
+    flex: 1,
   },
   {
     field: "status",
-    headerName: t("Status"),
+    headerName: t("global_status"),
+    flex: 1,
   },
   {
-    field: "completedAt",
+    field: "completed_at",
     headerName: t("Completed At"),
+    flex: 1,
   },
   {
-    field: "size",
-    headerName: t("Size"),
+    field: "file_size",
+    headerName: t("global_size"),
+    flex: 1,
   },
 ];
 
 export const columnsReportInvoiceManagers = [
   {
-    field: "invoiceNumber",
-    headerName: t("Invoice number"),
+    field: "invoice_number",
+    headerName: t("user_invoice_table_number"),
   },
   {
-    field: "history",
-    headerName: t("History"),
+    field: "created_at",
+    headerName: t("user_invoice_table_date"),
   },
   {
     field: "type",
-    headerName: t("Type"),
+    headerName: t("user_invoice_table_type"),
   },
   {
-    field: "manager",
-    headerName: t("Manager"),
+    field: "owner_details.username",
+    headerName: t("global_manager"),
+    valueGetter: (params) => {
+      if (params.row.owner_details) {
+        return params.row.owner_details.username;
+      }
+    },
   },
   {
     field: "amount",
-    headerName: t("Amount"),
+    headerName: t("user_invoice_table_amount"),
   },
   {
-    field: "details",
-    headerName: t("Details"),
+    field: "description",
+    headerName: t("global_description"),
   },
   {
-    field: "publishedBy",
-    headerName: t("Published by"),
+    field: "issuer_details.username",
+    headerName: t("manager_invoice_table_created_by"),
+    valueGetter: (params) => {
+      if (params.row.issuer_details) {
+        return params.row.issuer_details.username;
+      }
+    },
   },
   {
-    field: "paymentMethod",
-    headerName: t("Payment method"),
+    field: "payment_method",
+    headerName: t("manager_invoice_table_method"),
   },
   {
-    field: "notes",
-    headerName: t("Notes"),
+    field: "comments",
+    headerName: t("global_comment"),
   },
   {
     field: "paid",
-    headerName: t("Paid"),
+    headerName: t("manager_invoice_table_paid"),
   },
 ];
 
 export const columnsReportJournalManagers = [
   {
-    field: "history",
-    headerName: t("History"),
+    field: "created_at",
+    headerName: t("global_date"),
+    flex: 1,
   },
   {
-    field: "debit",
-    headerName: t("Debit"),
+    field: "cr",
+    headerName: t("report_journal_cr"),
+    flex: 1,
   },
   {
-    field: "credit",
-    headerName: t("Credit"),
+    field: "dr",
+    headerName: t("report_journal_dr"),
+    flex: 1,
   },
   {
     field: "amount",
-    headerName: t("Amount"),
+    headerName: t("report_journal_amount"),
+    flex: 1,
   },
   {
     field: "balance",
-    headerName: t("Balance"),
+    headerName: t("report_journal_balance"),
+    flex: 1,
   },
   {
-    field: "process",
-    headerName: t("Process"),
+    field: "operation",
+    headerName: t("user_journal_table_operation"),
+    flex: 1,
   },
   {
-    field: "details",
-    headerName: t("Details"),
+    field: "description",
+    headerName: t("user_journal_table_description"),
+    flex: 1,
   },
   {
-    field: "notes",
-    headerName: t("Notes"),
+    field: "comment",
+    headerName: t("global_comment"),
+    flex: 1,
   },
 ];
 
 export const columnsReportMonetTransfer = [
   {
-    field: "history",
-    headerName: t("History"),
+    field: "created_at",
+    headerName: t("global_date"),
+    flex: 1,
   },
   {
-    field: "process",
-    headerName: t("Process"),
+    field: "operation",
+    headerName: t("user_journal_table_operation"),
+    flex: 1,
   },
   {
-    field: "credit",
-    headerName: t("Credit"),
+    field: "cr_manager",
+    headerName: t("user_journal_table_cr"),
+    flex: 1,
   },
   {
-    field: "debit",
-    headerName: t("Debit"),
+    field: "dr_manager",
+    headerName: t("user_journal_table_dr"),
+    flex: 1,
   },
   {
     field: "amount",
-    headerName: t("Amount"),
+    headerName: t("user_journal_table_amount"),
+    flex: 1,
   },
   {
-    field: "notes",
-    headerName: t("Notes"),
+    field: "comment",
+    headerName: t("global_comment"),
+    flex: 1,
   },
 ];
 
 export const columnsPaymentGatewayTransactions = [
   {
-    field: "date",
-    headerName: t("Date"),
+    field: "created_at",
+    headerName: t("global_date"),
+    flex: 1,
   },
   {
-    field: "gateway",
-    headerName: t("Gateway"),
+    field: "gateway_name",
+    headerName: t("payment_gateways_transactions_table_gateway"),
+    flex: 1,
   },
   {
-    field: "manager",
-    headerName: t("Manager"),
+    field: "manager_name",
+    headerName: t("payment_gateways_transactions_table_manager"),
+    flex: 1,
   },
   {
-    field: "user",
-    headerName: t("User"),
+    field: "user_name",
+    headerName: t("payment_gateways_transactions_table_user"),
+    flex: 1,
   },
   {
     field: "amount",
-    headerName: t("Amount"),
+    headerName: t("payment_gateways_transactions_table_amount"),
+    flex: 1,
   },
   {
     field: "currency",
-    headerName: t("Currency"),
+    headerName: t("payment_gateways_transactions_table_currency"),
+    flex: 1,
   },
   {
     field: "status",
-    headerName: t("Status"),
+    headerName: t("payment_gateways_transactions_table_status"),
+    flex: 1,
   },
 ];
 
 export const columnsReportReceiptManagers = [
   {
-    field: "dateReceipt",
-    headerName: t("Date of receipt"),
+    field: "receipt_number",
+    headerName: t("user_receipt_table_no"),
+    flex: 1,
   },
   {
-    field: "history",
-    headerName: t("History"),
+    field: "created_at",
+    headerName: t("user_receipt_table_date"),
+    flex: 1,
   },
   {
-    field: "loginName",
-    headerName: t("Login name"),
+    field: "manager_details.username",
+    headerName: t("global_username"),
+    flex: 1,
+    valueGetter: (params) => {
+      if (params.row.manager_details) {
+        return params.row.manager_details.username;
+      }
+    },
   },
   {
     field: "type",
-    headerName: t("Type"),
+    headerName: t("user_receipt_table_type"),
+    flex: 1,
   },
   {
     field: "amount",
-    headerName: t("Amount"),
+    headerName: t("user_receipt_table_amount"),
+    flex: 1,
   },
   {
-    field: "details",
-    headerName: t("Details"),
+    field: "description",
+    headerName: t("user_receipt_table_description"),
+    flex: 1,
   },
   {
-    field: "publishedBy",
-    headerName: t("Published by"),
+    field: "created_by",
+    headerName: t("user_receipt_table_created_by"),
+    flex: 1,
   },
 ];
 
 export const columnsReportSessions = [
   {
-    field: "loginName",
-    headerName: t("Login name"),
+    field: "username",
+    headerName: t("global_username"),
   },
   {
-    field: "startTime",
-    headerName: t("Start Time"),
+    field: "acctstarttime",
+    headerName: t("user_session_table_started"),
   },
   {
-    field: "endTime",
-    headerName: t("End time"),
+    field: "acctstoptime",
+    headerName: t("user_session_table_ended"),
   },
   {
-    field: "ip",
-    headerName: t("IP"),
+    field: "framedipaddress",
+    headerName: t("user_session_table_ip"),
   },
   {
-    field: "mac",
-    headerName: t("Mac"),
+    field: "nasipaddress",
+    headerName: t("menu_nas"),
   },
   {
-    field: "lift",
-    headerName: t("Lift"),
+    field: "callingstationid",
+    headerName: t("user_session_table_mac"),
   },
   {
-    field: "download",
-    headerName: t("Download"),
+    field: "acctinputoctets",
+    headerName: t("user_session_table_upload"),
+    valueGetter: (params) => {
+      if (params.row["acctinputoctets"]) {
+        return convertFromBytes(params.row["acctinputoctets"]);
+      }
+    },
   },
   {
-    field: "contactPoint",
-    headerName: t("Contact Point"),
+    field: "acctoutputoctets",
+    headerName: t("user_session_table_download"),
+    valueGetter: (params) => {
+      if (params.row["acctoutputoctets"]) {
+        return convertFromBytes(params.row["acctoutputoctets"]);
+      }
+    },
   },
   {
-    field: "reasonTermination",
-    headerName: t("Reason for termination"),
+    field: "calledstationid",
+    headerName: t("user_session_table_service"),
+  },
+  {
+    field: "acctterminatecause",
+    headerName: t("user_session_table_termination_cause"),
     width: 170,
   },
 ];
@@ -1268,22 +1341,27 @@ export const columnsReportSuspicious = [
   {
     field: "username",
     headerName: t("Username"),
+    flex: 1,
   },
   {
     field: "expiration",
     headerName: t("Expiration"),
+    flex: 1,
   },
   {
     field: "name",
     headerName: t("Name"),
+    flex: 1,
   },
   {
     field: "currentSessions",
     headerName: t("Current Sessions"),
+    flex: 1,
   },
   {
     field: "flag",
     headerName: t("Flag"),
+    flex: 1,
   },
 ];
 

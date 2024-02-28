@@ -1,9 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import "./reportsCardUsage.scss";
 import ChartLine from "../../../components/charts/ChartLine";
 import { t } from "i18next";
+import apiAxios from "../../../utils/apiAxios";
 
 const ReportsCardsUsage = () => {
+  const [cardsUsageData, setCardsUsageData] = useState([]);
+
+  const getCardsUsageData = async () => {
+    try {
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+        display: true,
+      },
+      title: {
+        display: false,
+        text: "Cards Usage By Value",
+      },
+    },
+    scales: {
+      x: {
+        offset: true, // Add space data to the left
+      },
+    },
+  };
+
+  const labels = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+  ];
+
+  const data = {
+    labels,
+    datasets: [],
+  };
+
   return (
     <div className="report_cards_usage_section">
       <div className="form_report_cards">
@@ -31,7 +80,7 @@ const ReportsCardsUsage = () => {
       <div className="content_report_cards">
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div className="w-full h-[280px] md:h-[400px]">
-            <ChartLine />
+            <ChartLine labels={labels} data={data} options={options} />
           </div>
           <div className="">
             <div className="details">

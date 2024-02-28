@@ -1,10 +1,111 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ChartLine from "../../../components/charts/ChartLine";
 import Popup from "../../../components/popup/Popup";
 import InputItem from "../../../components/popup/inputItem/InputItem";
 import { t } from "i18next";
+import apiAxios from "../../../utils/apiAxios";
+import { encryptedData } from "../../../utils/utilsFunctions";
+import Loader from "../../../components/loader/Loader";
+import "./reportProfits.scss";
 
 const ReportProfits = () => {
+  const date = new Date();
+  const [reportProfitsActivations, setReportProfitsActivations] = useState([]);
+  const [reportProfitsCommissions, setReportProfitsCommissions] = useState([]);
+  const [years, setYears] = useState([]);
+  const [year, setYear] = useState(date.getFullYear());
+  const [managerId, setManagerId] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    // this for loop for set years in select options
+    const yearArray = [];
+    for (let i = date.getFullYear(); i >= 2018; i--) {
+      yearArray.push(i);
+    }
+    setYears(yearArray);
+  }, []);
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+        display: true,
+      },
+      title: {
+        display: false,
+        text: "Profits Chart",
+      },
+    },
+    scales: {
+      x: {
+        offset: true,
+      },
+    },
+  };
+
+  const labels = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+  ];
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Profits from Activations",
+        data:
+          reportProfitsActivations.length > 0
+            ? reportProfitsActivations?.map((ele, i) => ele.total)
+            : [],
+        borderColor: "#ABF76A",
+        backgroundColor: "#ABF76A",
+      },
+      {
+        label: "Profits from Commissions",
+        data:
+          reportProfitsCommissions.length > 0
+            ? reportProfitsCommissions?.map((ele, i) => ele.total)
+            : [],
+        borderColor: "#BAA0F7",
+        backgroundColor: "#BAA0F7",
+      },
+    ],
+  };
+
+  const getReportProfitsData = async () => {
+    setLoading(true);
+    try {
+      const { data } = await apiAxios.post("api/report/profits", {
+        payload: encryptedData({
+          manager_id: 50,
+          year,
+        }),
+      });
+      setReportProfitsActivations(data.data.activations);
+      setReportProfitsCommissions(data.data.commissions);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getReportProfitsData();
+  }, [year, managerId]);
+
   const [openDownloadDetaildReport, setOpenDownloadDetaildReport] =
     useState(false);
   const [dateSelected, setDateSelected] = useState(false);
@@ -14,28 +115,37 @@ const ReportProfits = () => {
   };
 
   return (
-    <div className="activation_states_section">
+    <div className="report_profits_section m-3">
       <div className="form_states">
-        <div>
+        <form>
           <div className="input">
-            <select name="" id="" className="select_month">
+            <select
+              name=""
+              id=""
+              className="select_month"
+              onChange={(e) => setManagerId(e.target.value)}
+            >
               <option value="">جميع المدراء</option>
-              <option value="">admin</option>
-              <option value="">manager_1</option>
-              <option value="">manager_2</option>
-              <option value="">manager_3</option>
-              <option value="">manager_4</option>
+              <option value="1">admin</option>
+              <option value="2">manager_1</option>
+              <option value="3">manager_2</option>
+              <option value="4">manager_3</option>
+              <option value="4">manager_4</option>
             </select>
           </div>
           <div className="input">
-            <select name="" id="">
-              <option value="">2023</option>
-              <option value="">2022</option>
-              <option value="">2021</option>
-              <option value="">2020</option>
-              <option value="">2019</option>
-              <option value="">2018</option>
-              <option value="">2017</option>
+            <select
+              value={year}
+              onChange={(e) => {
+                setYear(e.target.value);
+              }}
+            >
+              {years &&
+                years.map((item, index) => (
+                  <option value={item} key={index}>
+                    {item}
+                  </option>
+                ))}
             </select>
           </div>
           <button
@@ -44,12 +154,19 @@ const ReportProfits = () => {
           >
             {t("Download Detailed Report")}
           </button>
-        </div>
+        </form>
       </div>
 
       <div className="bg_section h-[300px] md:h-[500px] mt-3 md:mt-6">
-        <ChartLine title={"Earnings report"} />
+        <ChartLine
+          title={"Earnings report"}
+          labels={labels}
+          data={data}
+          options={options}
+        />
       </div>
+
+      {loading && <Loader />}
 
       {/* popup Deposit */}
       <Popup

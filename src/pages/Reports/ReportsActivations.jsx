@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import MainTable from "../../components/mainTable/MainTable";
 import { columnsReportsActivations } from "../../utils/columnsTables";
-import { mockDataReportsActivations } from "../../utils/mockData";
 import apiAxios from "../../utils/apiAxios";
 import { encryptedData } from "../../utils/utilsFunctions";
 import Loader from "../../components/loader/Loader";
+import HeadTable from "../../components/headTable/HeadTable";
+import { t } from "i18next";
 
 const ReportsActivations = () => {
   const [reportsActivations, setReportsActivations] = useState([]);
@@ -57,6 +58,13 @@ const ReportsActivations = () => {
   return (
     <div className="main_content_tables">
       <div className="conetnt_table">
+        <HeadTable
+          path={t("report_activations_title")}
+          title={t("report_activations_title")}
+          iconHead={<i className="fa-solid fa-people-group"></i>}
+          actions={false}
+          setSearch={setSearch}
+        />
         <MainTable
           rows={reportsActivations}
           columns={columnsReportsActivations}
@@ -65,6 +73,7 @@ const ReportsActivations = () => {
           perPage={perPage}
           setPerPage={setPerPage}
           lastPage={lastPage}
+          showToolbar={false}
         />
         {loading && <Loader />}
       </div>
