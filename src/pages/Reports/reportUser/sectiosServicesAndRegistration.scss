@@ -21,6 +21,22 @@
         border-radius: 5px;
       }
     }
+
+    .btn_actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      button {
+        padding: 4px 12px;
+        background-color: black;
+        color: white;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+    }
   }
 
   .content {

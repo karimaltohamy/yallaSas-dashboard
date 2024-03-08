@@ -122,6 +122,12 @@
             background-color: var(--bg-main);
           }
         }
+
+        select {
+          option {
+            color: black;
+          }
+        }
       }
 
       .checkbox_item {

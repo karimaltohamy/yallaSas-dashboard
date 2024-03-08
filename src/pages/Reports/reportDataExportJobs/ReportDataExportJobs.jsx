@@ -7,6 +7,7 @@ import apiAxios from "../../../utils/apiAxios";
 import { encryptedData } from "../../../utils/utilsFunctions";
 import Loader from "../../../components/loader/Loader";
 import { toast } from "react-toastify";
+import { saveAs } from "file-saver";
 
 const ReportDataExportJobs = () => {
   const [reportsExportJobs, setReportsExportJobs] = useState([]);
@@ -49,14 +50,18 @@ const ReportDataExportJobs = () => {
 
   const handleDownloadJobs = async () => {
     const exportJob = reportsExportJobs.find(
-      (item) => item.id == selectedRowData[0]
+      (item) => item.id === selectedRowData[0]
     );
     setLoading(true);
     try {
       const { data } = await apiAxios.get(
-        `api/storage/tmp/${exportJob.filename}`
+        `api/storage/tmp/${exportJob.filename}`,
+        { responseType: "blob" }
       );
-      toast.success("Successfull Operation");
+
+      const blob = new Blob([data]);
+      saveAs(blob, exportJob.filename);
+      toast.success("Successful Operation");
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {

@@ -6,7 +6,7 @@ import SwitchSectionForm from "../../../components/sectionform/SwitchSectionForm
 import InputSectionForm from "../../../components/sectionform/InputSectionForm";
 import SelectSectionForm from "../../../components/sectionform/SelectSectionForm";
 
-export const SettingsPaymentGateways = () => {
+const SettingsPaymentGateways = () => {
   const [selectSection, setSelectSection] = useState("bKash");
 
   return (
@@ -305,3 +305,5 @@ export const SettingsPaymentGateways = () => {
     </div>
   );
 };
+
+export default SettingsPaymentGateways;

@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { encryptedData } from "../../../utils/utilsFunctions";
 import Loader from "../../../components/loader/Loader";
+import Select from "react-select";
 
 const AddEditPackage = ({ typePage }) => {
   const { id } = useParams();
@@ -18,6 +19,7 @@ const AddEditPackage = ({ typePage }) => {
   const [allManagers, setAllManagers] = useState([]);
   const [fupProfiles, setFupProfiles] = useState([]);
   const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
   const [generalinformation, setGeneralinformation] = useState({
     name: "",
@@ -27,10 +29,11 @@ const AddEditPackage = ({ typePage }) => {
     downrate: "",
     uprate: "",
     type: "",
-    extension_allowed_profiles: "",
     description: "",
     vat: "",
   });
+  const [extension_allowed_profiles, setExtension_allowed_profiles] =
+    useState("");
   const [serviceParameters, setServiceParameters] = useState({
     limit_expiration: false,
     expiration_amount: "",
@@ -74,6 +77,7 @@ const AddEditPackage = ({ typePage }) => {
     allow_submanagers: "",
     allowed_services: "",
     fixed_expiration_time: false,
+    expiration_time: "",
     debitable: false,
     no_freezone: "",
     max_price: "",
@@ -82,6 +86,7 @@ const AddEditPackage = ({ typePage }) => {
     hotspot_separate_session: false,
     ignore_pool_on_hotspot: false,
   });
+  const [sas_ippool_id, setSas_ippool_id] = useState("");
 
   const [mikrotikSettings, setMikrotikSettings] = useState({
     mikrotik_addresslist: "",
@@ -211,6 +216,9 @@ const AddEditPackage = ({ typePage }) => {
     try {
       const { data } = await apiAxios.get(`api/profile/${id}`);
 
+      setExtension_allowed_profiles(
+        data.data && data.data?.extension_allowed_profiles
+      );
       setGeneralinformation((prev) => {
         return {
           ...prev,
@@ -222,8 +230,6 @@ const AddEditPackage = ({ typePage }) => {
           downrate: data.data && data.data?.downrate,
           uprate: data.data && data.data?.uprate,
           type: data.data && data.data?.type,
-          extension_allowed_profiles:
-            data.data && data.data?.extension_allowed_profiles,
           description: data.data && data.data?.description,
           vat: data.data && data.data?.vat,
         };
@@ -263,7 +269,7 @@ const AddEditPackage = ({ typePage }) => {
           ...prev,
           ippool_mode: data.data && data.data?.ippool_mode,
           pool: data.data && data.data?.pool,
-          sas_ippool_id: data.data && data.data?.sas_ippool_id,
+
           burst_enabled:
             data.data && data.data?.burst_enabled == 1 ? true : false,
           burst_limit_dl: data.data && data.data?.burst_limit_dl,
@@ -299,6 +305,7 @@ const AddEditPackage = ({ typePage }) => {
             data.data && data.data?.ignore_pool_on_hotspot == 1 ? true : false,
         };
       });
+      setSas_ippool_id(data.data && data.data?.sas_ippool_id);
       setMikrotikSettings((prev) => {
         return {
           ...prev,
@@ -413,6 +420,7 @@ const AddEditPackage = ({ typePage }) => {
       ...generalinformation,
       enabled: generalinformation.enabled ? 1 : 0,
       available_ucp: generalinformation.available_ucp ? 1 : 0,
+      extension_allowed_profiles: extension_allowed_profiles,
     };
 
     const serviceParametersTransform = {
@@ -433,6 +441,7 @@ const AddEditPackage = ({ typePage }) => {
         ? 1
         : 0,
       ignore_pool_on_hotspot: advancedFeatures.ignore_pool_on_hotspot ? 1 : 0,
+      sas_ippool_id,
     };
     const activationOptionsTransform = {
       ...activationOptions,
@@ -544,24 +553,31 @@ const AddEditPackage = ({ typePage }) => {
             onChange={handleChangeGeneralInformation}
             id="type"
             options={[
-              { name: "pay", value: "0" },
-              { name: "Post payment", value: "1" },
-              { name: "Fair usage service", value: "2" },
+              { name: "Prepaid", value: "0" },
+              { name: "Postpaid", value: "1" },
+              { name: "Fair Usage Policy (FUP)", value: "2" },
               { name: "Extension", value: "3" },
             ]}
             required={true}
           />
           {generalinformation.type == "3" && (
-            <SelectSectionForm
-              label={t("profile_form_allowed_to_extend")}
-              value={generalinformation.extension_allowed_profiles}
-              onChange={handleChangeGeneralInformation}
-              id="extension_allowed_profiles"
-              options={allProfiles.map((item) => ({
-                name: item.name,
-                value: item.id,
-              }))}
-            />
+            <div className="input_item">
+              <label htmlFor="">{t("profile_form_allowed_to_extend")}</label>
+              <Select
+                isMulti
+                onChange={(newValue) =>
+                  setExtension_allowed_profiles(
+                    newValue.map((item) => item.value)
+                  )
+                }
+                options={
+                  allProfiles &&
+                  allProfiles.map((item) => {
+                    return { value: item.id, label: item.name };
+                  })
+                }
+              />
+            </div>
           )}
           <InputSectionForm
             label={t("profile_form_description")}
@@ -727,16 +743,21 @@ const AddEditPackage = ({ typePage }) => {
             />
           )}
           {advancedFeatures.ippool_mode == "1" && (
-            <SelectSectionForm
-              label={t("SAS4 Pool Name")}
-              value={advancedFeatures.sas_ippool_id}
-              onChange={handleChangeAdvancedFeatures}
-              id="sas_ippool_id"
-              options={selectionIpPool.map((item) => ({
-                name: item.name,
-                value: item.id,
-              }))}
-            />
+            <div className="input_item">
+              <label htmlFor="">{t("SAS4 Pool Name")}</label>
+              <Select
+                isMulti
+                onChange={(newValue) =>
+                  setSas_ippool_id(newValue.map((item) => item.value))
+                }
+                options={
+                  selectionIpPool &&
+                  selectionIpPool.map((item) => {
+                    return { value: item.id, label: item.name };
+                  })
+                }
+              />
+            </div>
           )}
           <SwitchSectionForm
             label={t("profile_form_enable_burst")}
@@ -898,6 +919,15 @@ const AddEditPackage = ({ typePage }) => {
             onChange={handleChangeAdvancedFeatures}
             id="fixed_expiration_time"
           />
+          {advancedFeatures.fixed_expiration_time && (
+            <InputSectionForm
+              label={t("profile_form_expiration_time")}
+              type={"time"}
+              value={advancedFeatures.expiration_time}
+              onChange={handleChangeAdvancedFeatures}
+              id="expiration_time"
+            />
+          )}
           <SwitchSectionForm
             label={t("profile_form_debitable_service")}
             value={advancedFeatures.debitable}
@@ -1002,12 +1032,14 @@ const AddEditPackage = ({ typePage }) => {
               id="monthly_start_day"
             />
           )}
-          <SwitchSectionForm
-            label={t("profile_form_monthly_account")}
-            value={activationOptions.monthly_charge_entire_month}
-            onChange={handleChangeActivationOptions}
-            id="monthly_charge_entire_month"
-          />
+          {activationOptions.monthly && (
+            <SwitchSectionForm
+              label={t("profile_form_monthly_charge_full")}
+              value={activationOptions.monthly_charge_entire_month}
+              onChange={handleChangeActivationOptions}
+              id="monthly_charge_entire_month"
+            />
+          )}
           <SwitchSectionForm
             label={t("profile_form_carry_over")}
             value={activationOptions.carry_over}
@@ -1050,7 +1082,7 @@ const AddEditPackage = ({ typePage }) => {
           />
         </div>
       </SectionForm>
-      <SectionForm title={t("profile_forward_reward_pointss")}>
+      <SectionForm title={t("managers_table_reward_points")}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <InputSectionForm
             label={t("profile_form_awarded_points")}

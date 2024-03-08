@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import apiAxios from "../../utils/apiAxios";
 import CryptoJS from "crypto-js";
 import { secretPass } from "../../utils/data";
+import Loader from "../../components/loader/Loader";
 
 const Home = () => {
   const { t } = useTranslation();
@@ -17,6 +18,7 @@ const Home = () => {
   const [diskUsage, setDiskUsage] = useState("");
   const [memoryUsage, setMemoryUsage] = useState("");
   const [typeOnlineReport, setTypeOnlineReport] = useState("monthly");
+  const [loading, setLoading] = useState(false);
 
   const getSubscribers = async () => {
     try {
@@ -418,6 +420,7 @@ const Home = () => {
           </div>
         </MainBox>
       </div>
+      {loading && <Loader />}
     </div>
   );
 };

@@ -14,7 +14,7 @@ const SelectItem = ({ label, classes, onChange, value, options }) => {
         <option value="">{label}</option>
         {options &&
           options.map((item, i) => (
-            <option value={item.value} key={i}>
+            <option value={item.value ? item.value : item.id} key={i}>
               {item.name}
             </option>
           ))}

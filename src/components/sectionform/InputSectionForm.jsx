@@ -20,6 +20,7 @@ const InputSectionForm = ({
         onChange={(e) => onChange(e)}
         id={id}
         required={required}
+        disabled={classes && classes.includes("disabled")}
       />
     </div>
   );

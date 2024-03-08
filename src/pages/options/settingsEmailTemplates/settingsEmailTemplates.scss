@@ -1,0 +1,64 @@
+.settings_email_templates {
+  margin: 10px;
+
+  .selected_dashboard {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    form {
+      select {
+        width: 100%;
+        padding: 3px;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        min-width: 400px;
+        max-width: 100%;
+        background-color: var(--bg-section);
+        color: var(--text-color);
+
+        option {
+          color: black;
+        }
+      }
+    }
+
+    .utils_form {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      button {
+        i {
+          font-size: 17px;
+        }
+      }
+    }
+  }
+
+  .form_tamplate {
+    padding: 15px;
+
+    .input_item {
+      margin-bottom: 20px;
+
+      input,
+      select {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid var(--border-color);
+        border-radius: 3px;
+        background-color: transparent;
+        color: var(--text-color);
+
+        option {
+          color: black;
+        }
+      }
+
+      .ql-container {
+        height: 400px;
+      }
+    }
+  }
+}

@@ -12,19 +12,11 @@ const ReportProfits = () => {
   const date = new Date();
   const [reportProfitsActivations, setReportProfitsActivations] = useState([]);
   const [reportProfitsCommissions, setReportProfitsCommissions] = useState([]);
+  const [managers, setManagers] = useState([]);
   const [years, setYears] = useState([]);
   const [year, setYear] = useState(date.getFullYear());
   const [managerId, setManagerId] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    // this for loop for set years in select options
-    const yearArray = [];
-    for (let i = date.getFullYear(); i >= 2018; i--) {
-      yearArray.push(i);
-    }
-    setYears(yearArray);
-  }, []);
 
   const options = {
     responsive: true,
@@ -84,12 +76,39 @@ const ReportProfits = () => {
     ],
   };
 
+  const getManagers = async () => {
+    try {
+      const { data } = await apiAxios.post("api/index/manager", {
+        payload: encryptedData({
+          page: 1,
+          count: 10,
+          sortBy: "username",
+          direction: "asc",
+          search: "",
+          columns: [
+            "username",
+            "firstname",
+            "lastname",
+            "balance",
+            "loan_balance",
+            "name",
+            "username",
+            "users_count",
+          ],
+        }),
+      });
+      setManagers(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const getReportProfitsData = async () => {
     setLoading(true);
     try {
       const { data } = await apiAxios.post("api/report/profits", {
         payload: encryptedData({
-          manager_id: 50,
+          manager_id: managerId,
           year,
         }),
       });
@@ -101,6 +120,17 @@ const ReportProfits = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    // this for loop for set years in select options
+    const yearArray = [];
+    for (let i = date.getFullYear(); i >= 2018; i--) {
+      yearArray.push(i);
+    }
+    setYears(yearArray);
+    // get all managers
+    getManagers();
+  }, []);
 
   useEffect(() => {
     getReportProfitsData();
@@ -120,17 +150,16 @@ const ReportProfits = () => {
         <form>
           <div className="input">
             <select
-              name=""
-              id=""
-              className="select_month"
+              value={managerId}
               onChange={(e) => setManagerId(e.target.value)}
             >
-              <option value="">جميع المدراء</option>
-              <option value="1">admin</option>
-              <option value="2">manager_1</option>
-              <option value="3">manager_2</option>
-              <option value="4">manager_3</option>
-              <option value="4">manager_4</option>
+              <option value="">All managers</option>
+              {managers &&
+                managers.map((item, i) => (
+                  <option value={item.id} key={i}>
+                    {item.username}
+                  </option>
+                ))}
             </select>
           </div>
           <div className="input">

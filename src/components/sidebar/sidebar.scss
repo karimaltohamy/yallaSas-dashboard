@@ -29,36 +29,11 @@
 
 // start sidebar
 .sidebar {
-  padding: 30px 15px;
+  padding: 30px 0;
   background-color: $main-color;
   color: white;
-  overflow: auto;
   height: 100vh;
   z-index: 99999;
-
-  &::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background-color: transparent;
-  }
-
-  &::-webkit-scrollbar {
-    width: 7px;
-    background-color: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: $primary-color;
-  }
-
-  &:hover {
-    &:-webkit-scrollbar-thumb {
-      border-radius: 10px;
-      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-      background-color: rgb(225, 225, 225);
-    }
-  }
 
   &.remove_elemnts {
     .header_sidebar {
@@ -110,6 +85,32 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    height: calc(100vh - 157px);
+    overflow-y: auto;
+    padding: 0 10px;
+
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar {
+      width: 7px;
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      background-color: $primary-color;
+      background-color: transparent;
+    }
+
+    &:hover {
+      &::-webkit-scrollbar-thumb {
+        background-color: $primary-color;
+      }
+    }
 
     .mini_list {
       transition: all 0.4s ease;

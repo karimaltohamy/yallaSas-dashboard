@@ -9,6 +9,7 @@ const ReportsCardsUsage = () => {
 
   const getCardsUsageData = async () => {
     try {
+      const { data } = await apiAxios.get();
     } catch (error) {
       console.log(error);
     }

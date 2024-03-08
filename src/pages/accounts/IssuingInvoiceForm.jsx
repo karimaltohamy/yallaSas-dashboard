@@ -6,8 +6,10 @@ import apiAxios from "../../utils/apiAxios";
 import { encryptedData, generateUUID } from "../../utils/utilsFunctions";
 import InputSectionForm from "../../components/sectionform/InputSectionForm";
 import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 
 const IssuingInvoiceForm = () => {
+  const { id } = useParams();
   const [search, setSearch] = useState("");
   const [allProfiles, setAllProfiles] = useState([]);
   const [profile, setProfile] = useState("");
@@ -102,6 +104,20 @@ const IssuingInvoiceForm = () => {
     });
   };
 
+  const getUserInvoice = async () => {
+    setLoading(true);
+    try {
+      const {
+        data: { data },
+      } = await apiAxios.get(`api/userInvoice/${id}`);
+      setProfile(data.user);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // get profile price
   const handleGetProfilePrice = async () => {
     try {
@@ -150,6 +166,10 @@ const IssuingInvoiceForm = () => {
   };
 
   useEffect(() => {
+    id && getUserInvoice();
+  }, [id]);
+
+  useEffect(() => {
     handleGetServices();
     profile && handleGetProfilePrice();
   }, [profile]);
@@ -195,7 +215,13 @@ const IssuingInvoiceForm = () => {
               </div>
               <div className="item">
                 <h4></h4>
-                <span>Miller Pascal.</span>
+                <span className="block">
+                  {profile.firstname && profile.firstname}
+                </span>
+                <span className="block">
+                  {profile.lastname && profile.lastname}
+                </span>
+                <span className="block">{profile.phone && profile.phone}</span>
               </div>
             </div>
             <div className="add_service">

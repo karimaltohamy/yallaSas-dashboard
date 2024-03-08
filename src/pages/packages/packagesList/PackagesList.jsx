@@ -125,12 +125,15 @@ const PackagesList = () => {
           setSearch={setSearch}
         >
           <div className="content">
-            <Link to={"/packages/add/1"} className="item">
+            <Link to={"/packages/add"} className="item">
               <i className="fa-solid fa-plus"></i>
               <span>{t("global_actions_new")}</span>
             </Link>
             <Link
-              to={selectedRowData.length > 0 && "/packages/profile/1/edit"}
+              to={
+                selectedRowData.length > 0 &&
+                `/packages/profile/${selectedRowData}/edit`
+              }
               className="item"
             >
               <i className="fa-regular fa-pen-to-square"></i>

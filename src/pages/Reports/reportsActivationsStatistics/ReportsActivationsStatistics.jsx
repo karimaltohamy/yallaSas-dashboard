@@ -12,6 +12,8 @@ const ReportsActivationsStatistics = () => {
     []
   );
   const [profiles, setProfiles] = useState([]);
+  const [managers, setManagers] = useState([]);
+  const [managerId, setManagerId] = useState(1);
   const [years, setYears] = useState([]);
   const [year, setYear] = useState(date.getFullYear());
   const [month, setMonth] = useState(date.getMonth());
@@ -29,7 +31,7 @@ const ReportsActivationsStatistics = () => {
           type: typeStatistics,
           month: month + 1,
           year,
-          manager_id: 1,
+          manager_id: managerId,
           sub_managers: subManagers,
           activation_method: activationMethod,
         }),
@@ -132,6 +134,33 @@ const ReportsActivationsStatistics = () => {
     setDays(optionsDays);
   }
 
+  const getManagers = async () => {
+    try {
+      const { data } = await apiAxios.post("api/index/manager", {
+        payload: encryptedData({
+          page: 1,
+          count: 10,
+          sortBy: "username",
+          direction: "asc",
+          search: "",
+          columns: [
+            "username",
+            "firstname",
+            "lastname",
+            "balance",
+            "loan_balance",
+            "name",
+            "username",
+            "users_count",
+          ],
+        }),
+      });
+      setManagers(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     // this for loop for set years in select options
     const yearArray = [];
@@ -141,12 +170,14 @@ const ReportsActivationsStatistics = () => {
     setYears(yearArray);
     // generate dates of month
     getDaysInMonth(date.getMonth());
+    // get all managers
+    getManagers();
   }, []);
 
   useEffect(() => {
     // get consumption data
     getActivationsStatisticsData();
-  }, [year, month, typeStatistics, subManagers, activationMethod]);
+  }, [year, month, typeStatistics, subManagers, activationMethod, managerId]);
 
   return (
     <div className="activation_states_section">
@@ -208,12 +239,17 @@ const ReportsActivationsStatistics = () => {
             </select>
           </div>
           <div className="input">
-            <select name="" id="">
+            <select
+              value={managerId}
+              onChange={(e) => setManagerId(e.target.value)}
+            >
               <option value="">All managers</option>
-              <option value="">admin</option>
-              <option value="">manager_1</option>
-              <option value="">manager_2</option>
-              <option value="">manager_3</option>
+              {managers &&
+                managers.map((item, i) => (
+                  <option value={item.id} key={i}>
+                    {item.username}
+                  </option>
+                ))}
             </select>
           </div>
           <div className="input">

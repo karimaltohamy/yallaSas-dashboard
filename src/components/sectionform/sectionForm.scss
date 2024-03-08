@@ -88,6 +88,14 @@
         display: none;
       }
 
+      &.disabled {
+        input {
+          border: none;
+          outline: none;
+          background-color: var(--bg-main);
+        }
+      }
+
       label {
         font-weight: 600;
         display: block;
@@ -120,6 +128,10 @@
 
       select {
         padding: 2px;
+
+        option {
+          color: black !important;
+        }
       }
     }
 
@@ -214,6 +226,11 @@
           color: $primary-color;
         }
       }
+    }
+
+    .css-b62m3t-container {
+      height: 35px !important;
+      flex: 2 !important;
     }
   }
 }

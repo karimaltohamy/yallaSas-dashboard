@@ -1,6 +1,7 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./mainTable.scss";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { Button, Toolbar } from "@mui/material";
 
 const MainTable = ({
   columns,
@@ -19,13 +20,36 @@ const MainTable = ({
     siblingCount,
     5
   );
+  // const [selectedColumns, setSelectedColumns] = useState(() => {
+  //   const savedColumns = localStorage.getItem("selectedColumns");
+  //   return savedColumns ? JSON.parse(savedColumns) : columns.map((col) => col);
+  // });
+
+  // useEffect(() => {
+  //   // Save selected columns to localStorage whenever it changes
+  //   localStorage.setItem("selectedColumns", JSON.stringify(selectedColumns));
+  // }, [selectedColumns]);
+
+  // const handleToggleColumn = (columnName, visibility) => {
+  //   console.log(columnName, visibility);
+  //   setSelectedColumns((prevColumns) => {
+  //     // Find the column object with the provided columnName
+  //     const column = prevColumns.find((col) => col.field === columnName);
+  //     if (column) {
+  //       // Update the visibility of the column based on the provided visibility
+  //       column.hide = !visibility;
+  //     }
+  //     // Return a new array with the modified column object
+  //     return [...prevColumns];
+  //   });
+  // };
 
   // handle select row
   const handleRowSelectionModelChange = (newRowSelectionModel) => {
     setSelectedRowData(newRowSelectionModel);
   };
   return (
-    <div className="container_table">
+    <div className={`container_table`}>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -36,7 +60,7 @@ const MainTable = ({
         onRowSelectionModelChange={handleRowSelectionModelChange}
         noRowsOverlay={<div>No rows found!</div>}
         loading={false}
-        components={showToolbar ? { Toolbar: GridToolbar } : {}}
+        slots={showToolbar ? { toolbar: GridToolbar } : {}}
       />
       <div className="pagination">
         <div className="page_count_component">

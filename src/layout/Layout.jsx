@@ -1,8 +1,10 @@
-import React, { Fragment, Suspense } from "react";
+import React, { Suspense } from "react";
 import Sidebar from "../components/sidebar/Sidebar";
 import Header from "../components/header/Header";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+const BackupSettings = React.lazy(() =>
+  import("../pages/options/backupSettings/BackupSettings")
+);
 const Login = React.lazy(() => import("../pages/login/Login"));
 const Home = React.lazy(() => import("../pages/home/Home"));
 const Subscribers = React.lazy(() =>
@@ -270,7 +272,7 @@ const SettingsNotifications = React.lazy(() =>
 const SettingsAcl = React.lazy(() =>
   import("../pages/options/settingsAcl/SettingsAcl")
 );
-const { SettingsPaymentGateways } = React.lazy(() =>
+const SettingsPaymentGateways = React.lazy(() =>
   import("../pages/options/settingsPaymentGateways/SettingsPaymentGateways")
 );
 const SettingsBilling = React.lazy(() =>
@@ -684,7 +686,7 @@ const Layout = () => {
             }
           />
           <Route
-            path="/packages/add/:id"
+            path="/packages/add"
             element={
               <Suspense fallback={<Loader />}>
                 <AddEditPackage typePage="addPage" />
@@ -799,6 +801,14 @@ const Layout = () => {
           />
           <Route
             path="/issuing-invoice"
+            element={
+              <Suspense fallback={<Loader />}>
+                <IssuingInvoiceForm />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/issuing-invoice/:id"
             element={
               <Suspense fallback={<Loader />}>
                 <IssuingInvoiceForm />
@@ -1127,7 +1137,7 @@ const Layout = () => {
             path="/add-settings-backup"
             element={
               <Suspense fallback={<Loader />}>
-                <BulkChanges />
+                <BackupSettings />
               </Suspense>
             }
           />

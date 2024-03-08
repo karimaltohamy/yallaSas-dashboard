@@ -286,7 +286,6 @@ const Managers = () => {
             await apiAxios.post(`api/manager/bulkDelete`, {
               payload: encryptedData(selectedRowData),
             });
-            await apiAxios.delete(`api/manager/${selectedRowData[0]}`);
           } else {
             await apiAxios.delete(`api/manager/${selectedRowData[0]}`);
           }

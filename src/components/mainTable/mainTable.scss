@@ -47,6 +47,10 @@
     margin-right: auto !important;
   }
 
+  .MuiButtonBase-root[aria-label="Export"] {
+    display: none;
+  }
+
   .pagination {
     display: flex;
     align-items: center;
@@ -94,5 +98,23 @@
     border-radius: 5px;
     display: block;
     margin: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .container_table {
+    .pagination {
+      flex-direction: column;
+      gap: 10px;
+
+      .page_count_component,
+      .per_page_component {
+        .page_item {
+          padding: 1px 0;
+          width: 35px;
+          font-size: 13px;
+        }
+      }
+    }
   }
 }

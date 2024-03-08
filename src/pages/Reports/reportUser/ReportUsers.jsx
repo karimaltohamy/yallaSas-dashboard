@@ -6,17 +6,17 @@ import { t } from "i18next";
 const ReportUsers = () => {
   const itemsNev = [
     {
-      title: t("According to managers"),
+      title: t("report_users_per_manager_title"),
       icon: <i className="fa-regular fa-user"></i>,
       path: "accordingManagers",
     },
     {
-      title: t("According to the service"),
+      title: t("report_users_per_profile_title"),
       icon: <i className="fa-solid fa-bell-concierge"></i>,
       path: "accordingService",
     },
     {
-      title: t("By registration date"),
+      title: t("report_users_registrations_title"),
       icon: <i className="fa-solid fa-sliders"></i>,
       path: "registrationDate",
     },

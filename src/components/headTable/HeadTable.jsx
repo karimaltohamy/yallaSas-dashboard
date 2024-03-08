@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import "./headTable.scss";
 import { useTranslation } from "react-i18next";
+import { Link, useLocation } from "react-router-dom";
 
 const HeadTable = ({
   children,
@@ -15,6 +16,7 @@ const HeadTable = ({
   const processesRef = useRef();
   const lang = localStorage.getItem("lang");
   const { t } = useTranslation();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -79,6 +81,12 @@ const HeadTable = ({
               </div>
             )}
           </div>
+          {pathname != "/report-data-export-jobs" && (
+            <Link to={"/report-data-export-jobs"} className="btn_export">
+              <i class="fa-solid fa-download"></i>
+              {t("menu_tools_export")}
+            </Link>
+          )}
           <div className="input_search">
             <input
               type="text"

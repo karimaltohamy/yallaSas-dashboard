@@ -4,7 +4,7 @@ const FileInput = ({ label, value, onChange, id }) => {
   return (
     <div className="input_file">
       <h6>{label}</h6>
-      <label htmlFor="logo">
+      <label htmlFor={id}>
         <i className="fa-solid fa-image"></i>
       </label>
       <input

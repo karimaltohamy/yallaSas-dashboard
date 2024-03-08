@@ -150,32 +150,35 @@
       }
     }
 
-    .info_details {
+    .information {
       width: 65%;
-      background-color: var(--bg-section);
-      padding: 15px;
-      border-radius: 10px;
-      height: fit-content;
-      border: 1px solid var(--border-color);
 
-      .item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+      .info_details {
+        background-color: var(--bg-section);
+        padding: 15px;
+        border-radius: 10px;
+        height: fit-content;
+        border: 1px solid var(--border-color);
 
-        &:not(:last-child) {
-          margin-bottom: 7px;
-          padding-bottom: 5px;
-          border-bottom: 1px solid var(--border-color);
-        }
+        .item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
 
-        h6 {
-          font-weight: 600;
-          font-size: 18px;
-        }
+          &:not(:last-child) {
+            margin-bottom: 7px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--border-color);
+          }
 
-        span {
-          color: gray;
+          h6 {
+            font-weight: 600;
+            font-size: 18px;
+          }
+
+          span {
+            color: gray;
+          }
         }
       }
     }

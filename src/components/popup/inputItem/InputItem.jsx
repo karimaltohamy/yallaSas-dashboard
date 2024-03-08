@@ -1,6 +1,14 @@
 import React from "react";
 
-const InputItem = ({ label, type, placeholder, value, onChange, classes }) => {
+const InputItem = ({
+  label,
+  type,
+  placeholder,
+  value,
+  onChange,
+  classes,
+  id = null,
+}) => {
   return (
     <div className={`input_item ${classes}`}>
       <label htmlFor=""> {label} </label>
@@ -8,6 +16,7 @@ const InputItem = ({ label, type, placeholder, value, onChange, classes }) => {
         type={type}
         placeholder={placeholder}
         value={value}
+        id={id && id}
         onChange={(e) => onChange(e.target.value)}
       />
     </div>
