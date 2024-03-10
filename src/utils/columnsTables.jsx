@@ -1096,6 +1096,13 @@ export const columnsCards = [
     headerName: t("global_series"),
     minWidth: 160,
     flex: 1,
+    renderCell: (params) => {
+      return (
+        <Link className="text_color" to={`/cards/list/${params.row.series}`}>
+          {params.row.series}
+        </Link>
+      );
+    },
   },
   {
     field: "type",
@@ -1148,6 +1155,65 @@ export const columnsCards = [
   {
     field: "expiration",
     headerName: t("global_expiration"),
+    minWidth: 160,
+    flex: 1,
+  },
+];
+
+export const columnsCardsList = [
+  {
+    field: "id",
+    headerName: t("ID"),
+    minWidth: 160,
+    flex: 1,
+  },
+  {
+    field: "serialnumber",
+    headerName: t("Serial Number"),
+    minWidth: 160,
+    flex: 1,
+  },
+  {
+    field: "pin",
+    headerName: t("PIN"),
+    minWidth: 160,
+    flex: 1,
+  },
+  {
+    field: "username",
+    headerName: t("Username"),
+    minWidth: 160,
+    flex: 1,
+  },
+  {
+    field: "password",
+    headerName: t("Password"),
+    minWidth: 160,
+    flex: 1,
+  },
+  {
+    field: "used_at",
+    headerName: t("Used At"),
+    flex: 1,
+
+    minWidth: 160,
+    flex: 1,
+  },
+  {
+    field: "username",
+    headerName: t("Used By (User)"),
+    flex: 1,
+    valueGetter: (params) => {
+      if (params.row["profile_details"]) {
+        return params.row["profile_details"].name;
+      }
+    },
+    minWidth: 160,
+    flex: 1,
+  },
+  {
+    field: "username",
+    headerName: t("Used By (Manager)"),
     minWidth: 160,
     flex: 1,
   },

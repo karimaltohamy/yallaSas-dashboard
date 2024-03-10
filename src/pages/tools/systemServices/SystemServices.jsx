@@ -1,9 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MainSection from "../../../components/mainSection/MainSection";
 import "./systemServices.scss";
 import { t } from "i18next";
+import apiAxios from "../../../utils/apiAxios";
+import Loader from "../../../components/loader/Loader";
 
 const SystemServices = () => {
+  const [systemServices, setSystemServices] = useState([]);
+  const [tunnelStatus, setTunnelStatus] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const getSystemServices = async () => {
+    setLoading(true);
+    try {
+      const { data } = await apiAxios.get("api/systemService/status");
+      setSystemServices(data.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getTunnelStatus = async () => {
+    setLoading(true);
+    try {
+      const { data } = await apiAxios.get("api/tunnel/status");
+      setTunnelStatus(data.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getSystemServices();
+    getTunnelStatus();
+  }, []);
+
   return (
     <div className="m-[10px]">
       <MainSection
@@ -273,6 +308,7 @@ const SystemServices = () => {
           </table>
         </div>
       </MainSection>
+      {loading && <Loader />}
     </div>
   );
 };

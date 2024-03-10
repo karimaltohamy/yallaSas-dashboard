@@ -55,7 +55,7 @@ const SettingsBilling = () => {
   const handleSaveSettings = async () => {
     setLoading(true);
     try {
-      await apiAxios.post("api/settings/billing_", {
+      await apiAxios.post("api/settings/billing", {
         payload: encryptedData({
           billing_auto_generate_invoices:
             generalSettings.billing_auto_generate_invoices ? 1 : 0,

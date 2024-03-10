@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import Sidebar from "../components/sidebar/Sidebar";
 import Header from "../components/header/Header";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+const CardsList = React.lazy(() => import("../pages/cards/CardsList"));
 const BackupSettings = React.lazy(() =>
   import("../pages/options/backupSettings/BackupSettings")
 );
@@ -787,6 +788,14 @@ const Layout = () => {
             element={
               <Suspense fallback={<Loader />}>
                 <CardJobsQueue />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/cards/list/:series"
+            element={
+              <Suspense fallback={<Loader />}>
+                <CardsList />
               </Suspense>
             }
           />

@@ -1,8 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
 import "./systemMaintenance.scss";
 import { t } from "i18next";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import apiAxios from "../../../utils/apiAxios";
 
 const SystemMaintenance = () => {
+  const [loading, setLoading] = useState(false);
+
+  const handleLogoutManagers = async () => {
+    Swal.fire({
+      title: "Force Logout All Managers ?",
+      showCancelButton: true,
+      confirmButtonText: "OK",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setLoading(true);
+        try {
+          await apiAxios.get(`api/system/logoutAll`);
+          toast.success("Successful operation");
+        } catch (error) {
+          console.log(error);
+          toast.error(error.response.data.error);
+        } finally {
+          setLoading(false);
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        console.log("User clicked Cancel");
+      }
+    });
+  };
+
+  const handleForcePasswordChange = async () => {
+    Swal.fire({
+      title: "Force Password Change On All Managers ?",
+      showCancelButton: true,
+      confirmButtonText: "OK",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setLoading(true);
+        try {
+          await apiAxios.get(`api/system/forceChangePassword`);
+          toast.success("Successful operation");
+        } catch (error) {
+          console.log(error);
+          toast.error(error.response.data.error);
+        } finally {
+          setLoading(false);
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        console.log("User clicked Cancel");
+      }
+    });
+  };
+
   return (
     <div className="system_maintenance_section">
       <div className="head text-center pt-5 pb-3">
@@ -72,7 +125,10 @@ const SystemMaintenance = () => {
               <div className="accordion-body">
                 {t("Force logout of all logged in managers (including admin).")}
                 <div className="btns">
-                  <button className="btn_system btn_logout_Managers">
+                  <button
+                    className="btn_system btn_logout_Managers"
+                    onClick={handleLogoutManagers}
+                  >
                     {t("Log out Managers")}
                   </button>
                 </div>
@@ -109,7 +165,10 @@ const SystemMaintenance = () => {
                   "Force logout of all logged in managers (including admin) and force them to change password on next login."
                 )}
                 <div className="btns">
-                  <button className="btn_system btn_change_password">
+                  <button
+                    className="btn_system btn_change_password"
+                    onClick={handleForcePasswordChange}
+                  >
                     {t("Force Password Change")}
                   </button>
                 </div>
