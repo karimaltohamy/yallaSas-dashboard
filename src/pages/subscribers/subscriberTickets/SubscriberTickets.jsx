@@ -65,6 +65,7 @@ const SubscriberTickets = () => {
       setOpenSupportTicket(false);
       setClientSupport("");
       setSubjectSuport("");
+      getSubscribersTickets();
     } catch (error) {
       toast.error(error.response.data.error);
       console.log(error);
@@ -177,6 +178,7 @@ const SubscriberTickets = () => {
           perPage={perPage}
           setPerPage={setPerPage}
           lastPage={lastPage}
+          uniqueIdentifier={"subscriberTickets"}
         />
       </div>
 

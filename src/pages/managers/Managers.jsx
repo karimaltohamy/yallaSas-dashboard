@@ -171,6 +171,7 @@ const Managers = () => {
       setOpenDeposit(false);
       setAmountDeposot("");
       setNoticeDeposite("");
+      getManagers();
     } catch (error) {
       toast.error(error.response.data.message);
       console.log(error);
@@ -197,6 +198,7 @@ const Managers = () => {
       setOpenDiscountAmount(false);
       setAmountDiscount("");
       setNoticeDiscount("");
+      getManagers();
     } catch (error) {
       toast.error(error.response.data.message);
       console.log(error);
@@ -224,6 +226,7 @@ const Managers = () => {
       setOpenPayOffDebts(false);
       setAmountPayDebts("");
       setNoticePayDebts("");
+      getManagers();
     } catch (error) {
       toast.error(error.response.data.message);
       console.log(error);
@@ -244,6 +247,7 @@ const Managers = () => {
       toast.success("Successful operation");
       setOpenAddPoints(false);
       setAddPoints("");
+      getManagers();
     } catch (error) {
       toast.error(error.response.data.message);
       console.log(error);
@@ -265,6 +269,7 @@ const Managers = () => {
       toast.success("Successful operation");
       setOpenRecoverPoints(false);
       setRecoverPoints("");
+      getManagers();
     } catch (error) {
       toast.error(error.response.data.message);
       console.log(error);
@@ -292,6 +297,7 @@ const Managers = () => {
           toast.success("Successful operation");
           setLoading(false);
           navigate(-1);
+          getManagers();
         } catch (error) {
           console.log(error);
           toast.error(error.response.data.error);
@@ -429,6 +435,7 @@ const Managers = () => {
           perPage={perPage}
           setPerPage={setPerPage}
           lastPage={lastPage}
+          uniqueIdentifier={"managers"}
         />
       </div>
       {loading && <Loader />}

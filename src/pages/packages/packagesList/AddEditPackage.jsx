@@ -553,10 +553,10 @@ const AddEditPackage = ({ typePage }) => {
             onChange={handleChangeGeneralInformation}
             id="type"
             options={[
-              { name: "Prepaid", value: "0" },
-              { name: "Postpaid", value: "1" },
-              { name: "Fair Usage Policy (FUP)", value: "2" },
-              { name: "Extension", value: "3" },
+              { name: t("profile_form_type_prepaid"), value: "0" },
+              { name: t("profile_form_type_postpaid"), value: "1" },
+              { name: t("profile_form_type_fup"), value: "2" },
+              { name: t("profile_form_type_extension"), value: "3" },
             ]}
             required={true}
           />
@@ -609,9 +609,9 @@ const AddEditPackage = ({ typePage }) => {
             onChange={handleChangeServiceParameters}
             id="expiration_unit"
             options={[
-              { name: "days", value: "0" },
-              { name: "months", value: "1" },
-              { name: "hours", value: "2" },
+              { name: t("expiration_unit_month"), value: "0" },
+              { name: t("expiration_unit_month"), value: "1" },
+              { name: t("expiration_unit_hour"), value: "2" },
             ]}
             valueInput={serviceParameters.expiration_amount}
             onChangeInput={handleChangeServiceParameters}
@@ -631,8 +631,8 @@ const AddEditPackage = ({ typePage }) => {
             onChange={handleChangeServiceParameters}
             id="uptime_unit"
             options={[
-              { name: "minutes", value: "0" },
-              { name: "hours", value: "1" },
+              { name: t("global_minutes"), value: "0" },
+              { name: t("expiration_unit_hour"), value: "1" },
             ]}
             valueInput={serviceParameters.uptime_amount}
             onChangeInput={handleChangeServiceParameters}
@@ -710,8 +710,8 @@ const AddEditPackage = ({ typePage }) => {
             onChange={handleChangeDailySOADeterminants}
             id="daily_uptime_unit"
             options={[
-              { name: "minutes", value: "0" },
-              { name: "hour", value: "1" },
+              { name: t("global_minutes"), value: "0" },
+              { name: t("expiration_unit_hour"), value: "1" },
             ]}
             valueInput={dailySOADeterminants.daily_uptime_limit}
             onChangeInput={handleChangeDailySOADeterminants}
@@ -729,8 +729,8 @@ const AddEditPackage = ({ typePage }) => {
             onChange={handleChangeAdvancedFeatures}
             id="ippool_mode"
             options={[
-              { name: "use NAS IP Pools", value: "0" },
-              { name: "use SAS4 IP Pools", value: "1" },
+              { name: t("profile_form_pool_nas"), value: "0" },
+              { name: t("profile_form_pool_sas"), value: "1" },
             ]}
           />
           {advancedFeatures.ippool_mode == "0" && (
@@ -940,8 +940,8 @@ const AddEditPackage = ({ typePage }) => {
             onChange={handleChangeAdvancedFeatures}
             id="no_freezone"
             options={[
-              { name: "Allowed", value: "0" },
-              { name: "Disable freezone", value: "1" },
+              { name: t("profile_form_freezone_allowed"), value: "0" },
+              { name: t("profile_form_no_freezone"), value: "1" },
             ]}
           />
           <InputSectionForm
@@ -1064,8 +1064,8 @@ const AddEditPackage = ({ typePage }) => {
             onChange={handleChangeActivationOptions}
             id="quota_addition_date"
             options={[
-              { name: "Immediate", value: "0" },
-              { name: "Next Billing Date", value: "1" },
+              { name: t("user_change_option_immediate"), value: "0" },
+              { name: t("profile_form_quota_next"), value: "1" },
             ]}
           />
           <SwitchSectionForm
@@ -1116,9 +1116,9 @@ const AddEditPackage = ({ typePage }) => {
             onChange={handleChangeInitialValues}
             id="initial_expiration_unit"
             options={[
-              { name: "days", value: "0" },
-              { name: "months", value: "1" },
-              { name: "hours", value: "2" },
+              { name: t("expiration_unit_day"), value: "0" },
+              { name: t("expiration_unit_month"), value: "1" },
+              { name: t("expiration_unit_hour"), value: "2" },
             ]}
             valueInput={initialValues.initial_expiration_amount}
             onChangeInput={handleChangeInitialValues}
@@ -1139,8 +1139,8 @@ const AddEditPackage = ({ typePage }) => {
             onChange={handleChangeInitialValues}
             id="initial_uptime_unit"
             options={[
-              { name: "minutes", value: "0" },
-              { name: "hours", value: "1" },
+              { name: t("global_minutes"), value: "0" },
+              { name: t("expiration_unit_hour"), value: "1" },
             ]}
             valueInput={initialValues.initial_uptime_amount}
             onChangeInput={handleChangeInitialValues}

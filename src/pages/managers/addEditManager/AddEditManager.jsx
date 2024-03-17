@@ -484,7 +484,7 @@ const AddEditManager = ({ typePage }) => {
             options={
               nas &&
               nas.map((item) => {
-                return { name: item.name, value: item.id };
+                return { name: item.shortname, value: item.id };
               })
             }
           />

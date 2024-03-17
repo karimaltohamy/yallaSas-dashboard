@@ -5,6 +5,8 @@ import imgAr from "../../images/ar.png";
 import imgProfile from "../../images/user-1.jpg";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import imgLogo from "../../images/logo.png";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [openListLang, setOpenListLang] = useState(false);
@@ -89,7 +91,7 @@ const Header = () => {
           </svg>
         </div>
         <div className="logo_header">
-          <img src="images/logo.png" alt="logo" loading="lazy" />
+          <img src={imgLogo} alt="logo" loading="lazy" />
         </div>
       </div>
       <div className="right">
@@ -165,6 +167,14 @@ const Header = () => {
                 </div>
               </div>
             )}
+            <div className="items">
+              <div className="item">
+                <Link to={"/profile"} className="flex items-center gap-2">
+                  <i class="fa-solid fa-id-badge"></i>
+                  <span>Profile</span>
+                </Link>
+              </div>
+            </div>
             <a href="login.html" className="btn_logout">
               Logout
             </a>

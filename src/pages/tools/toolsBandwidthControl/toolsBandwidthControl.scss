@@ -27,7 +27,7 @@
       padding: 15px;
 
       &:not(:last-child) {
-        border-left: 1px solid var(--border-color);
+        border-color: var(--border-color) !important;
       }
     }
 

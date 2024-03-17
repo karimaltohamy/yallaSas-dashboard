@@ -166,6 +166,7 @@ const Cards = () => {
         `api/series/suspend/${selectedRowData[0]}`
       );
       toast.success("Success Operation");
+      getCards();
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message);
@@ -181,6 +182,7 @@ const Cards = () => {
         `api/series/release/${selectedRowData[0]}`
       );
       toast.success("Success Operation");
+      getCards();
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message);
@@ -202,6 +204,7 @@ const Cards = () => {
       toast.success("Successfull Operation");
       setOpenChangeCard(false);
       setManagerChangeCard("");
+      getCards();
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message);
@@ -227,6 +230,7 @@ const Cards = () => {
       setOpenChangeCardRange(false);
       setManagerChangeCardRange("");
       setCountChangeCardRange("");
+      getCards();
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message);
@@ -361,6 +365,7 @@ const Cards = () => {
           setPerPage={setPerPage}
           lastPage={lastPage}
           rowId={"series"}
+          uniqueIdentifier={"cards"}
         />
         {loading && <Loader />}
       </div>

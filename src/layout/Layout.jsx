@@ -2,6 +2,8 @@ import React, { Suspense } from "react";
 import Sidebar from "../components/sidebar/Sidebar";
 import Header from "../components/header/Header";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import Profile from "../pages/profile/Profile";
+import PopupStyle from "../components/popupStyle/PopupStyle";
 const CardsList = React.lazy(() => import("../pages/cards/CardsList"));
 const BackupSettings = React.lazy(() =>
   import("../pages/options/backupSettings/BackupSettings")
@@ -345,6 +347,14 @@ const Layout = () => {
             element={
               <Suspense fallback={<Loader />}>
                 <Login />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <Suspense fallback={<Loader />}>
+                <Profile />
               </Suspense>
             }
           />
@@ -1314,6 +1324,8 @@ const Layout = () => {
           </Route>
         </Routes>
       </div>
+
+      {location.pathname != "/login" && <PopupStyle />}
     </main>
   );
 };

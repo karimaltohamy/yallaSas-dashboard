@@ -8,6 +8,7 @@ import apiAxios from "../../utils/apiAxios";
 import { encryptedData } from "../../utils/utilsFunctions";
 import Swal from "sweetalert2";
 import Loader from "../../components/loader/Loader";
+import { toast } from "react-toastify";
 
 const Nas = () => {
   const [nas, setNas] = useState([]);
@@ -118,6 +119,7 @@ const Nas = () => {
           perPage={perPage}
           setPerPage={setPerPage}
           lastPage={lastPage}
+          uniqueIdentifier={"nas"}
         />
         {loading && <Loader />}
       </div>

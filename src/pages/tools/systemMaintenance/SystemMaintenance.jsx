@@ -4,9 +4,57 @@ import { t } from "i18next";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import apiAxios from "../../../utils/apiAxios";
+import Loader from "../../../components/loader/Loader";
 
 const SystemMaintenance = () => {
   const [loading, setLoading] = useState(false);
+
+  const handleShutdown = async () => {
+    Swal.fire({
+      title: "Shutdown ?",
+      showCancelButton: true,
+      confirmButtonText: "OK",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setLoading(true);
+        try {
+          await apiAxios.get(`api/system/shutdown`);
+          toast.success("Successful operation");
+        } catch (error) {
+          console.log(error);
+          toast.error(error.response.data.error);
+        } finally {
+          setLoading(false);
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        console.log("User clicked Cancel");
+      }
+    });
+  };
+  const handleReboot = async () => {
+    Swal.fire({
+      title: "Reboot ?",
+      showCancelButton: true,
+      confirmButtonText: "OK",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setLoading(true);
+        try {
+          await apiAxios.get(`api/system/reboot`);
+          toast.success("Successful operation");
+        } catch (error) {
+          console.log(error);
+          toast.error(error.response.data.error);
+        } finally {
+          setLoading(false);
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        console.log("User clicked Cancel");
+      }
+    });
+  };
 
   const handleLogoutManagers = async () => {
     Swal.fire({
@@ -56,6 +104,146 @@ const SystemMaintenance = () => {
     });
   };
 
+  const handleClearSessionsTable = async () => {
+    Swal.fire({
+      title: "Clear Current Sessions",
+      text: "This will clear current sessions data. Use it only when system becomes very slow or not showing online users",
+      showCancelButton: true,
+      confirmButtonText: "OK",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setLoading(true);
+        try {
+          await apiAxios.get(`api/system/clear_sessions`);
+          toast.success("Successful operation");
+        } catch (error) {
+          console.log(error);
+          toast.error(error.response.data.error);
+        } finally {
+          setLoading(false);
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        console.log("User clicked Cancel");
+      }
+    });
+  };
+  const handleCloseOnlineSessions = async () => {
+    Swal.fire({
+      title: "Close Online Sessions ?",
+      showCancelButton: true,
+      confirmButtonText: "OK",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setLoading(true);
+        try {
+          await apiAxios.get(`api/system/close_sessions`);
+          toast.success("Successful operation");
+        } catch (error) {
+          console.log(error);
+          toast.error(error.response.data.error);
+        } finally {
+          setLoading(false);
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        console.log("User clicked Cancel");
+      }
+    });
+  };
+  const handleDeleteExpiredUsers = async () => {
+    Swal.fire({
+      title: "Delete Expired Users ?",
+      showCancelButton: true,
+      confirmButtonText: "OK",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setLoading(true);
+        try {
+          await apiAxios.get(`api/system/deleteExpiredUsers`);
+          toast.success("Successful operation");
+        } catch (error) {
+          console.log(error);
+          toast.error(error.response.data.error);
+        } finally {
+          setLoading(false);
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        console.log("User clicked Cancel");
+      }
+    });
+  };
+  const handleDeleteExpiredCard = async () => {
+    Swal.fire({
+      title: "Delete Expired Card Users ?",
+      showCancelButton: true,
+      confirmButtonText: "OK",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setLoading(true);
+        try {
+          await apiAxios.get(`api/system/deleteExpiredCardUsers`);
+          toast.success("Successful operation");
+        } catch (error) {
+          console.log(error);
+          toast.error(error.response.data.error);
+        } finally {
+          setLoading(false);
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        console.log("User clicked Cancel");
+      }
+    });
+  };
+  const handleClearEmailQueue = async () => {
+    Swal.fire({
+      title: "Clear Email Queue ?",
+      showCancelButton: true,
+      confirmButtonText: "OK",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setLoading(true);
+        try {
+          await apiAxios.get(`api/system/clearEmailQueue`);
+          toast.success("Successful operation");
+        } catch (error) {
+          console.log(error);
+          toast.error(error.response.data.error);
+        } finally {
+          setLoading(false);
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        console.log("User clicked Cancel");
+      }
+    });
+  };
+  const handleClearSmsQueue = async () => {
+    Swal.fire({
+      title: "Clear SMS Queue ?",
+      showCancelButton: true,
+      confirmButtonText: "OK",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setLoading(true);
+        try {
+          await apiAxios.get(`api/system/clearSMSQueue`);
+          toast.success("Successful operation");
+        } catch (error) {
+          console.log(error);
+          toast.error(error.response.data.error);
+        } finally {
+          setLoading(false);
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        console.log("User clicked Cancel");
+      }
+    });
+  };
+
   return (
     <div className="system_maintenance_section">
       <div className="head text-center pt-5 pb-3">
@@ -91,8 +279,18 @@ const SystemMaintenance = () => {
               <div className="accordion-body">
                 {t("Power off or reboot server")}
                 <div className="btns">
-                  <button className="btn_system btn_power">Shutdwon</button>
-                  <button className="btn_system btn_reboot">Reboot</button>
+                  <button
+                    className="btn_system btn_power"
+                    onClick={handleShutdown}
+                  >
+                    Shutdwon
+                  </button>
+                  <button
+                    className="btn_system btn_reboot"
+                    onClick={handleReboot}
+                  >
+                    Reboot
+                  </button>
                 </div>
               </div>
             </div>
@@ -245,7 +443,12 @@ const SystemMaintenance = () => {
                   "This is useful to do from time to time to reduce your database size or to force removal of stale sessions. This operation is totally safe and will NOT reset traffic counters for users. SAS4 uses different table to keep track of users traffic usage."
                 )}
                 <div className="btns">
-                  <button className="btn_system btn_Clear">{t("Clear")}</button>
+                  <button
+                    className="btn_system btn_Clear"
+                    onClick={handleClearSessionsTable}
+                  >
+                    {t("Clear")}
+                  </button>
                 </div>
               </div>
             </div>
@@ -275,7 +478,10 @@ const SystemMaintenance = () => {
                   "Force all online sessions to get closed immediately. This won't affect real online users as their sessions will get opened on next interim-update."
                 )}
                 <div className="btns">
-                  <button className="btn_system btn_close_sessions">
+                  <button
+                    className="btn_system btn_close_sessions"
+                    onClick={handleCloseOnlineSessions}
+                  >
                     {t("Close Sessions")}
                   </button>
                 </div>
@@ -312,7 +518,10 @@ const SystemMaintenance = () => {
                   "This operation is useful to maintain users count bellow your license limit."
                 )}
                 <div className="btns">
-                  <button className="btn_system btn_delete_users">
+                  <button
+                    className="btn_system btn_delete_users"
+                    onClick={handleDeleteExpiredUsers}
+                  >
                     {t("Delete")}
                   </button>
                 </div>
@@ -347,7 +556,10 @@ const SystemMaintenance = () => {
               <div className="accordion-body">
                 {t("This will delete only expired card users.")}
                 <div className="btns">
-                  <button className="btn_system btn_card_user">
+                  <button
+                    className="btn_system btn_card_user"
+                    onClick={handleDeleteExpiredCard}
+                  >
                     {t("Delete")}
                   </button>
                 </div>
@@ -384,7 +596,12 @@ const SystemMaintenance = () => {
                   "This will clear any pending emails in the queue, blocking new emails from getting sent."
                 )}
                 <div className="btns">
-                  <button className="btn_system btn_clear_email">Clear</button>
+                  <button
+                    className="btn_system btn_clear_email"
+                    onClick={handleClearEmailQueue}
+                  >
+                    Clear
+                  </button>
                 </div>
               </div>
             </div>
@@ -417,7 +634,10 @@ const SystemMaintenance = () => {
               <div className="accordion-body">
                 {t("Clear all SMS messages waiting in queue.")}
                 <div className="btns">
-                  <button className="btn_system btn_clear_sms">
+                  <button
+                    className="btn_system btn_clear_sms"
+                    onClick={handleClearSmsQueue}
+                  >
                     {t("Clear")}
                   </button>
                 </div>
@@ -426,6 +646,7 @@ const SystemMaintenance = () => {
           </div>
         </div>
       </div>
+      {loading && <Loader />}
     </div>
   );
 };

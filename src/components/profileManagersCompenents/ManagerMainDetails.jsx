@@ -10,7 +10,7 @@ import Loader from "../loader/Loader";
 import avatar from "../../images/avatar2.png";
 import Swal from "sweetalert2";
 
-const ManagerMainDetails = ({ manager }) => {
+const ManagerMainDetails = ({ manager, getManager }) => {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -41,6 +41,7 @@ const ManagerMainDetails = ({ manager }) => {
       setOpenChangeName(false);
       setNewName("");
       setLoading(false);
+      getManager();
     } catch (error) {
       toast.error(error.response.data.error);
       console.log(error);
@@ -66,6 +67,7 @@ const ManagerMainDetails = ({ manager }) => {
       setOpenDeposit(false);
       setAmountDeposot("");
       setNoticeDeposite("");
+      getManager();
     } catch (error) {
       toast.error(error.response.data.error);
       console.log(error);
@@ -92,6 +94,7 @@ const ManagerMainDetails = ({ manager }) => {
       setOpenDiscountAmount(false);
       setAmountDiscount("");
       setNoticeDiscount("");
+      getManager();
     } catch (error) {
       toast.error(error.response.data.error);
       console.log(error);
@@ -118,6 +121,7 @@ const ManagerMainDetails = ({ manager }) => {
       setOpenPayDebt(false);
       setAmountPayDebts("");
       setNoticePayDebts("");
+      getManager();
     } catch (error) {
       toast.error(error.response.data.error);
       console.log(error);
@@ -138,6 +142,7 @@ const ManagerMainDetails = ({ manager }) => {
           toast.success("Successful operation");
           setLoading(false);
           navigate(-1);
+          getManager();
         } catch (error) {
           console.log(error);
           toast.error(error.response.data.error);

@@ -54,8 +54,15 @@ const ConsumptionSubscriber = () => {
       },
     },
     scales: {
+      y: {
+        ticks: {
+          callback: function (value, index, values) {
+            return value + "G"; // Append " 4G" to each y-axis tick label
+          },
+        },
+      },
       x: {
-        offset: true, // Add space data to the left
+        offset: true,
       },
     },
   };
@@ -114,7 +121,8 @@ const ConsumptionSubscriber = () => {
         label: "Real Traffic",
         data: labels.map(
           (_, i) =>
-            consumptionData?.total_real && consumptionData?.total_real[i]
+            consumptionData?.total_real &&
+            convertFromBytes(consumptionData?.total_real[i])
         ),
         borderColor: "#f7994c",
         backgroundColor: "#f7994c",
@@ -122,7 +130,9 @@ const ConsumptionSubscriber = () => {
       {
         label: "Total",
         data: labels.map(
-          (_, i) => consumptionData?.total && consumptionData?.total[i]
+          (_, i) =>
+            consumptionData?.total &&
+            convertFromBytes(consumptionData?.total[i])
         ),
         borderColor: "#90ED7D",
         backgroundColor: "#90ED7D",
@@ -130,7 +140,8 @@ const ConsumptionSubscriber = () => {
       {
         label: "Upload",
         data: labels.map(
-          (_, i) => consumptionData?.tx && consumptionData?.tx[i]
+          (_, i) =>
+            consumptionData?.tx && convertFromBytes(consumptionData?.tx[i])
         ),
         borderColor: "#434348",
         backgroundColor: "#434348",
@@ -138,7 +149,8 @@ const ConsumptionSubscriber = () => {
       {
         label: "Download",
         data: labels.map(
-          (_, i) => consumptionData?.rx && consumptionData?.rx[i]
+          (_, i) =>
+            consumptionData?.rx && convertFromBytes(consumptionData?.rx[i])
         ),
         borderColor: "#7CB5EC",
         backgroundColor: "#7CB5EC",

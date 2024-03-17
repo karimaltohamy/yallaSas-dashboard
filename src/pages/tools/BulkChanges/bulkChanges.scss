@@ -1,7 +1,35 @@
 .bulk_changes_content {
   padding: 15px;
 
-  form {
+  table {
+    width: 100%;
+    margin-bottom: 30px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+
+    thead {
+      background-color: var(--bg-main);
+
+      th {
+        padding: 5px;
+      }
+    }
+
+    tbody {
+      tr {
+        &:not(:last-child) {
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        td {
+          padding: 5px;
+        }
+      }
+    }
+  }
+
+  .form,
+  .form_apply {
     display: flex;
     align-items: end;
     gap: 20px;
@@ -39,6 +67,10 @@
           color: black;
         }
       }
+
+      select {
+        padding: 2px;
+      }
     }
 
     .btns_actions {
@@ -53,6 +85,24 @@
         color: white;
         border-radius: 4px;
       }
+    }
+
+    .btn_apply {
+      padding: 5px 15px;
+      background-color: black;
+      color: white;
+      border-radius: 4px;
+    }
+  }
+
+  .form_apply {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+
+    > div {
+      flex: 1;
     }
   }
 }

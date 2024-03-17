@@ -55,7 +55,7 @@ const Groups = () => {
           await apiAxios.delete(`api/group/${selectedRowData[0]}`);
           toast.success("Successful operation");
           setLoading(false);
-          getSubscribersTickets();
+          getGroups();
         } catch (error) {
           console.log(error);
           toast.error(error.response.data.error);
@@ -102,6 +102,7 @@ const Groups = () => {
           perPage={perPage}
           setPerPage={setPerPage}
           lastPage={lastPage}
+          uniqueIdentifier={"groups"}
         />
         {loading && <Loader />}
       </div>

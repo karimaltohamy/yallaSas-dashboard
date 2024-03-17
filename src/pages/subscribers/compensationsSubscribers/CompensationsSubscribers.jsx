@@ -18,6 +18,38 @@ const CompensationsSubscribers = () => {
   const [lastPage, setLastePage] = useState(0);
   const [selectedRowData, setSelectedRowData] = useState([]);
 
+  const getCompensationsSubscribers = async () => {
+    setLoading(true);
+    try {
+      const { data } = await apiAxios.post("/api/index/compensation", {
+        payload: encryptedData({
+          page: currentPage,
+          count: perPage,
+          sortBy: "id",
+          direction: "desc",
+          search,
+          columns: [
+            "created_at",
+            "username",
+            "days",
+            "traffic",
+            "hours",
+            "created_by_username",
+            "approved",
+            "approved_by_username",
+          ],
+        }),
+      });
+      setCompensationsSubscribers(data.data);
+      setNumberSubscribers(data.total);
+      setLastePage(data.last_page);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
   const handleDeleteSubsciber = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -31,6 +63,7 @@ const CompensationsSubscribers = () => {
       }
       toast.success("Successful operation");
       setLoading(false);
+      getCompensationsSubscribers();
     } catch (error) {
       toast.error(error.response.data.error);
       console.log(error);
@@ -39,37 +72,7 @@ const CompensationsSubscribers = () => {
   };
 
   useEffect(() => {
-    (async () => {
-      setLoading(true);
-      try {
-        const { data } = await apiAxios.post("/api/index/compensation", {
-          payload: encryptedData({
-            page: currentPage,
-            count: perPage,
-            sortBy: "id",
-            direction: "desc",
-            search,
-            columns: [
-              "created_at",
-              "username",
-              "days",
-              "traffic",
-              "hours",
-              "created_by_username",
-              "approved",
-              "approved_by_username",
-            ],
-          }),
-        });
-        setCompensationsSubscribers(data.data);
-        setNumberSubscribers(data.total);
-        setLastePage(data.last_page);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      }
-    })();
+    getCompensationsSubscribers();
   }, [search, perPage, currentPage]);
 
   return (
@@ -101,6 +104,7 @@ const CompensationsSubscribers = () => {
           perPage={perPage}
           setPerPage={setPerPage}
           lastPage={lastPage}
+          uniqueIdentifier={"compensationsSubscriber"}
         />
         {loading && <Loader />}
       </div>

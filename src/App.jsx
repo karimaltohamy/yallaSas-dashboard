@@ -53,6 +53,22 @@ function App() {
       document.body.classList.remove("dark");
     }
 
+    // change style
+    if (localStorage.getItem("style") && !location.pathname.includes("login")) {
+      let value = localStorage.getItem("style");
+      let sidebar = document.querySelector(".sidebar");
+      sidebar.classList.remove(
+        "dashboard_style_2",
+        "dashboard_style_3",
+        "dashboard_style_4"
+      );
+      if (value == "") {
+        sidebar.classList.add("");
+      } else {
+        sidebar.classList.add(value);
+      }
+    }
+
     return () => {
       window.removeEventListener("resize", handleResize);
     };

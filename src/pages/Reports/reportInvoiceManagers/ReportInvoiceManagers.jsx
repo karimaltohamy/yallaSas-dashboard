@@ -61,6 +61,7 @@ const ReportInvoiceManagers = () => {
         }),
       });
       toast.success("Successfull Operation");
+      getReportsInvoiceManager();
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {
@@ -97,6 +98,7 @@ const ReportInvoiceManagers = () => {
           perPage={perPage}
           setPerPage={setPerPage}
           lastPage={lastPage}
+          uniqueIdentifier={"invoiceManagers"}
         />
         {loading && <Loader />}
       </div>

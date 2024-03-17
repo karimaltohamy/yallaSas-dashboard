@@ -20,50 +20,6 @@ const SubscriberInvoices = () => {
   const [lastPage, setLastePage] = useState(0);
   const [selectedRowData, setSelectedRowData] = useState([]);
 
-  const handleInvoicesPay = async () => {
-    setLoading(true);
-    try {
-      const { data } = await apiAxios.get(
-        `api/user/invoice/pay/${selectedRowData[0]}`
-      );
-      toast.success(data?.message);
-    } catch (error) {
-      toast.error(error.response.data.message);
-      console.log(error.response.data.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-  const handleInvoicesUnPay = async () => {
-    setLoading(true);
-    try {
-      const { data } = await apiAxios.get(
-        `api/user/invoice/unpay/${selectedRowData[0]}`
-      );
-      toast.success(data?.message);
-    } catch (error) {
-      toast.error(error.response.data.message);
-      console.log(error.response.data.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleInvoicesDownload = async () => {
-    setLoading(true);
-    try {
-      const { data } = await apiAxios.get(
-        `api/userInvoice/download/${selectedRowData[0]}`
-      );
-      toast.success(data?.message);
-    } catch (error) {
-      toast.error(error.response.data.message);
-      console.log(error.response.data.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const getSubscriberInvoices = async () => {
     setLoading(true);
     try {
@@ -92,6 +48,53 @@ const SubscriberInvoices = () => {
       setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
+    }
+  };
+
+  const handleInvoicesPay = async () => {
+    setLoading(true);
+    try {
+      const { data } = await apiAxios.get(
+        `api/user/invoice/pay/${selectedRowData[0]}`
+      );
+      toast.success(data?.message);
+      getSubscriberInvoices();
+    } catch (error) {
+      toast.error(error.response.data.message);
+      console.log(error.response.data.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const handleInvoicesUnPay = async () => {
+    setLoading(true);
+    try {
+      const { data } = await apiAxios.get(
+        `api/user/invoice/unpay/${selectedRowData[0]}`
+      );
+      toast.success(data?.message);
+      getSubscriberInvoices();
+    } catch (error) {
+      toast.error(error.response.data.message);
+      console.log(error.response.data.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleInvoicesDownload = async () => {
+    setLoading(true);
+    try {
+      const { data } = await apiAxios.get(
+        `api/userInvoice/download/${selectedRowData[0]}`
+      );
+      toast.success(data?.message);
+      getSubscriberInvoices();
+    } catch (error) {
+      toast.error(error.response.data.message);
+      console.log(error.response.data.message);
+    } finally {
       setLoading(false);
     }
   };
@@ -145,6 +148,7 @@ const SubscriberInvoices = () => {
           perPage={perPage}
           setPerPage={setPerPage}
           lastPage={lastPage}
+          uniqueIdentifier={"subscriberInvoice"}
         />
       </div>
       {loading && <Loader />}

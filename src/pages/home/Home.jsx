@@ -19,6 +19,7 @@ const Home = () => {
   const [memoryUsage, setMemoryUsage] = useState("");
   const [typeOnlineReport, setTypeOnlineReport] = useState("monthly");
   const [loading, setLoading] = useState(false);
+  const homeStyle = localStorage.getItem("home_page_style");
 
   const getSubscribers = async () => {
     try {
@@ -184,80 +185,184 @@ const Home = () => {
 
   return (
     <div className="home_section my-[12px] mx-[10px]">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-[25px] mb-[25px]">
+      <div
+        className={`grid ${
+          homeStyle == "style_1" ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"
+        } gap-[25px] mb-[25px]`}
+      >
         <MainBox title={t("aboard_label_subscribers")}>
-          <div className="items">
+          <div
+            className={`items ${
+              homeStyle == "style_1" ? "style_1" : "style_2"
+            }`}
+          >
             <div className="item">
-              <div className="text">
+              {homeStyle == "style_2" && (
                 <div className="icon">
                   <i className="fa-solid fa-people-group"></i>
                 </div>
+              )}
+              <div className="text">
+                {homeStyle == "style_1" && (
+                  <div className="icon">
+                    <i className="fa-solid fa-people-group"></i>
+                  </div>
+                )}
+                {homeStyle == "style_2" && (
+                  <div className="num">{subscribers.total}</div>
+                )}
                 <h4>{t("manager_overview_total_users")}</h4>
               </div>
-              <div className="num">{subscribers.total}</div>
+              {homeStyle == "style_1" && (
+                <div className="num">{subscribers.total}</div>
+              )}
             </div>
             <div className="item">
-              <div className="text">
+              {homeStyle == "style_2" && (
                 <div className="icon">
                   <i className="fa-regular fa-address-book"></i>
                 </div>
+              )}
+              <div className="text">
+                {homeStyle == "style_1" && (
+                  <div className="icon">
+                    <i className="fa-regular fa-address-book"></i>
+                  </div>
+                )}
+                {homeStyle == "style_2" && (
+                  <div className="num">{subscribers.online}</div>
+                )}
                 <h4>{t("menu_users_online")}</h4>
               </div>
-              <div className="num">{subscribers.online}</div>
+              {homeStyle == "style_1" && (
+                <div className="num">{subscribers.online}</div>
+              )}
             </div>
             <div className="item">
-              <div className="text">
+              {homeStyle == "style_2" && (
                 <div className="icon">
                   <i className="fa-solid fa-people-line"></i>
                 </div>
+              )}
+              <div className="text">
+                {homeStyle == "style_1" && (
+                  <div className="icon">
+                    <i className="fa-solid fa-people-line"></i>
+                  </div>
+                )}
+                {homeStyle == "style_2" && (
+                  <div className="num">{subscribers.expired}</div>
+                )}
                 <h4>{t("manager_overview_expired_users")}</h4>
               </div>
-              <div className="num">{subscribers.expired}</div>
+              {homeStyle == "style_1" && (
+                <div className="num">{subscribers.expired}</div>
+              )}
             </div>
             <div className="item">
-              <div className="text">
+              {homeStyle == "style_2" && (
                 <div className="icon">
                   <i className="fa-solid fa-people-roof"></i>
                 </div>
+              )}
+              <div className="text">
+                {homeStyle == "style_1" && (
+                  <div className="icon">
+                    <i className="fa-solid fa-people-roof"></i>
+                  </div>
+                )}
+                {homeStyle == "style_2" && (
+                  <div className="num">{subscribers.active}</div>
+                )}
                 <h4>{t("manager_overview_active_users")}</h4>
               </div>
-              <div className="num">{subscribers.active}</div>
+              {homeStyle == "style_1" && (
+                <div className="num">{subscribers.active}</div>
+              )}
             </div>
             <div className="item">
-              <div className="text">
+              {homeStyle == "style_2" && (
                 <div className="icon">
                   <i className="fa-solid fa-person-falling"></i>
                 </div>
+              )}
+              <div className="text">
+                {homeStyle == "style_1" && (
+                  <div className="icon">
+                    <i className="fa-solid fa-person-falling"></i>
+                  </div>
+                )}
+                {homeStyle == "style_2" && (
+                  <div className="num">{subscribers.expiring_today}</div>
+                )}
                 <h4>{t("users_status_expiring_today")}</h4>
               </div>
-              <div className="num">{subscribers.expiring_today}</div>
+              {homeStyle == "style_1" && (
+                <div className="num">{subscribers.expiring_today}</div>
+              )}
             </div>
             <div className="item">
-              <div className="text">
+              {homeStyle == "style_2" && (
                 <div className="icon">
                   <i className="fa-solid fa-users-slash"></i>
                 </div>
+              )}
+              <div className="text">
+                {homeStyle == "style_1" && (
+                  <div className="icon">
+                    <i className="fa-solid fa-users-slash"></i>
+                  </div>
+                )}
+                {homeStyle == "style_2" && (
+                  <div className="num">{subscribers.expiring_soon}</div>
+                )}
                 <h4>{t("widget_title_about_expire")}</h4>
               </div>
-              <div className="num">{subscribers.expiring_soon}</div>
+              {homeStyle == "style_1" && (
+                <div className="num">{subscribers.expiring_soon}</div>
+              )}
             </div>
             <div className="item">
-              <div className="text">
+              {homeStyle == "style_2" && (
                 <div className="icon">
                   <i className="fa-solid fa-person-military-pointing"></i>
                 </div>
+              )}
+              <div className="text">
+                {homeStyle == "style_1" && (
+                  <div className="icon">
+                    <i className="fa-solid fa-person-military-pointing"></i>
+                  </div>
+                )}
+                {homeStyle == "style_2" && (
+                  <div className="num">{subscribers.managers}</div>
+                )}
                 <h4>{t("menu_managers")}</h4>
               </div>
-              <div className="num">{subscribers.managers}</div>
+              {homeStyle == "style_1" && (
+                <div className="num">{subscribers.managers}</div>
+              )}
             </div>
             <div className="item">
-              <div className="text">
+              {homeStyle == "style_2" && (
                 <div className="icon">
                   <i className="fa-solid fa-signal"></i>
                 </div>
+              )}
+              <div className="text">
+                {homeStyle == "style_1" && (
+                  <div className="icon">
+                    <i className="fa-solid fa-signal"></i>
+                  </div>
+                )}
+                {homeStyle == "style_2" && (
+                  <div className="num">{subscribers.fup}</div>
+                )}
                 <h4>{t("widget_title_fup_online")}</h4>
               </div>
-              <div className="num">{subscribers.fup}</div>
+              {homeStyle == "style_1" && (
+                <div className="num">{subscribers.fup}</div>
+              )}
             </div>
           </div>
         </MainBox>
@@ -267,129 +372,289 @@ const Home = () => {
           </div>
         </MainBox>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-[30px] mb-[25px]">
+      <div
+        className={`grid ${
+          homeStyle == "style_1" ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"
+        }  gap-[25px] mb-[25px]`}
+      >
         <MainBox title={t("aboard_label_finance")}>
           <div className="items">
             <div className="item">
-              <div className="text">
+              {homeStyle == "style_2" && (
                 <div className="icon">
                   <i className="fa-solid fa-money-check-dollar"></i>
                 </div>
+              )}
+              <div className="text">
+                {homeStyle == "style_1" && (
+                  <div className="icon">
+                    <i className="fa-solid fa-money-check-dollar"></i>
+                  </div>
+                )}
+                {homeStyle == "style_2" && (
+                  <div className="num">{finance.balance}</div>
+                )}
                 <h4>{t("managers_table_balance")}</h4>
               </div>
-              <div className="num">{finance.balance}</div>
+              {homeStyle == "style_1" && (
+                <div className="num">{finance.balance}</div>
+              )}
             </div>
             <div className="item">
-              <div className="text">
+              {homeStyle == "style_2" && (
                 <div className="icon">
                   <i className="fa-solid fa-braille"></i>
                 </div>
+              )}
+              <div className="text">
+                {homeStyle == "style_1" && (
+                  <div className="icon">
+                    <i className="fa-solid fa-braille"></i>
+                  </div>
+                )}
+                {homeStyle == "style_2" && (
+                  <div className="num">{finance.reward_points}</div>
+                )}
                 <h4>{t("managers_table_reward_points")}</h4>
               </div>
-              <div className="num">{finance.reward_points}</div>
+              {homeStyle == "style_1" && (
+                <div className="num">{finance.reward_points}</div>
+              )}
             </div>
             <div className="item">
-              <div className="text">
+              {homeStyle == "style_2" && (
                 <div className="icon">
                   <i className="fa-solid fa-fire"></i>
                 </div>
+              )}
+              <div className="text">
+                {homeStyle == "style_1" && (
+                  <div className="icon">
+                    <i className="fa-solid fa-fire"></i>
+                  </div>
+                )}
+                {homeStyle == "style_2" && (
+                  <div className="num">{finance.activations}</div>
+                )}
                 <h4>{t("aboard_activations_today")}</h4>
               </div>
-              <div className="num">{finance.activations}</div>
+              {homeStyle == "style_1" && (
+                <div className="num">{finance.activations}</div>
+              )}
             </div>
             <div className="item">
-              <div className="text">
+              {homeStyle == "style_2" && (
                 <div className="icon">
                   <i className="fa-solid fa-cash-register"></i>
                 </div>
+              )}
+              <div className="text">
+                {homeStyle == "style_1" && (
+                  <div className="icon">
+                    <i className="fa-solid fa-cash-register"></i>
+                  </div>
+                )}
+                {homeStyle == "style_2" && (
+                  <div className="num">{finance.registrations}</div>
+                )}
                 <h4>{t("aboard_registrations_today")}</h4>
               </div>
-              <div className="num">{finance.registrations}</div>
+              {homeStyle == "style_1" && (
+                <div className="num">{finance.registrations}</div>
+              )}
             </div>
             <div className="item">
-              <div className="text">
+              {homeStyle == "style_2" && (
                 <div className="icon">
                   <i className="fa-solid fa-wallet"></i>
                 </div>
+              )}
+              <div className="text">
+                {homeStyle == "style_1" && (
+                  <div className="icon">
+                    <i className="fa-solid fa-wallet"></i>
+                  </div>
+                )}
+                {homeStyle == "style_2" && (
+                  <div className="num">{finance.outstanding_debts}</div>
+                )}
                 <h4>{t("aboard_outstanding_debts")}</h4>
               </div>
-              <div className="num">{finance.outstanding_debts}</div>
+              {homeStyle == "style_1" && (
+                <div className="num">{finance.outstanding_debts}</div>
+              )}
             </div>
             <div className="item">
-              <div className="text">
+              {homeStyle == "style_2" && (
                 <div className="icon">
                   <i className="fa-solid fa-receipt"></i>
                 </div>
+              )}
+              <div className="text">
+                {homeStyle == "style_1" && (
+                  <div className="icon">
+                    <i className="fa-solid fa-receipt"></i>
+                  </div>
+                )}
+                {homeStyle == "style_2" && (
+                  <div className="num">{finance.outstanding_claims}</div>
+                )}
                 <h4>{t("aboard_outstanding_claims")}</h4>
               </div>
-              <div className="num">{finance.outstanding_claims}</div>
+              {homeStyle == "style_1" && (
+                <div className="num">{finance.outstanding_claims}</div>
+              )}
             </div>
           </div>
         </MainBox>
         <MainBox title={t("aboard_label_system_health")}>
           <div className="items">
             <div className="item">
-              <div className="text">
+              {homeStyle == "style_2" && (
                 <div className="icon">
                   <i className="fa-solid fa-business-time"></i>
                 </div>
+              )}
+              <div className="text">
+                {homeStyle == "style_1" && (
+                  <div className="icon">
+                    <i className="fa-solid fa-business-time"></i>
+                  </div>
+                )}
+                {homeStyle == "style_2" && (
+                  <div className="num">{systemHealth.uptime}</div>
+                )}
                 <h4>{t("users_table_uptime")}</h4>
               </div>
-              <div className="num">{systemHealth.uptime}</div>
+              {homeStyle == "style_1" && (
+                <div className="num">{systemHealth.uptime}</div>
+              )}
             </div>
             <div className="item">
-              <div className="text">
+              {homeStyle == "style_2" && (
                 <div className="icon">
                   <i className="fa-regular fa-hard-drive"></i>
                 </div>
+              )}
+              <div className="text">
+                {homeStyle == "style_1" && (
+                  <div className="icon">
+                    <i className="fa-regular fa-hard-drive"></i>
+                  </div>
+                )}
+                {homeStyle == "style_2" && (
+                  <div className="num">{systemHealth.backup}</div>
+                )}
                 <h4>{t("aboard_backup")}</h4>
               </div>
-              <div className="num">{systemHealth.backup}</div>
+              {homeStyle == "style_1" && (
+                <div className="num">{systemHealth.backup}</div>
+              )}
             </div>
             <div className="item">
-              <div className="text">
+              {homeStyle == "style_2" && (
                 <div className="icon">
                   <i className="fa-solid fa-server"></i>
                 </div>
+              )}
+              <div className="text">
+                {homeStyle == "style_1" && (
+                  <div className="icon">
+                    <i className="fa-solid fa-server"></i>
+                  </div>
+                )}
+                {homeStyle == "style_2" && (
+                  <div className="num">{systemHealth.network}</div>
+                )}
                 <h4>{t("aboard_network_status")}</h4>
               </div>
-              <div className="num">{systemHealth.network}</div>
+              {homeStyle == "style_1" && (
+                <div className="num">{systemHealth.network}</div>
+              )}
             </div>
             <div className="item">
-              <div className="text">
+              {homeStyle == "style_2" && (
                 <div className="icon">
                   <i className="fa-solid fa-database"></i>
                 </div>
+              )}
+              <div className="text">
+                {homeStyle == "style_1" && (
+                  <div className="icon">
+                    <i className="fa-solid fa-database"></i>
+                  </div>
+                )}
+                {homeStyle == "style_2" && (
+                  <div className="num">{systemHealth.db_time}</div>
+                )}
                 <h4>{t("aboard_label_db_time")}</h4>
               </div>
-              <div className="num">{systemHealth.db_time}</div>
+              {homeStyle == "style_1" && (
+                <div className="num">{systemHealth.db_time}</div>
+              )}
             </div>
             <div className="item">
-              <div className="text">
+              {homeStyle == "style_2" && (
                 <div className="icon">
                   <i className="fa-solid fa-chart-area"></i>
                 </div>
+              )}
+              <div className="text">
+                {homeStyle == "style_1" && (
+                  <div className="icon">
+                    <i className="fa-solid fa-chart-area"></i>
+                  </div>
+                )}
+                {homeStyle == "style_2" && (
+                  <div className="num">{systemHealth.timezone}</div>
+                )}
                 <h4>{t("aboard_label_timezone")}</h4>
               </div>
-              <div className="num">{systemHealth.timezone}</div>
+              {homeStyle == "style_1" && (
+                <div className="num">{systemHealth.timezone}</div>
+              )}
             </div>
             <div className="item">
-              <div className="text">
+              {homeStyle == "style_2" && (
                 <div className="icon">
                   <i className="fa-solid fa-chart-area"></i>
                 </div>
+              )}
+              <div className="text">
+                {homeStyle == "style_1" && (
+                  <div className="icon">
+                    <i className="fa-solid fa-chart-area"></i>
+                  </div>
+                )}
+                {homeStyle == "style_2" && (
+                  <div className="num">{systemHealth.version}</div>
+                )}
                 <h4>{t("aboard_label_version")}</h4>
               </div>
-              <div className="num">{systemHealth.version}</div>
+              {homeStyle == "style_1" && (
+                <div className="num">{systemHealth.version}</div>
+              )}
             </div>
             <div className="item">
-              <div className="text">
+              {homeStyle == "style_2" && (
                 <div className="icon">
                   <i className="fa-regular fa-id-card"></i>
                 </div>
+              )}
+              <div className="text">
+                {homeStyle == "style_1" && (
+                  <div className="icon">
+                    <i className="fa-regular fa-id-card"></i>
+                  </div>
+                )}
+                {homeStyle == "style_2" && (
+                  <div className="num">{systemHealth.license}</div>
+                )}
                 <h4>{t("aboard_license_status")}</h4>
               </div>
-              <div className="num">{systemHealth.license}</div>
+              {homeStyle == "style_1" && (
+                <div className="num">{systemHealth.license}</div>
+              )}
             </div>
           </div>
         </MainBox>

@@ -121,6 +121,7 @@ const CardsList = () => {
           perPage={perPage}
           setPerPage={setPerPage}
           lastPage={lastPage}
+          uniqueIdentifier={"cardsList"}
         />
         {loading && <Loader />}
       </div>

@@ -381,6 +381,13 @@ const SettingsAcl = () => {
             managers &&
             managers.map((item) => ({ value: item.id, label: item.username }))
           }
+          styles={{
+            menu: (provided, state) => ({
+              ...provided,
+              height: "100px",
+              overflow: "hidden",
+            }),
+          }}
         />
       </Popup>
 

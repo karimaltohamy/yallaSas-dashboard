@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import InfoDetails from "../../../components/profileComponents/InfoDetails";
 import { useParams } from "react-router-dom";
 import apiAxios from "../../../utils/apiAxios";
 import ManagerMainDetails from "../../../components/profileManagersCompenents/ManagerMainDetails";
@@ -25,7 +24,7 @@ const GeneralManager = () => {
   return (
     <div className="general_information">
       <div className="line">
-        <ManagerMainDetails manager={manager} />
+        <ManagerMainDetails manager={manager} getManager={getManager} />
         <ManagerInfoDetails manager={manager} />
       </div>
     </div>

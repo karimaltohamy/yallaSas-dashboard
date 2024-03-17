@@ -1,0 +1,137 @@
+@import "../../sass/variables.scss";
+
+// start popup_styls
+.popup_styls {
+  position: fixed;
+  top: 0;
+  right: -260px;
+  height: 100%;
+  width: 260px;
+  background-color: var(--bg-section);
+
+  transition: all 0.4s ease;
+  z-index: 100000;
+
+  &.open {
+    right: 0;
+    box-shadow: -20px -1px 20px var(--color-shadow);
+  }
+
+  &.ar {
+    right: auto;
+    left: -260px;
+
+    &.open {
+      left: 0;
+      box-shadow: 20px -1px 20px var(--color-shadow);
+    }
+  }
+
+  .icon_open_popup {
+    background-color: $primary-color;
+    position: absolute;
+    left: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &.ar {
+      left: auto;
+      right: -40px;
+    }
+  }
+
+  .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color);
+
+    h4 {
+      margin-bottom: 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 18px;
+
+      i {
+        font-size: 15px;
+      }
+    }
+
+    .close_popu_style {
+      cursor: pointer;
+    }
+  }
+
+  .content {
+    padding: 20px 10px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar {
+      width: 7px;
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      background-color: $primary-color;
+    }
+
+    &:hover {
+      &:-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: rgb(225, 225, 225);
+      }
+    }
+
+    .styles {
+      .item {
+        text-align: center;
+        cursor: pointer;
+
+        &:not(:last-child) {
+          margin-bottom: 14px;
+          padding-bottom: 8px;
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        &:hover {
+          h4 {
+            color: $primary-color;
+          }
+        }
+
+        .image {
+          margin-bottom: 10px;
+          img {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+          }
+        }
+
+        h4 {
+          font-size: 15px;
+          font-weight: 600;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+// end popup_styls

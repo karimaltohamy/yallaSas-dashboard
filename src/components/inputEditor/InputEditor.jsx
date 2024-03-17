@@ -11,7 +11,7 @@ const InputEditor = ({ content, setContent }) => {
       <Editor
         apiKey="cpfuvu48b5fm64c2c9vliogjidtw4qp1mws7meludv62v7jd"
         onInit={(evt, editor) => (content = editor)}
-        initialValue="<p>This is the initial content of the editor.</p>"
+        initialValue=""
         init={{
           height: 500,
           menubar: false,

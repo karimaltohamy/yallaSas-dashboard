@@ -59,7 +59,26 @@ const HeadTable = ({
           </p>
         </div>
 
-        <div className="flex items-center gap-2 md:gap-3 flex-col md:flex-row">
+        <div className="flex items-center justify-center gap-2 md:gap-3 flex-row flex-wrap">
+          <div className="input_search">
+            <input
+              type="text"
+              placeholder={t("placeholder_search")}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+              ></path>
+            </svg>
+          </div>
           <div className="utils" ref={processesRef}>
             {actions && (
               <div className="actions_box">
@@ -84,28 +103,15 @@ const HeadTable = ({
           {pathname != "/report-data-export-jobs" && (
             <Link to={"/report-data-export-jobs"} className="btn_export">
               <i class="fa-solid fa-download"></i>
-              {t("menu_tools_export")}
             </Link>
           )}
-          <div className="input_search">
-            <input
-              type="text"
-              placeholder={t("placeholder_search")}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-              ></path>
-            </svg>
-          </div>
+
+          <button className="btn_reload">
+            <i class="fa-solid fa-arrows-rotate"></i>
+          </button>
+          <button className="btn_filter">
+            <i class="fa-solid fa-filter"></i>
+          </button>
         </div>
       </div>
     </Fragment>

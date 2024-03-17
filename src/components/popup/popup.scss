@@ -45,6 +45,7 @@
     overflow: auto;
     background-color: var(--bg-section);
     border-radius: 5px;
+    min-height: 300px;
 
     &.max_height {
       height: 80vh;

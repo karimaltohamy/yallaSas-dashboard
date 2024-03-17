@@ -31,94 +31,189 @@
     padding: 12px;
 
     .items {
-      .item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+      &.style_1 {
+        .item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
 
-        &:not(:last-child) {
-          padding-bottom: 5px;
-          margin-bottom: 5px;
-          border-bottom: 1px solid var(--border-color);
-        }
+          &:not(:last-child) {
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+            border-bottom: 1px solid rgb(234, 234, 234);
+          }
 
-        &:nth-child(2) {
+          &:nth-child(2) {
+            .text {
+              .icon {
+                background-color: #e9f8fc;
+                color: #46d2f9;
+              }
+            }
+          }
+
+          &:nth-child(3) {
+            .text {
+              .icon {
+                background-color: #fef8ec;
+                color: #f7b736;
+              }
+            }
+          }
+
+          &:nth-child(3) {
+            .text {
+              .icon {
+                background-color: #fef8ec;
+                color: #f7b736;
+              }
+            }
+          }
+          &:nth-child(4) {
+            .text {
+              .icon {
+                background-color: #fcedeb;
+                color: #f9553f;
+              }
+            }
+          }
+          &:nth-child(5) {
+            .text {
+              .icon {
+                background-color: #e9f8fc;
+                color: #46d2f9;
+              }
+            }
+          }
+          &:nth-child(6) {
+            .text {
+              .icon {
+                background-color: #fef8ec;
+                color: #f7b736;
+              }
+            }
+          }
+
+          &:nth-child(7) {
+            .text {
+              .icon {
+                background-color: #fbe9f2;
+                color: #e791bc;
+              }
+            }
+          }
+
+          &:nth-child(8) {
+            .text {
+              .icon {
+                background-color: #e3f9f2;
+                color: #26bf94;
+              }
+            }
+          }
+
           .text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .icon {
+              width: 35px;
+              height: 35px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background-color: #f2eefc;
+              color: #743ff9;
+
+              i {
+                font-size: 15px;
+              }
+            }
+
+            h4 {
+              margin-bottom: 0;
+              font-size: 16px;
+              font-weight: 600;
+            }
+          }
+
+          .num {
+            color: gray;
+          }
+        }
+      }
+
+      &.style_2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+
+        .item {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          padding: 12px 15px;
+          border: 1px solid var(--border-color);
+          border-radius: 10px;
+
+          &:nth-child(2) {
             .icon {
               background-color: #e9f8fc;
               color: #46d2f9;
             }
           }
-        }
 
-        &:nth-child(3) {
-          .text {
+          &:nth-child(3) {
             .icon {
               background-color: #fef8ec;
               color: #f7b736;
             }
           }
-        }
 
-        &:nth-child(3) {
-          .text {
+          &:nth-child(3) {
             .icon {
               background-color: #fef8ec;
               color: #f7b736;
             }
           }
-        }
-        &:nth-child(4) {
-          .text {
+          &:nth-child(4) {
             .icon {
               background-color: #fcedeb;
               color: #f9553f;
             }
           }
-        }
-        &:nth-child(5) {
-          .text {
+          &:nth-child(5) {
             .icon {
               background-color: #e9f8fc;
               color: #46d2f9;
             }
           }
-        }
-        &:nth-child(6) {
-          .text {
+          &:nth-child(6) {
             .icon {
               background-color: #fef8ec;
               color: #f7b736;
             }
           }
-        }
 
-        &:nth-child(7) {
-          .text {
+          &:nth-child(7) {
             .icon {
               background-color: #fbe9f2;
               color: #e791bc;
             }
           }
-        }
 
-        &:nth-child(8) {
-          .text {
+          &:nth-child(8) {
             .icon {
               background-color: #e3f9f2;
               color: #26bf94;
             }
           }
-        }
-
-        .text {
-          display: flex;
-          align-items: center;
-          gap: 8px;
 
           .icon {
-            width: 35px;
-            height: 35px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -127,20 +222,25 @@
             color: #743ff9;
 
             i {
-              font-size: 15px;
+              font-size: 20px;
             }
           }
 
-          h4 {
-            margin-bottom: 0;
-            font-size: 16px;
-            font-weight: 600;
+          .text {
+            h4 {
+              font-size: 16px;
+              margin-bottom: 3px;
+            }
+
+            .num {
+              color: gray;
+              font-size: 18px;
+            }
           }
         }
+      }
 
-        .num {
-          color: gray;
-        }
+      .item {
       }
     }
 

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./mainTable.scss";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { Button, Toolbar } from "@mui/material";
 
 const MainTable = ({
   columns,
@@ -14,42 +13,38 @@ const MainTable = ({
   lastPage,
   rowId,
   showToolbar = true,
+  uniqueIdentifier,
 }) => {
+  const lang = localStorage.getItem("lang");
+  const localStorageKey = `${uniqueIdentifier}_columns`;
+  const [columnVisibilityModel, setColumnVisibilityModel] = useState({});
   const [siblingCount, setSiblingCount] = useState(0);
   const totalPages = Array.from({ length: lastPage }, (_, i) => i + 1).splice(
     siblingCount,
     5
   );
-  // const [selectedColumns, setSelectedColumns] = useState(() => {
-  //   const savedColumns = localStorage.getItem("selectedColumns");
-  //   return savedColumns ? JSON.parse(savedColumns) : columns.map((col) => col);
-  // });
 
-  // useEffect(() => {
-  //   // Save selected columns to localStorage whenever it changes
-  //   localStorage.setItem("selectedColumns", JSON.stringify(selectedColumns));
-  // }, [selectedColumns]);
+  useEffect(() => {
+    const savedColumnVisibilityModel = localStorage.getItem(localStorageKey);
+    if (savedColumnVisibilityModel && uniqueIdentifier) {
+      setColumnVisibilityModel(JSON.parse(savedColumnVisibilityModel));
+    }
+  }, [localStorageKey]);
 
-  // const handleToggleColumn = (columnName, visibility) => {
-  //   console.log(columnName, visibility);
-  //   setSelectedColumns((prevColumns) => {
-  //     // Find the column object with the provided columnName
-  //     const column = prevColumns.find((col) => col.field === columnName);
-  //     if (column) {
-  //       // Update the visibility of the column based on the provided visibility
-  //       column.hide = !visibility;
-  //     }
-  //     // Return a new array with the modified column object
-  //     return [...prevColumns];
-  //   });
-  // };
+  const handleColumnChange = (newModel) => {
+    // Update the columnVisibilityModel state variable
+    setColumnVisibilityModel(newModel);
+    // Save it to localStorage
+    uniqueIdentifier &&
+      localStorage.setItem(localStorageKey, JSON.stringify(newModel));
+  };
 
   // handle select row
   const handleRowSelectionModelChange = (newRowSelectionModel) => {
     setSelectedRowData(newRowSelectionModel);
   };
   return (
-    <div className={`container_table`}>
+    <div className={`container_table ${lang == "ar" ? "ar" : ""}`}>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -61,6 +56,8 @@ const MainTable = ({
         noRowsOverlay={<div>No rows found!</div>}
         loading={false}
         slots={showToolbar ? { toolbar: GridToolbar } : {}}
+        onColumnVisibilityModelChange={handleColumnChange}
+        columnVisibilityModel={columnVisibilityModel}
       />
       <div className="pagination">
         <div className="page_count_component">

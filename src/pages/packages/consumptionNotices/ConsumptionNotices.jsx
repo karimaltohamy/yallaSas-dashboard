@@ -117,7 +117,7 @@ const ConsumptionNotices = () => {
           <div className="content">
             <Link to={"/consumption-notices/add"} className="item">
               <i className="fa-solid fa-plus"></i>
-              <span>{t("Add")}</span>
+              <span>{t("global_actions_new")}</span>
             </Link>
             <Link
               to={
@@ -127,21 +127,21 @@ const ConsumptionNotices = () => {
               className="item"
             >
               <i className="fa-regular fa-pen-to-square"></i>
-              <span>{t("Edit")}</span>
+              <span>{t("global_actions_edit")}</span>
             </Link>
             <div
               className="item"
               onClick={() => selectedRowData[0] && handleCopyNotification()}
             >
               <i className="fa-regular fa-copy"></i>
-              <span>{t("Copy")}</span>
+              <span>{t("global_actions_copy")}</span>
             </div>
             <div
               className="item"
               onClick={() => selectedRowData[0] && handleDeleteNotification()}
             >
               <i className="fa-solid fa-trash"></i>
-              <span>{t("Delete")}</span>
+              <span>{t("global_actions_delete")}</span>
             </div>
           </div>
         </HeadTable>
@@ -154,6 +154,7 @@ const ConsumptionNotices = () => {
           perPage={perPage}
           setPerPage={setPerPage}
           lastPage={lastPage}
+          uniqueIdentifier={"consumptionNotices"}
         />
         {loading && <Loader />}
       </div>

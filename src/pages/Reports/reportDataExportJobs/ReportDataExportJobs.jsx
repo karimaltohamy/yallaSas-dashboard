@@ -62,6 +62,7 @@ const ReportDataExportJobs = () => {
       const blob = new Blob([data]);
       saveAs(blob, exportJob.filename);
       toast.success("Successful Operation");
+      getReportsExportJobs();
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {
@@ -99,6 +100,7 @@ const ReportDataExportJobs = () => {
           perPage={perPage}
           setPerPage={setPerPage}
           lastPage={lastPage}
+          uniqueIdentifier={"dataExportJobs"}
         />
         {loading && <Loader />}
       </div>

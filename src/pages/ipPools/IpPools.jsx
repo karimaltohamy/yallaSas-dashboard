@@ -106,6 +106,7 @@ const IpPools = () => {
           perPage={perPage}
           setPerPage={setPerPage}
           lastPage={lastPage}
+          uniqueIdentifier={"ipPools"}
         />
         {loading && <Loader />}
       </div>

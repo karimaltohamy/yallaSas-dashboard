@@ -1,0 +1,120 @@
+@import "../../sass/variables.scss";
+
+.profile_section {
+  margin: 15px;
+
+  .profile_details {
+    background-color: var(--bg-section);
+    border-radius: 6px;
+    padding: 15px;
+
+    .main_information {
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+      text-align: center;
+
+      .img {
+        margin-bottom: 10px;
+        img {
+          width: 180px;
+          height: 180px;
+          border-radius: 10px;
+          margin: auto;
+        }
+      }
+
+      .text {
+        h4 {
+          font-weight: 700;
+          font-size: 18px;
+        }
+      }
+    }
+
+    .personal_information {
+      .title {
+        font-weight: 600;
+        font-size: 20px;
+        margin-bottom: 15px;
+      }
+      .items {
+        .item {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+
+          &:not(:last-child) {
+            margin-bottom: 18px;
+          }
+
+          .icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ecf3f2;
+
+            i {
+              font-size: 20px;
+              color: $primary-color;
+            }
+          }
+
+          .text {
+            h5 {
+              font-weight: 600;
+              font-size: 18px;
+            }
+            p {
+              color: gray;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .change_password_section {
+    background-color: var(--bg-section);
+    border-radius: 6px;
+    padding: 15px;
+    height: fit-content;
+
+    .title {
+      font-weight: 600;
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    form {
+      .input_item {
+        &:not(:last-child) {
+          margin-bottom: 12px;
+        }
+
+        input {
+          padding: 8px;
+          border: 1px solid var(--border-color);
+          border-radius: 5px;
+          width: 100%;
+          outline: none;
+
+          &:focus {
+            border: 1px solid $primary-color;
+          }
+        }
+      }
+
+      .btn_submit {
+        background-color: black;
+        color: white;
+        padding: 5px 12px;
+        border-radius: 5px;
+        margin-right: auto;
+      }
+    }
+  }
+}

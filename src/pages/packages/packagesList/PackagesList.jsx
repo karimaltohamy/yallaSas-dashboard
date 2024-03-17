@@ -164,6 +164,7 @@ const PackagesList = () => {
           perPage={perPage}
           setPerPage={setPerPage}
           lastPage={lastPage}
+          uniqueIdentifier={"packagesList"}
         />
         {loading && <Loader />}
       </div>

@@ -2062,26 +2062,26 @@ export const columnsLoginAttempts = [
 
 export const columnsBackupIndex = [
   {
-    field: "fileName",
+    field: "filename",
     headerName: t("FileName"),
     minWidth: 160,
     flex: 1,
   },
   {
-    field: "date",
-    headerName: t("Date"),
+    field: "file_time",
+    headerName: t("global_date"),
     minWidth: 160,
     flex: 1,
   },
   {
     field: "size",
-    headerName: t("Size"),
+    headerName: t("global_size"),
     minWidth: 160,
     flex: 1,
   },
   {
     field: "version",
-    headerName: t("Version"),
+    headerName: t("nas_form_version"),
     minWidth: 160,
     flex: 1,
   },

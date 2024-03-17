@@ -8,6 +8,7 @@ import apiAxios from "../../utils/apiAxios";
 const Sidebar = () => {
   const [openLinksList, setOpenLinksList] = useState(null);
   const { t } = useTranslation();
+  const lang = localStorage.getItem("lang");
   const [menu, setMenu] = useState([]);
 
   const toggleList = (index) => {
@@ -60,45 +61,7 @@ const Sidebar = () => {
         },
       ],
     },
-    {
-      title: t("Malfunctions"),
-      icon: <i className="fa-solid fa-gear"></i>,
-      linksList: [
-        {
-          titleLink: t("Team Leader"),
-          pathLink: "/team-leader",
-        },
-        {
-          titleLink: t("Tickets wait team"),
-          pathLink: "tickets-wait-team",
-        },
-        {
-          titleLink: t("Damage Wait"),
-          pathLink: "/damage-wait",
-        },
-        {
-          titleLink: t("Review Damage"),
-          pathLink: "/review-damage",
-        },
-        {
-          titleLink: t("Solved Tickets"),
-          pathLink: "/solved-tickets",
-        },
-        {
-          titleLink: t("Tickets Quality"),
-          pathLink: "/tickets-quality",
-        },
-        {
-          titleLink: t("Customer Installations"),
-          pathLink: "/install-customer",
-        },
-      ],
-    },
-    {
-      title: t("Offer of Pieces"),
-      path: "/offer-pieces",
-      icon: <i className="fa-solid fa-puzzle-piece"></i>,
-    },
+
     {
       title: t("menu_managers"),
       path: "/managers",
@@ -248,7 +211,7 @@ const Sidebar = () => {
       ],
     },
     {
-      title: t("menu_reports_user_auth_log"),
+      title: t("menu_tools"),
       icon: <i className="fa-solid fa-screwdriver-wrench"></i>,
       linksList: [
         {
@@ -384,11 +347,59 @@ const Sidebar = () => {
       ],
     },
     {
-      title: t("menu_about"),
-      path: "/about-company/about",
-      icon: <i className="fa-solid fa-info"></i>,
+      title: t("Malfunctions"),
+      icon: <i className="fa-solid fa-gear"></i>,
+      linksList: [
+        {
+          titleLink: t("Team Leader"),
+          pathLink: "/team-leader",
+        },
+        {
+          titleLink: t("Tickets wait team"),
+          pathLink: "tickets-wait-team",
+        },
+        {
+          titleLink: t("Damage Wait"),
+          pathLink: "/damage-wait",
+        },
+        {
+          titleLink: t("Review Damage"),
+          pathLink: "/review-damage",
+        },
+        {
+          titleLink: t("Solved Tickets"),
+          pathLink: "/solved-tickets",
+        },
+        {
+          titleLink: t("Tickets Quality"),
+          pathLink: "/tickets-quality",
+        },
+        {
+          titleLink: t("Customer Installations"),
+          pathLink: "/install-customer",
+        },
+      ],
     },
+    {
+      title: t("Offer of Pieces"),
+      path: "/offer-pieces",
+      icon: <i className="fa-solid fa-puzzle-piece"></i>,
+    },
+    // {
+    //   title: t("menu_about"),
+    //   path: "/about-company/about",
+    //   icon: <i className="fa-solid fa-info"></i>,
+    // },
   ];
+
+  const handleCloseSidebar = () => {
+    document.querySelector(".sidebar").classList.toggle("remove_elemnts");
+    document.querySelector(".sidebar").classList.toggle("close_sidebar");
+
+    if (innerWidth < 768) {
+      document.querySelector(".overflow_sidebar").classList.toggle("active");
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -402,8 +413,8 @@ const Sidebar = () => {
 
   return (
     <Fragment>
-      <div className="overflow_sidebar"></div>
-      <div className="sidebar">
+      <div className="overflow_sidebar" onClick={handleCloseSidebar}></div>
+      <div className={`sidebar ${lang == "ar" ? "ar" : "en"}`}>
         <div className="header_sidebar text-center">
           <img src={logo} alt="logo" loading="lazy" className="mx-auto" />
         </div>
@@ -455,7 +466,7 @@ const Sidebar = () => {
                                 to={link.pathLink}
                                 key={i}
                                 className={({ isActive }) =>
-                                  isActive ? "active" : ""
+                                  isActive ? "text_color" : ""
                                 }
                               >
                                 {link.titleLink}

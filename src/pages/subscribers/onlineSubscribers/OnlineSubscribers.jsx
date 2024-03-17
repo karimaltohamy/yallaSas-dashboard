@@ -43,6 +43,39 @@ const OnlineSubscribers = () => {
     },
   ];
 
+  const getOnlineSubscriiber = async () => {
+    setLoading(true);
+    try {
+      const { data } = await apiAxios.post("api/index/online", {
+        payload: encryptedData({
+          page: currentPage,
+          count: perPage,
+          sortBy: null,
+          direction: "asc",
+          search,
+          columns: [
+            "id",
+            "username",
+            "acctoutputoctets",
+            "acctinputoctets",
+            "user_profile_name",
+            "framedipaddress",
+            "callingstationid",
+            "acctsessiontime",
+            "oui",
+          ],
+        }),
+      });
+      setOnlineSubscribers(data.data);
+      setNumberOnlineSubscribers(data.total);
+      setLastePage(data.last_page);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
   const showAlertDisconnect = () => {
     Swal.fire({
       title: "Disconnect User",
@@ -58,6 +91,7 @@ const OnlineSubscribers = () => {
             `api/user/disconnect/userid/${selectedRowData[0]}`
           );
           toast.success(data.status == 200 && data.message);
+          getOnlineSubscriiber();
         } catch (error) {
           console.log(error);
         }
@@ -68,38 +102,7 @@ const OnlineSubscribers = () => {
   };
 
   useEffect(() => {
-    (async () => {
-      setLoading(true);
-      try {
-        const { data } = await apiAxios.post("api/index/online", {
-          payload: encryptedData({
-            page: currentPage,
-            count: perPage,
-            sortBy: null,
-            direction: "asc",
-            search,
-            columns: [
-              "id",
-              "username",
-              "acctoutputoctets",
-              "acctinputoctets",
-              "user_profile_name",
-              "framedipaddress",
-              "callingstationid",
-              "acctsessiontime",
-              "oui",
-            ],
-          }),
-        });
-        setOnlineSubscribers(data.data);
-        setNumberOnlineSubscribers(data.total);
-        setLastePage(data.last_page);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      }
-    })();
+    getOnlineSubscriiber();
   }, [search, perPage, currentPage]);
 
   return (
@@ -163,6 +166,7 @@ const OnlineSubscribers = () => {
           setPerPage={setPerPage}
           lastPage={lastPage}
           rowId={"user_details"}
+          uniqueIdentifier={"onlineSubscriber"}
         />
         {loading && <Loader />}
       </div>

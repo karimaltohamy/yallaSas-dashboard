@@ -34,35 +34,6 @@
       margin-bottom: 0;
       font-weight: 600;
     }
-
-    // &:nth-child(1) {
-    //   span {
-    //     background-color: rgb(235, 219, 1);
-    //   }
-    // }
-
-    // &:nth-child(3) {
-    //   span {
-    //     background-color: rgb(1, 235, 20);
-    //   }
-    // }
-
-    // &:nth-child(4) {
-    //   span {
-    //     background-color: #bb3436;
-    //   }
-    // }
-
-    // &:nth-child(5) {
-    //   span {
-    //     background-color: #7c40a5;
-    //   }
-    // }
-    // &:nth-child(6) {
-    //   span {
-    //     background-color: black;
-    //   }
-    // }
   }
 }
 
@@ -128,10 +99,10 @@
       position: relative;
 
       .btn_actions {
-        padding: 5px 15px;
+        padding: 3px 15px;
         border: none;
         background-color: $primary-color;
-        color: white;
+        color: white !important;
         border-radius: 5px;
         display: flex;
         align-items: center;
@@ -226,212 +197,12 @@
         background-color: $primary-color;
       }
     }
-
-    .filter {
-      position: relative;
-
-      .filter_box {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-35%);
-        background-color: white;
-        box-shadow: 0 0 15px #c8c8c8;
-        border-radius: 5px;
-        width: 285px;
-        overflow: hidden;
-        scale: 0.5;
-        opacity: 0;
-        z-index: -1;
-        transition: all 0.1s linear;
-
-        &.active {
-          scale: 1;
-          opacity: 1;
-          z-index: 999;
-        }
-
-        .head {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 10px;
-          background-color: $main-color;
-          color: white;
-
-          .close {
-            cursor: pointer;
-          }
-
-          h5 {
-            margin-bottom: 0;
-          }
-        }
-
-        form {
-          padding: 10px;
-
-          .input_item {
-            &:not(:last-child) {
-              margin-bottom: 10px;
-            }
-
-            label {
-              display: block;
-              margin-bottom: 5px;
-            }
-
-            select,
-            input {
-              width: 100%;
-              border: 1px solid rgb(200, 200, 200);
-              padding: 4px;
-              border-radius: 3px;
-            }
-          }
-
-          .input_switch {
-            position: relative;
-            display: flex;
-            gap: 20px;
-            align-items: center;
-
-            span {
-              font-weight: 600;
-              display: block;
-              margin-bottom: 4px;
-              flex: 1;
-            }
-
-            input[type="checkbox"] {
-              height: 0;
-              width: 0;
-              visibility: hidden;
-              display: none;
-            }
-
-            label {
-              cursor: pointer;
-              text-indent: -9999px;
-              width: 55px;
-              height: 22px;
-              background: grey;
-              display: block;
-              border-radius: 100px;
-              position: relative;
-            }
-
-            label:after {
-              content: "";
-              position: absolute;
-              top: 2px;
-              left: 5px;
-              width: 18px;
-              height: 18px;
-              background: #fff;
-              border-radius: 90px;
-              transition: 0.3s;
-            }
-
-            input:checked + label {
-              background: #5588da;
-            }
-
-            input:checked + label:after {
-              left: calc(100% - 5px);
-              transform: translateX(-100%);
-            }
-
-            label:active:after {
-              width: 130px;
-            }
-          }
-
-          .btn_search {
-            margin-top: 15px;
-            padding: 5px 20px;
-            width: 100%;
-            background-color: $primary-color;
-            color: white;
-            border: none;
-            border-radius: 5px;
-          }
-        }
-      }
-    }
-
-    .stopwatch {
-      position: relative;
-
-      .boxStopWatch {
-        position: absolute;
-        top: 35px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 200px;
-        background-color: white;
-        box-shadow: 0 0 15px #c8c8c8;
-        border-radius: 5px;
-        padding: 10px;
-        overflow: hidden;
-        scale: 0.5;
-        opacity: 0;
-        z-index: -1;
-        transition: all 0.1s linear;
-
-        &.active {
-          scale: 1;
-          opacity: 1;
-          z-index: 999;
-        }
-
-        .item {
-          &:not(:last-child) {
-            margin-bottom: 10px;
-          }
-
-          span {
-            font-weight: 600;
-          }
-        }
-      }
-    }
-
-    .list_filter {
-      position: relative;
-
-      .box_list_filter {
-        position: absolute;
-        top: 30px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 150px;
-        background-color: white;
-        padding: 10px;
-        border-radius: 5px;
-        box-shadow: 2px 3px 20px rgb(228, 228, 228);
-        scale: 0.5;
-        opacity: 0;
-        z-index: -1;
-        transition: all 0.1s linear;
-
-        &.active {
-          scale: 1;
-          opacity: 1;
-          z-index: 999;
-        }
-
-        .input_item {
-          &:not(:last-child) {
-            margin-bottom: 10px;
-          }
-        }
-      }
-    }
   }
 
-  .btn_export {
-    padding: 5px 15px;
+  .btn_export,
+  .btn_reload,
+  .btn_filter {
+    padding: 6px 8px;
     border: none;
     background-color: $primary-color;
     color: white !important;
@@ -499,7 +270,7 @@
 
       .actions_box {
         .btn_actions {
-          padding: 5px 10px;
+          padding: 3px 10px;
           font-size: 14px;
         }
 
@@ -602,5 +373,10 @@
         font-size: 12px;
       }
     }
+  }
+
+  .btn_export {
+    padding: 5px 5px;
+    font-size: 14px;
   }
 }

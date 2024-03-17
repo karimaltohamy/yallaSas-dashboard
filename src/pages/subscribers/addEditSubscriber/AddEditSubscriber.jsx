@@ -295,13 +295,6 @@ const AddEditSubscriber = ({ typePage }) => {
             onChange={handleChangeGeneralUnformation}
             id="enabled"
           />
-          <InputSectionForm
-            label={t("user_form_portal_password")}
-            type={"text"}
-            value={generalinformation.portal_password}
-            onChange={handleChangeGeneralUnformation}
-            id="portal_password"
-          />
           <SwitchSectionForm
             label={t("user_form_label_mac_lock")}
             value={generalinformation.mac_auth}
@@ -314,6 +307,15 @@ const AddEditSubscriber = ({ typePage }) => {
             onChange={handleChangeGeneralUnformation}
             id="use_separate_portal_password"
           />
+          {generalinformation.use_separate_portal_password && (
+            <InputSectionForm
+              label={t("user_form_portal_password")}
+              type={"text"}
+              value={generalinformation.portal_password}
+              onChange={handleChangeGeneralUnformation}
+              id="portal_password"
+            />
+          )}
         </div>
       </SectionForm>
       <SectionForm title={t("user_form_label_personnel_information")}>

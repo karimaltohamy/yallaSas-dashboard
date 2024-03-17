@@ -82,6 +82,7 @@ const CardJobsQueue = () => {
           perPage={perPage}
           setPerPage={setPerPage}
           lastPage={lastPage}
+          uniqueIdentifier={"cardsJobsQueue"}
         />
       </div>
       {loading && <Loader />}

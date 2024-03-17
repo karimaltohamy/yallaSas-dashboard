@@ -10,7 +10,7 @@ import Loader from "../loader/Loader";
 import avatar from "../../images/avatar2.png";
 import Swal from "sweetalert2";
 
-const MainDetails = ({ subsciberData }) => {
+const MainDetails = ({ subsciberData, getSubscriber }) => {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   // opens and setOpnes popups
@@ -63,6 +63,7 @@ const MainDetails = ({ subsciberData }) => {
             payload: encryptedData({ user_id: id }),
           });
           toast.success(data.status == 200 && data.message);
+          getSubscriber();
         } catch (error) {
           console.log(error);
         }
@@ -83,6 +84,7 @@ const MainDetails = ({ subsciberData }) => {
       setOpenChangeName(false);
       setNewName("");
       setLoading(false);
+      getSubscriber();
     } catch (error) {
       toast.error(error.response.data.error);
       console.log(error);
@@ -108,6 +110,7 @@ const MainDetails = ({ subsciberData }) => {
         setOpenDeposit(false);
         setAmountDeposot("");
         setNoticeDeposite("");
+        getSubscriber();
       } catch (error) {
         toast.error(error.response.data.error);
         console.log(error);
@@ -133,6 +136,7 @@ const MainDetails = ({ subsciberData }) => {
         setLoading(false);
         setOpenDiscountAmount(false);
         setAmountDiscount("");
+        getSubscriber();
       } catch (error) {
         toast.error(error.response.data.error);
         console.log(error);
@@ -148,6 +152,7 @@ const MainDetails = ({ subsciberData }) => {
       await apiAxios.delete(`api/user/${id}`);
       toast.success("Successful operation");
       setLoading(false);
+      getSubscriber();
     } catch (error) {
       toast.error(error.response.data.error);
       console.log(error);

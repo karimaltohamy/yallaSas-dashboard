@@ -196,6 +196,11 @@ main {
           right: -100%;
         }
       }
+
+      &.ar {
+        left: auto;
+        right: 0;
+      }
     }
 
     .content_page {

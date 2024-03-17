@@ -77,8 +77,45 @@ const Subscribers = () => {
   };
 
   // get subscriber to use data in popups
-  const getSubscriber = () => {
+  const selectSubscriber = () => {
     setSubscriber(subscribers.find((item) => item.id == selectedRowData));
+  };
+
+  const getSubscriber = async () => {
+    let encrypted;
+    const dataToEncrypt = JSON.stringify({
+      page: currentPage,
+      count: perPage,
+      sortBy: "username",
+      direction: "asc",
+      search,
+      columns: [
+        "idx",
+        "username",
+        "firstname",
+        "lastname",
+        "expiration",
+        "parent_username",
+        "name",
+        "loan_balance",
+        "traffic",
+        "remaining_days",
+      ],
+    });
+    encrypted = CryptoJS.AES.encrypt(dataToEncrypt, secretPass).toString();
+    setLoading(true);
+    try {
+      const { data } = await apiAxios.post("api/index/user", {
+        payload: encrypted,
+      });
+      setSubscribers(data.data);
+      setNumberSubscribers(data.total);
+      setLastePage(data.last_page);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
   };
 
   const handleChangeName = async (e) => {
@@ -91,6 +128,7 @@ const Subscribers = () => {
       toast.success("Successful operation");
       setOpenChangeName(false);
       setLoading(false);
+      getSubscriber();
     } catch (error) {
       toast.error(error.response.data.error);
       console.log(error);
@@ -119,6 +157,7 @@ const Subscribers = () => {
       setNoticeDataBalance("");
       setDataTypeBalance("");
       setLoading(false);
+      getSubscriber();
     } catch (error) {
       toast.error(error.response.data.error);
       console.log(error);
@@ -153,6 +192,7 @@ const Subscribers = () => {
       setOpenDeposit(false);
       setAmountDeposot("");
       setNoticeDeposite("");
+      getSubscriber();
     } catch (error) {
       toast.error(error.response.data.error);
       console.log(error);
@@ -177,6 +217,7 @@ const Subscribers = () => {
       setOpenDiscountAmount(false);
       setAmountDiscount("");
       setNoticeDiscount("");
+      getSubscriber();
     } catch (error) {
       toast.error(error.response.data.error);
       console.log(error);
@@ -201,6 +242,7 @@ const Subscribers = () => {
       }
       toast.success("Successful operation");
       setLoading(false);
+      getSubscriber();
     } catch (error) {
       toast.error(error.response.data.error);
       console.log(error);
@@ -209,46 +251,11 @@ const Subscribers = () => {
   };
 
   useEffect(() => {
-    (async () => {
-      let encrypted;
-      const dataToEncrypt = JSON.stringify({
-        page: currentPage,
-        count: perPage,
-        sortBy: "username",
-        direction: "asc",
-        search,
-        columns: [
-          "idx",
-          "username",
-          "firstname",
-          "lastname",
-          "expiration",
-          "parent_username",
-          "name",
-          "loan_balance",
-          "traffic",
-          "remaining_days",
-        ],
-      });
-      encrypted = CryptoJS.AES.encrypt(dataToEncrypt, secretPass).toString();
-      setLoading(true);
-      try {
-        const { data } = await apiAxios.post("api/index/user", {
-          payload: encrypted,
-        });
-        setSubscribers(data.data);
-        setNumberSubscribers(data.total);
-        setLastePage(data.last_page);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      }
-    })();
+    getSubscriber();
   }, [search, perPage, currentPage]);
 
   useEffect(() => {
-    getSubscriber();
+    selectSubscriber();
   }, [selectedRowData]);
 
   return (
@@ -405,6 +412,7 @@ const Subscribers = () => {
           perPage={perPage}
           setPerPage={setPerPage}
           lastPage={lastPage}
+          uniqueIdentifier={"subscriber"}
         />
       </div>
       {loading && <Loader />}
@@ -431,7 +439,7 @@ const Subscribers = () => {
       </Popup>
       {/* popup Add or withdraw data balance*/}
       <Popup
-        title={"user_traffic_form_title"}
+        title={t("user_traffic_form_title")}
         openPopup={openDataBalance}
         setOpenPopup={setOpenDataBalance}
         onSubmit={handleDataBalance}

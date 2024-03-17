@@ -125,6 +125,7 @@
       &:hover,
       &.active {
         background-color: #257e67;
+        color: white !important;
         border-top-left-radius: 2px;
         border-bottom-left-radius: 2px;
         border-right: 4px solid white;
@@ -157,13 +158,13 @@
           }
 
           i {
-            font-size: 23px;
+            font-size: 22px;
           }
         }
 
         span {
           font-weight: 600;
-          font-size: 17px;
+          font-size: 16px;
         }
       }
 
@@ -226,6 +227,7 @@
 
     .links {
       gap: 10px;
+      height: 100%;
 
       .link_item {
         .text {
@@ -247,3 +249,192 @@
   }
 }
 // end sidebar
+
+// start sidebar dashboard_style2
+.sidebar {
+  &.dashboard_style_2 {
+    background-color: var(--bg-section);
+    color: var(--color-sidebar);
+
+    .sidebar_container {
+      padding: 0 10px;
+    }
+
+    .links {
+      .link_item {
+        &.active,
+        &:hover {
+          border-right: 4px solid #1b6052;
+        }
+      }
+
+      .list {
+        background-color: var(--bg-main);
+      }
+    }
+  }
+}
+// end sidebar dashboard_style2
+
+// start sidebar dashboard_style3
+.sidebar {
+  &.dashboard_style_3 {
+    background-color: var(--bg-section);
+    color: var(--color-sidebar);
+    width: 150px;
+    min-width: 150px;
+    max-width: 150px;
+    padding: 25px 10px;
+    position: relative;
+    overflow: unset;
+
+    .sidebar_container {
+      padding: 0 10px;
+    }
+
+    .header_sidebar {
+      img {
+        width: 80px;
+      }
+    }
+
+    .links {
+      gap: 25px;
+      .link_item {
+        &.active,
+        &:hover {
+          border-right: unset;
+          background-color: transparent;
+          color: $primary-color !important;
+        }
+
+        .text {
+          flex-direction: column;
+          justify-content: center;
+          width: 100%;
+          gap: 5px;
+
+          .icon {
+            height: auto;
+            background-color: transparent;
+          }
+        }
+
+        .arrow {
+          display: none;
+        }
+      }
+
+      .list {
+        background-color: var(--bg-main);
+        font-size: 14px;
+        position: absolute;
+        left: -150px;
+        top: 0;
+        min-width: 150px;
+        box-shadow: -20px -1px 20px rgb(129 129 129 / 21%);
+        border-left: 4px solid $primary-color;
+        border-radius: 0;
+        height: 100%;
+
+        li {
+          padding: 8px;
+
+          &:first-child {
+            padding-top: 30px;
+          }
+
+          i,
+          a {
+            font-size: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+// end sidebar dashboard_style3
+
+// start sidebar dashboard_style4
+.sidebar {
+  &.dashboard_style_4 {
+    background-color: var(--bg-section);
+    color: var(--color-sidebar);
+    width: 90px;
+    min-width: 90px;
+    max-width: 90px;
+    padding: 25px 0;
+    position: relative;
+    overflow: unset;
+
+    .sidebar_container {
+      padding: 0 10px;
+    }
+
+    .header_sidebar {
+      img {
+        width: 50px;
+      }
+    }
+
+    .links {
+      gap: 25px;
+
+      .link_item {
+        &.active,
+        &:hover {
+          border-right: unset;
+          background-color: transparent;
+          color: $primary-color !important;
+        }
+
+        .text {
+          flex-direction: column;
+          justify-content: center;
+          width: 100%;
+          gap: 5px;
+
+          .icon {
+            height: auto;
+            background-color: transparent;
+          }
+        }
+
+        .arrow {
+          display: none;
+        }
+
+        span {
+          display: none;
+        }
+      }
+
+      .list {
+        background-color: var(--bg-main);
+        font-size: 14px;
+        position: absolute;
+        left: -150px;
+        top: 50%;
+        transform: translateY(-50%);
+        min-width: 150px;
+        box-shadow: -20px -1px 20px rgb(129 129 129 / 21%);
+        border-left: 4px solid $primary-color;
+        border-radius: 0;
+
+        li {
+          padding: 8px;
+
+          &:first-child {
+            padding-top: 30px;
+          }
+
+          i,
+          a {
+            font-size: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+// end sidebar dashboard_style4
